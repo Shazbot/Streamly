@@ -9,12 +9,12 @@ pygments: true
 # Themes are encouraged to use these universal variables 
 # so be sure to set them if your theme uses them.
 #
-title : Jekyll Bootstrap
-tagline: Site Tagline
-author :
+title : LeStreamsFace
+tagline: STREAMS
+author : CrptnTeemo
   name : Name Lastname
   email : blah@email.test
-  github : username
+  github : Shazbot
   twitter : username
   feedburner : feedname
 
@@ -99,7 +99,7 @@ JB :
   analytics :
     provider : google 
     google : 
-        tracking_id : 'UA-123-12'
+        tracking_id : 'UA-33562564-1'
     getclicky :
       site_id : 
     mixpanel :
