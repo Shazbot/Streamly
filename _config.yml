@@ -105,6 +105,7 @@ JB :
     mixpanel :
         token : '_MIXPANEL_TOKEN_'
 
+safe : true
   # Settings for sharing helper. 
   # Sharing is for things like tweet, plusone, like, reddit buttons etc.
   # Set 'provider' to the sharing provider you want to use.
