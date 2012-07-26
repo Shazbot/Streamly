@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Config>
+	<AppSettings>
+		<SamplingInterval>60</SamplingInterval>
+		<NotificationTimeout>0</NotificationTimeout>
+		<TriageStreams>20</TriageStreams>
+		<AutoCheckFavorites>true</AutoCheckFavorites>
+		<HideTitleBar>false</HideTitleBar>
+		<PinToDesktop>false</PinToDesktop>
+		<SaveWindowPosition>false</SaveWindowPosition>
+		<WinTop>0</WinTop>
+		<WinLeft>0</WinLeft>
+		<WinOpacity>1</WinOpacity>
+		<WinWidth>1000</WinWidth>
+		<WinHeight>580</WinHeight>
+	</AppSettings>
+	<Filters>
+		<Diablo>false</Diablo>
+	</Filters>
+	<BannedGames>world of warcraft,call of duty</BannedGames>
+	<TimeBlock>
+		<FromSpan>00:00:00</FromSpan>
+		<ToSpan>00:00:00</ToSpan>
+	</TimeBlock>
+	<Favorites>
+		<TwitchTv>
+			<Stream Name="sydtko">12576365</Stream>
+			<Stream Name="scarra">22253819</Stream>
+			<Stream Name="barnyyy">25989068</Stream>
+			<Stream Name="theblinks">27443864</Stream>
+			<Stream Name="tsm_theoddone">30080840</Stream>
+		</TwitchTv>
+		<OwnedTv>
+			<Stream Name="GuardsmanBob">http://www.own3d.tv/live/34046</Stream>
+			<Stream Name="Phreak - League of Legends">http://www.own3d.tv/live/5046</Stream>
+			<Stream Name="LoCicero">http://www.own3d.tv/live/81266</Stream>
+			<Stream Name="CLG Chauster">http://www.own3d.tv/live/49897</Stream>
+			<Stream Name="CLG Doublelift">http://www.own3d.tv/live/13573</Stream>
+		</OwnedTv>
+	</Favorites>
+</Config>

@@ -1,0 +1,12 @@
+﻿<Application x:Class="LeStreamsFace.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:myns="clr-namespace:LeStreamsFace">
+    <Application.Resources>
+        <myns:CutoffConverter x:Key="WidthConverter" Cutoff="150" />
+        <myns:ConfigManager x:Key="ConfigManager" />
+
+        <!--  wpf bug: http://bengribaudo.com/blog/2010/08/19/106/bug-single-application-resources-entry-ignored  -->
+        <Style TargetType="{x:Type Rectangle}" />
+    </Application.Resources>
+</Application>
