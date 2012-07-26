@@ -172,10 +172,6 @@
     <Resource Include="Resources\App.ico" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\RestSharp.dll" />
-    <EmbeddedResource Include="Resources\Kent.Boogaart.HelperTrinity.dll" />
-    <EmbeddedResource Include="Resources\Kent.Boogaart.Converters.dll" />
-    <EmbeddedResource Include="Resources\System.Windows.Interactivity.dll" />
     <EmbeddedResource Include="Resources\MahApps.Metro.dll" />
     <Resource Include="Resources\honIcon.png" />
     <Resource Include="Resources\minecraftIcon.ico" />
@@ -185,6 +181,18 @@
     <Resource Include="Resources\appbar.question.png" />
     <Resource Include="Resources\bindingOfIsaacIcon.png" />
     <Resource Include="Resources\config.xml" />
+    <EmbeddedResource Include="..\packages\Kent.Boogaart.Converters.1.3.0.0\lib\net40\Kent.Boogaart.Converters.dll">
+      <Link>Resources\Kent.Boogaart.Converters.dll</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\packages\Kent.Boogaart.HelperTrinity.1.4.0.0\lib\net40\Kent.Boogaart.HelperTrinity.dll">
+      <Link>Resources\Kent.Boogaart.HelperTrinity.dll</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\packages\RestSharp.103.2\lib\net4\RestSharp.dll">
+      <Link>Resources\RestSharp.dll</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\packages\MahApps.Metro.0.8.9.30-ALPHA\lib\net40\System.Windows.Interactivity.dll">
+      <Link>Resources\System.Windows.Interactivity.dll</Link>
+    </EmbeddedResource>
     <Content Include="Resources\Entypo-license.txt" />
     <Resource Include="Resources\leagueIcon.png" />
     <Resource Include="Resources\sc2Icon.png" />
