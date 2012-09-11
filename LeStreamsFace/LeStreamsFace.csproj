@@ -42,10 +42,8 @@
     <ApplicationIcon>Resources\App.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AutomaticUpdaterWPF, Version=2.6.16.0, Culture=neutral, PublicKeyToken=3dbca7c1b6b9ada2, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="AutomaticUpdaterWPF">
       <HintPath>Resources\AutomaticUpdaterWPF.dll</HintPath>
-      <Private>False</Private>
     </Reference>
     <Reference Include="Kent.Boogaart.Converters">
       <HintPath>..\packages\Kent.Boogaart.Converters.1.3.0.0\lib\net40\Kent.Boogaart.Converters.dll</HintPath>
@@ -56,8 +54,7 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="MahApps.Metro">
-      <HintPath>..\packages\MahApps.Metro.0.9.9.45-ALPHA\lib\net40\MahApps.Metro.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>Resources\MahApps.Metro.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="OxyPlot">
@@ -130,15 +127,17 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="ConfigManager.cs" />
+    <Compile Include="Converters\GameNameToIconUriConverter.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="FavoriteStream.cs" />
+    <Compile Include="GameIconAdorner.cs" />
     <Compile Include="NonNegativeIntegerValidationRule.cs" />
     <Compile Include="ProgramInfo.cs" />
     <Compile Include="ProjectExtensions.cs" />
     <Compile Include="StreamsListWindow.xaml.cs">
       <DependentUpon>StreamsListWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CutOffConverter.cs" />
+    <Compile Include="Converters\CutOffConverter.cs" />
     <Compile Include="IconWindow.xaml.cs">
       <DependentUpon>IconWindow.xaml</DependentUpon>
     </Compile>
@@ -184,8 +183,8 @@
     <Resource Include="Resources\honIcon.png" />
     <Resource Include="Resources\minecraftIcon.ico" />
     <Resource Include="Resources\tribesIcon.png" />
-    <Resource Include="Resources\dota2icon.png" />
-    <Resource Include="Resources\diabloIcon.png" />
+    <Resource Include="Resources\DotaIcon.png" />
+    <Resource Include="Resources\DiabloIcon.png" />
     <Resource Include="Resources\appbar.question.png" />
     <Resource Include="Resources\bindingOfIsaacIcon.png" />
     <Resource Include="Resources\config.xml" />
@@ -195,15 +194,15 @@
     <EmbeddedResource Include="..\packages\Kent.Boogaart.HelperTrinity.1.4.0.0\lib\net40\Kent.Boogaart.HelperTrinity.dll">
       <Link>Resources\Kent.Boogaart.HelperTrinity.dll</Link>
     </EmbeddedResource>
-    <Content Include="..\packages\MahApps.Metro.0.9.9.45-ALPHA\lib\net40\System.Windows.Interactivity.dll">
+    <EmbeddedResource Include="..\packages\MahApps.Metro.0.9.9.45-ALPHA\lib\net40\System.Windows.Interactivity.dll">
       <Link>Resources\System.Windows.Interactivity.dll</Link>
-    </Content>
-    <Content Include="..\packages\RestSharp.104.1\lib\net4\RestSharp.dll">
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\packages\RestSharp.104.1\lib\net4\RestSharp.dll">
       <Link>Resources\RestSharp.dll</Link>
-    </Content>
+    </EmbeddedResource>
     <Content Include="Resources\Entypo-license.txt" />
     <Resource Include="Resources\leagueIcon.png" />
-    <Resource Include="Resources\sc2Icon.png" />
+    <Resource Include="Resources\StarcraftIcon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
   <ProjectExtensions>

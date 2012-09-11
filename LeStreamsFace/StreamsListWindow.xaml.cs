@@ -7,6 +7,7 @@ using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Documents;
 using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Interop;
@@ -22,6 +23,7 @@ using RestSharp;
 using Button = System.Windows.Controls.Button;
 using CheckBox = System.Windows.Controls.CheckBox;
 using Clipboard = System.Windows.Clipboard;
+using DataGrid = System.Windows.Controls.DataGrid;
 using KeyEventArgs = System.Windows.Input.KeyEventArgs;
 using MessageBox = System.Windows.MessageBox;
 using MouseEventArgs = System.Windows.Input.MouseEventArgs;
@@ -333,6 +335,43 @@ namespace LeStreamsFace
                 }
                 button.Background = background;
             }
+
+            SetGameIconBackground();
+        }
+
+        private void SetGameIconBackground()
+        {
+            AdornerLayer adLayer = AdornerLayer.GetAdornerLayer(streamsDataGrid);
+            if (adLayer == null) return;
+
+            var currentIconFilters = StreamsManager.Filters.Where(pair => pair.Value ?? false);
+            if (currentIconFilters.Count() == 1)
+            {
+                var brush = new ImageBrush();
+                var iconConverter = new GameNameToIconUriConverter();
+
+                var filteredGameName = ((DescriptionAttribute)typeof(FiltersEnum).GetMember(currentIconFilters.FirstOrDefault().Key.ToString())[0].GetCustomAttributes(
+                                 typeof(DescriptionAttribute), false)[0]).Description;
+                var iconUri = iconConverter.Convert(filteredGameName, null, null, null) as Uri;
+                if (iconUri == null) return;
+
+                brush.ImageSource = new BitmapImage(iconUri);
+                brush.Stretch = Stretch.None;
+
+                if (!adLayer.FindChildren<GameIconAdorner>().Any())
+                {
+                    adLayer.Add(new GameIconAdorner(streamsDataGrid, brush));
+                }
+            }
+            else
+            {
+                adLayer.FindChildren<GameIconAdorner>().ToList().ForEach(adLayer.Remove);
+            }
+        }
+
+        private void streamsDataGrid_Loaded(object sender, RoutedEventArgs e)
+        {
+            SetGameIconBackground();
         }
 
         private void DisabledTimeTextBox_TextChanged(object sender, TextChangedEventArgs e)

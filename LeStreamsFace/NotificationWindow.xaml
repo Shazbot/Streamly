@@ -123,32 +123,7 @@
                        Stretch="Uniform">
                     <Image.Style>
                         <Style TargetType="{x:Type Image}">
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding GameName}" Value="League of Legends">
-                                    <Setter Property="Image.Source" Value="/LeStreamsFace;component/Resources/leagueIcon.png" />
-                                </DataTrigger>
-                                <DataTrigger Binding="{Binding GameName}" Value="Dota 2">
-                                    <Setter Property="Image.Source" Value="/LeStreamsFace;component/Resources/dota2Icon.png" />
-                                </DataTrigger>
-                                <DataTrigger Binding="{Binding GameName}" Value="StarCraft II">
-                                    <Setter Property="Image.Source" Value="/LeStreamsFace;component/Resources/sc2Icon.png" />
-                                </DataTrigger>
-                                <DataTrigger Binding="{Binding GameName}" Value="Diablo III">
-                                    <Setter Property="Image.Source" Value="/LeStreamsFace;component/Resources/diabloIcon.png" />
-                                </DataTrigger>
-                                <DataTrigger Binding="{Binding GameName}" Value="Tribes Ascend">
-                                    <Setter Property="Image.Source" Value="/LeStreamsFace;component/Resources/tribesIcon.png" />
-                                </DataTrigger>
-                                <DataTrigger Binding="{Binding GameName}" Value="Minecraft">
-                                    <Setter Property="Image.Source" Value="/LeStreamsFace;component/Resources/minecraftIcon.ico" />
-                                </DataTrigger>
-                                <DataTrigger Binding="{Binding GameName}" Value="Heroes of Newerth">
-                                    <Setter Property="Image.Source" Value="/LeStreamsFace;component/Resources/honIcon.png" />
-                                </DataTrigger>
-                                <DataTrigger Binding="{Binding GameName}" Value="The Binding of Isaac">
-                                    <Setter Property="Image.Source" Value="/LeStreamsFace;component/Resources/bindingOfIsaacIcon.png" />
-                                </DataTrigger>
-                            </Style.Triggers>
+                            <Setter Property="Source" Value="{Binding GameName, Converter={LeStreamsFace:GameNameToIconUriConverter}}" />
                         </Style>
                     </Image.Style>
                 </Image>
@@ -171,7 +146,6 @@
                     </Image.OpacityMask>
                 </Image>
             </Grid>
-
         </Grid>
         <Border.Background>
             <ImageBrush ImageSource="/LeStreamsFace;component/Resources/box1.png" />

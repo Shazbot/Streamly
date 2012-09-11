@@ -74,6 +74,7 @@
                     </DataTrigger>
                 </Style.Triggers>
             </Style>
+            <BitmapImage x:Key="questionMarkImage" UriSource="/LeStreamsFace;component/Resources/appbar.question.png" />
         </ResourceDictionary>
     </Window.Resources>
 
@@ -96,28 +97,28 @@
                     Tag="{x:Static LeStreamsFace:FiltersEnum.League}">
                 <Image Width="15"
                        Height="15"
-                       Source="/LeStreamsFace;component/Resources/leagueIcon.png" />
+                       Source="/LeStreamsFace;component/Resources/LeagueIcon.png" />
             </Button>
             <Button Name="sc2IconButton"
                     Click="GameIconButton_Click"
                     Tag="{x:Static LeStreamsFace:FiltersEnum.Starcraft}">
                 <Image Width="15"
                        Height="15"
-                       Source="/LeStreamsFace;component/Resources/sc2Icon.png" />
+                       Source="/LeStreamsFace;component/Resources/StarcraftIcon.png" />
             </Button>
             <Button Name="dota2IconButton"
                     Click="GameIconButton_Click"
                     Tag="{x:Static LeStreamsFace:FiltersEnum.Dota}">
                 <Image Width="15"
                        Height="15"
-                       Source="/LeStreamsFace;component/Resources/dota2icon.png" />
+                       Source="/LeStreamsFace;component/Resources/DotaIcon.png" />
             </Button>
             <Button Name="diabloIconButton"
                     Click="GameIconButton_Click"
                     Tag="{x:Static LeStreamsFace:FiltersEnum.Diablo}">
                 <Image Width="15"
                        Height="15"
-                       Source="/LeStreamsFace;component/Resources/diabloIcon.png" />
+                       Source="/LeStreamsFace;component/Resources/DiabloIcon.png" />
             </Button>
             <Button Click="Streams_Click" Content="streams" />
             <Button Click="Config_Click" Content="config" />
@@ -158,7 +159,8 @@
                                   PreviewKeyDown="streamsDataGrid_PreviewKeyDown"
                                   SelectionChanged="blockedItemsListBox_SelectionChanged"
                                   SelectionMode="Single"
-                                  SelectionUnit="FullRow">
+                                  SelectionUnit="FullRow"
+                                  Loaded="streamsDataGrid_Loaded">
                             <DataGrid.CellStyle>
                                 <Style TargetType="{x:Type DataGridCell}">
                                     <Setter Property="FocusVisualStyle" Value="{x:Null}" />
@@ -309,47 +311,16 @@
                                                        Height="25">
                                                     <Image.Style>
                                                         <Style TargetType="{x:Type Image}">
-                                                            <Setter Property="Image.Opacity" Value="0.25" />
-                                                            <Setter Property="Image.Source" Value="/LeStreamsFace;component/Resources/appbar.question.png" />
+                                                            <Setter Property="Source" Value="{Binding GameName, FallbackValue={StaticResource questionMarkImage}, TargetNullValue={StaticResource questionMarkImage},  Converter={LeStreamsFace:GameNameToIconUriConverter}}" />
+                                                            <Style.Triggers>
+                                                                <Trigger Property="Source" Value="{StaticResource questionMarkImage}">
+                                                                    <Setter Property="Image.Opacity" Value="0.25" />
+                                                                </Trigger>
+                                                            </Style.Triggers>
                                                         </Style>
                                                     </Image.Style>
                                                 </Image>
                                             </Grid>
-                                            <DataTemplate.Triggers>
-                                                <DataTrigger Binding="{Binding Path=GameName}" Value="League of Legends">
-                                                    <Setter TargetName="gameIconImage" Property="Opacity" Value="1" />
-                                                    <Setter TargetName="gameIconImage" Property="Source" Value="/LeStreamsFace;component/Resources/leagueIcon.png" />
-                                                </DataTrigger>
-                                                <DataTrigger Binding="{Binding Path=GameName}" Value="Dota 2">
-                                                    <Setter TargetName="gameIconImage" Property="Opacity" Value="1" />
-                                                    <Setter TargetName="gameIconImage" Property="Source" Value="/LeStreamsFace;component/Resources/dota2Icon.png" />
-                                                </DataTrigger>
-                                                <DataTrigger Binding="{Binding Path=GameName}" Value="StarCraft II">
-                                                    <Setter TargetName="gameIconImage" Property="Opacity" Value="1" />
-                                                    <Setter TargetName="gameIconImage" Property="Source" Value="/LeStreamsFace;component/Resources/sc2Icon.png" />
-                                                </DataTrigger>
-                                                <DataTrigger Binding="{Binding Path=GameName}" Value="Diablo III">
-                                                    <Setter TargetName="gameIconImage" Property="Opacity" Value="1" />
-                                                    <Setter TargetName="gameIconImage" Property="Source" Value="/LeStreamsFace;component/Resources/diabloIcon.png" />
-                                                </DataTrigger>
-                                                <DataTrigger Binding="{Binding Path=GameName}" Value="Tribes Ascend">
-                                                    <Setter TargetName="gameIconImage" Property="Opacity" Value="1" />
-                                                    <Setter TargetName="gameIconImage" Property="Source" Value="/LeStreamsFace;component/Resources/tribesIcon.png" />
-                                                </DataTrigger>
-                                                <DataTrigger Binding="{Binding Path=GameName}" Value="Minecraft">
-                                                    <Setter TargetName="gameIconImage" Property="Opacity" Value="1" />
-                                                    <Setter TargetName="gameIconImage" Property="Source" Value="/LeStreamsFace;component/Resources/minecraftIcon.ico" />
-                                                </DataTrigger>
-                                                <DataTrigger Binding="{Binding Path=GameName}" Value="Heroes of Newerth">
-                                                    <Setter TargetName="gameIconImage" Property="Opacity" Value="1" />
-                                                    <Setter TargetName="gameIconImage" Property="Source" Value="/LeStreamsFace;component/Resources/honIcon.png" />
-                                                </DataTrigger>
-                                                <DataTrigger Binding="{Binding Path=GameName}" Value="The Binding of Isaac">
-                                                    <Setter TargetName="gameIconImage" Property="Opacity" Value="1" />
-                                                    <Setter TargetName="gameIconImage" Property="Source" Value="/LeStreamsFace;component/Resources/bindingOfIsaacIcon.png" />
-                                                </DataTrigger>
-                                            </DataTemplate.Triggers>
-
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
@@ -385,7 +356,6 @@
                                      TextChanged="searchTextBox_TextChanged"
                                      TextInput="searchTextBox_TextInput"
                                      TextWrapping="Wrap" />
-
                         </DockPanel>
                     </Grid>
                 </TabItem>
@@ -470,7 +440,7 @@
                                             <Style BasedOn="{StaticResource {x:Type TextBox}}" TargetType="{x:Type TextBox}">
                                                 <Style.Triggers>
                                                     <Trigger Property="Validation.HasError" Value="True">
-                                                        <!--  <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors).CurrentItem.ErrorContent}"/>  -->
+                                                        <!--  <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors).CurrentItem.ErrorContent}" />  -->
                                                     </Trigger>
                                                 </Style.Triggers>
                                             </Style>
@@ -630,7 +600,6 @@
                             <Hyperlink NavigateUri="http://mahapps.com/MahApps.Metro/" RequestNavigate="Hyperlink_RequestNavigate">MahApps.Metro</Hyperlink>
                             for the pretties
                         </TextBlock>
-
                     </StackPanel>
                 </TabItem>
             </TabControl>
