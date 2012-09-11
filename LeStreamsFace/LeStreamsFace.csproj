@@ -55,16 +55,26 @@
       <HintPath>..\packages\Kent.Boogaart.HelperTrinity.1.4.0.0\lib\net40\Kent.Boogaart.HelperTrinity.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="MahApps.Metro, Version=0.8.0.0, Culture=neutral, PublicKeyToken=f4fb5a3c4d1e5b4f, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>Resources\MahApps.Metro.dll</HintPath>
+    <Reference Include="MahApps.Metro">
+      <HintPath>..\packages\MahApps.Metro.0.9.9.45-ALPHA\lib\net40\MahApps.Metro.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="OxyPlot">
+      <HintPath>..\packages\OxyPlot.Wpf.2012.4.13.1\lib\NET45\OxyPlot.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="OxyPlot.Wpf">
+      <HintPath>..\packages\OxyPlot.Wpf.2012.4.13.1\lib\NET45\OxyPlot.Wpf.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="OxyPlot.Xps">
+      <HintPath>..\packages\OxyPlot.Wpf.2012.4.13.1\lib\NET45\OxyPlot.Xps.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="RestSharp">
-      <HintPath>..\packages\RestSharp.103.2\lib\net4\RestSharp.dll</HintPath>
+      <HintPath>..\packages\RestSharp.104.1\lib\net4\RestSharp.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
@@ -74,9 +84,7 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>Resources\System.Windows.Interactivity.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\packages\MahApps.Metro.0.9.9.45-ALPHA\lib\net40\System.Windows.Interactivity.dll</HintPath>
     </Reference>
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml" />
@@ -187,12 +195,12 @@
     <EmbeddedResource Include="..\packages\Kent.Boogaart.HelperTrinity.1.4.0.0\lib\net40\Kent.Boogaart.HelperTrinity.dll">
       <Link>Resources\Kent.Boogaart.HelperTrinity.dll</Link>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\packages\RestSharp.103.2\lib\net4\RestSharp.dll">
-      <Link>Resources\RestSharp.dll</Link>
-    </EmbeddedResource>
-    <EmbeddedResource Include="..\packages\MahApps.Metro.0.8.9.30-ALPHA\lib\net40\System.Windows.Interactivity.dll">
+    <Content Include="..\packages\MahApps.Metro.0.9.9.45-ALPHA\lib\net40\System.Windows.Interactivity.dll">
       <Link>Resources\System.Windows.Interactivity.dll</Link>
-    </EmbeddedResource>
+    </Content>
+    <Content Include="..\packages\RestSharp.104.1\lib\net4\RestSharp.dll">
+      <Link>Resources\RestSharp.dll</Link>
+    </Content>
     <Content Include="Resources\Entypo-license.txt" />
     <Resource Include="Resources\leagueIcon.png" />
     <Resource Include="Resources\sc2Icon.png" />

@@ -540,6 +540,13 @@
             <param name="pascalCasedWord">String to convert</param>
             <returns>string</returns>
         </member>
+        <member name="M:RestSharp.Extensions.StringExtensions.AddUnderscorePrefix(System.String)">
+            <summary>
+            Add an undescore prefix to a pascasl-cased string
+            </summary>
+            <param name="pascalCasedWord"></param>
+            <returns></returns>
+        </member>
         <member name="M:RestSharp.Extensions.StringExtensions.GetNameVariants(System.String,System.Globalization.CultureInfo)">
             <summary>
             Return possible variants of a name for name matching.
@@ -621,6 +628,20 @@
             HttpWebRequest wrapper (sync methods)
             </summary>
         </member>
+        <member name="M:RestSharp.Http.AsPostAsync(System.Action{RestSharp.HttpResponse},System.String)">
+            <summary>
+            Execute an async POST-style request with the specified HTTP Method.  
+            </summary>
+            <param name="httpMethod">The HTTP method to execute.</param>
+            <returns></returns>
+        </member>
+        <member name="M:RestSharp.Http.AsGetAsync(System.Action{RestSharp.HttpResponse},System.String)">
+            <summary>
+            Execute an async GET-style request with the specified HTTP Method.  
+            </summary>
+            <param name="httpMethod">The HTTP method to execute.</param>
+            <returns></returns>
+        </member>
         <member name="M:RestSharp.Http.Create">
             <summary>
              Creates an IHttp
@@ -666,6 +687,20 @@
             <summary>
             Execute a PATCH request
             </summary>
+        </member>
+        <member name="M:RestSharp.Http.AsGet(System.String)">
+            <summary>
+            Execute a GET-style request with the specified HTTP Method.  
+            </summary>
+            <param name="httpMethod">The HTTP method to execute.</param>
+            <returns></returns>
+        </member>
+        <member name="M:RestSharp.Http.AsPost(System.String)">
+            <summary>
+            Execute a POST-style request with the specified HTTP Method.  
+            </summary>
+            <param name="httpMethod">The HTTP method to execute.</param>
+            <returns></returns>
         </member>
         <member name="P:RestSharp.Http.HasParameters">
             <summary>
@@ -1071,6 +1106,40 @@
             </summary>
             <param name="request"></param>
         </member>
+        <member name="M:RestSharp.IRestClient.ExecuteAsyncGet(RestSharp.IRestRequest,System.Action{RestSharp.IRestResponse,RestSharp.RestRequestAsyncHandle},System.String)">
+            <summary>
+            Executes a GET-style request and callback asynchronously, authenticating if needed
+            </summary>
+            <param name="request">Request to be executed</param>
+            <param name="callback">Callback function to be executed upon completion providing access to the async handle.</param>
+            <param name="httpMethod">The HTTP method to execute</param>
+        </member>
+        <member name="M:RestSharp.IRestClient.ExecuteAsyncPost(RestSharp.IRestRequest,System.Action{RestSharp.IRestResponse,RestSharp.RestRequestAsyncHandle},System.String)">
+            <summary>
+            Executes a POST-style request and callback asynchronously, authenticating if needed
+            </summary>
+            <param name="request">Request to be executed</param>
+            <param name="callback">Callback function to be executed upon completion providing access to the async handle.</param>
+            <param name="httpMethod">The HTTP method to execute</param>
+        </member>
+        <member name="M:RestSharp.IRestClient.ExecuteAsyncGet``1(RestSharp.IRestRequest,System.Action{RestSharp.IRestResponse{``0},RestSharp.RestRequestAsyncHandle},System.String)">
+            <summary>
+            Executes a GET-style request and callback asynchronously, authenticating if needed
+            </summary>
+            <typeparam name="T">Target deserialization type</typeparam>
+            <param name="request">Request to be executed</param>
+            <param name="callback">Callback function to be executed upon completion</param>
+            <param name="httpMethod">The HTTP method to execute</param>
+        </member>
+        <member name="M:RestSharp.IRestClient.ExecuteAsyncPost``1(RestSharp.IRestRequest,System.Action{RestSharp.IRestResponse{``0},RestSharp.RestRequestAsyncHandle},System.String)">
+            <summary>
+            Executes a GET-style request and callback asynchronously, authenticating if needed
+            </summary>
+            <typeparam name="T">Target deserialization type</typeparam>
+            <param name="request">Request to be executed</param>
+            <param name="callback">Callback function to be executed upon completion</param>
+            <param name="httpMethod">The HTTP method to execute</param>
+        </member>
         <member name="P:RestSharp.IRestClient.CookieContainer">
             <summary>
             
@@ -1442,6 +1511,22 @@
             <param name="request">Request to be executed</param>
             <param name="callback">Callback function to be executed upon completion providing access to the async handle.</param>
         </member>
+        <member name="M:RestSharp.RestClient.ExecuteAsyncGet(RestSharp.IRestRequest,System.Action{RestSharp.IRestResponse,RestSharp.RestRequestAsyncHandle},System.String)">
+            <summary>
+            Executes a GET-style request and callback asynchronously, authenticating if needed
+            </summary>
+            <param name="request">Request to be executed</param>
+            <param name="callback">Callback function to be executed upon completion providing access to the async handle.</param>
+            <param name="httpMethod">The HTTP method to execute</param>
+        </member>
+        <member name="M:RestSharp.RestClient.ExecuteAsyncPost(RestSharp.IRestRequest,System.Action{RestSharp.IRestResponse,RestSharp.RestRequestAsyncHandle},System.String)">
+            <summary>
+            Executes a POST-style request and callback asynchronously, authenticating if needed
+            </summary>
+            <param name="request">Request to be executed</param>
+            <param name="callback">Callback function to be executed upon completion providing access to the async handle.</param>
+            <param name="httpMethod">The HTTP method to execute</param>
+        </member>
         <member name="M:RestSharp.RestClient.ExecuteAsync``1(RestSharp.IRestRequest,System.Action{RestSharp.IRestResponse{``0},RestSharp.RestRequestAsyncHandle})">
             <summary>
             Executes the request and callback asynchronously, authenticating if needed
@@ -1449,6 +1534,24 @@
             <typeparam name="T">Target deserialization type</typeparam>
             <param name="request">Request to be executed</param>
             <param name="callback">Callback function to be executed upon completion</param>
+        </member>
+        <member name="M:RestSharp.RestClient.ExecuteAsyncGet``1(RestSharp.IRestRequest,System.Action{RestSharp.IRestResponse{``0},RestSharp.RestRequestAsyncHandle},System.String)">
+            <summary>
+            Executes a GET-style request and callback asynchronously, authenticating if needed
+            </summary>
+            <typeparam name="T">Target deserialization type</typeparam>
+            <param name="request">Request to be executed</param>
+            <param name="callback">Callback function to be executed upon completion</param>
+            <param name="httpMethod">The HTTP method to execute</param>
+        </member>
+        <member name="M:RestSharp.RestClient.ExecuteAsyncPost``1(RestSharp.IRestRequest,System.Action{RestSharp.IRestResponse{``0},RestSharp.RestRequestAsyncHandle},System.String)">
+            <summary>
+            Executes a POST-style request and callback asynchronously, authenticating if needed
+            </summary>
+            <typeparam name="T">Target deserialization type</typeparam>
+            <param name="request">Request to be executed</param>
+            <param name="callback">Callback function to be executed upon completion</param>
+            <param name="httpMethod">The HTTP method to execute</param>
         </member>
         <member name="M:RestSharp.RestClient.#ctor">
             <summary>
@@ -1460,51 +1563,6 @@
             Sets the BaseUrl property for requests made by this client instance
             </summary>
             <param name="baseUrl"></param>
-        </member>
-        <member name="M:RestSharp.RestClient.AddDefaultParameter(RestSharp.Parameter)">
-            <summary>
-            Add a parameter to use on every request made with this client instance
-            </summary>
-            <param name="p">Parameter to add</param>
-            <returns></returns>
-        </member>
-        <member name="M:RestSharp.RestClient.AddDefaultParameter(System.String,System.Object)">
-            <summary>
-            Adds a HTTP parameter (QueryString for GET, DELETE, OPTIONS and HEAD; Encoded form for POST and PUT)
-            Used on every request made by this client instance
-            </summary>
-            <param name="name">Name of the parameter</param>
-            <param name="value">Value of the parameter</param>
-            <returns>This request</returns>
-        </member>
-        <member name="M:RestSharp.RestClient.AddDefaultParameter(System.String,System.Object,RestSharp.ParameterType)">
-            <summary>
-            Adds a parameter to the request. There are four types of parameters:
-            - GetOrPost: Either a QueryString value or encoded form value based on method
-            - HttpHeader: Adds the name/value pair to the HTTP request's Headers collection
-            - UrlSegment: Inserted into URL if there is a matching url token e.g. {AccountId}
-            - RequestBody: Used by AddBody() (not recommended to use directly)
-            </summary>
-            <param name="name">Name of the parameter</param>
-            <param name="value">Value of the parameter</param>
-            <param name="type">The type of parameter to add</param>
-            <returns>This request</returns>
-        </member>
-        <member name="M:RestSharp.RestClient.AddDefaultHeader(System.String,System.String)">
-            <summary>
-            Shortcut to AddDefaultParameter(name, value, HttpHeader) overload
-            </summary>
-            <param name="name">Name of the header to add</param>
-            <param name="value">Value of the header to add</param>
-            <returns></returns>
-        </member>
-        <member name="M:RestSharp.RestClient.AddDefaultUrlSegment(System.String,System.String)">
-            <summary>
-            Shortcut to AddDefaultParameter(name, value, UrlSegment) overload
-            </summary>
-            <param name="name">Name of the segment to add</param>
-            <param name="value">Value of the segment to add</param>
-            <returns></returns>
         </member>
         <member name="M:RestSharp.RestClient.AddHandler(System.String,RestSharp.Deserializers.IDeserializer)">
             <summary>
@@ -1638,6 +1696,56 @@
             <typeparam name="T">Target deserialization type</typeparam>
             <param name="request">Request to be executed</param>
             <param name="callback">Callback function to be executed upon completion providing access to the async handle</param>
+        </member>
+        <member name="M:RestSharp.RestClientExtensions.AddDefaultParameter(RestSharp.IRestClient,RestSharp.Parameter)">
+            <summary>
+            Add a parameter to use on every request made with this client instance
+            </summary>
+            <param name="restClient">The IRestClient instance</param>
+            <param name="p">Parameter to add</param>
+            <returns></returns>
+        </member>
+        <member name="M:RestSharp.RestClientExtensions.AddDefaultParameter(RestSharp.IRestClient,System.String,System.Object)">
+            <summary>
+            Adds a HTTP parameter (QueryString for GET, DELETE, OPTIONS and HEAD; Encoded form for POST and PUT)
+            Used on every request made by this client instance
+            </summary>
+            <param name="restClient">The IRestClient instance</param>
+            <param name="name">Name of the parameter</param>
+            <param name="value">Value of the parameter</param>
+            <returns>This request</returns>
+        </member>
+        <member name="M:RestSharp.RestClientExtensions.AddDefaultParameter(RestSharp.IRestClient,System.String,System.Object,RestSharp.ParameterType)">
+            <summary>
+            Adds a parameter to the request. There are four types of parameters:
+            - GetOrPost: Either a QueryString value or encoded form value based on method
+            - HttpHeader: Adds the name/value pair to the HTTP request's Headers collection
+            - UrlSegment: Inserted into URL if there is a matching url token e.g. {AccountId}
+            - RequestBody: Used by AddBody() (not recommended to use directly)
+            </summary>
+            <param name="restClient">The IRestClient instance</param>
+            <param name="name">Name of the parameter</param>
+            <param name="value">Value of the parameter</param>
+            <param name="type">The type of parameter to add</param>
+            <returns>This request</returns>
+        </member>
+        <member name="M:RestSharp.RestClientExtensions.AddDefaultHeader(RestSharp.IRestClient,System.String,System.String)">
+            <summary>
+            Shortcut to AddDefaultParameter(name, value, HttpHeader) overload
+            </summary>
+            <param name="restClient">The IRestClient instance</param>
+            <param name="name">Name of the header to add</param>
+            <param name="value">Value of the header to add</param>
+            <returns></returns>
+        </member>
+        <member name="M:RestSharp.RestClientExtensions.AddDefaultUrlSegment(RestSharp.IRestClient,System.String,System.String)">
+            <summary>
+            Shortcut to AddDefaultParameter(name, value, UrlSegment) overload
+            </summary>
+            <param name="restClient">The IRestClient instance</param>
+            <param name="name">Name of the segment to add</param>
+            <param name="value">Value of the segment to add</param>
+            <returns></returns>
         </member>
         <member name="T:RestSharp.RestRequest">
             <summary>
