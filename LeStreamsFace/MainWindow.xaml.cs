@@ -1,20 +1,18 @@
-﻿using System;
+﻿using RestSharp;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Data;
 using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Threading;
 using System.Xml.Linq;
-using RestSharp;
 using ContextMenu = System.Windows.Forms.ContextMenu;
 using MenuItem = System.Windows.Forms.MenuItem;
 using MessageBox = System.Windows.MessageBox;
@@ -388,9 +386,8 @@ namespace LeStreamsFace
                             var newStreamsListCopy = newStreamsList.ToList();
                             this.Dispatcher.BeginInvoke((MethodInvoker)(delegate()
                                                                             {
-                                                                                foreach (Stream newStream in newStreamsListCopy)
-
-                                                                                //                            foreach (Stream newStream in newStreamsList.Favorites())
+                                                                                //                                                                                foreach (Stream newStream in newStreamsListCopy)
+                                                                                foreach (Stream newStream in newStreamsList.Favorites())
                                                                                 {
                                                                                     new NotificationWindow(newStream);
                                                                                 }
@@ -405,10 +402,7 @@ namespace LeStreamsFace
             }
             catch (AggregateException exception)
             {
-                if (Debugger.IsAttached)
-                {
-                    throw;
-                }
+                if (Debugger.IsAttached) throw;
 
                 foreach (var taskException in exception.InnerExceptions)
                 {
@@ -416,10 +410,7 @@ namespace LeStreamsFace
             }
             catch (Exception)
             {
-                if (Debugger.IsAttached)
-                {
-                    throw;
-                }
+                if (Debugger.IsAttached) throw;
             }
             finally
             {
