@@ -22,7 +22,7 @@ namespace LeStreamsFace
 
     internal static class StreamsManager
     {
-        public static readonly ObservableCollection<Stream> Streams = new ObservableCollection<Stream>();
+        public static readonly OptimizedObservableCollection<Stream> Streams = new OptimizedObservableCollection<Stream>();
         public static readonly Dictionary<FiltersEnum, bool?> Filters = new Dictionary<FiltersEnum, bool?>();
 
         static StreamsManager()

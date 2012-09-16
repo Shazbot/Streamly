@@ -335,7 +335,7 @@ namespace LeStreamsFace
                         StreamsManager.Streams.Remove(closedStream);
                         Debug.WriteLine("REMOVED STREAM " + closedStream.Name);
                     }
-                    newStreamsList.ForEach(stream => StreamsManager.Streams.Add(stream));
+                    StreamsManager.Streams.AddRange(newStreamsList);
 
                     // don't create a new notification for streams readded this pass
                     foreach (Stream stream in newStreamsList.Favorites().Where(stream => closedLastPass.Any(stream1 => stream1.Name == stream.Name)).ToList())

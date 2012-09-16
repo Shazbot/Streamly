@@ -126,7 +126,7 @@ namespace LeStreamsFace
         public static TimeSpan FromSpan = new TimeSpan(0, 0, 0);
         public static TimeSpan ToSpan = new TimeSpan(0, 0, 0);
 
-        public static readonly ObservableCollection<FavoriteStream> FavoriteStreams = new ObservableCollection<FavoriteStream>();
+        public static readonly OptimizedObservableCollection<FavoriteStream> FavoriteStreams = new OptimizedObservableCollection<FavoriteStream>();
         public static List<string> BannedGames = new List<string>();
 
         private const string ConfigFileName = "config.xml";

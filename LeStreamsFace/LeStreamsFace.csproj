@@ -132,6 +132,7 @@
     <Compile Include="FavoriteStream.cs" />
     <Compile Include="GameIconAdorner.cs" />
     <Compile Include="NonNegativeIntegerValidationRule.cs" />
+    <Compile Include="OptimizedObservableCollection.cs" />
     <Compile Include="ProgramInfo.cs" />
     <Compile Include="ProjectExtensions.cs" />
     <Compile Include="StreamsListWindow.xaml.cs">
