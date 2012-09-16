@@ -1,11 +1,14 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Data;
 using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Interop;
@@ -120,18 +123,15 @@ namespace LeStreamsFace
 
             dispatcherTimer.Stop();
 
-            try
+            // remove duplicates in unreportedFavs, and display currently existing favorites
+            foreach (Stream unreportedStream in unreportedFavs.GroupBy(stream => stream.Id).Select(grouping => grouping.Last())
+
+                //                                                        .Favorites()
+                                                    .Where(stream => StreamsManager.Streams.Any(stream1 => stream1.Id == stream.Id)))
             {
-                // remove duplicates in unreportedFavs, and display currently existing favorites
-                foreach (Stream unreportedStream in unreportedFavs.GroupBy(stream => stream.Id).Select(grouping => grouping.Last())
-                                                        .Favorites()
-                                                        .Where(stream => StreamsManager.Streams.Any(stream1 => stream1.Id == stream.Id)))
-                {
-                    new NotificationWindow(unreportedStream);
-                }
-                unreportedFavs.Clear();
+                new NotificationWindow(unreportedStream);
             }
-            catch (Exception) { }
+            unreportedFavs.Clear();
         }
 
         private static bool IsFullscreenAppRunning()
@@ -187,7 +187,6 @@ namespace LeStreamsFace
         private void mainTimer_Tick(object sender, EventArgs e)
         {
             //            (new NotificationWindow(new Stream("a", "b", 100, "a", "League of Legends", StreamingSite.TwitchTv))).Show();
-
             try
             {
                 DateTime now = DateTime.Now;
@@ -218,10 +217,11 @@ namespace LeStreamsFace
                         CheckFavoriteStreamsManually(newStreamsList, streamsList);
                     }
                     catch (Exception) { }
-                    closedStreams.AddRange(StreamsManager.Streams.Where(stream => stream.GottenViaAutoGetFavs && streamsList.All(stream1 => stream1.Id != stream.Id)).ToList());
+                    closedStreams.AddRange(StreamsManager.Streams.Where(stream => stream.GottenViaAutoGetFavs && !streamsList.Contains(stream)).ToList());
                 }
 
                 XDocument xDoc;
+
                 //                                xDoc = XDocument.Load("twitch.xml");
                 try
                 {
@@ -250,9 +250,9 @@ namespace LeStreamsFace
                         try
                         {
                             var newStream = LoadTwStreamFromXml(stream);
-                            if (streamsList.All(stream1 => stream1.Id != newStream.Id))
+                            if (!streamsList.Contains(newStream))
                             {
-                                if (StreamsManager.Streams.All(_stream => _stream.Id != newStream.Id))
+                                if (!StreamsManager.Streams.Contains(newStream))
                                 {
                                     Debug.WriteLine("ADDED " + newStream.Name + ", " + newStream.Id);
                                     newStreamsList.Add(newStream);
@@ -268,6 +268,7 @@ namespace LeStreamsFace
 
                 //                XDocument xDocOwned = XDocument.Load("owned.xml");
                 var xDocOwned = ownedTask.Result;
+
                 //                Debug.WriteLine((DateTime.Now - now).TotalSeconds + " for owned request");
                 if (xDocOwned != null)
                 {
@@ -277,7 +278,7 @@ namespace LeStreamsFace
                         try
                         {
                             var newStream = LoadOwnedStreamFromXml(ownedStream);
-                            if (StreamsManager.Streams.All(stream => stream.Id != newStream.Id))
+                            if (!StreamsManager.Streams.Contains(newStream))
                             {
                                 Debug.WriteLine("ADDED " + newStream.Name + ", " + newStream.Id);
                                 newStreamsList.Add(newStream);
@@ -299,7 +300,7 @@ namespace LeStreamsFace
                 }
 
                 // check expired streams, without autoGetFavs
-                closedStreams.AddRange(StreamsManager.Streams.Where(stream => !stream.GottenViaAutoGetFavs && streamsList.All(stream1 => stream1.Id != stream.Id)).ToList());
+                closedStreams.AddRange(StreamsManager.Streams.Where(stream => !stream.GottenViaAutoGetFavs && !streamsList.Contains(stream)).ToList());
 
                 // id of a stream sometimes changes for no reason
                 foreach (Stream closedStream in closedStreams.ToList())
@@ -384,10 +385,12 @@ namespace LeStreamsFace
                     {
                         if (!DuringTimeBlock())
                         {
+                            var newStreamsListCopy = newStreamsList.ToList();
                             this.Dispatcher.BeginInvoke((MethodInvoker)(delegate()
                                                                             {
-                                                                                //                                                                                foreach (Stream newStream in newStreamsList)
-                                                                                foreach (Stream newStream in newStreamsList.Favorites())
+                                                                                foreach (Stream newStream in newStreamsListCopy)
+
+                                                                                //                            foreach (Stream newStream in newStreamsList.Favorites())
                                                                                 {
                                                                                     new NotificationWindow(newStream);
                                                                                 }
@@ -422,6 +425,8 @@ namespace LeStreamsFace
             {
                 Debug.WriteLine("".PadRight(45, '-'));
                 firstRun = false;
+                ConfigManager.UpdatePlotModel(StreamsManager.Streams);
+
                 // need this to be in sync
                 this.Dispatcher.BeginInvoke((MethodInvoker)(() => newStreamsList.Clear()));
                 timer.Start();
@@ -438,39 +443,56 @@ namespace LeStreamsFace
 
                 if (streamsWindow != null)
                 {
-                    this.Dispatcher.BeginInvoke((MethodInvoker)(() => streamsWindow.RefreshView()));
+                    //                    this.Dispatcher.BeginInvoke((MethodInvoker)(() => streamsWindow.RefreshView()));
+                    streamsWindow.RefreshView();
                 }
             }
             else if (WasTimeBlocking && !timeBlocking)
             {
                 WasTimeBlocking = false;
 
-                this.Dispatcher.BeginInvoke((MethodInvoker)(delegate()
+                //                this.Dispatcher.BeginInvoke((MethodInvoker)(delegate()
+                //                {
+                if (streamsWindow != null)
                 {
-                    if (streamsWindow != null)
-                    {
-                        streamsWindow.RefreshView();
-                    }
+                    streamsWindow.RefreshView();
+                }
 
-                    var fullscreen = IsFullscreenAppRunning();
+                var fullscreen = IsFullscreenAppRunning();
 
-                    foreach (Stream newStream in StreamsManager.Streams.Favorites().Where(stream => newStreamsList.All(stream1 => stream1.Id != stream.Id)))
-                    {
-                        if (fullscreen)
-                        {
-                            unreportedFavs.Add(newStream);
-                        }
-                        else
-                        {
-                            new NotificationWindow(newStream);
-                        }
-                    }
+                var streamsFromNewPass = StreamsManager.Streams.Favorites().Where(stream => !newStreamsList.Contains(stream)).ToList();
 
-                    if (fullscreen)
+                ParameterizedThreadStart showNotifications = streams =>
+                {
+                    foreach (Stream newStream in streams as IEnumerable<Stream>)
                     {
-                        dispatcherTimer.Start();
+                        new NotificationWindow(newStream);
                     }
-                }));
+                };
+                if (fullscreen)
+                {
+                    streamsFromNewPass.ForEach(stream => unreportedFavs.Add(stream));
+                }
+                else
+                {
+                    if (Thread.CurrentThread == Dispatcher.CurrentDispatcher.Thread)
+                    {
+                        showNotifications(streamsFromNewPass);
+                    }
+                    else
+                    {
+                        showNotifications(streamsFromNewPass);
+
+                        //                        this.Dispatcher.BeginInvoke((MethodInvoker)showNotifications(streamsFromNewPass));
+                    }
+                }
+
+                if (fullscreen)
+                {
+                    dispatcherTimer.Start();
+                }
+
+                //                }));
             }
 
             return timeBlocking;
@@ -511,7 +533,7 @@ namespace LeStreamsFace
             foreach (Stream stream in gottenFavs)
             {
                 stream.GottenViaAutoGetFavs = true;
-                if (StreamsManager.Streams.All(_stream => _stream.Id != stream.Id))
+                if (!StreamsManager.Streams.Contains(stream))
                 {
                     Debug.WriteLine("ADDED " + stream.Name + ", " + stream.Id + " FROM FAVORITES CHECK");
                     newStreamsList.Add(stream);
@@ -530,22 +552,11 @@ namespace LeStreamsFace
             name = stream.Element("channel").Element("title").Value;
             viewers = int.Parse(stream.Element("channel_count").Value);
             id = stream.Element("id").Value;
-            try
-            {
-                title = stream.Element("title").Value;
-            }
-            catch (NullReferenceException)
-            {
-            }
-            try
-            {
-                gameName = stream.Element("meta_game").Value;
-            }
-            catch (NullReferenceException)
-            {
-            }
+            title = (string)stream.Element("title") ?? "";
+            gameName = (string)stream.Element("meta_game") ?? "";
             twitchLogin = stream.Element("channel").Element("login").Value;
             channelId = stream.Element("channel").Element("id").Value;
+
             //            thumbnailURI = stream.Element("channel").Element("screen_cap_url_large").Value;
             thumbnailURI = stream.Element("channel").Element("screen_cap_url_huge").Value;
 
@@ -595,6 +606,7 @@ namespace LeStreamsFace
         private void Window_SourceInitialized(object sender, EventArgs e)
         {
             var hwnd = new WindowInteropHelper(this).Handle;
+
             //make invisible to task manager
             int exStyle = (int)NativeMethods.GetWindowLong(hwnd, (int)NativeMethods.GetWindowLongFields.GWL_EXSTYLE);
             exStyle |= (int)NativeMethods.ExtendedWindowStyles.WS_EX_TOOLWINDOW;

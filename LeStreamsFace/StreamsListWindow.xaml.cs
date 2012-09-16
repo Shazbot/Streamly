@@ -45,6 +45,8 @@ namespace LeStreamsFace
             InitializeComponent();
             this.timeBlockingDelegate = timeBlockingDelegate;
 
+            NameScope.SetNameScope(windowCommands, NameScope.GetNameScope(this));
+
             TypeDescriptor.GetProperties(this.streamsDataGrid)["ItemsSource"].AddValueChanged(this.streamsDataGrid, new EventHandler(blockedItemsListBox_ItemsSourceChanged));
             this.AutoCheckFavoritesCheckBox.IsChecked = ConfigManager.AutoCheckFavorites;
             UpdateGameIconBackgrounds();
@@ -196,29 +198,31 @@ namespace LeStreamsFace
             System.Diagnostics.Process.Start(e.Uri.ToString());
         }
 
-        private void Config_Click(object sender, RoutedEventArgs e)
+        private void ChangeTab_Click(object sender, RoutedEventArgs e)
         {
-            DisabledTimeTextBox.Text = ConfigManager.FromSpan.ToString("hhmm") + '-' + ConfigManager.ToSpan.ToString("hhmm");
-            BannedGamesTextBox.Text = ConfigManager.BannedGames.Aggregate((s, s1) => s + ", " + s1);
-
-            configTabItem.IsSelected = true;
-        }
-
-        private void About_Click(object sender, RoutedEventArgs e)
-        {
-            aboutTabItem.IsSelected = true;
-        }
-
-        private void Streams_Click(object sender, RoutedEventArgs e)
-        {
-            if (streamsTabItem.IsSelected)
+            var tabItem = (sender as FrameworkElement).Tag as TabItem;
+            if (tabItem == streamsTabItem)
             {
-                doFilterGames = !doFilterGames;
+                if (streamsTabItem.IsSelected)
+                {
+                    doFilterGames = !doFilterGames;
 
-                RefreshView();
+                    RefreshView();
+                }
+            }
+            else if (tabItem == configTabItem)
+            {
+                DisabledTimeTextBox.Text = ConfigManager.FromSpan.ToString("hhmm") + '-' + ConfigManager.ToSpan.ToString("hhmm");
+                BannedGamesTextBox.Text = ConfigManager.BannedGames.Aggregate((s, s1) => s + ", " + s1);
+            }
+            else if (tabItem == statsTabItem)
+            {
+            }
+            else if (tabItem == aboutTabItem)
+            {
             }
 
-            streamsTabItem.IsSelected = true;
+            tabItem.IsSelected = true;
         }
 
         private void TwitchFavorites_Click(object sender, RoutedEventArgs e)

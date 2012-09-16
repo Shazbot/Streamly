@@ -7,7 +7,7 @@
                            xmlns:lib="http://schemas.leschemasface.com/2012/xaml/presentation"
                            xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                            xmlns:MetroControls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-                           xmlns:Updater="clr-namespace:LeStreamsFace.Updater"
+                           xmlns:Updater="clr-namespace:LeStreamsFace.Updater" xmlns:oxy="http://oxyplot.codeplex.com"
                            Name="window"
                            Title="Do you even watch streams?"
                            MinWidth="150"
@@ -120,9 +120,10 @@
                        Height="15"
                        Source="/LeStreamsFace;component/Resources/DiabloIcon.png" />
             </Button>
-            <Button Click="Streams_Click" Content="streams" />
-            <Button Click="Config_Click" Content="config" />
-            <Button Click="About_Click" Content="about" />
+            <Button Click="ChangeTab_Click" Content="streams" Tag="{Binding ElementName=streamsTabItem}" />
+            <Button Click="ChangeTab_Click" Content="config" Tag="{Binding ElementName=configTabItem}" />
+            <Button Click="ChangeTab_Click" Content="stats" Tag="{Binding ElementName=statsTabItem}" />
+            <Button Click="ChangeTab_Click" Content="about" Tag="{Binding ElementName=aboutTabItem}" />
         </MetroControls:WindowCommands>
     </MetroControls:MetroWindow.WindowCommands>
 
@@ -583,6 +584,18 @@
                             </StackPanel>
                         </WrapPanel>
                     </ScrollViewer>
+                </TabItem>
+                <TabItem Name="statsTabItem"
+                         Header="Stats"
+                         Visibility="Collapsed">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <oxy:Plot Grid.Column="0" Model="{Binding StreamsPerGamePlotModel, Source={StaticResource ConfigManager}}" Background="Transparent" />
+                        <oxy:Plot Grid.Column="1" Model="{Binding ViewersPerGamePlotModel, Source={StaticResource ConfigManager}}" Background="Transparent" />
+                    </Grid>
                 </TabItem>
                 <TabItem Name="aboutTabItem"
                          Header="About"
