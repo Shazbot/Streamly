@@ -75,6 +75,9 @@ namespace LeStreamsFace
             timeBlockingDelegate = null;
             Updater.CheckForUpdateButton.Click -= ((UpdaterViewModel)Updater.DataContext).CheckForUpdate;
             Updater.DataContext = null;
+
+            gameStreamsPlot.Model = null;
+            gameViewersPlot.Model = null;
         }
 
         private void blockedItemsListBox_ItemsSourceChanged(object sender, EventArgs e)

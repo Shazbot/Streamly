@@ -47,6 +47,14 @@
     <Reference Include="AutomaticUpdaterWPF">
       <HintPath>Resources\AutomaticUpdaterWPF.dll</HintPath>
     </Reference>
+    <Reference Include="Awesomium.Core, Version=1.6.6.0, Culture=neutral, PublicKeyToken=e1a0d7c8071a5214, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\Awesomium.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Awesomium.Windows.Controls, Version=1.6.6.0, Culture=neutral, PublicKeyToken=7a34e179b8b61c39, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\Awesomium.Windows.Controls.dll</HintPath>
+    </Reference>
     <Reference Include="Kent.Boogaart.Converters">
       <HintPath>..\packages\Kent.Boogaart.Converters.1.3.0.0\lib\net40\Kent.Boogaart.Converters.dll</HintPath>
       <Private>False</Private>
@@ -99,7 +107,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="IconWindow.xaml">
+    <Page Include="Tray Icon\IconWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -131,7 +139,7 @@
     <Compile Include="ConfigManager.cs" />
     <Compile Include="Converters\GameNameToIconUriConverter.cs" />
     <Compile Include="Extensions.cs" />
-    <Compile Include="FavoriteStream.cs" />
+    <Compile Include="Stream\FavoriteStream.cs" />
     <Compile Include="GameIconAdorner.cs" />
     <Compile Include="NonNegativeIntegerValidationRule.cs" />
     <Compile Include="OptimizedObservableCollection.cs" />
@@ -141,7 +149,7 @@
       <DependentUpon>StreamsListWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\CutOffConverter.cs" />
-    <Compile Include="IconWindow.xaml.cs">
+    <Compile Include="Tray Icon\IconWindow.xaml.cs">
       <DependentUpon>IconWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
@@ -149,14 +157,14 @@
     </Compile>
     <Compile Include="MouseUtilities.cs" />
     <Compile Include="NativeMethods.cs" />
-    <Compile Include="NotificationAreaIcon.cs" />
+    <Compile Include="Tray Icon\NotificationAreaIcon.cs" />
     <Compile Include="NotificationWindow.xaml.cs">
       <DependentUpon>NotificationWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs" />
     <Compile Include="Properties\Settings.Designer.cs" />
-    <Compile Include="Stream.cs" />
+    <Compile Include="Stream\Stream.cs" />
     <Compile Include="StreamsManager.cs" />
     <Compile Include="Taskbar.cs" />
     <Compile Include="Updater\UpdaterChangesView.xaml.cs">
@@ -203,6 +211,8 @@
     <EmbeddedResource Include="..\packages\RestSharp.104.1\lib\net4\RestSharp.dll">
       <Link>Resources\RestSharp.dll</Link>
     </EmbeddedResource>
+    <Content Include="lib\Awesomium.Core.dll" />
+    <Content Include="lib\Awesomium.Windows.Controls.dll" />
     <Content Include="Resources\Entypo-license.txt" />
     <Resource Include="Resources\leagueIcon.png" />
     <Resource Include="Resources\StarcraftIcon.png" />

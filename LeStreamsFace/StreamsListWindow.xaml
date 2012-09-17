@@ -593,8 +593,8 @@
                             <ColumnDefinition />
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions>
-                        <oxy:Plot Grid.Column="0" Model="{Binding StreamsPerGamePlotModel, Source={StaticResource ConfigManager}}" Background="Transparent" />
-                        <oxy:Plot Grid.Column="1" Model="{Binding ViewersPerGamePlotModel, Source={StaticResource ConfigManager}}" Background="Transparent" />
+                        <oxy:Plot Name="gameStreamsPlot" Grid.Column="0" Model="{Binding StreamsPerGamePlotModel, Source={StaticResource ConfigManager}}" Background="Transparent" />
+                        <oxy:Plot Name="gameViewersPlot" Grid.Column="1" Model="{Binding ViewersPerGamePlotModel, Source={StaticResource ConfigManager}}" Background="Transparent" />
                     </Grid>
                 </TabItem>
                 <TabItem Name="aboutTabItem"
