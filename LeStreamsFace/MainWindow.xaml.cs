@@ -123,8 +123,7 @@ namespace LeStreamsFace
 
             // remove duplicates in unreportedFavs, and display currently existing favorites
             foreach (Stream unreportedStream in unreportedFavs.GroupBy(stream => stream.Id).Select(grouping => grouping.Last())
-
-                //                                                        .Favorites()
+                                                    .Favorites()
                                                     .Where(stream => StreamsManager.Streams.Any(stream1 => stream1.Id == stream.Id)))
             {
                 new NotificationWindow(unreportedStream);
