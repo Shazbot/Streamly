@@ -10,6 +10,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{A70D90
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarkPad.PreviewControl", "MarkPad.PreviewControl\MarkPad.PreviewControl.csproj", "{D1EF806F-2DAF-47B3-AA55-EB841ADBD4EF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,6 +32,16 @@ Global
 		{88922744-5F2F-4AE4-BFEA-C77BD1BBE685}.Release|Mixed Platforms.Build.0 = Release|x86
 		{88922744-5F2F-4AE4-BFEA-C77BD1BBE685}.Release|x86.ActiveCfg = Release|x86
 		{88922744-5F2F-4AE4-BFEA-C77BD1BBE685}.Release|x86.Build.0 = Release|x86
+		{D1EF806F-2DAF-47B3-AA55-EB841ADBD4EF}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{D1EF806F-2DAF-47B3-AA55-EB841ADBD4EF}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{D1EF806F-2DAF-47B3-AA55-EB841ADBD4EF}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{D1EF806F-2DAF-47B3-AA55-EB841ADBD4EF}.Debug|x86.ActiveCfg = Debug|x86
+		{D1EF806F-2DAF-47B3-AA55-EB841ADBD4EF}.Debug|x86.Build.0 = Debug|x86
+		{D1EF806F-2DAF-47B3-AA55-EB841ADBD4EF}.Release|Any CPU.ActiveCfg = Release|x86
+		{D1EF806F-2DAF-47B3-AA55-EB841ADBD4EF}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{D1EF806F-2DAF-47B3-AA55-EB841ADBD4EF}.Release|Mixed Platforms.Build.0 = Release|x86
+		{D1EF806F-2DAF-47B3-AA55-EB841ADBD4EF}.Release|x86.ActiveCfg = Release|x86
+		{D1EF806F-2DAF-47B3-AA55-EB841ADBD4EF}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

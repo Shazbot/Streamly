@@ -217,6 +217,12 @@
     <Resource Include="Resources\leagueIcon.png" />
     <Resource Include="Resources\StarcraftIcon.png" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MarkPad.PreviewControl\MarkPad.PreviewControl.csproj">
+      <Project>{d1ef806f-2daf-47b3-aa55-eb841adbd4ef}</Project>
+      <Name>MarkPad.PreviewControl</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
   <ProjectExtensions>
     <VisualStudio AllowExistingFolder="true" />

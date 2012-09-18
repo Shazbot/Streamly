@@ -33,10 +33,13 @@ namespace LeStreamsFace
 
         private static PlotModel _viewersPerGamePlotModel;
 
-        public static void UpdatePlotModel(IEnumerable<Stream> streams)
+        public static void UpdatePlotModel(IEnumerable<Stream> gameStreams)
         {
+            if (!gameStreams.Any()) return;
+
             const int showFirst = 15;
-            streams = streams.ToList();
+            // create a copy
+            var streams = gameStreams.ToList();
 
             var groupedByViewers =
                 streams.ToList().GroupBy(stream => stream.GameName).OrderByDescending(
