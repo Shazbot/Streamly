@@ -80,6 +80,9 @@
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="PropertyChanged">
+      <HintPath>..\packages\PropertyChanged.Fody.1.28.1.0\Lib\NET40\PropertyChanged.dll</HintPath>
+    </Reference>
     <Reference Include="RestSharp">
       <HintPath>..\packages\RestSharp.104.1\lib\net4\RestSharp.dll</HintPath>
       <Private>False</Private>
@@ -97,12 +100,17 @@
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="WindowsBase" />
+    <None Include="FodyWeavers.xml" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="StreamEmbedWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="StreamsListWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -139,6 +147,9 @@
     <Compile Include="ConfigManager.cs" />
     <Compile Include="Converters\GameNameToIconUriConverter.cs" />
     <Compile Include="Extensions.cs" />
+    <Compile Include="StreamEmbedWindow.xaml.cs">
+      <DependentUpon>StreamEmbedWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Stream\FavoriteStream.cs" />
     <Compile Include="GameIconAdorner.cs" />
     <Compile Include="NonNegativeIntegerValidationRule.cs" />
@@ -232,4 +243,5 @@
     </PreBuildEvent>
   </PropertyGroup>
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
+  <Import Project="$(ProjectPath)\..\..\Tools\Fody\Fody.targets" />
 </Project>
