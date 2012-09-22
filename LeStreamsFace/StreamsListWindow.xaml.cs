@@ -38,12 +38,12 @@ namespace LeStreamsFace
     internal partial class StreamsListWindow : MetroWindow
     {
         private bool doFilterGames = true;
-        private MainWindow.TimeBlockingDelegate timeBlockingDelegate;
+        private Func<bool> timeBlockCheck;
 
-        public StreamsListWindow(MainWindow.TimeBlockingDelegate timeBlockingDelegate)
+        public StreamsListWindow(Func<bool> timeBlockCheck)
         {
             InitializeComponent();
-            this.timeBlockingDelegate = timeBlockingDelegate;
+            this.timeBlockCheck = timeBlockCheck;
 
             NameScope.SetNameScope(windowCommands, NameScope.GetNameScope(this));
 
@@ -72,7 +72,7 @@ namespace LeStreamsFace
         private void window_Closed(object sender, EventArgs e)
         {
             TypeDescriptor.GetProperties(this.streamsDataGrid)["ItemsSource"].RemoveValueChanged(this.streamsDataGrid, new EventHandler(blockedItemsListBox_ItemsSourceChanged));
-            timeBlockingDelegate = null;
+            timeBlockCheck = null;
             Updater.CheckForUpdateButton.Click -= ((UpdaterViewModel)Updater.DataContext).CheckForUpdate;
             Updater.DataContext = null;
 
@@ -412,7 +412,7 @@ namespace LeStreamsFace
                 ConfigManager.FromSpan = fromSpan;
                 ConfigManager.ToSpan = toSpan;
                 ConfigManager.WriteConfigXml();
-                timeBlockingDelegate();
+                timeBlockCheck();
             }
             catch (Exception)
             {

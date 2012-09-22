@@ -26,6 +26,7 @@ namespace LeStreamsFace
         public static StreamsListWindow streamsWindow;
         public static bool WasTimeBlocking = false;
         private bool firstRun = true;
+        private readonly object _syncLock = new object();
 
         public static readonly Taskbar Taskbar = new Taskbar();
         public static readonly List<NotificationWindow> NotificationWindows = new List<NotificationWindow>();
@@ -37,8 +38,6 @@ namespace LeStreamsFace
         private readonly List<Stream> closedLastPass = new List<Stream>();
 
         public delegate void ExitDelegate(object sender, EventArgs e);
-
-        public delegate bool TimeBlockingDelegate();
 
         public MainWindow()
         {
@@ -66,7 +65,7 @@ namespace LeStreamsFace
                 iconWindow.notificationItem.TrayContextMenu = new ContextMenu(menuItems.ToArray());
                 iconWindow.notificationItem.TrayContextMenu.MenuItems.Add(0, new MenuItem("Stream list", StreamListOnClick));
 
-                iconWindow.MouseLeftButtonDown += IconWindowOnMouseLeftButtonDown;
+                iconWindow.MouseLeftButtonDown += StreamListOnClick;
                 iconWindow.Show();
 
                 dispatcherTimer = new DispatcherTimer();
@@ -152,21 +151,23 @@ namespace LeStreamsFace
             return false;
         }
 
-        private void IconWindowOnMouseLeftButtonDown(object sender, MouseButtonEventArgs mouseButtonEventArgs)
-        {
-            StreamListOnClick();
-        }
-
         private void StreamListOnClick(object sender = null, EventArgs eventArgs = null)
         {
             if (streamsWindow == null)
             {
-                streamsWindow = new StreamsListWindow(new TimeBlockingDelegate(DuringTimeBlock));
-                streamsWindow.Closed += (o, args) => streamsWindow = null;
-                streamsWindow.Owner = this;
+                lock (_syncLock)
+                {
+                    if (streamsWindow == null)
+                    {
+                        streamsWindow = new StreamsListWindow(DuringTimeBlock);
+                        streamsWindow.Closed += (o, args) => streamsWindow = null;
+                        streamsWindow.Owner = this;
 
-                streamsWindow.Show();
-                streamsWindow.Activate();
+                        streamsWindow.Show();
+                        streamsWindow.Activate();
+                    }
+                    
+                }
             }
             else
             {
