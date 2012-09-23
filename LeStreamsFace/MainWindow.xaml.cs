@@ -21,8 +21,8 @@ namespace LeStreamsFace
 {
     internal partial class MainWindow : Window
     {
-        private readonly DispatcherTimer timer;
-        private readonly DispatcherTimer dispatcherTimer;
+        private readonly DispatcherTimer mainTimer;
+        private readonly DispatcherTimer fullscreenWaitTimer;
         public static StreamsListWindow streamsWindow;
         public static bool WasTimeBlocking = false;
         private bool firstRun = true;
@@ -68,13 +68,13 @@ namespace LeStreamsFace
                 iconWindow.MouseLeftButtonDown += StreamListOnClick;
                 iconWindow.Show();
 
-                dispatcherTimer = new DispatcherTimer();
-                dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 0, 2500);
-                dispatcherTimer.Tick += FullscreenWait;
+                fullscreenWaitTimer = new DispatcherTimer();
+                fullscreenWaitTimer.Interval = new TimeSpan(0, 0, 0, 0, 2500);
+                fullscreenWaitTimer.Tick += FullscreenWait;
 
-                timer = new DispatcherTimer();
-                timer.Interval = new TimeSpan(0, 0, 0, ConfigManager.SamplingInterval);
-                timer.Tick += MainTimerTick;
+                mainTimer = new DispatcherTimer();
+                mainTimer.Interval = new TimeSpan(0, 0, 0, ConfigManager.SamplingInterval);
+                mainTimer.Tick += MainTimerTick;
 
                 MainTimerTick(null, null);
             }
@@ -109,7 +109,7 @@ namespace LeStreamsFace
         {
             if (DuringTimeBlock())
             {
-                dispatcherTimer.Stop();
+                fullscreenWaitTimer.Stop();
                 return;
             }
 
@@ -118,7 +118,7 @@ namespace LeStreamsFace
                 return;
             }
 
-            dispatcherTimer.Stop();
+            fullscreenWaitTimer.Stop();
 
             // remove duplicates in unreportedFavs, and display currently existing favorites
             foreach (Stream unreportedStream in unreportedFavs.GroupBy(stream => stream.Id).Select(grouping => grouping.Last())
@@ -180,27 +180,51 @@ namespace LeStreamsFace
             App.ExitApp();
         }
 
-        // maybe rework this as a dispatcher timer
-        // using a threading timer, not DispatcherTimer, don't access UI directly
         private async void MainTimerTick(object sender, EventArgs e)
         {
-            timer.Stop();
+            mainTimer.Stop();
             //            (new NotificationWindow(new Stream("a", "b", 100, "a", "League of Legends", StreamingSite.TwitchTv))).Show();
             try
             {
                 DateTime now = DateTime.Now;
 
+                var twitchTask = Task.Factory.StartNew( () =>
+                                                        {
+                                                            var twitchResponse = new RestClient("http://api.justin.tv/api/stream/list.xml?category=gaming&limit=100").SinglePageResponse();
+                                                            //                                                              XDocument.Load("twitch.xml");
+                                                            IEnumerable<XElement> streams = XDocument.Parse(twitchResponse.Content).Descendants("stream");
+                                                            var createdStreams = new List<Stream>();
+
+                                                            foreach (XElement stream in streams)
+                                                            {
+                                                                try
+                                                                {
+                                                                    createdStreams.Add(LoadTwStreamFromXml(stream));
+                                                                }
+                                                                catch (NullReferenceException) { }
+                                                            }
+                                                            return createdStreams;
+                                                        }, TaskCreationOptions.PreferFairness);
+
                 var ownedTask = Task.Factory.StartNew( () =>
                                                           {
                                                               var ownedResponse = new RestClient("http://api.own3d.tv/live").SinglePageResponse();
-                                                              return XDocument.Parse(ownedResponse.Content);
+                                                              //                                                              XDocument.Load("owned.xml");
+                                                              IEnumerable<XElement> streams = XDocument.Parse(ownedResponse.Content).Descendants("item");
+                                                              var createdStreams = new List<Stream>();
+
+                                                              foreach (XElement stream in streams)
+                                                              {
+                                                                  try
+                                                                  {
+                                                                      createdStreams.Add(LoadOwnedStreamFromXml(stream));
+                                                                  }
+                                                                  catch (NullReferenceException) { }
+                                                              }
+                                                              return createdStreams;
                                                           }, TaskCreationOptions.PreferFairness);
 
-                var twitchTask = Task.Factory.StartNew( () =>
-                        {
-                            var twitchResponse = new RestClient("http://api.justin.tv/api/stream/list.xml?category=gaming&limit=100").SinglePageResponse();
-                            return XDocument.Parse(twitchResponse.Content);
-                        }, TaskCreationOptions.PreferFairness);
+                
 
                 var streamsList = new List<Stream>();
                 var closedStreams = new List<Stream>();
@@ -216,87 +240,45 @@ namespace LeStreamsFace
                     closedStreams.AddRange(StreamsManager.Streams.Where(stream => stream.GottenViaAutoGetFavs && !streamsList.Contains(stream)).ToList());
                 }
 
-                XDocument xDoc = null;
-                //                                xDoc = XDocument.Load("twitch.xml");
                 try
                 {
-                    xDoc = await twitchTask;
+                    await twitchTask;
                 }
                 catch (Exception exception)
-                {
-                    Debug.WriteLine(exception);
-                }
-
-                if (xDoc != null)
-                {
-                    IEnumerable<XElement> streams = xDoc.Descendants("stream");
-
-                    foreach (XElement stream in streams)
-                    {
-                        try
-                        {
-                            var newStream = LoadTwStreamFromXml(stream);
-                            if (!streamsList.Contains(newStream))
-                            {
-                                if (!StreamsManager.Streams.Contains(newStream))
-                                {
-                                    Debug.WriteLine("ADDED " + newStream.Name + ", " + newStream.Id);
-                                    newStreamsList.Add(newStream);
-                                }
-                                streamsList.Add(newStream);
-                            }
-                        }
-                        catch (NullReferenceException)
-                        {
-                        }
-                    }
-                }
-                else
                 {
                     // need to not spam user
                     if (firstRun)
                     {
                         iconWindow.notificationItem.BalloonTip("Trouble reading from TWITCHTV", "REQUEST FAILED", toolTipIcon: ToolTipIcon.Error);
                     }
-                }
-
-                //                XDocument xDocOwned = XDocument.Load("owned.xml");
-                XDocument xDocOwned = null;
-                try
-                {
-                    xDocOwned = await ownedTask;
-                }
-                catch (Exception exception)
-                {
                     Debug.WriteLine(exception);
                 }
-                //                Debug.WriteLine((DateTime.Now - now).TotalSeconds + " for owned request");
-                if (xDocOwned != null)
+
+                try
                 {
-                    var ownedStreams = xDocOwned.Descendants("item");
-                    foreach (XElement ownedStream in ownedStreams)
-                    {
-                        try
-                        {
-                            var newStream = LoadOwnedStreamFromXml(ownedStream);
-                            if (!StreamsManager.Streams.Contains(newStream))
-                            {
-                                Debug.WriteLine("ADDED " + newStream.Name + ", " + newStream.Id);
-                                newStreamsList.Add(newStream);
-                            }
-                            streamsList.Add(newStream);
-                        }
-                        catch (NullReferenceException)
-                        {
-                        }
-                    }
+                    await ownedTask;
                 }
-                else
+                catch (Exception exception)
                 {
                     // need to not spam user
                     if (firstRun)
                     {
                         iconWindow.notificationItem.BalloonTip("Trouble reading from OWNEDTV", "REQUEST FAILED", toolTipIcon: ToolTipIcon.Error);
+                    }
+                    Debug.WriteLine(exception);
+                }
+
+                // add streams we didn't get from favs to streamsList, new streams to newStreamsList
+                foreach (Stream stream in twitchTask.Result.Concat(ownedTask.Result))
+                {
+                    if (!streamsList.Contains(stream))
+                    {
+                        if (!StreamsManager.Streams.Contains(stream))
+                        {
+                            Debug.WriteLine("ADDED " + stream.Name + ", " + stream.Id);
+                            newStreamsList.Add(stream);
+                        }
+                        streamsList.Add(stream);
                     }
                 }
 
@@ -346,11 +328,8 @@ namespace LeStreamsFace
                     streamsWindow.RefreshView();
                 }
 
-                //first run is in a UI safe thread
                 if (firstRun)
                 {
-                    firstRun = false;
-
                     if (!DuringTimeBlock())
                     {
                         foreach (Stream newStream in newStreamsList.Favorites())
@@ -374,7 +353,7 @@ namespace LeStreamsFace
                     {
                         unreportedFavs.AddRange(newStreamsList);
 
-                        dispatcherTimer.Start();
+                        fullscreenWaitTimer.Start();
                     }
                     else
                     {
@@ -412,7 +391,7 @@ namespace LeStreamsFace
                 ConfigManager.UpdatePlotModel(StreamsManager.Streams);
 
                 newStreamsList.Clear();
-                timer.Start();
+                mainTimer.Start();
             }
         }
 
@@ -455,7 +434,7 @@ namespace LeStreamsFace
 
                 if (fullscreen)
                 {
-                    dispatcherTimer.Start();
+                    fullscreenWaitTimer.Start();
                 }
             }
 
@@ -482,7 +461,7 @@ namespace LeStreamsFace
             var twitchFavsResponse = new RestClient("http://api.justin.tv/api/stream/list.xml?channel=" + channels).SinglePageResponse();
             XDocument xDocument = XDocument.Parse(twitchFavsResponse.Content);
 
-            List<Stream> gottenFavs = new List<Stream>();
+            var gottenFavs = new List<Stream>();
             foreach (XElement stream in xDocument.Element("streams").Elements("stream"))
             {
                 try
