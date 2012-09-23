@@ -21,7 +21,7 @@ namespace LeStreamsFace
 {
     internal partial class MainWindow : Window
     {
-        private readonly System.Timers.Timer timer;
+        private readonly DispatcherTimer timer;
         private readonly DispatcherTimer dispatcherTimer;
         public static StreamsListWindow streamsWindow;
         public static bool WasTimeBlocking = false;
@@ -72,11 +72,11 @@ namespace LeStreamsFace
                 dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 0, 2500);
                 dispatcherTimer.Tick += FullscreenWait;
 
-                timer = new System.Timers.Timer(ConfigManager.SamplingInterval * 1000);
-                timer.AutoReset = false;
-                timer.Elapsed += mainTimer_Tick;
+                timer = new DispatcherTimer();
+                timer.Interval = new TimeSpan(0, 0, 0, ConfigManager.SamplingInterval);
+                timer.Tick += MainTimerTick;
 
-                mainTimer_Tick(null, null);
+                MainTimerTick(null, null);
             }
             catch (FileNotFoundException e)
             {
@@ -182,62 +182,50 @@ namespace LeStreamsFace
 
         // maybe rework this as a dispatcher timer
         // using a threading timer, not DispatcherTimer, don't access UI directly
-        private void mainTimer_Tick(object sender, EventArgs e)
+        private async void MainTimerTick(object sender, EventArgs e)
         {
+            timer.Stop();
             //            (new NotificationWindow(new Stream("a", "b", 100, "a", "League of Legends", StreamingSite.TwitchTv))).Show();
             try
             {
                 DateTime now = DateTime.Now;
 
-                var ownedTask = Task.Factory.StartNew(delegate
+                var ownedTask = Task.Factory.StartNew( () =>
                                                           {
-                                                              try
-                                                              {
-                                                                  var ownedResponse = new RestClient("http://api.own3d.tv/live").SinglePageResponse();
-                                                                  return XDocument.Parse(ownedResponse.Content);
-                                                              }
-                                                              catch (Exception exception)
-                                                              {
-                                                                  Debug.WriteLine(exception);
-                                                                  return null;
-                                                              }
-                                                          }, TaskCreationOptions.PreferFairness
-                                                          );
+                                                              var ownedResponse = new RestClient("http://api.own3d.tv/live").SinglePageResponse();
+                                                              return XDocument.Parse(ownedResponse.Content);
+                                                          }, TaskCreationOptions.PreferFairness);
 
-                List<Stream> streamsList = new List<Stream>();
-                List<Stream> closedStreams = new List<Stream>();
+                var twitchTask = Task.Factory.StartNew( () =>
+                        {
+                            var twitchResponse = new RestClient("http://api.justin.tv/api/stream/list.xml?category=gaming&limit=100").SinglePageResponse();
+                            return XDocument.Parse(twitchResponse.Content);
+                        }, TaskCreationOptions.PreferFairness);
+
+                var streamsList = new List<Stream>();
+                var closedStreams = new List<Stream>();
 
                 // check twitch fav streams through a channel request
                 if (ConfigManager.AutoCheckFavorites)
                 {
                     try
                     {
-                        CheckFavoriteStreamsManually(newStreamsList, streamsList);
+                        await Task.Factory.StartNew( () => CheckFavoriteStreamsManually(newStreamsList, streamsList));
                     }
                     catch (Exception) { }
                     closedStreams.AddRange(StreamsManager.Streams.Where(stream => stream.GottenViaAutoGetFavs && !streamsList.Contains(stream)).ToList());
                 }
 
-                XDocument xDoc;
-
+                XDocument xDoc = null;
                 //                                xDoc = XDocument.Load("twitch.xml");
                 try
                 {
-                    var twitchResponse = new RestClient("http://api.justin.tv/api/stream/list.xml?category=gaming&limit=100").SinglePageResponse();
-                    xDoc = XDocument.Parse(twitchResponse.Content);
+                    xDoc = await twitchTask;
                 }
-                catch (Exception)
+                catch (Exception exception)
                 {
-                    xDoc = null;
-
-                    // need to not spam user
-                    if (firstRun)
-                    {
-                        iconWindow.notificationItem.BalloonTip("Trouble reading from TWITCHTV", "REQUEST FAILED", toolTipIcon: ToolTipIcon.Error);
-                    }
+                    Debug.WriteLine(exception);
                 }
-
-                //                Debug.WriteLine((DateTime.Now - now).TotalSeconds + " for twitch request");
 
                 if (xDoc != null)
                 {
@@ -263,10 +251,25 @@ namespace LeStreamsFace
                         }
                     }
                 }
+                else
+                {
+                    // need to not spam user
+                    if (firstRun)
+                    {
+                        iconWindow.notificationItem.BalloonTip("Trouble reading from TWITCHTV", "REQUEST FAILED", toolTipIcon: ToolTipIcon.Error);
+                    }
+                }
 
                 //                XDocument xDocOwned = XDocument.Load("owned.xml");
-                var xDocOwned = ownedTask.Result;
-
+                XDocument xDocOwned = null;
+                try
+                {
+                    xDocOwned = await ownedTask;
+                }
+                catch (Exception exception)
+                {
+                    Debug.WriteLine(exception);
+                }
                 //                Debug.WriteLine((DateTime.Now - now).TotalSeconds + " for owned request");
                 if (xDocOwned != null)
                 {
@@ -326,28 +329,22 @@ namespace LeStreamsFace
                 }
 
                 // add new streams, remove closed ones from the main list
-                this.Dispatcher.BeginInvoke((MethodInvoker)(delegate()
+                StreamsManager.Streams.RemoveRange(closedStreams);
+                closedStreams.ForEach(stream => Debug.WriteLine("REMOVED STREAM " + stream.Name));
+                StreamsManager.Streams.AddRange(newStreamsList);
+
+                // don't create a new notification for streams readded this pass
+                foreach (Stream stream in newStreamsList.Favorites().Where(stream => closedLastPass.Any(stream1 => stream1.Name == stream.Name)).ToList())
                 {
-                    foreach (Stream closedStream in closedStreams)
-                    {
-                        StreamsManager.Streams.Remove(closedStream);
-                        Debug.WriteLine("REMOVED STREAM " + closedStream.Name);
-                    }
-                    StreamsManager.Streams.AddRange(newStreamsList);
+                    newStreamsList.Remove(stream);
+                }
+                closedLastPass.Clear();
+                closedLastPass.AddRange(closedStreams);
 
-                    // don't create a new notification for streams readded this pass
-                    foreach (Stream stream in newStreamsList.Favorites().Where(stream => closedLastPass.Any(stream1 => stream1.Name == stream.Name)).ToList())
-                    {
-                        newStreamsList.Remove(stream);
-                    }
-                    closedLastPass.Clear();
-                    closedLastPass.AddRange(closedStreams);
-
-                    if (streamsWindow != null)
-                    {
-                        streamsWindow.RefreshView();
-                    }
-                }));
+                if (streamsWindow != null)
+                {
+                    streamsWindow.RefreshView();
+                }
 
                 //first run is in a UI safe thread
                 if (firstRun)
@@ -383,15 +380,11 @@ namespace LeStreamsFace
                     {
                         if (!DuringTimeBlock())
                         {
-                            var newStreamsListCopy = newStreamsList.ToList();
-                            this.Dispatcher.BeginInvoke((MethodInvoker)(delegate()
-                                                                            {
-                                                                                //                                                                                foreach (Stream newStream in newStreamsListCopy)
-                                                                                foreach (Stream newStream in newStreamsList.Favorites())
-                                                                                {
-                                                                                    new NotificationWindow(newStream);
-                                                                                }
-                                                                            }));
+                            // foreach (Stream newStream in newStreamsList)
+                            foreach (Stream newStream in newStreamsList.Favorites())
+                            {
+                                new NotificationWindow(newStream);
+                            }
                         }
                     }
                 }
@@ -418,8 +411,7 @@ namespace LeStreamsFace
                 firstRun = false;
                 ConfigManager.UpdatePlotModel(StreamsManager.Streams);
 
-                // need this to be in sync
-                this.Dispatcher.BeginInvoke((MethodInvoker)(() => newStreamsList.Clear()));
+                newStreamsList.Clear();
                 timer.Start();
             }
         }
@@ -434,7 +426,6 @@ namespace LeStreamsFace
 
                 if (streamsWindow != null)
                 {
-                    //                    this.Dispatcher.BeginInvoke((MethodInvoker)(() => streamsWindow.RefreshView()));
                     streamsWindow.RefreshView();
                 }
             }
@@ -442,39 +433,23 @@ namespace LeStreamsFace
             {
                 WasTimeBlocking = false;
 
-                //                this.Dispatcher.BeginInvoke((MethodInvoker)(delegate()
-                //                {
                 if (streamsWindow != null)
                 {
                     streamsWindow.RefreshView();
                 }
 
                 var fullscreen = IsFullscreenAppRunning();
-
                 var streamsFromNewPass = StreamsManager.Streams.Favorites().Where(stream => !newStreamsList.Contains(stream)).ToList();
 
-                ParameterizedThreadStart showNotifications = streams =>
-                {
-                    foreach (Stream newStream in streams as IEnumerable<Stream>)
-                    {
-                        new NotificationWindow(newStream);
-                    }
-                };
                 if (fullscreen)
                 {
-                    streamsFromNewPass.ForEach(stream => unreportedFavs.Add(stream));
+                    unreportedFavs.AddRange(streamsFromNewPass);
                 }
                 else
                 {
-                    if (Thread.CurrentThread == Dispatcher.CurrentDispatcher.Thread)
+                    foreach (Stream newStream in streamsFromNewPass)
                     {
-                        showNotifications(streamsFromNewPass);
-                    }
-                    else
-                    {
-                        showNotifications(streamsFromNewPass);
-
-                        //                        this.Dispatcher.BeginInvoke((MethodInvoker)showNotifications(streamsFromNewPass));
+                        new NotificationWindow(newStream);
                     }
                 }
 
@@ -482,8 +457,6 @@ namespace LeStreamsFace
                 {
                     dispatcherTimer.Start();
                 }
-
-                //                }));
             }
 
             return timeBlocking;

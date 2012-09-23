@@ -38,6 +38,30 @@ namespace LeStreamsFace
             }
         }
 
+        public void RemoveRange(IEnumerable<T> items)
+        {
+            if (null == items)
+            {
+                throw new ArgumentNullException("items");
+            }
+
+            if (items.Any())
+            {
+                try
+                {
+                    suppressOnCollectionChanged = true;
+                    foreach (var item in items)
+                    {
+                        Remove(item);
+                    }
+                }
+                finally
+                {
+                    suppressOnCollectionChanged = false;
+                    OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+                }
+            }
+        }
         protected override void OnCollectionChanged(NotifyCollectionChangedEventArgs e)
         {
             if (!suppressOnCollectionChanged)

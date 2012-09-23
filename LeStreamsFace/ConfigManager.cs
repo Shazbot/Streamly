@@ -35,70 +35,76 @@ namespace LeStreamsFace
 
         public static void UpdatePlotModel(IEnumerable<Stream> gameStreams)
         {
-            if (!gameStreams.Any()) return;
-
-            const int showFirst = 15;
-            // create a copy
-            var streams = gameStreams.ToList();
-
-            var groupedByViewers =
-                streams.ToList().GroupBy(stream => stream.GameName).OrderByDescending(
-                    grouping => grouping.Select(stream => stream.Viewers).Sum());
-            var groupedByGame = streams.ToList().GroupBy(stream => stream.GameName).OrderByDescending(grouping => grouping.Count());
-
-            var model = new PlotModel("Number of streams per game");
-            var ps = new PieSeries();
-            foreach (IGrouping<string, Stream> grouping in groupedByGame.Take(showFirst))
+            try
             {
-                var pieSliceLabel = grouping.Key;
+                if (!gameStreams.Any()) return;
 
-                //                if (string.IsNullOrWhiteSpace(grouping.Key)) pieSliceLabel = "Unknown";
-                if (string.IsNullOrWhiteSpace(grouping.Key)) continue;
-                ps.Slices.Add(new PieSlice(pieSliceLabel, grouping.Count()));
+                const int showFirst = 15;
+                // create a copy
+                var streams = gameStreams.ToList();
+
+                var groupedByViewers =
+                    streams.ToList().GroupBy(stream => stream.GameName).OrderByDescending(
+                        grouping => grouping.Select(stream => stream.Viewers).Sum());
+                var groupedByGame = streams.ToList().GroupBy(stream => stream.GameName).OrderByDescending(grouping => grouping.Count());
+
+                var model = new PlotModel("Number of streams per game");
+                var ps = new PieSeries();
+                foreach (IGrouping<string, Stream> grouping in groupedByGame.Take(showFirst))
+                {
+                    var pieSliceLabel = grouping.Key;
+
+                    //                if (string.IsNullOrWhiteSpace(grouping.Key)) pieSliceLabel = "Unknown";
+                    if (string.IsNullOrWhiteSpace(grouping.Key)) continue;
+                    ps.Slices.Add(new PieSlice(pieSliceLabel, grouping.Count()));
+                }
+                var theRestOfGames = groupedByGame.Skip(showFirst);
+                ps.Slices.Add(new PieSlice("Other", theRestOfGames.Select(grouping => grouping.Count()).Aggregate((i, i1) => i + i1)));
+
+                //            ps.Slices.ForEach(slice => slice.Label = slice.Value.ToString() + " " + slice.Label);
+                ps.AreInsideLabelsAngled = true;
+
+                ps.InnerDiameter = 0;
+                ps.ExplodedDistance = 0.0;
+                ps.Stroke = OxyColors.White;
+                ps.StrokeThickness = 2.0;
+                ps.InsideLabelPosition = 0.8;
+                ps.AngleSpan = 360;
+                ps.StartAngle = 0;
+                model.Series.Add(ps);
+
+                StreamsPerGamePlotModel = model;
+
+                model = new PlotModel("Total viewers per game");
+                ps = new PieSeries();
+                foreach (IGrouping<string, Stream> grouping in groupedByViewers.Take(showFirst))
+                {
+                    var pieSliceLabel = grouping.Key;
+
+                    //                if (string.IsNullOrWhiteSpace(grouping.Key)) pieSliceLabel = "Unknown";
+                    if (string.IsNullOrWhiteSpace(grouping.Key)) continue;
+                    ps.Slices.Add(new PieSlice(pieSliceLabel, grouping.Sum(stream => stream.Viewers)));
+                }
+                theRestOfGames = groupedByViewers.Skip(showFirst);
+                ps.Slices.Add(new PieSlice("Other", theRestOfGames.Select(grouping => grouping.Sum(stream => stream.Viewers)).Sum()));
+
+                //            ps.Slices.ForEach(slice => slice.Label = slice.Value.ToString() + " " + slice.Label);
+                ps.AreInsideLabelsAngled = true;
+
+                ps.InnerDiameter = 0;
+                ps.ExplodedDistance = 0.0;
+                ps.Stroke = OxyColors.White;
+                ps.StrokeThickness = 2.0;
+                ps.InsideLabelPosition = 0.8;
+                ps.AngleSpan = 360;
+                ps.StartAngle = 0;
+                model.Series.Add(ps);
+
+                ViewersPerGamePlotModel = model;
             }
-            var theRestOfGames = groupedByGame.Skip(showFirst);
-            ps.Slices.Add(new PieSlice("Other", theRestOfGames.Select(grouping => grouping.Count()).Aggregate((i, i1) => i + i1)));
-
-            //            ps.Slices.ForEach(slice => slice.Label = slice.Value.ToString() + " " + slice.Label);
-            ps.AreInsideLabelsAngled = true;
-
-            ps.InnerDiameter = 0;
-            ps.ExplodedDistance = 0.0;
-            ps.Stroke = OxyColors.White;
-            ps.StrokeThickness = 2.0;
-            ps.InsideLabelPosition = 0.8;
-            ps.AngleSpan = 360;
-            ps.StartAngle = 0;
-            model.Series.Add(ps);
-
-            StreamsPerGamePlotModel = model;
-
-            model = new PlotModel("Total viewers per game");
-            ps = new PieSeries();
-            foreach (IGrouping<string, Stream> grouping in groupedByViewers.Take(showFirst))
+            catch (Exception)
             {
-                var pieSliceLabel = grouping.Key;
-
-                //                if (string.IsNullOrWhiteSpace(grouping.Key)) pieSliceLabel = "Unknown";
-                if (string.IsNullOrWhiteSpace(grouping.Key)) continue;
-                ps.Slices.Add(new PieSlice(pieSliceLabel, grouping.Sum(stream => stream.Viewers)));
             }
-            theRestOfGames = groupedByViewers.Skip(showFirst);
-            ps.Slices.Add(new PieSlice("Other", theRestOfGames.Select(grouping => grouping.Sum(stream => stream.Viewers)).Sum()));
-
-            //            ps.Slices.ForEach(slice => slice.Label = slice.Value.ToString() + " " + slice.Label);
-            ps.AreInsideLabelsAngled = true;
-
-            ps.InnerDiameter = 0;
-            ps.ExplodedDistance = 0.0;
-            ps.Stroke = OxyColors.White;
-            ps.StrokeThickness = 2.0;
-            ps.InsideLabelPosition = 0.8;
-            ps.AngleSpan = 360;
-            ps.StartAngle = 0;
-            model.Series.Add(ps);
-
-            ViewersPerGamePlotModel = model;
         }
 
         static ConfigManager()
@@ -124,7 +130,7 @@ namespace LeStreamsFace
             //            StreamsPerGamePlotModel = temp;
         }
 
-        public static int SamplingInterval = 60000;
+        public static int SamplingInterval = 60;
 
         public static TimeSpan FromSpan = new TimeSpan(0, 0, 0);
         public static TimeSpan ToSpan = new TimeSpan(0, 0, 0);
