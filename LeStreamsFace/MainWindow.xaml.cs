@@ -76,7 +76,7 @@ namespace LeStreamsFace
                 mainTimer.Interval = new TimeSpan(0, 0, 0, ConfigManager.SamplingInterval);
                 mainTimer.Tick += MainTimerTick;
 
-                MainTimerTick(null, null);
+                MainTimerTick();
             }
             catch (FileNotFoundException e)
             {
@@ -180,10 +180,15 @@ namespace LeStreamsFace
             App.ExitApp();
         }
 
-        private async void MainTimerTick(object sender, EventArgs e)
+        private async void MainTimerTick(object sender = null, EventArgs e = null)
         {
             mainTimer.Stop();
-            //            (new NotificationWindow(new Stream("a", "b", 100, "a", "League of Legends", StreamingSite.TwitchTv))).Show();
+
+            if (firstRun && streamsWindow == null)
+            {
+                StreamListOnClick();
+            }
+
             try
             {
                 DateTime now = DateTime.Now;
@@ -340,11 +345,6 @@ namespace LeStreamsFace
                     else
                     {
                         iconWindow.notificationItem.BalloonTip("Currently blocking favorites.", "BLOCKING", toolTipIcon: ToolTipIcon.Info);
-                    }
-
-                    if (streamsWindow == null)
-                    {
-                        StreamListOnClick();
                     }
                 }
                 else

@@ -75,6 +75,7 @@
                 </Style.Triggers>
             </Style>
             <BitmapImage x:Key="questionMarkImage" UriSource="/LeStreamsFace;component/Resources/appbar.question.png" />
+            <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
         </ResourceDictionary>
     </Window.Resources>
 
@@ -139,6 +140,7 @@
                             <RowDefinition />
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
+                        <MetroControls:ProgressRing Grid.Row="0" IsActive="True"/>
                         <DataGrid Name="streamsDataGrid"
                                   Grid.Row="0"
                                   Width="Auto"
@@ -162,6 +164,15 @@
                                   SelectionMode="Single"
                                   SelectionUnit="FullRow"
                                   Loaded="streamsDataGrid_Loaded">
+                            <DataGrid.Style>
+                                <Style TargetType="{x:Type DataGrid}" BasedOn="{StaticResource {x:Type DataGrid}}">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding ItemsSource.Count, ElementName=streamsDataGrid, TargetNullValue=0, FallbackValue=0}" Value="0">
+                                            <Setter Property="Visibility" Value="Collapsed" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </DataGrid.Style>
                             <DataGrid.CellStyle>
                                 <Style TargetType="{x:Type DataGridCell}">
                                     <Setter Property="FocusVisualStyle" Value="{x:Null}" />
