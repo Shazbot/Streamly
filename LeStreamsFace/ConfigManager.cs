@@ -109,25 +109,6 @@ namespace LeStreamsFace
 
         static ConfigManager()
         {
-            //            UpdatePlotModel();
-
-            //            var temp = new PlotModel("Square wave");
-            //            var ls = new LineSeries("sin(x)+sin(3x)/3+sin(5x)/5+...");
-            //            int n = 10;
-            //            for (double x = -10; x < 10; x += 0.0001)
-            //            {
-            //                double y = 0;
-            //                for (int i = 0; i < n; i++)
-            //                {
-            //                    int j = i * 2 + 1;
-            //                    y += Math.Sin(j * x) / j;
-            //                }
-            //                ls.Points.Add(new DataPoint(x, y));
-            //            }
-            //            temp.Series.Add(ls);
-            //            temp.Axes.Add(new LinearAxis(AxisPosition.Left, -4, 4));
-            //            temp.Axes.Add(new LinearAxis(AxisPosition.Bottom));
-            //            StreamsPerGamePlotModel = temp;
         }
 
         public static int SamplingInterval = 60;
@@ -270,6 +251,18 @@ namespace LeStreamsFace
             }
         }
 
+        public static bool Offline
+        {
+            get { return _offline; }
+            set
+            {
+                if (_offline == value) return;
+                _offline = value;
+                OnStaticPropertyChanged(GetVariableName(() => Offline));
+            }
+        }
+
+        private static bool _offline = false;
         private static double _winWidth = 1000;
         private static double _winHeight = 580;
         private static double _winOpacity = 1.0;

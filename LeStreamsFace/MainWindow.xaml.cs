@@ -123,7 +123,7 @@ namespace LeStreamsFace
             // remove duplicates in unreportedFavs, and display currently existing favorites
             foreach (Stream unreportedStream in unreportedFavs.GroupBy(stream => stream.Id).Select(grouping => grouping.Last())
                                                     .Favorites()
-                                                    .Where(stream => StreamsManager.Streams.Any(stream1 => stream1.Id == stream.Id)))
+                                                    .Where(stream => StreamsManager.Streams.Any(stream1 => stream1 == stream)))
             {
                 new NotificationWindow(unreportedStream);
             }
@@ -191,8 +191,6 @@ namespace LeStreamsFace
 
             try
             {
-                DateTime now = DateTime.Now;
-
                 var twitchTask = Task.Factory.StartNew( () =>
                                                         {
                                                             var twitchResponse = new RestClient("http://api.justin.tv/api/stream/list.xml?category=gaming&limit=100").SinglePageResponse();
@@ -245,28 +243,29 @@ namespace LeStreamsFace
                     closedStreams.AddRange(StreamsManager.Streams.Where(stream => stream.GottenViaAutoGetFavs && !streamsList.Contains(stream)).ToList());
                 }
 
+                IEnumerable<Stream> twitchFetchedStreams = Enumerable.Empty<Stream>();
                 try
                 {
-                    await twitchTask;
+                    twitchFetchedStreams = await twitchTask;
                 }
                 catch (Exception exception)
                 {
-                    // need to not spam user
-                    if (firstRun)
+                    if (firstRun) // need to not spam user
                     {
                         iconWindow.notificationItem.BalloonTip("Trouble reading from TWITCHTV", "REQUEST FAILED", toolTipIcon: ToolTipIcon.Error);
                     }
                     Debug.WriteLine(exception);
                 }
 
+                IEnumerable<Stream> ownedFetchedStreams = Enumerable.Empty<Stream>();
                 try
                 {
-                    await ownedTask;
+                    ownedFetchedStreams = await ownedTask;
                 }
                 catch (Exception exception)
                 {
-                    // need to not spam user
-                    if (firstRun)
+
+                    if (firstRun) // need to not spam user
                     {
                         iconWindow.notificationItem.BalloonTip("Trouble reading from OWNEDTV", "REQUEST FAILED", toolTipIcon: ToolTipIcon.Error);
                     }
@@ -274,7 +273,7 @@ namespace LeStreamsFace
                 }
 
                 // add streams we didn't get from favs to streamsList, new streams to newStreamsList
-                foreach (Stream stream in twitchTask.Result.Concat(ownedTask.Result))
+                foreach (Stream stream in twitchFetchedStreams.Concat(ownedFetchedStreams))
                 {
                     if (!streamsList.Contains(stream))
                     {
@@ -288,7 +287,7 @@ namespace LeStreamsFace
                 }
 
                 // check expired streams, without autoGetFavs
-                closedStreams.AddRange(StreamsManager.Streams.Where(stream => !stream.GottenViaAutoGetFavs && !streamsList.Contains(stream)).ToList());
+                closedStreams.AddRange(StreamsManager.Streams.Where(stream => !stream.GottenViaAutoGetFavs && !streamsList.Contains(stream)));
 
                 // id of a stream sometimes changes for no reason
                 foreach (Stream closedStream in closedStreams.ToList())
@@ -349,20 +348,23 @@ namespace LeStreamsFace
                 }
                 else
                 {
-                    if (IsFullscreenAppRunning())
+                    if (!ConfigManager.Offline)
                     {
-                        unreportedFavs.AddRange(newStreamsList);
-
-                        fullscreenWaitTimer.Start();
-                    }
-                    else
-                    {
-                        if (!DuringTimeBlock())
+                        if (IsFullscreenAppRunning())
                         {
-                            // foreach (Stream newStream in newStreamsList)
-                            foreach (Stream newStream in newStreamsList.Favorites())
+                            unreportedFavs.AddRange(newStreamsList);
+
+                            fullscreenWaitTimer.Start();
+                        }
+                        else
+                        {
+                            if (!DuringTimeBlock())
                             {
-                                new NotificationWindow(newStream);
+                                // foreach (Stream newStream in newStreamsList)
+                                foreach (Stream newStream in newStreamsList.Favorites())
+                                {
+                                    new NotificationWindow(newStream);
+                                }
                             }
                         }
                     }
@@ -388,6 +390,11 @@ namespace LeStreamsFace
             {
                 Debug.WriteLine("".PadRight(45, '-'));
                 firstRun = false;
+                ConfigManager.Offline = !StreamsManager.Streams.Any();
+                if (ConfigManager.Offline)
+                {
+                    unreportedFavs.Clear();
+                }
                 ConfigManager.UpdatePlotModel(StreamsManager.Streams);
 
                 newStreamsList.Clear();
@@ -418,23 +425,19 @@ namespace LeStreamsFace
                 }
 
                 var fullscreen = IsFullscreenAppRunning();
-                var streamsFromNewPass = StreamsManager.Streams.Favorites().Where(stream => !newStreamsList.Contains(stream)).ToList();
+                var streamsFromOldPasses = StreamsManager.Streams.Favorites().Where(stream => !newStreamsList.Contains(stream)).ToList();
 
                 if (fullscreen)
                 {
-                    unreportedFavs.AddRange(streamsFromNewPass);
+                    unreportedFavs.AddRange(streamsFromOldPasses);
+                    fullscreenWaitTimer.Start();
                 }
                 else
                 {
-                    foreach (Stream newStream in streamsFromNewPass)
+                    foreach (Stream newStream in streamsFromOldPasses)
                     {
                         new NotificationWindow(newStream);
                     }
-                }
-
-                if (fullscreen)
-                {
-                    fullscreenWaitTimer.Start();
                 }
             }
 
@@ -550,7 +553,7 @@ namespace LeStreamsFace
         {
             var hwnd = new WindowInteropHelper(this).Handle;
 
-            //make invisible to task manager
+            // make invisible to task manager
             int exStyle = (int)NativeMethods.GetWindowLong(hwnd, (int)NativeMethods.GetWindowLongFields.GWL_EXSTYLE);
             exStyle |= (int)NativeMethods.ExtendedWindowStyles.WS_EX_TOOLWINDOW;
             exStyle |= (int)NativeMethods.ExtendedWindowStyles.WS_EX_NOACTIVATE;
