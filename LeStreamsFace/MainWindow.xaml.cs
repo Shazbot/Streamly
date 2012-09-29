@@ -533,7 +533,8 @@ namespace LeStreamsFace
             viewers = int.Parse(ownedStream.Element("misc").Attribute("viewers").Value);
             id = ownedStream.Element("guid").Value;
             gameName = ownedStream.Element("misc").Attribute("game").Value;
-            thumbnailURI = ownedStream.Element("thumbnail").Value;
+//            thumbnailURI = ownedStream.Element("thumbnail").Value;
+            thumbnailURI = "http://owned.vo.llnwd.net/e2/live/live_tn_" + id.Substring(id.LastIndexOf('/') + 1) + "_.jpg?1348800268";
 
             if (gameName == "Diablo 3")
             {
