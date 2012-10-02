@@ -215,17 +215,10 @@
     <EmbeddedResource Include="..\packages\RestSharp.104.1\lib\net4\RestSharp.dll">
       <Link>Resources\RestSharp.dll</Link>
     </EmbeddedResource>
-    <Content Include="lib\Awesomium.Core.dll" />
-    <Content Include="lib\Awesomium.Windows.Controls.dll" />
+    <EmbeddedResource Include="lib\AutomaticUpdaterWPF.dll" />
     <Content Include="Resources\Entypo-license.txt" />
     <Resource Include="Resources\leagueIcon.png" />
     <Resource Include="Resources\StarcraftIcon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\MarkPad.PreviewControl\MarkPad.PreviewControl.csproj">
-      <Project>{d1ef806f-2daf-47b3-aa55-eb841adbd4ef}</Project>
-      <Name>MarkPad.PreviewControl</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
   <ProjectExtensions>
