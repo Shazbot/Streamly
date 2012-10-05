@@ -97,7 +97,7 @@ namespace LeStreamsFace
             Site = streamingSite;
             ChannelId = channelId;
 
-            IsFavorite = ConfigManager.FavoriteStreams.Any(stream => stream.ChannelId == channelId);
+            IsFavorite = ConfigManager.Instance.FavoriteStreams.Any(stream => stream.ChannelId == channelId);
         }
 
         public string GetUrl()

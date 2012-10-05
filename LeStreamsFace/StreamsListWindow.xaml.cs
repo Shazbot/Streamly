@@ -23,6 +23,7 @@ using RestSharp;
 using Button = System.Windows.Controls.Button;
 using CheckBox = System.Windows.Controls.CheckBox;
 using Clipboard = System.Windows.Clipboard;
+using Control = System.Windows.Controls.Control;
 using DataGrid = System.Windows.Controls.DataGrid;
 using KeyEventArgs = System.Windows.Input.KeyEventArgs;
 using MessageBox = System.Windows.MessageBox;
@@ -48,17 +49,17 @@ namespace LeStreamsFace
             NameScope.SetNameScope(windowCommands, NameScope.GetNameScope(this));
 
             TypeDescriptor.GetProperties(this.streamsDataGrid)["ItemsSource"].AddValueChanged(this.streamsDataGrid, new EventHandler(blockedItemsListBox_ItemsSourceChanged));
-            this.AutoCheckFavoritesCheckBox.IsChecked = ConfigManager.AutoCheckFavorites;
+            this.AutoCheckFavoritesCheckBox.IsChecked = ConfigManager.Instance.AutoCheckFavorites;
             UpdateGameIconBackgrounds();
             this.streamsDataGrid.ItemsSource = StreamsManager.Streams;
-            this.favoritesListBox.ItemsSource = ConfigManager.FavoriteStreams;
+            this.favoritesListBox.ItemsSource = ConfigManager.Instance.FavoriteStreams;
 
             var updaterViewModel = new UpdaterViewModel();
             Updater.DataContext = updaterViewModel;
             Updater.CheckForUpdateButton.Click += updaterViewModel.CheckForUpdate;
             updaterViewModel.CheckForUpdate();
 
-            if (ConfigManager.SaveWindowPosition)
+            if (ConfigManager.Instance.SaveWindowPosition)
             {
                 WindowStartupLocation = WindowStartupLocation.Manual;
             }
@@ -120,12 +121,12 @@ namespace LeStreamsFace
                 return false;
             }
 
-            if (ConfigManager.BannedGames.Any(stream.GameName.ContainsIgnoreCase))
+            if (ConfigManager.Instance.BannedGames.Any(stream.GameName.ContainsIgnoreCase))
             {
                 return false;
             }
 
-            if (stream.Viewers < ConfigManager.TriageStreams && !stream.IsFavorite)
+            if (stream.Viewers < ConfigManager.Instance.TriageStreams && !stream.IsFavorite)
             {
                 return false;
             }
@@ -184,16 +185,16 @@ namespace LeStreamsFace
 
             if (!stream.IsFavorite)
             {
-                ConfigManager.FavoriteStreams.Remove(ConfigManager.FavoriteStreams.SingleOrDefault(stream1 => stream1.ChannelId == stream.ChannelId));
+                ConfigManager.Instance.FavoriteStreams.Remove(ConfigManager.Instance.FavoriteStreams.SingleOrDefault(stream1 => stream1.ChannelId == stream.ChannelId));
             }
             else
             {
-                if (ConfigManager.FavoriteStreams.Where(stream1 => stream1.Site == stream.Site).All(stream1 => stream1.ChannelId != stream.ChannelId))
+                if (ConfigManager.Instance.FavoriteStreams.Where(stream1 => stream1.Site == stream.Site).All(stream1 => stream1.ChannelId != stream.ChannelId))
                 {
-                    ConfigManager.FavoriteStreams.Add(new FavoriteStream(stream.LoginNameTwtv, stream.ChannelId, stream.Site));
+                    ConfigManager.Instance.FavoriteStreams.Add(new FavoriteStream(stream.LoginNameTwtv, stream.ChannelId, stream.Site));
                 }
             }
-            ConfigManager.WriteConfigXml();
+            ConfigManager.Instance.WriteConfigXml();
         }
 
         private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
@@ -215,11 +216,21 @@ namespace LeStreamsFace
             }
             else if (tabItem == configTabItem)
             {
-                DisabledTimeTextBox.Text = ConfigManager.FromSpan.ToString("hhmm") + '-' + ConfigManager.ToSpan.ToString("hhmm");
-                BannedGamesTextBox.Text = ConfigManager.BannedGames.Aggregate((s, s1) => s + ", " + s1);
+                DisabledTimeTextBox.Text = ConfigManager.Instance.FromSpan.ToString("hhmm") + '-' + ConfigManager.Instance.ToSpan.ToString("hhmm");
+                BannedGamesTextBox.Text = ConfigManager.Instance.BannedGames.Aggregate((s, s1) => s + ", " + s1);
             }
             else if (tabItem == statsTabItem)
             {
+                if (statsTabItem.IsSelected)
+                {
+                    // switch between stats for viewers and number of streams / game
+                    foreach (var control in new Control[] { gameStreamsList, gameStreamsPlot, gameViewersList, gameViewersPlot })
+                    {
+                        control.Visibility = control.Visibility == Visibility.Visible
+                                                     ? Visibility.Collapsed
+                                                     : Visibility.Visible;
+                    }
+                }
             }
             else if (tabItem == aboutTabItem)
             {
@@ -262,9 +273,9 @@ namespace LeStreamsFace
                 {
                 }
 
-                if (ConfigManager.FavoriteStreams.Where(stream => stream.Site == StreamingSite.TwitchTv).All(stream => channelId != stream.ChannelId))
+                if (ConfigManager.Instance.FavoriteStreams.Where(stream => stream.Site == StreamingSite.TwitchTv).All(stream => channelId != stream.ChannelId))
                 {
-                    ConfigManager.FavoriteStreams.Add(new FavoriteStream(twitchLogin, channelId, StreamingSite.TwitchTv));
+                    ConfigManager.Instance.FavoriteStreams.Add(new FavoriteStream(twitchLogin, channelId, StreamingSite.TwitchTv));
                     StreamsManager.Streams.Where(stream => stream.Site == StreamingSite.TwitchTv && stream.ChannelId == channelId).ToList().ForEach(stream => stream.IsFavorite = true);
                     needToWriteConfig = true;
                 }
@@ -273,7 +284,7 @@ namespace LeStreamsFace
             if (needToWriteConfig)
             {
                 MessageBox.Show("Successfully imported favorites.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
-                ConfigManager.WriteConfigXml();
+                ConfigManager.Instance.WriteConfigXml();
                 RefreshView();
             }
             else
@@ -316,7 +327,7 @@ namespace LeStreamsFace
             }
 
             UpdateGameIconBackgrounds();
-            ConfigManager.WriteConfigXml();
+            ConfigManager.Instance.WriteConfigXml();
 
             RefreshView();
         }
@@ -409,9 +420,9 @@ namespace LeStreamsFace
                         }
                     }
                 }
-                ConfigManager.FromSpan = fromSpan;
-                ConfigManager.ToSpan = toSpan;
-                ConfigManager.WriteConfigXml();
+                ConfigManager.Instance.FromSpan = fromSpan;
+                ConfigManager.Instance.ToSpan = toSpan;
+                ConfigManager.Instance.WriteConfigXml();
                 timeBlockCheck();
             }
             catch (Exception)
@@ -421,8 +432,8 @@ namespace LeStreamsFace
 
         private void AutoCheckFavoritesCheckBox_Click(object sender, RoutedEventArgs e)
         {
-            ConfigManager.AutoCheckFavorites = ((CheckBox)sender).IsChecked.Value;
-            ConfigManager.WriteConfigXml();
+            ConfigManager.Instance.AutoCheckFavorites = ((CheckBox)sender).IsChecked.Value;
+            ConfigManager.Instance.WriteConfigXml();
         }
 
         private void WindowSizeChanged(object sender, SizeChangedEventArgs e)
@@ -438,13 +449,13 @@ namespace LeStreamsFace
         {
             var sendersStream = (FavoriteStream)((Button)sender).DataContext;
 
-            ConfigManager.FavoriteStreams.Remove(sendersStream);
+            ConfigManager.Instance.FavoriteStreams.Remove(sendersStream);
 
             StreamsManager.Streams.Where(stream => stream.ChannelId == sendersStream.ChannelId).ToList().ForEach(
                 stream => stream.IsFavorite = false);
 
             RefreshView();
-            ConfigManager.WriteConfigXml();
+            ConfigManager.Instance.WriteConfigXml();
         }
 
         public void RefreshView(object sender = null, DataTransferEventArgs dataTransferEventArgs = null)
@@ -464,13 +475,13 @@ namespace LeStreamsFace
                 if (!string.IsNullOrWhiteSpace(bannedGamesText))
                 {
                     var bannedGames = bannedGamesText.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries).Select(s => s.Trim());
-                    ConfigManager.BannedGames = bannedGames.ToList();
+                    ConfigManager.Instance.BannedGames = bannedGames.ToList();
                 }
                 else
                 {
-                    ConfigManager.BannedGames.Clear();
+                    ConfigManager.Instance.BannedGames.Clear();
                 }
-                ConfigManager.WriteConfigXml();
+                ConfigManager.Instance.WriteConfigXml();
                 RefreshView();
             }
             catch (Exception)
@@ -557,7 +568,7 @@ namespace LeStreamsFace
 
         private void window_SourceInitialized(object sender, EventArgs e)
         {
-            if (ConfigManager.PinToDesktop)
+            if (ConfigManager.Instance.PinToDesktop)
             {
                 var handle = new WindowInteropHelper(this).Handle;
                 IntPtr hwndParent = NativeMethods.FindWindow("ProgMan", null);

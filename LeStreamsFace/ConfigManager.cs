@@ -15,25 +15,14 @@ using MessageBox = System.Windows.MessageBox;
 
 namespace LeStreamsFace
 {
-    internal class ConfigManager
+    internal class ConfigManager : INotifyPropertyChanged
     {
-        public static PlotModel StreamsPerGamePlotModel
-        {
-            get { return _streamsPerGamePlotModel; }
-            set { _streamsPerGamePlotModel = value; OnStaticPropertyChanged(GetVariableName(() => StreamsPerGamePlotModel)); }
-        }
+        public PlotModel StreamsPerGamePlotModel { get; set; }
+        public PlotModel ViewersPerGamePlotModel { get; set; }
+        public OptimizedObservableCollection<Tuple<string,int>> StreamsPerGame { get; set; }
+        public OptimizedObservableCollection<Tuple<string,int>> ViewersPerGame { get; set; }
 
-        private static PlotModel _streamsPerGamePlotModel;
-
-        public static PlotModel ViewersPerGamePlotModel
-        {
-            get { return _viewersPerGamePlotModel; }
-            set { _viewersPerGamePlotModel = value; OnStaticPropertyChanged(GetVariableName(() => ViewersPerGamePlotModel)); }
-        }
-
-        private static PlotModel _viewersPerGamePlotModel;
-
-        public static void UpdatePlotModel(IEnumerable<Stream> gameStreams)
+        public void UpdatePlotModel(IEnumerable<Stream> gameStreams)
         {
             try
             {
@@ -43,27 +32,28 @@ namespace LeStreamsFace
                 // create a copy
                 var streams = gameStreams.ToList();
 
-                var groupedByViewers =
-                    streams.ToList().GroupBy(stream => stream.GameName).OrderByDescending(
-                        grouping => grouping.Select(stream => stream.Viewers).Sum());
-                var groupedByGame = streams.ToList().GroupBy(stream => stream.GameName).OrderByDescending(grouping => grouping.Count());
+                var groupedByViewers = streams.GroupBy(stream => stream.GameName).OrderByDescending(grouping => grouping.Select(stream => stream.Viewers).Sum());
+                var groupedByGame = streams.GroupBy(stream => stream.GameName).OrderByDescending(grouping => grouping.Count());
 
                 var model = new PlotModel("Number of streams per game");
                 var ps = new PieSeries();
+
                 foreach (IGrouping<string, Stream> grouping in groupedByGame.Take(showFirst))
                 {
                     var pieSliceLabel = grouping.Key;
 
-                    //                if (string.IsNullOrWhiteSpace(grouping.Key)) pieSliceLabel = "Unknown";
                     if (string.IsNullOrWhiteSpace(grouping.Key)) continue;
                     ps.Slices.Add(new PieSlice(pieSliceLabel, grouping.Count()));
                 }
-                var theRestOfGames = groupedByGame.Skip(showFirst);
-                ps.Slices.Add(new PieSlice("Other", theRestOfGames.Select(grouping => grouping.Count()).Aggregate((i, i1) => i + i1)));
+                var theRestOfGamesViewers = groupedByGame.Skip(showFirst).Select(grouping => grouping.Count()).Aggregate((i, i1) => i + i1);
+                ps.Slices.Add(new PieSlice("Other", theRestOfGamesViewers));
 
-                //            ps.Slices.ForEach(slice => slice.Label = slice.Value.ToString() + " " + slice.Label);
+                var gameNameCountTuples = groupedByGame.Select(grouping => new Tuple<string, int>(grouping.Key, grouping.Count())).ToList();
+                gameNameCountTuples.RemoveAll(tuple => string.IsNullOrWhiteSpace(tuple.Item1));
+                StreamsPerGame = new OptimizedObservableCollection<Tuple<string, int>>();
+                StreamsPerGame.AddRange(gameNameCountTuples.OrderByDescending(tuple => tuple.Item2));
+
                 ps.AreInsideLabelsAngled = true;
-
                 ps.InnerDiameter = 0;
                 ps.ExplodedDistance = 0.0;
                 ps.Stroke = OxyColors.White;
@@ -81,16 +71,18 @@ namespace LeStreamsFace
                 {
                     var pieSliceLabel = grouping.Key;
 
-                    //                if (string.IsNullOrWhiteSpace(grouping.Key)) pieSliceLabel = "Unknown";
                     if (string.IsNullOrWhiteSpace(grouping.Key)) continue;
                     ps.Slices.Add(new PieSlice(pieSliceLabel, grouping.Sum(stream => stream.Viewers)));
                 }
-                theRestOfGames = groupedByViewers.Skip(showFirst);
-                ps.Slices.Add(new PieSlice("Other", theRestOfGames.Select(grouping => grouping.Sum(stream => stream.Viewers)).Sum()));
+                theRestOfGamesViewers = groupedByViewers.Skip(showFirst).Select(grouping => grouping.Count()).Aggregate((i, i1) => i + i1);
+                ps.Slices.Add(new PieSlice("Other", theRestOfGamesViewers));
 
-                //            ps.Slices.ForEach(slice => slice.Label = slice.Value.ToString() + " " + slice.Label);
+                gameNameCountTuples = groupedByViewers.Select(grouping => new Tuple<string, int>(grouping.Key, grouping.Sum(stream => stream.Viewers))).ToList();
+                gameNameCountTuples.RemoveAll(tuple => string.IsNullOrWhiteSpace(tuple.Item1));
+                ViewersPerGame = new OptimizedObservableCollection<Tuple<string, int>>();
+                ViewersPerGame.AddRange(gameNameCountTuples.OrderByDescending(tuple => tuple.Item2));
+
                 ps.AreInsideLabelsAngled = true;
-
                 ps.InnerDiameter = 0;
                 ps.ExplodedDistance = 0.0;
                 ps.Stroke = OxyColors.White;
@@ -107,177 +99,169 @@ namespace LeStreamsFace
             }
         }
 
-        static ConfigManager()
+        private static volatile ConfigManager _instance;
+        private static object syncRoot = new Object();
+
+        private ConfigManager()
         {
+            Offline = false;
         }
 
-        public static int SamplingInterval = 60;
+        public static ConfigManager Instance
+        {
+            get
+            {
+                if (_instance == null)
+                {
+                    lock (syncRoot)
+                    {
+                        if (_instance == null)
+                            _instance = new ConfigManager();
+                    }
+                }
 
-        public static TimeSpan FromSpan = new TimeSpan(0, 0, 0);
-        public static TimeSpan ToSpan = new TimeSpan(0, 0, 0);
+                return _instance;
+            }
+        }
 
-        public static readonly OptimizedObservableCollection<FavoriteStream> FavoriteStreams = new OptimizedObservableCollection<FavoriteStream>();
-        public static List<string> BannedGames = new List<string>();
+        public int SamplingInterval = 60;
+
+        public TimeSpan FromSpan = new TimeSpan(0, 0, 0);
+        public TimeSpan ToSpan = new TimeSpan(0, 0, 0);
+
+        public readonly OptimizedObservableCollection<FavoriteStream> FavoriteStreams = new OptimizedObservableCollection<FavoriteStream>();
+        public List<string> BannedGames = new List<string>();
 
         private const string ConfigFileName = "config.xml";
         private const string XmlVersion = "1.0";
 
-        public static event EventHandler<PropertyChangedEventArgs> StaticPropertyChanged;
-
-        private static void OnStaticPropertyChanged(string propertyName)
-        {
-            EventHandler<PropertyChangedEventArgs> handler = StaticPropertyChanged;
-            if (handler != null)
-                handler(null, new PropertyChangedEventArgs(propertyName));
-        }
-
-        public static int TriageStreams
+        public int TriageStreams
         {
             get { return _triageStreams; }
             set
             {
                 if (_triageStreams == value) return;
                 _triageStreams = value;
-                OnStaticPropertyChanged(GetVariableName(() => TriageStreams));
                 WriteConfigXml();
             }
         }
 
-        public static int NotificationTimeout
+        public int NotificationTimeout
         {
             get { return _notificationTimeout; }
             set
             {
                 if (_notificationTimeout == value) return;
                 _notificationTimeout = value;
-                OnStaticPropertyChanged(GetVariableName(() => NotificationTimeout));
                 WriteConfigXml();
             }
         }
 
-        public static bool HideTitleBar
+        public bool HideTitleBar
         {
             get { return _hideTitleBar; }
             set
             {
                 if (_hideTitleBar == value) return;
                 _hideTitleBar = value;
-                OnStaticPropertyChanged(GetVariableName(() => HideTitleBar));
                 WriteConfigXml();
             }
         }
 
-        public static bool PinToDesktop
+        public bool PinToDesktop
         {
             get { return _pinToDesktop; }
             set
             {
                 if (_pinToDesktop == value) return;
                 _pinToDesktop = value;
-                OnStaticPropertyChanged(GetVariableName(() => PinToDesktop));
                 WriteConfigXml();
             }
         }
 
-        public static bool SaveWindowPosition
+        public bool SaveWindowPosition
         {
             get { return _saveWindowPosition; }
             set
             {
                 if (_saveWindowPosition == value) return;
                 _saveWindowPosition = value;
-                OnStaticPropertyChanged(GetVariableName(() => SaveWindowPosition));
                 WriteConfigXml();
             }
         }
 
-        public static double WinLeft
+        public double WinLeft
         {
             get { return _winLeft; }
             set
             {
                 if (_winLeft == value) return;
                 _winLeft = value;
-                OnStaticPropertyChanged(GetVariableName(() => WinLeft));
                 WriteConfigXml();
             }
         }
 
-        public static double WinTop
+        public double WinTop
         {
             get { return _winTop; }
             set
             {
                 if (_winTop == value) return;
                 _winTop = value;
-                OnStaticPropertyChanged(GetVariableName(() => WinTop));
                 WriteConfigXml();
             }
         }
 
-        public static double WinOpacity
+        public double WinOpacity
         {
             get { return _winOpacity; }
             set
             {
                 if (_winOpacity == value) return;
                 _winOpacity = value;
-                OnStaticPropertyChanged(GetVariableName(() => WinOpacity));
                 WriteConfigXml();
             }
         }
 
-        public static double WinWidth
+        public double WinWidth
         {
             get { return _winWidth; }
             set
             {
                 if (_winWidth == value) return;
                 _winWidth = value;
-                OnStaticPropertyChanged(GetVariableName(() => WinWidth));
                 WriteConfigXml();
             }
         }
 
-        public static double WinHeight
+        public double WinHeight
         {
             get { return _winHeight; }
             set
             {
                 if (_winHeight == value) return;
                 _winHeight = value;
-                OnStaticPropertyChanged(GetVariableName(() => WinHeight));
                 WriteConfigXml();
             }
         }
 
-        public static bool Offline
-        {
-            get { return _offline; }
-            set
-            {
-                if (_offline == value) return;
-                _offline = value;
-                OnStaticPropertyChanged(GetVariableName(() => Offline));
-            }
-        }
+        public bool Offline { get; set; }
 
-        private static bool _offline = false;
-        private static double _winWidth = 1000;
-        private static double _winHeight = 580;
-        private static double _winOpacity = 1.0;
-        private static double _winLeft = 0;
-        private static double _winTop = 0;
-        private static bool _saveWindowPosition;
-        private static bool _hideTitleBar;
-        private static bool _pinToDesktop;
-        private static int _notificationTimeout = 20;
-        private static int _triageStreams = 20;
+        private double _winWidth = 1000;
+        private double _winHeight = 580;
+        private double _winOpacity = 1.0;
+        private double _winLeft = 0;
+        private double _winTop = 0;
+        private bool _saveWindowPosition;
+        private bool _hideTitleBar;
+        private bool _pinToDesktop;
+        private int _notificationTimeout = 20;
+        private int _triageStreams = 20;
 
-        private static bool initialConfigReadCompleted = false;
-        public static bool AutoCheckFavorites = true;
+        private bool initialConfigReadCompleted = false;
+        public bool AutoCheckFavorites = true;
 
-        public static void ReadConfigXml()
+        public void ReadConfigXml()
         {
             bool configMissing = !File.Exists(ConfigFileName);
 
@@ -343,7 +327,7 @@ namespace LeStreamsFace
             }
         }
 
-        public static void WriteConfigXml()
+        public void WriteConfigXml()
         {
             if (!initialConfigReadCompleted)
             {
@@ -415,5 +399,9 @@ namespace LeStreamsFace
 
             return body.Member.Name;
         }
+
+#pragma warning disable 67
+        public event PropertyChangedEventHandler PropertyChanged;
+#pragma warning restore 67
     }
 }

@@ -42,14 +42,14 @@ namespace LeStreamsFace
             //            this.Topmost = false;
             this.Show();
 
-            if (ConfigManager.NotificationTimeout > 0)
+            if (ConfigManager.Instance.NotificationTimeout > 0)
             {
                 dispatcherTimer = new DispatcherTimer();
 
                 //                Random a = new Random();
                 //                dispatcherTimer.Interval = TimeSpan.FromSeconds(a.Next(15) + 5);
 
-                dispatcherTimer.Interval = TimeSpan.FromSeconds(ConfigManager.NotificationTimeout);
+                dispatcherTimer.Interval = TimeSpan.FromSeconds(ConfigManager.Instance.NotificationTimeout);
                 dispatcherTimer.Tick += DispatcherTimerOnTick;
                 dispatcherTimer.Start();
             }

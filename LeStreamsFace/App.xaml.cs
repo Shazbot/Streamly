@@ -48,11 +48,12 @@ namespace LeStreamsFace
             string[] fields = args.Name.Split(',');
             string name = fields[0];
             string culture = fields[2];
-            if (name.EndsWith(".resources") && !culture.EndsWith("neutral")) //A satellite assembly ends with .resources
-                return null;                                    //and uses a specific culture
 
-            // loading DllName.dll from resource AssemblyName.Resources.DllName.dll
-            String resourceName = Assembly.GetEntryAssembly().GetName().Name + ".Resources." + new AssemblyName(args.Name).Name + ".dll";
+            //A satellite assembly ends with .resources and uses a specific culture
+            if (name.EndsWith(".resources") && !culture.EndsWith("neutral")) return null;
+
+            // loading DllName.dll from resource AssemblyName.lib.DllName.dll
+            String resourceName = Assembly.GetEntryAssembly().GetName().Name + ".lib." + new AssemblyName(args.Name).Name + ".dll";
             if (resourceNames.All(s => s != resourceName))
             {
                 return null;

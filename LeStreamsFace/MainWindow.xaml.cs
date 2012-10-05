@@ -53,7 +53,7 @@ namespace LeStreamsFace
 
             try
             {
-                ConfigManager.ReadConfigXml();
+                ConfigManager.Instance.ReadConfigXml();
 
                 ExitDelegate exitDelegate = new ExitDelegate(OnTrayExitClick);
 
@@ -73,7 +73,7 @@ namespace LeStreamsFace
                 fullscreenWaitTimer.Tick += FullscreenWait;
 
                 mainTimer = new DispatcherTimer();
-                mainTimer.Interval = new TimeSpan(0, 0, 0, ConfigManager.SamplingInterval);
+                mainTimer.Interval = new TimeSpan(0, 0, 0, ConfigManager.Instance.SamplingInterval);
                 mainTimer.Tick += MainTimerTick;
 
                 MainTimerTick();
@@ -233,7 +233,7 @@ namespace LeStreamsFace
                 var closedStreams = new List<Stream>();
 
                 // check twitch fav streams through a channel request
-                if (ConfigManager.AutoCheckFavorites)
+                if (ConfigManager.Instance.AutoCheckFavorites)
                 {
                     try
                     {
@@ -356,7 +356,7 @@ namespace LeStreamsFace
                 }
                 else
                 {
-                    if (!ConfigManager.Offline)
+                    if (!ConfigManager.Instance.Offline)
                     {
                         if (IsFullscreenAppRunning())
                         {
@@ -398,17 +398,15 @@ namespace LeStreamsFace
             {
                 Debug.WriteLine("".PadRight(45, '-'));
                 firstRun = false;
-                ConfigManager.Offline = !StreamsManager.Streams.Any();
-                if (ConfigManager.Offline)
+                ConfigManager.Instance.Offline = !StreamsManager.Streams.Any();
+                if (ConfigManager.Instance.Offline)
                 {
                     unreportedFavs.Clear();
                 }
-                ConfigManager.UpdatePlotModel(StreamsManager.Streams);
+                ConfigManager.Instance.UpdatePlotModel(StreamsManager.Streams);
 
                 newStreamsList.Clear();
                 mainTimer.Start();
-
-                ConfigManager.HideTitleBar = !ConfigManager.HideTitleBar;
             }
         }
 
@@ -456,17 +454,17 @@ namespace LeStreamsFace
 
         public static bool DuringTimeBlockCheck()
         {
-            return DateTime.Now.TimeOfDay >= ConfigManager.FromSpan
-                       && DateTime.Now.TimeOfDay <= ConfigManager.ToSpan;
+            return DateTime.Now.TimeOfDay >= ConfigManager.Instance.FromSpan
+                       && DateTime.Now.TimeOfDay <= ConfigManager.Instance.ToSpan;
         }
 
         // only checking twitch
         private void CheckFavoriteStreamsManually(List<Stream> newStreamsList, List<Stream> streamsList)
         {
-            if (!ConfigManager.FavoriteStreams.Any()) return;
+            if (!ConfigManager.Instance.FavoriteStreams.Any()) return;
 
             DateTime now = DateTime.Now;
-            string channels = ConfigManager.FavoriteStreams
+            string channels = ConfigManager.Instance.FavoriteStreams
                 .Where(stream => stream.Site == StreamingSite.TwitchTv && streamsList.All(stream1 => stream1.ChannelId != stream.ChannelId))
                 .Select(stream => stream.LoginNameTwtv)
                 .Aggregate((s, s1) => s + "," + s1);

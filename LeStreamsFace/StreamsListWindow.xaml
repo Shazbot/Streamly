@@ -21,22 +21,22 @@
                            KeyDown="window_KeyDown"
                            Left="{Binding WinLeft,
                                           Mode=TwoWay,
-                                          Source={StaticResource ConfigManager}}"
+                                          Source={x:Static LeStreamsFace:ConfigManager.Instance}}"
                            MouseLeftButtonDown="window_MouseLeftButtonDown"
                            Opacity="{Binding WinOpacity,
                                              Mode=TwoWay,
-                                             Source={StaticResource ConfigManager}}"
+                                             Source={x:Static LeStreamsFace:ConfigManager.Instance}}"
                            PreviewTextInput="window_PreviewTextInput"
                            ShowIconOnTitleBar="False"
                            ShowTitleBar="{Binding HideTitleBar,
-                                                  Source={StaticResource ConfigManager},
+                                                  Source={x:Static LeStreamsFace:ConfigManager.Instance},
                                                   Converter={con:ExpressionConverter {}!{0}}}"
                            SizeChanged="WindowSizeChanged"
                            SizeToContent="Manual"
                            SourceInitialized="window_SourceInitialized"
                            Top="{Binding WinTop,
                                          Mode=TwoWay,
-                                         Source={StaticResource ConfigManager}}"
+                                         Source={x:Static LeStreamsFace:ConfigManager.Instance}}"
                            WindowStartupLocation="CenterScreen"
                            WindowStyle="None"
                            x:ClassModifier="internal"
@@ -80,9 +80,9 @@
         <Style BasedOn="{StaticResource {x:Type MetroControls:MetroWindow}}" TargetType="{x:Type MetroControls:MetroWindow}">
             <Setter Property="FrameworkElement.FocusVisualStyle" Value="{x:Null}" />
             <Style.Triggers>
-                <DataTrigger Binding="{Binding SaveWindowPosition, Source={StaticResource ConfigManager}}" Value="True">
-                    <Setter Property="Width" Value="{Binding WinWidth, Mode=TwoWay, Source={StaticResource ConfigManager}}" />
-                    <Setter Property="Height" Value="{Binding WinHeight, Mode=TwoWay, Source={StaticResource ConfigManager}}" />
+                <DataTrigger Binding="{Binding SaveWindowPosition, Source={x:Static LeStreamsFace:ConfigManager.Instance}}" Value="True">
+                    <Setter Property="Width" Value="{Binding WinWidth, Mode=TwoWay, Source={x:Static LeStreamsFace:ConfigManager.Instance}}" />
+                    <Setter Property="Height" Value="{Binding WinHeight, Mode=TwoWay, Source={x:Static LeStreamsFace:ConfigManager.Instance}}" />
                 </DataTrigger>
             </Style.Triggers>
         </Style>
@@ -145,7 +145,7 @@
                             <MetroControls:ProgressRing.Style>
                                 <Style TargetType="{x:Type MetroControls:ProgressRing}" BasedOn="{StaticResource {x:Type MetroControls:ProgressRing}}">
                                     <Style.Triggers>
-                                        <DataTrigger Binding="{Binding Offline, Source={StaticResource ConfigManager}}" Value="True">
+                                        <DataTrigger Binding="{Binding Offline, Source={x:Static LeStreamsFace:ConfigManager.Instance}}" Value="True">
                                             <Setter Property="Visibility" Value="Collapsed" />
                                         </DataTrigger>
                                     </Style.Triggers>
@@ -157,7 +157,7 @@
                                 <Style TargetType="{x:Type StackPanel}">
                                     <Setter Property="Visibility" Value="Collapsed" />
                                     <Style.Triggers>
-                                        <DataTrigger Binding="{Binding Offline, Source={StaticResource ConfigManager}}" Value="True">
+                                        <DataTrigger Binding="{Binding Offline, Source={x:Static LeStreamsFace:ConfigManager.Instance}}" Value="True">
                                             <Setter Property="Visibility" Value="Visible" />
                                         </DataTrigger>
                                     </Style.Triggers>
@@ -386,7 +386,6 @@
                                      BorderThickness="1"
                                      DockPanel.Dock="Left"
                                      FontSize="14"
-                                     MetroControls:TextboxHelper.ClearTextButton="True"
                                      MetroControls:TextboxHelper.Watermark="search"
                                      PreviewTextInput="searchTextBox_PreviewTextInput"
                                      TextAlignment="Left"
@@ -440,11 +439,11 @@
                                              Width="50"
                                              Margin="5,0,0,0"
                                              FontSize="14">
-                                        <!--  MetroControls:TextboxHelper.Watermark="{Binding NotificationTimeout, Source={StaticResource ConfigManager}}"  -->
+                                        <!--  MetroControls:TextboxHelper.Watermark="{Binding NotificationTimeout, Source={x:Static LeStreamsFace:ConfigManager.Instance}}"  -->
                                         <TextBox.Text>
                                             <Binding NotifyOnSourceUpdated="True"
                                                      Path="NotificationTimeout"
-                                                     Source="{StaticResource ConfigManager}"
+                                                     Source="{x:Static LeStreamsFace:ConfigManager.Instance}"
                                                      UpdateSourceTrigger="PropertyChanged">
                                                 <Binding.ValidationRules>
                                                     <LeStreamsFace:NonNegativeIntegerValidationRule />
@@ -471,7 +470,7 @@
                                              Margin="5,0,0,0"
                                              FontSize="14"
                                              MetroControls:TextboxHelper.Watermark="{Binding TriageStreams,
-                                                                                             Source={StaticResource ConfigManager}}"
+                                                                                             Source={x:Static LeStreamsFace:ConfigManager.Instance}}"
                                              SourceUpdated="RefreshView">
                                         <TextBox.Style>
                                             <Style BasedOn="{StaticResource {x:Type TextBox}}" TargetType="{x:Type TextBox}">
@@ -485,7 +484,7 @@
                                         <TextBox.Text>
                                             <Binding NotifyOnSourceUpdated="True"
                                                      Path="TriageStreams"
-                                                     Source="{StaticResource ConfigManager}"
+                                                     Source="{x:Static LeStreamsFace:ConfigManager.Instance}"
                                                      UpdateSourceTrigger="PropertyChanged">
                                                 <Binding.ValidationRules>
                                                     <LeStreamsFace:NonNegativeIntegerValidationRule />
@@ -537,7 +536,7 @@
                                           Content="Remember window size and position"
                                           FontSize="13.333"
                                           IsChecked="{Binding SaveWindowPosition,
-                                                              Source={StaticResource ConfigManager},
+                                                              Source={x:Static LeStreamsFace:ConfigManager.Instance},
                                                               Mode=TwoWay}"
                                           Padding="4,-3,0,0" />
                                 <CheckBox x:Name="HideTitleBarCheckBox"
@@ -546,7 +545,7 @@
                                           Content="Hide title bar"
                                           FontSize="13.333"
                                           IsChecked="{Binding HideTitleBar,
-                                                              Source={StaticResource ConfigManager},
+                                                              Source={x:Static LeStreamsFace:ConfigManager.Instance},
                                                               Mode=TwoWay}"
                                           Padding="4,-3,0,0" />
                                 <CheckBox x:Name="PinToDesktopCheckBox"
@@ -555,7 +554,7 @@
                                           Content="Pin to desktop"
                                           FontSize="13.333"
                                           IsChecked="{Binding PinToDesktop,
-                                                              Source={StaticResource ConfigManager},
+                                                              Source={x:Static LeStreamsFace:ConfigManager.Instance},
                                                               Mode=TwoWay}"
                                           Padding="4,-3,0,0"
                                           ToolTip="Requires reopening the window"
@@ -630,8 +629,36 @@
                             <ColumnDefinition />
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions>
-                        <oxy:Plot Name="gameStreamsPlot" Grid.Column="0" Model="{Binding StreamsPerGamePlotModel, Source={StaticResource ConfigManager}}" Background="Transparent" />
-                        <oxy:Plot Name="gameViewersPlot" Grid.Column="1" Model="{Binding ViewersPerGamePlotModel, Source={StaticResource ConfigManager}}" Background="Transparent" />
+                        <oxy:Plot Name="gameViewersPlot" Grid.Column="0" Model="{Binding ViewersPerGamePlotModel, Source={x:Static LeStreamsFace:ConfigManager.Instance}}" Background="Transparent" />
+                        <ListBox Name="gameViewersList" HorizontalContentAlignment="Stretch" Grid.Column="1"  ItemsSource="{Binding ViewersPerGame, Source={x:Static LeStreamsFace:ConfigManager.Instance}}">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid Width="Auto" HorizontalAlignment="Stretch">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="70*" />
+                                            <ColumnDefinition Width="30*" />
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Text="{Binding Item1}" Grid.Column="0" />
+                                        <TextBlock Text="{Binding Item2}" Grid.Column="1" HorizontalAlignment="Right" />
+                                    </Grid>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                        <oxy:Plot Name="gameStreamsPlot" Visibility="Collapsed" Grid.Column="0" Model="{Binding StreamsPerGamePlotModel, Source={x:Static LeStreamsFace:ConfigManager.Instance}}" Background="Transparent" />
+                        <ListBox Name="gameStreamsList" Visibility="Collapsed" HorizontalContentAlignment="Stretch" Grid.Column="1"  ItemsSource="{Binding StreamsPerGame, Source={x:Static LeStreamsFace:ConfigManager.Instance}}">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid Width="Auto" HorizontalAlignment="Stretch">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="70*" />
+                                            <ColumnDefinition Width="30*" />
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Text="{Binding Item1}" Grid.Column="0" />
+                                        <TextBlock Text="{Binding Item2}" Grid.Column="1" HorizontalAlignment="Right" />
+                                    </Grid>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
                     </Grid>
                 </TabItem>
                 <TabItem Name="aboutTabItem"
