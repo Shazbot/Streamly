@@ -21,24 +21,21 @@
                            KeyDown="window_KeyDown"
                            Left="{Binding WinLeft,
                                           Mode=TwoWay,
-                                          Delay=20,
                                           Source={StaticResource ConfigManager}}"
                            MouseLeftButtonDown="window_MouseLeftButtonDown"
                            Opacity="{Binding WinOpacity,
                                              Mode=TwoWay,
-                                             Delay=20,
                                              Source={StaticResource ConfigManager}}"
                            PreviewTextInput="window_PreviewTextInput"
                            ShowIconOnTitleBar="False"
                            ShowTitleBar="{Binding HideTitleBar,
                                                   Source={StaticResource ConfigManager},
                                                   Converter={con:ExpressionConverter {}!{0}}}"
-                           SizeChanged="window_SizeChanged"
+                           SizeChanged="WindowSizeChanged"
                            SizeToContent="Manual"
                            SourceInitialized="window_SourceInitialized"
                            Top="{Binding WinTop,
                                          Mode=TwoWay,
-                                         Delay=20,
                                          Source={StaticResource ConfigManager}}"
                            WindowStartupLocation="CenterScreen"
                            WindowStyle="None"
@@ -84,8 +81,8 @@
             <Setter Property="FrameworkElement.FocusVisualStyle" Value="{x:Null}" />
             <Style.Triggers>
                 <DataTrigger Binding="{Binding SaveWindowPosition, Source={StaticResource ConfigManager}}" Value="True">
-                    <Setter Property="Width" Value="{Binding WinWidth, Delay=20, Mode=TwoWay, Source={StaticResource ConfigManager}}" />
-                    <Setter Property="Height" Value="{Binding WinHeight, Delay=20, Mode=TwoWay, Source={StaticResource ConfigManager}}" />
+                    <Setter Property="Width" Value="{Binding WinWidth, Mode=TwoWay, Source={StaticResource ConfigManager}}" />
+                    <Setter Property="Height" Value="{Binding WinHeight, Mode=TwoWay, Source={StaticResource ConfigManager}}" />
                 </DataTrigger>
             </Style.Triggers>
         </Style>
@@ -93,38 +90,42 @@
 
     <MetroControls:MetroWindow.WindowCommands>
         <MetroControls:WindowCommands x:Name="windowCommands">
-            <Button Name="leagueIconButton"
+            <StackPanel Name="gameIconsPanel" Orientation="Horizontal">
+                <Button Name="leagueIconButton"
                     Click="GameIconButton_Click"
                     Tag="{x:Static LeStreamsFace:FiltersEnum.League}">
-                <Image Width="15"
+                    <Image Margin="0,5" Width="15"
                        Height="15"
                        Source="/LeStreamsFace;component/Resources/LeagueIcon.png" />
-            </Button>
-            <Button Name="sc2IconButton"
+                </Button>
+                <Button Name="sc2IconButton"
                     Click="GameIconButton_Click"
                     Tag="{x:Static LeStreamsFace:FiltersEnum.Starcraft}">
-                <Image Width="15"
+                    <Image Width="15"
                        Height="15"
                        Source="/LeStreamsFace;component/Resources/StarcraftIcon.png" />
-            </Button>
-            <Button Name="dota2IconButton"
+                </Button>
+                <Button Name="dota2IconButton"
                     Click="GameIconButton_Click"
                     Tag="{x:Static LeStreamsFace:FiltersEnum.Dota}">
-                <Image Width="15"
+                    <Image Width="15"
                        Height="15"
                        Source="/LeStreamsFace;component/Resources/DotaIcon.png" />
-            </Button>
-            <Button Name="diabloIconButton"
+                </Button>
+                <Button Name="diabloIconButton"
                     Click="GameIconButton_Click"
                     Tag="{x:Static LeStreamsFace:FiltersEnum.Diablo}">
-                <Image Width="15"
+                    <Image Width="15"
                        Height="15"
                        Source="/LeStreamsFace;component/Resources/DiabloIcon.png" />
-            </Button>
-            <Button Click="ChangeTab_Click" Content="streams" Tag="{Binding ElementName=streamsTabItem}" />
-            <Button Click="ChangeTab_Click" Content="config" Tag="{Binding ElementName=configTabItem}" />
-            <Button Click="ChangeTab_Click" Content="stats" Tag="{Binding ElementName=statsTabItem}" />
-            <Button Click="ChangeTab_Click" Content="about" Tag="{Binding ElementName=aboutTabItem}" />
+                </Button>
+            </StackPanel>
+            <StackPanel Name="changeTabButtons" Orientation="Horizontal">
+                <Button Click="ChangeTab_Click" Content="streams" Tag="{Binding ElementName=streamsTabItem}" />
+                <Button Click="ChangeTab_Click" Content="config" Tag="{Binding ElementName=configTabItem}" />
+                <Button Click="ChangeTab_Click" Content="stats" Tag="{Binding ElementName=statsTabItem}" />
+                <Button Click="ChangeTab_Click" Content="about" Tag="{Binding ElementName=aboutTabItem}" />
+            </StackPanel>
         </MetroControls:WindowCommands>
     </MetroControls:MetroWindow.WindowCommands>
 

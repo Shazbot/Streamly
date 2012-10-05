@@ -425,27 +425,13 @@ namespace LeStreamsFace
             ConfigManager.WriteConfigXml();
         }
 
-        private void window_SizeChanged(object sender, SizeChangedEventArgs e)
+        private void WindowSizeChanged(object sender, SizeChangedEventArgs e)
         {
-            var filterButtons = windowCommands.FindChildren<Button>().Where(button => button.Tag is FiltersEnum);
+            changeTabButtons.Visibility = e.NewSize.Width <= 315 ? Visibility.Collapsed : Visibility.Visible;
 
-            if (e.NewSize.Width <= 380)
-            {
-                filterButtons.ForEach(button => button.Visibility = Visibility.Collapsed);
-            }
-            else
-            {
-                filterButtons.ForEach(button => button.Visibility = Visibility.Visible);
-            }
+            gameIconsPanel.Visibility = e.NewSize.Width <= 465 ? Visibility.Collapsed : Visibility.Visible;
 
-            if (e.NewSize.Width <= 615)
-            {
-                this.Title = string.Empty;
-            }
-            else
-            {
-                this.Title = "Do you even watch streams?";
-            }
+            this.Title = e.NewSize.Width <= 700 ? string.Empty : "Do you even watch streams?";
         }
 
         private void UnfavoriteButton_Click(object sender, RoutedEventArgs e)

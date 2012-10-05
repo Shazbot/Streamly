@@ -316,7 +316,15 @@ namespace LeStreamsFace
 
                 // add new streams, remove closed ones from the main list
                 StreamsManager.Streams.RemoveRange(closedStreams);
-                closedStreams.ForEach(stream => Debug.WriteLine("REMOVED STREAM " + stream.Name));
+                foreach (Stream closedStream in closedStreams)
+                {
+                    var existingNotification = NotificationWindows.FirstOrDefault(window => ReferenceEquals(window.DataContext, closedStream));
+                    if (existingNotification != null)
+                    {
+                        existingNotification.Close();
+                    }
+                    Debug.WriteLine("REMOVED STREAM " + closedStream.Name);
+                }
                 StreamsManager.Streams.AddRange(newStreamsList);
 
                 // don't create a new notification for streams readded this pass
@@ -399,6 +407,8 @@ namespace LeStreamsFace
 
                 newStreamsList.Clear();
                 mainTimer.Start();
+
+                ConfigManager.HideTitleBar = !ConfigManager.HideTitleBar;
             }
         }
 
