@@ -596,13 +596,32 @@ namespace LeStreamsFace
             }
 
             var rowSender = (DataGridRow)sender;
-            streamsDataGrid.SelectedItem = rowSender.DataContext;
-            streamsDataGrid.ScrollIntoView(rowSender.DataContext);
 
-            if (searchPanel.Visibility == Visibility.Collapsed)
+            // give keyboard focus to the mouseovered row if it's not only partially visible, otherwise give it to the row before it
+            if (IsWholeChildVisible(streamsDataGrid, rowSender))
             {
                 rowSender.MoveFocus(new TraversalRequest(FocusNavigationDirection.Next));
             }
+            else
+            {
+                var indexPreviousRow = streamsDataGrid.Items.IndexOf(rowSender.DataContext) - 1;
+                if (indexPreviousRow > -1)
+                {
+                    var previousRow = streamsDataGrid.ItemContainerGenerator.ContainerFromIndex(indexPreviousRow) as DataGridRow;
+                    if (previousRow != null) previousRow.MoveFocus(new TraversalRequest(FocusNavigationDirection.Next));
+                }
+            }
+
+            streamsDataGrid.SelectedItem = rowSender.DataContext;
+        }
+
+        private static bool IsWholeChildVisible(FrameworkElement container, FrameworkElement element)
+        {
+            if (!element.IsVisible) return false;
+
+            Rect bounds = element.TransformToAncestor(container).TransformBounds(new Rect(0.0, 0.0, element.ActualWidth, element.ActualHeight));
+            var rect = new Rect(0.0, 0.0, container.ActualWidth, container.ActualHeight);
+            return rect.Contains(bounds.TopLeft) && rect.Contains(bounds.BottomRight);
         }
 
         private bool refuseRowMouseoverSelect;
