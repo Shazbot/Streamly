@@ -365,14 +365,23 @@
                                             <DataTemplate.Triggers>
                                                 <MultiDataTrigger>
                                                     <MultiDataTrigger.Conditions>
+                                                        <Condition Binding="{Binding IsActive, ElementName=window}" Value="True" />
                                                         <Condition Binding="{Binding IsSelected, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGridRow}}}" Value="True" />
                                                         <Condition Binding="{Binding Source, ElementName=gameIconImage}" Value="{StaticResource questionMarkImage}" />
                                                     </MultiDataTrigger.Conditions>
                                                     <Setter TargetName="gameIconGrid" Property="ToolTipService.IsEnabled" Value="False" />
                                                     <Setter TargetName="gameIconPopup" Property="IsOpen" Value="True" />
                                                 </MultiDataTrigger>
-                                                <DataTrigger Binding="{Binding DataContext.GameName, ElementName=gameIconPopup}" Value="">
+                                                <DataTrigger Binding="{Binding DataContext.GameName, ElementName=gameIconPopup}" Value="" >
                                                     <Setter TargetName="gameIconPopup" Property="IsOpen" Value="False" />
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding IsKeyboardFocusWithin, ElementName=window}" Value="False" >
+                                                    <Setter TargetName="gameIconPopup" Property="IsOpen" Value="False" />
+                                                    <Setter TargetName="gameIconPopup" Property="IsEnabled" Value="False" />
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding IsActive, ElementName=window}" Value="False" >
+                                                    <Setter TargetName="gameIconPopup" Property="IsOpen" Value="False" />
+                                                    <Setter TargetName="gameIconPopup" Property="IsEnabled" Value="False" />
                                                 </DataTrigger>
                                             </DataTemplate.Triggers>
                                         </DataTemplate>
