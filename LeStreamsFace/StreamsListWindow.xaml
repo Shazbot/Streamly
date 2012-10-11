@@ -12,6 +12,7 @@
                            Title="Do you even watch streams?"
                            MinWidth="150"
                            MinHeight="100"
+                           ResizeMode="CanResizeWithGrip"
                            AllowsTransparency="True"
                            Background="WhiteSmoke"
                            Closed="window_Closed"
@@ -402,7 +403,7 @@
                         <WrapPanel x:Name="wrapPanel"
                                    Background="Transparent"
                                    MouseLeftButtonDown="WrapPanel_OnMouseLeftButtonDown">
-                            <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top">
+                            <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,0,0,0">
                                 <GroupBox HorizontalAlignment="Left">
                                     <GroupBox.Header>
                                         <Label Content="TwitchTV" FontSize="14" />

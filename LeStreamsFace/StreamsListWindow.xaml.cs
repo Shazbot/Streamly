@@ -300,7 +300,13 @@ namespace LeStreamsFace
             var ctrlDown = NativeMethods.IsButtonDown(Keys.ControlKey);
             if (ctrlDown)
             {
-                Clipboard.SetText(sendersStream.GetUrl());
+                try
+                {
+                    Clipboard.SetText(sendersStream.GetUrl());
+                }
+                catch (Exception)
+                {
+                }
                 return;
             }
 
