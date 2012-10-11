@@ -336,7 +336,7 @@
                                                         IsReadOnly="True">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <Grid Width="25"
+                                            <Grid Name="gameIconGrid"
                                                   Height="25"
                                                   Background="Transparent"
                                                   ToolTipService.IsEnabled="True"
@@ -344,6 +344,9 @@
                                                 <Grid.ToolTip>
                                                     <TextBlock Text="{Binding GameName}" />
                                                 </Grid.ToolTip>
+                                                <Popup Name="gameIconPopup" PlacementTarget="{Binding ElementName=gameIconGrid}" Placement="Bottom">
+                                                    <TextBlock Text="{Binding GameName}" Foreground="White" Padding="5,2,5,2" /> 
+                                                </Popup>
                                                 <Image Name="gameIconImage"
                                                        Width="25"
                                                        Height="25">
@@ -359,6 +362,19 @@
                                                     </Image.Style>
                                                 </Image>
                                             </Grid>
+                                            <DataTemplate.Triggers>
+                                                <MultiDataTrigger>
+                                                    <MultiDataTrigger.Conditions>
+                                                        <Condition Binding="{Binding IsSelected, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGridRow}}}" Value="True" />
+                                                        <Condition Binding="{Binding Source, ElementName=gameIconImage}" Value="{StaticResource questionMarkImage}" />
+                                                    </MultiDataTrigger.Conditions>
+                                                    <Setter TargetName="gameIconGrid" Property="ToolTipService.IsEnabled" Value="False" />
+                                                    <Setter TargetName="gameIconPopup" Property="IsOpen" Value="True" />
+                                                </MultiDataTrigger>
+                                                <DataTrigger Binding="{Binding DataContext.GameName, ElementName=gameIconPopup}" Value="">
+                                                    <Setter TargetName="gameIconPopup" Property="IsOpen" Value="False" />
+                                                </DataTrigger>
+                                            </DataTemplate.Triggers>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>

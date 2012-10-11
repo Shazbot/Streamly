@@ -523,6 +523,7 @@ namespace LeStreamsFace
             {
                 title = string.Empty;
             }
+            title = title.Replace("\\n", " ");
 
             var newStream = new Stream(name, title, viewers, id, channelId, gameName, StreamingSite.TwitchTv) { LoginNameTwtv = twitchLogin, ThumbnailURI = thumbnailURI };
             return newStream;

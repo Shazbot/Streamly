@@ -601,24 +601,30 @@ namespace LeStreamsFace
                 return;
             }
 
-            var rowSender = (DataGridRow)sender;
+            try
+            {
+                var rowSender = (DataGridRow)sender;
 
-            // give keyboard focus to the mouseovered row if it's not only partially visible, otherwise give it to the row before it
-            if (IsWholeChildVisible(streamsDataGrid, rowSender))
-            {
-                rowSender.MoveFocus(new TraversalRequest(FocusNavigationDirection.Next));
-            }
-            else
-            {
-                var indexPreviousRow = streamsDataGrid.Items.IndexOf(rowSender.DataContext) - 1;
-                if (indexPreviousRow > -1)
+                // give keyboard focus to the mouseovered row if it's not only partially visible, otherwise give it to the row before it
+                if (IsWholeChildVisible(streamsDataGrid, rowSender))
                 {
-                    var previousRow = streamsDataGrid.ItemContainerGenerator.ContainerFromIndex(indexPreviousRow) as DataGridRow;
-                    if (previousRow != null) previousRow.MoveFocus(new TraversalRequest(FocusNavigationDirection.Next));
+                    rowSender.MoveFocus(new TraversalRequest(FocusNavigationDirection.Next));
                 }
-            }
+                else
+                {
+                    var indexPreviousRow = streamsDataGrid.Items.IndexOf(rowSender.DataContext) - 1;
+                    if (indexPreviousRow > -1)
+                    {
+                        var previousRow = streamsDataGrid.ItemContainerGenerator.ContainerFromIndex(indexPreviousRow) as DataGridRow;
+                        if (previousRow != null) previousRow.MoveFocus(new TraversalRequest(FocusNavigationDirection.Next));
+                    }
+                }
 
-            streamsDataGrid.SelectedItem = rowSender.DataContext;
+                streamsDataGrid.SelectedItem = rowSender.DataContext;
+            }
+            catch (InvalidOperationException) // collection was changed during enumeration exception
+            {
+            }
         }
 
         private static bool IsWholeChildVisible(FrameworkElement container, FrameworkElement element)
