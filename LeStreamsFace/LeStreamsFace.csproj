@@ -55,35 +55,27 @@
       <HintPath>..\packages\Kent.Boogaart.HelperTrinity.1.4.0.0\lib\net40\Kent.Boogaart.HelperTrinity.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="MahApps.Metro, Version=0.9.0.0, Culture=neutral, PublicKeyToken=f4fb5a3c4d1e5b4f, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\MahApps.Metro.0.9.9.50-ALPHA\lib\net40\MahApps.Metro.dll</HintPath>
-      <Private>False</Private>
+    <Reference Include="MahApps.Metro">
+      <HintPath>..\packages\MahApps.Metro.0.9.9.53-ALPHA\lib\net40\MahApps.Metro.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CompilerServices.AsyncTargetingPack.Net4">
       <HintPath>..\packages\Microsoft.CompilerServices.AsyncTargetingPack.1.0.0\lib\net40\Microsoft.CompilerServices.AsyncTargetingPack.Net4.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="OxyPlot, Version=2012.4.14.1, Culture=neutral, PublicKeyToken=638079a8f0bd61e9, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\OxyPlot.Wpf.2012.4.14.1\lib\NET40\OxyPlot.dll</HintPath>
-      <Private>False</Private>
+    <Reference Include="OxyPlot">
+      <HintPath>..\packages\OxyPlot.Wpf.2012.4.17.1\lib\NET40\OxyPlot.dll</HintPath>
     </Reference>
-    <Reference Include="OxyPlot.Wpf, Version=2012.4.14.1, Culture=neutral, PublicKeyToken=75e952ba404cdbb0, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\OxyPlot.Wpf.2012.4.14.1\lib\NET40\OxyPlot.Wpf.dll</HintPath>
-      <Private>False</Private>
+    <Reference Include="OxyPlot.Wpf">
+      <HintPath>..\packages\OxyPlot.Wpf.2012.4.17.1\lib\NET40\OxyPlot.Wpf.dll</HintPath>
     </Reference>
     <Reference Include="OxyPlot.Xps">
-      <HintPath>..\packages\OxyPlot.Wpf.2012.4.14.1\lib\NET40\OxyPlot.Xps.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\packages\OxyPlot.Wpf.2012.4.17.1\lib\NET40\OxyPlot.Xps.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="PropertyChanged">
-      <HintPath>..\packages\PropertyChanged.Fody.1.29.0.0\Lib\NET40\PropertyChanged.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\packages\PropertyChanged.Fody.1.31.0.0\lib\NET40\PropertyChanged.dll</HintPath>
     </Reference>
     <Reference Include="RestSharp">
       <HintPath>..\packages\RestSharp.104.1\lib\net4\RestSharp.dll</HintPath>
@@ -96,8 +88,7 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\MahApps.Metro.0.9.9.50-ALPHA\lib\net40\System.Windows.Interactivity.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\packages\MahApps.Metro.0.9.9.53-ALPHA\lib\net40\System.Windows.Interactivity.dll</HintPath>
     </Reference>
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml" />
@@ -214,26 +205,26 @@
       <Link>lib\RestSharp.dll</Link>
     </EmbeddedResource>
     <EmbeddedResource Include="lib\AutomaticUpdaterWPF.dll" />
-    <EmbeddedResource Include="..\packages\MahApps.Metro.0.9.9.50-ALPHA\lib\net40\System.Windows.Interactivity.dll">
-      <Link>lib\System.Windows.Interactivity.dll</Link>
-    </EmbeddedResource>
-    <EmbeddedResource Include="..\packages\MahApps.Metro.0.9.9.50-ALPHA\lib\net40\MahApps.Metro.dll">
-      <Link>lib\MahApps.Metro.dll</Link>
-    </EmbeddedResource>
     <EmbeddedResource Include="..\packages\Microsoft.CompilerServices.AsyncTargetingPack.1.0.0\lib\net40\Microsoft.CompilerServices.AsyncTargetingPack.Net4.dll">
       <Link>lib\Microsoft.CompilerServices.AsyncTargetingPack.Net4.dll</Link>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\packages\OxyPlot.Wpf.2012.4.14.1\lib\NET40\OxyPlot.dll">
+    <EmbeddedResource Include="..\packages\PropertyChanged.Fody.1.31.0.0\Lib\NET40\PropertyChanged.dll">
+      <Link>lib\PropertyChanged.dll</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\packages\MahApps.Metro.0.9.9.53-ALPHA\lib\net40\MahApps.Metro.dll">
+      <Link>lib\MahApps.Metro.dll</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\packages\MahApps.Metro.0.9.9.53-ALPHA\lib\net40\System.Windows.Interactivity.dll">
+      <Link>lib\System.Windows.Interactivity.dll</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\packages\OxyPlot.Wpf.2012.4.17.1\lib\NET40\OxyPlot.dll">
       <Link>lib\OxyPlot.dll</Link>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\packages\OxyPlot.Wpf.2012.4.14.1\lib\NET40\OxyPlot.Wpf.dll">
+    <EmbeddedResource Include="..\packages\OxyPlot.Wpf.2012.4.17.1\lib\NET40\OxyPlot.Wpf.dll">
       <Link>lib\OxyPlot.Wpf.dll</Link>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\packages\OxyPlot.Wpf.2012.4.14.1\lib\NET40\OxyPlot.Xps.dll">
+    <EmbeddedResource Include="..\packages\OxyPlot.Wpf.2012.4.17.1\lib\NET40\OxyPlot.Xps.dll">
       <Link>lib\OxyPlot.Xps.dll</Link>
-    </EmbeddedResource>
-    <EmbeddedResource Include="..\packages\PropertyChanged.Fody.1.29.0.0\Lib\NET40\PropertyChanged.dll">
-      <Link>lib\PropertyChanged.dll</Link>
     </EmbeddedResource>
     <Content Include="Resources\Entypo-license.txt" />
     <Resource Include="Resources\leagueIcon.png" />
