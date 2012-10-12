@@ -36,6 +36,7 @@ namespace LeStreamsFace
                     iconUri = "DotaIcon.png";
                     break;
 
+                case "StarCraft II: Heart of the Swarm":
                 case "StarCraft II":
                     iconUri = "StarcraftIcon.png";
                     break;
