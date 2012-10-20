@@ -231,11 +231,7 @@
                                             <Setter Property="Background" Value="White" />
                                         </Trigger>
                                         <Trigger Property="AlternationIndex" Value="1">
-                                            <Setter Property="Background">
-                                                <Setter.Value>
-                                                    <SolidColorBrush Opacity="0.5" Color="WhiteSmoke" />
-                                                </Setter.Value>
-                                            </Setter>
+                                            <Setter Property="Background" Value="#F3F3F3" />
                                         </Trigger>
 
                                         <MultiDataTrigger>
