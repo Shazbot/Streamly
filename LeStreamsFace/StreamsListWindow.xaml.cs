@@ -420,10 +420,6 @@ namespace LeStreamsFace
                         {
                             return;
                         }
-                        if (fromSpan.CompareTo(toSpan) != -1)
-                        {
-                            throw new ArgumentException();
-                        }
                     }
                 }
                 ConfigManager.Instance.FromSpan = fromSpan;

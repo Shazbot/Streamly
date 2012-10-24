@@ -454,8 +454,16 @@ namespace LeStreamsFace
 
         public static bool DuringTimeBlockCheck()
         {
-            return DateTime.Now.TimeOfDay >= ConfigManager.Instance.FromSpan
+            // e.g. 0600-2200
+            if (ConfigManager.Instance.FromSpan <= ConfigManager.Instance.ToSpan)
+            {
+                return DateTime.Now.TimeOfDay >= ConfigManager.Instance.FromSpan
                        && DateTime.Now.TimeOfDay <= ConfigManager.Instance.ToSpan;
+            }
+
+            // e.g. 2200-0600
+            return DateTime.Now.TimeOfDay >= ConfigManager.Instance.FromSpan
+                   || DateTime.Now.TimeOfDay <= ConfigManager.Instance.ToSpan;
         }
 
         // only checking twitch
