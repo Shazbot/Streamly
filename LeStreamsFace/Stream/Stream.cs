@@ -29,7 +29,7 @@ namespace LeStreamsFace
         public string Title
         {
             get { return _title; }
-            private set { _title = value; onPropertyChanged(this, "Title"); }
+            private set { _title = value.TrimEnd(new[] { ' ', '\n' }); onPropertyChanged(this, "Title"); }
         }
 
         public int Viewers

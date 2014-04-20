@@ -209,23 +209,23 @@ namespace LeStreamsFace
                                                             return createdStreams;
                                                         }, TaskCreationOptions.PreferFairness);
 
-                var ownedTask = Task.Factory.StartNew( () =>
-                                                          {
-                                                              var ownedResponse = new RestClient("http://api.own3d.tv/live").SinglePageResponse();
-                                                              //                                                              XDocument.Load("owned.xml");
-                                                              IEnumerable<XElement> streams = XDocument.Parse(ownedResponse.Content).Descendants("item");
-                                                              var createdStreams = new List<Stream>();
-
-                                                              foreach (XElement stream in streams)
-                                                              {
-                                                                  try
-                                                                  {
-                                                                      createdStreams.Add(LoadOwnedStreamFromXml(stream));
-                                                                  }
-                                                                  catch (NullReferenceException) { }
-                                                              }
-                                                              return createdStreams;
-                                                          }, TaskCreationOptions.PreferFairness);
+//                var ownedTask = Task.Factory.StartNew( () =>
+//                                                          {
+//                                                              var ownedResponse = new RestClient("http://api.own3d.tv/live").SinglePageResponse();
+//                                                              //                                                              XDocument.Load("owned.xml");
+//                                                              IEnumerable<XElement> streams = XDocument.Parse(ownedResponse.Content).Descendants("item");
+//                                                              var createdStreams = new List<Stream>();
+//
+//                                                              foreach (XElement stream in streams)
+//                                                              {
+//                                                                  try
+//                                                                  {
+//                                                                      createdStreams.Add(LoadOwnedStreamFromXml(stream));
+//                                                                  }
+//                                                                  catch (NullReferenceException) { }
+//                                                              }
+//                                                              return createdStreams;
+//                                                          }, TaskCreationOptions.PreferFairness);
 
                 
 
@@ -260,7 +260,7 @@ namespace LeStreamsFace
                 IEnumerable<Stream> ownedFetchedStreams = Enumerable.Empty<Stream>();
                 try
                 {
-                    ownedFetchedStreams = await ownedTask;
+//                    ownedFetchedStreams = await ownedTask;
                 }
                 catch (Exception exception)
                 {
