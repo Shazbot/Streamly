@@ -11,6 +11,7 @@ using System.Windows.Resources;
 using System.Xml;
 using System.Xml.Linq;
 using OxyPlot;
+using OxyPlot.Series;
 using MessageBox = System.Windows.MessageBox;
 
 namespace LeStreamsFace
