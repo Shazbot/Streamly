@@ -36,7 +36,8 @@ namespace LeStreamsFace
                 var groupedByViewers = streams.GroupBy(stream => stream.GameName).OrderByDescending(grouping => grouping.Select(stream => stream.Viewers).Sum());
                 var groupedByGame = streams.GroupBy(stream => stream.GameName).OrderByDescending(grouping => grouping.Count());
 
-                var model = new PlotModel("Number of streams per game");
+                var model = new PlotModel();
+                model.Title = "Number of streams per game";
                 var ps = new PieSeries();
 
                 foreach (IGrouping<string, Stream> grouping in groupedByGame.Take(showFirst))
@@ -66,7 +67,8 @@ namespace LeStreamsFace
 
                 StreamsPerGamePlotModel = model;
 
-                model = new PlotModel("Total viewers per game");
+                model = new PlotModel();
+                model.Title = "Total viewers per game";
                 ps = new PieSeries();
                 foreach (IGrouping<string, Stream> grouping in groupedByViewers.Take(showFirst))
                 {
