@@ -29,7 +29,8 @@ namespace LeStreamsFace
 
             base.OnStartup(e);
 
-            AppDomain.CurrentDomain.AssemblyResolve += new ResolveEventHandler(Target);
+            // now using Costura to load assemblies
+//            AppDomain.CurrentDomain.AssemblyResolve += new ResolveEventHandler(Target);
 
             new MainWindow();
         }
