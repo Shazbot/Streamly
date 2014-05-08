@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Net;
+using System.Reflection;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
@@ -19,7 +20,10 @@ using System.Windows.Threading;
 using System.Xml.Linq;
 using LeStreamsFace.Updater;
 using MahApps.Metro.Controls;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using RestSharp;
+using RestSharp.Extensions;
 using Button = System.Windows.Controls.Button;
 using CheckBox = System.Windows.Controls.CheckBox;
 using Clipboard = System.Windows.Clipboard;
@@ -247,11 +251,18 @@ namespace LeStreamsFace
                 return;
             }
 
-            XDocument xDoc;
+            IEnumerable<Stream> favoritesFromTwitch;
             try
             {
-                var channelFavsResponse = new RestClient("http://api.justin.tv/api/user/favorites/" + newBlockItem + ".xml").SinglePageResponse();
-                xDoc = XDocument.Parse(channelFavsResponse.Content);
+                var client = new RestClient("https://api.twitch.tv/kraken/users/" + newBlockItem + "/follows/channels?limit=100");
+                var request = new RestRequest();
+                client.AddHandler("application/json", new RestSharpJsonNetSerializer());
+                var resp = client.Execute<JObject>(request);
+                if (resp.Data["error"] != null)
+                {
+                    throw new WebException();
+                }
+                favoritesFromTwitch = resp.Data["follows"].Select(token => (Stream)token["channel"].ToObject(typeof(Stream)));
             }
             catch (WebException)
             {
@@ -260,23 +271,12 @@ namespace LeStreamsFace
             }
 
             var needToWriteConfig = false;
-            foreach (XElement channel in xDoc.Element("channels").Descendants("channel"))
+            foreach (var favoriteChannel in favoritesFromTwitch)
             {
-                string channelId = null, twitchLogin = null;
-
-                try
+                if (ConfigManager.Instance.FavoriteStreams.Where(stream => stream.Site == StreamingSite.TwitchTv).All(stream => favoriteChannel.Id != stream.ChannelId))
                 {
-                    channelId = channel.Element("id").Value;
-                    twitchLogin = channel.Element("login").Value;
-                }
-                catch (NullReferenceException)
-                {
-                }
-
-                if (ConfigManager.Instance.FavoriteStreams.Where(stream => stream.Site == StreamingSite.TwitchTv).All(stream => channelId != stream.ChannelId))
-                {
-                    ConfigManager.Instance.FavoriteStreams.Add(new FavoriteStream(twitchLogin, channelId, StreamingSite.TwitchTv));
-                    StreamsManager.Streams.Where(stream => stream.Site == StreamingSite.TwitchTv && stream.ChannelId == channelId).ToList().ForEach(stream => stream.IsFavorite = true);
+                    ConfigManager.Instance.FavoriteStreams.Add(new FavoriteStream(favoriteChannel.Name, favoriteChannel.Id, StreamingSite.TwitchTv));
+                    StreamsManager.Streams.Where(stream => stream.Site == StreamingSite.TwitchTv && stream.ChannelId == favoriteChannel.Id).ToList().ForEach(stream => stream.IsFavorite = true);
                     needToWriteConfig = true;
                 }
             }

@@ -7,6 +7,16 @@ namespace LeStreamsFace
 {
     internal static class Extensions
     {
+        // programmatic version of default(Type)
+        public static object GetDefault(this Type type)
+        {
+            if (type.IsValueType)
+            {
+                return Activator.CreateInstance(type);
+            }
+            return null;
+        }
+
         public static bool Contains(this string source, string toCheck, StringComparison comp)
         {
             return source.IndexOf(toCheck, comp) >= 0;

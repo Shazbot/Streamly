@@ -1,10 +1,14 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using System.IO;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using Newtonsoft.Json.Linq;
 using RestSharp;
 using RestSharp.Deserializers;
 using RestSharp.Serializers;
-using System.IO;
+using JsonSerializer = Newtonsoft.Json.JsonSerializer;
 
-namespace TwitchTesting
+namespace LeStreamsFace
 {
     internal class RestSharpJsonNetSerializer : ISerializer, IDeserializer
     {

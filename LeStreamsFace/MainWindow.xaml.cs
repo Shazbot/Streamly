@@ -1,4 +1,6 @@
-﻿using RestSharp;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using RestSharp;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -194,7 +196,6 @@ namespace LeStreamsFace
                 var twitchTask = Task.Factory.StartNew( () =>
                                                         {
                                                             var twitchResponse = new RestClient("http://api.justin.tv/api/stream/list.xml?category=gaming&limit=100").SinglePageResponse();
-                                                            //                                                              XDocument.Load("twitch.xml");
                                                             IEnumerable<XElement> streams = XDocument.Parse(twitchResponse.Content).Descendants("stream");
                                                             var createdStreams = new List<Stream>();
 
@@ -209,6 +210,7 @@ namespace LeStreamsFace
                                                             return createdStreams;
                                                         }, TaskCreationOptions.PreferFairness);
 
+//                owned.tv currently offline
 //                var ownedTask = Task.Factory.StartNew( () =>
 //                                                          {
 //                                                              var ownedResponse = new RestClient("http://api.own3d.tv/live").SinglePageResponse();

@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Linq;
+using Newtonsoft.Json;
 
 namespace LeStreamsFace
 {
@@ -38,6 +39,7 @@ namespace LeStreamsFace
             private set { _viewers = value; onPropertyChanged(this, "Viewers"); }
         }
 
+        [JsonProperty(PropertyName = "_id")]
         public string Id
         {
             get { return _id; }
