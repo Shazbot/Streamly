@@ -166,15 +166,17 @@ namespace LeStreamsFace
                         streamsWindow.Owner = this;
 
                         streamsWindow.Show();
-                        streamsWindow.Activate();
                     }
                     
                 }
             }
-            else
-            {
-                streamsWindow.Activate();
-            }
+
+            streamsWindow.Activate();
+
+            // make sure we start topmost
+            streamsWindow.Topmost = true;
+            streamsWindow.Topmost = false;
+            streamsWindow.Focus();  
         }
 
         private void OnTrayExitClick(object sender, EventArgs e)

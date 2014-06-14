@@ -1,23 +1,21 @@
 ﻿<MetroControls:MetroWindow x:Class="LeStreamsFace.StreamsListWindow"
                            xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                            xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                           xmlns:LeStreamsFace="clr-namespace:LeStreamsFace"
+                           xmlns:MetroControls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+                           xmlns:Updater="clr-namespace:LeStreamsFace.Updater"
                            xmlns:con="clr-namespace:Kent.Boogaart.Converters.Markup;assembly=Kent.Boogaart.Converters"
                            xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-                           xmlns:LeStreamsFace="clr-namespace:LeStreamsFace"
                            xmlns:lib="http://schemas.leschemasface.com/2012/xaml/presentation"
                            xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                           xmlns:MetroControls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-                           xmlns:Updater="clr-namespace:LeStreamsFace.Updater" xmlns:oxy="http://oxyplot.codeplex.com"
+                           xmlns:oxy="http://oxyplot.codeplex.com"
                            Name="window"
                            Title="Do you even watch streams?"
                            MinWidth="150"
                            MinHeight="100"
-                           ResizeMode="CanResizeWithGrip"
                            AllowsTransparency="True"
                            Background="WhiteSmoke"
                            Closed="window_Closed"
-                           d:DesignHeight="300"
-                           d:DesignWidth="300"
                            Icon="/LeStreamsFace;component/Resources/App.ico"
                            KeyDown="window_KeyDown"
                            Left="{Binding WinLeft,
@@ -28,6 +26,7 @@
                                              Mode=TwoWay,
                                              Source={x:Static LeStreamsFace:ConfigManager.Instance}}"
                            PreviewTextInput="window_PreviewTextInput"
+                           ResizeMode="CanResizeWithGrip"
                            ShowIconOnTitleBar="False"
                            ShowTitleBar="{Binding HideTitleBar,
                                                   Source={x:Static LeStreamsFace:ConfigManager.Instance},
@@ -40,6 +39,8 @@
                                          Source={x:Static LeStreamsFace:ConfigManager.Instance}}"
                            WindowStartupLocation="CenterScreen"
                            WindowStyle="None"
+                           d:DesignHeight="300"
+                           d:DesignWidth="300"
                            x:ClassModifier="internal"
                            mc:Ignorable="d">
 
@@ -93,39 +94,48 @@
         <MetroControls:WindowCommands x:Name="windowCommands">
             <StackPanel Name="gameIconsPanel" Orientation="Horizontal">
                 <Button Name="leagueIconButton"
-                    Click="GameIconButton_Click"
-                    Tag="{x:Static LeStreamsFace:FiltersEnum.League}">
-                    <Image Margin="0,5" Width="15"
-                       Height="15"
-                       Source="/LeStreamsFace;component/Resources/LeagueIcon.png" />
+                        Click="GameIconButton_Click"
+                        Tag="{x:Static LeStreamsFace:FiltersEnum.League}">
+                    <Image Width="15"
+                           Height="15"
+                           Margin="0,5"
+                           Source="/LeStreamsFace;component/Resources/LeagueIcon.png" />
                 </Button>
                 <Button Name="sc2IconButton"
-                    Click="GameIconButton_Click"
-                    Tag="{x:Static LeStreamsFace:FiltersEnum.Starcraft}">
+                        Click="GameIconButton_Click"
+                        Tag="{x:Static LeStreamsFace:FiltersEnum.Starcraft}">
                     <Image Width="15"
-                       Height="15"
-                       Source="/LeStreamsFace;component/Resources/StarcraftIcon.png" />
+                           Height="15"
+                           Source="/LeStreamsFace;component/Resources/StarcraftIcon.png" />
                 </Button>
                 <Button Name="dota2IconButton"
-                    Click="GameIconButton_Click"
-                    Tag="{x:Static LeStreamsFace:FiltersEnum.Dota}">
+                        Click="GameIconButton_Click"
+                        Tag="{x:Static LeStreamsFace:FiltersEnum.Dota}">
                     <Image Width="15"
-                       Height="15"
-                       Source="/LeStreamsFace;component/Resources/DotaIcon.png" />
+                           Height="15"
+                           Source="/LeStreamsFace;component/Resources/DotaIcon.png" />
                 </Button>
                 <Button Name="diabloIconButton"
-                    Click="GameIconButton_Click"
-                    Tag="{x:Static LeStreamsFace:FiltersEnum.Diablo}">
+                        Click="GameIconButton_Click"
+                        Tag="{x:Static LeStreamsFace:FiltersEnum.Diablo}">
                     <Image Width="15"
-                       Height="15"
-                       Source="/LeStreamsFace;component/Resources/DiabloIcon.png" />
+                           Height="15"
+                           Source="/LeStreamsFace;component/Resources/DiabloIcon.png" />
                 </Button>
             </StackPanel>
             <StackPanel Name="changeTabButtons" Orientation="Horizontal">
-                <Button Click="ChangeTab_Click" Content="streams" Tag="{Binding ElementName=streamsTabItem}" />
-                <Button Click="ChangeTab_Click" Content="config" Tag="{Binding ElementName=configTabItem}" />
-                <Button Click="ChangeTab_Click" Content="stats" Tag="{Binding ElementName=statsTabItem}" />
-                <Button Click="ChangeTab_Click" Content="about" Tag="{Binding ElementName=aboutTabItem}" />
+                <Button Click="ChangeTab_Click"
+                        Content="streams"
+                        Tag="{Binding ElementName=streamsTabItem}" />
+                <Button Click="ChangeTab_Click"
+                        Content="config"
+                        Tag="{Binding ElementName=configTabItem}" />
+                <Button Click="ChangeTab_Click"
+                        Content="stats"
+                        Tag="{Binding ElementName=statsTabItem}" />
+                <Button Click="ChangeTab_Click"
+                        Content="about"
+                        Tag="{Binding ElementName=aboutTabItem}" />
             </StackPanel>
         </MetroControls:WindowCommands>
     </MetroControls:MetroWindow.WindowCommands>
@@ -144,7 +154,7 @@
                         </Grid.RowDefinitions>
                         <MetroControls:ProgressRing Grid.Row="0" IsActive="True">
                             <MetroControls:ProgressRing.Style>
-                                <Style TargetType="{x:Type MetroControls:ProgressRing}" BasedOn="{StaticResource {x:Type MetroControls:ProgressRing}}">
+                                <Style BasedOn="{StaticResource {x:Type MetroControls:ProgressRing}}" TargetType="{x:Type MetroControls:ProgressRing}">
                                     <Style.Triggers>
                                         <DataTrigger Binding="{Binding Offline, Source={x:Static LeStreamsFace:ConfigManager.Instance}}" Value="True">
                                             <Setter Property="Visibility" Value="Collapsed" />
@@ -153,7 +163,9 @@
                                 </Style>
                             </MetroControls:ProgressRing.Style>
                         </MetroControls:ProgressRing>
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <StackPanel HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Orientation="Horizontal">
                             <StackPanel.Style>
                                 <Style TargetType="{x:Type StackPanel}">
                                     <Setter Property="Visibility" Value="Collapsed" />
@@ -164,8 +176,14 @@
                                     </Style.Triggers>
                                 </Style>
                             </StackPanel.Style>
-                                <TextBlock FontFamily="../Resources/#Entypo" Text="c" Margin="0,-7,4,0" FontSize="38" Foreground="Red" />
-                            <TextBlock FontSize="18" Foreground="Red" Text="Check your Internet connection!" />
+                            <TextBlock Margin="0,-7,4,0"
+                                       FontFamily="../Resources/#Entypo"
+                                       FontSize="38"
+                                       Foreground="Red"
+                                       Text="c" />
+                            <TextBlock FontSize="18"
+                                       Foreground="Red"
+                                       Text="Check your Internet connection!" />
                         </StackPanel>
                         <DataGrid Name="streamsDataGrid"
                                   Grid.Row="0"
@@ -185,13 +203,13 @@
                                   IsEnabled="True"
                                   IsReadOnly="True"
                                   KeyUp="streamsDataGrid_KeyUp"
+                                  Loaded="streamsDataGrid_Loaded"
                                   PreviewKeyDown="streamsDataGrid_PreviewKeyDown"
                                   SelectionChanged="blockedItemsListBox_SelectionChanged"
                                   SelectionMode="Single"
-                                  SelectionUnit="FullRow"
-                                  Loaded="streamsDataGrid_Loaded">
+                                  SelectionUnit="FullRow">
                             <DataGrid.Style>
-                                <Style TargetType="{x:Type DataGrid}" BasedOn="{StaticResource {x:Type DataGrid}}">
+                                <Style BasedOn="{StaticResource {x:Type DataGrid}}" TargetType="{x:Type DataGrid}">
                                     <Style.Triggers>
                                         <DataTrigger Binding="{Binding ItemsSource.Count, ElementName=streamsDataGrid, TargetNullValue=0, FallbackValue=0}" Value="0">
                                             <Setter Property="Visibility" Value="Collapsed" />
@@ -340,15 +358,19 @@
                                                 <Grid.ToolTip>
                                                     <TextBlock Text="{Binding GameName}" />
                                                 </Grid.ToolTip>
-                                                <Popup Name="gameIconPopup" PlacementTarget="{Binding ElementName=gameIconGrid}" Placement="Bottom">
-                                                    <TextBlock Text="{Binding GameName}" Foreground="White" Padding="5,2,5,2" /> 
+                                                <Popup Name="gameIconPopup"
+                                                       Placement="Bottom"
+                                                       PlacementTarget="{Binding ElementName=gameIconGrid}">
+                                                    <TextBlock Foreground="White"
+                                                               Padding="5,2,5,2"
+                                                               Text="{Binding GameName}" />
                                                 </Popup>
                                                 <Image Name="gameIconImage"
                                                        Width="25"
                                                        Height="25">
                                                     <Image.Style>
                                                         <Style TargetType="{x:Type Image}">
-                                                            <Setter Property="Source" Value="{Binding GameName, FallbackValue={StaticResource questionMarkImage}, TargetNullValue={StaticResource questionMarkImage},  Converter={LeStreamsFace:GameNameToIconUriConverter}}" />
+                                                            <Setter Property="Source" Value="{Binding GameName, FallbackValue={StaticResource questionMarkImage}, TargetNullValue={StaticResource questionMarkImage}, Converter={LeStreamsFace:GameNameToIconUriConverter}}" />
                                                             <Style.Triggers>
                                                                 <Trigger Property="Source" Value="{StaticResource questionMarkImage}">
                                                                     <Setter Property="Image.Opacity" Value="0.25" />
@@ -370,15 +392,15 @@
                                                     <Setter TargetName="gameIconGrid" Property="ToolTipService.IsEnabled" Value="False" />
                                                     <Setter TargetName="gameIconPopup" Property="IsOpen" Value="True" />
                                                 </MultiDataTrigger>
-                                                <DataTrigger Binding="{Binding DataContext.GameName, ElementName=gameIconPopup}" Value="" >
+                                                <DataTrigger Binding="{Binding DataContext.GameName, ElementName=gameIconPopup}" Value="">
                                                     <Setter TargetName="gameIconPopup" Property="IsOpen" Value="False" />
                                                     <Setter TargetName="gameIconPopup" Property="IsEnabled" Value="False" />
                                                 </DataTrigger>
-                                                <DataTrigger Binding="{Binding IsKeyboardFocusWithin, ElementName=streamsDataGrid}" Value="False" >
+                                                <DataTrigger Binding="{Binding IsKeyboardFocusWithin, ElementName=streamsDataGrid}" Value="False">
                                                     <Setter TargetName="gameIconPopup" Property="IsOpen" Value="False" />
                                                     <Setter TargetName="gameIconPopup" Property="IsEnabled" Value="False" />
                                                 </DataTrigger>
-                                                <DataTrigger Binding="{Binding IsActive, ElementName=window}" Value="False" >
+                                                <DataTrigger Binding="{Binding IsActive, ElementName=window}" Value="False">
                                                     <Setter TargetName="gameIconPopup" Property="IsOpen" Value="False" />
                                                     <Setter TargetName="gameIconPopup" Property="IsEnabled" Value="False" />
                                                 </DataTrigger>
@@ -427,7 +449,9 @@
                         <WrapPanel x:Name="wrapPanel"
                                    Background="Transparent"
                                    MouseLeftButtonDown="WrapPanel_OnMouseLeftButtonDown">
-                            <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,0,0,0">
+                            <StackPanel Margin="10,0,0,0"
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Top">
                                 <GroupBox HorizontalAlignment="Left">
                                     <GroupBox.Header>
                                         <Label Content="TwitchTV" FontSize="14" />
@@ -545,13 +569,13 @@
                                          TextChanged="DisabledTimeTextBox_TextChanged"
                                          TextWrapping="Wrap" />
                                 <Slider Name="opacitySlider"
-                                        ToolTipService.ToolTip="Opacity"
                                         Width="160"
                                         Height="20"
                                         Margin="0,10,0,0"
                                         HorizontalAlignment="Left"
                                         Maximum="1"
                                         Minimum="0.2"
+                                        ToolTipService.ToolTip="Opacity"
                                         Value="{Binding Opacity,
                                                         Mode=TwoWay,
                                                         ElementName=window}" />
@@ -654,8 +678,16 @@
                             <ColumnDefinition />
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions>
-                        <oxy:Plot Name="gameViewersPlot" Grid.Column="0" Model="{Binding ViewersPerGamePlotModel, Source={x:Static LeStreamsFace:ConfigManager.Instance}}" Background="Transparent" />
-                        <ListBox Name="gameViewersList" HorizontalContentAlignment="Stretch" Grid.Column="1"  ItemsSource="{Binding ViewersPerGame, Source={x:Static LeStreamsFace:ConfigManager.Instance}}">
+                        <oxy:Plot Name="gameViewersPlot"
+                                  Grid.Column="0"
+                                  Background="Transparent"
+                                  Model="{Binding ViewersPerGamePlotModel,
+                                                  Source={x:Static LeStreamsFace:ConfigManager.Instance}}" />
+                        <ListBox Name="gameViewersList"
+                                 Grid.Column="1"
+                                 HorizontalContentAlignment="Stretch"
+                                 ItemsSource="{Binding ViewersPerGame,
+                                                       Source={x:Static LeStreamsFace:ConfigManager.Instance}}">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
                                     <Grid Width="Auto" HorizontalAlignment="Stretch">
@@ -663,14 +695,26 @@
                                             <ColumnDefinition Width="70*" />
                                             <ColumnDefinition Width="30*" />
                                         </Grid.ColumnDefinitions>
-                                        <TextBlock Text="{Binding Item1}" Grid.Column="0" />
-                                        <TextBlock Text="{Binding Item2}" Grid.Column="1" HorizontalAlignment="Right" />
+                                        <TextBlock Grid.Column="0" Text="{Binding Item1}" />
+                                        <TextBlock Grid.Column="1"
+                                                   HorizontalAlignment="Right"
+                                                   Text="{Binding Item2}" />
                                     </Grid>
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
                         </ListBox>
-                        <oxy:Plot Name="gameStreamsPlot" Visibility="Collapsed" Grid.Column="0" Model="{Binding StreamsPerGamePlotModel, Source={x:Static LeStreamsFace:ConfigManager.Instance}}" Background="Transparent" />
-                        <ListBox Name="gameStreamsList" Visibility="Collapsed" HorizontalContentAlignment="Stretch" Grid.Column="1"  ItemsSource="{Binding StreamsPerGame, Source={x:Static LeStreamsFace:ConfigManager.Instance}}">
+                        <oxy:Plot Name="gameStreamsPlot"
+                                  Grid.Column="0"
+                                  Background="Transparent"
+                                  Model="{Binding StreamsPerGamePlotModel,
+                                                  Source={x:Static LeStreamsFace:ConfigManager.Instance}}"
+                                  Visibility="Collapsed" />
+                        <ListBox Name="gameStreamsList"
+                                 Grid.Column="1"
+                                 HorizontalContentAlignment="Stretch"
+                                 ItemsSource="{Binding StreamsPerGame,
+                                                       Source={x:Static LeStreamsFace:ConfigManager.Instance}}"
+                                 Visibility="Collapsed">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
                                     <Grid Width="Auto" HorizontalAlignment="Stretch">
@@ -678,8 +722,10 @@
                                             <ColumnDefinition Width="70*" />
                                             <ColumnDefinition Width="30*" />
                                         </Grid.ColumnDefinitions>
-                                        <TextBlock Text="{Binding Item1}" Grid.Column="0" />
-                                        <TextBlock Text="{Binding Item2}" Grid.Column="1" HorizontalAlignment="Right" />
+                                        <TextBlock Grid.Column="0" Text="{Binding Item1}" />
+                                        <TextBlock Grid.Column="1"
+                                                   HorizontalAlignment="Right"
+                                                   Text="{Binding Item2}" />
                                     </Grid>
                                 </DataTemplate>
                             </ListBox.ItemTemplate>

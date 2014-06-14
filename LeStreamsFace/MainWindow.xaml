@@ -8,8 +8,6 @@
         Width="0"
         Height="0"
         AllowsTransparency="True"
-        d:DesignHeight="420"
-        d:DesignWidth="793"
         Focusable="False"
         Icon="/LeStreamsFace;component/Resources/App.ico"
         IsHitTestVisible="False"
@@ -19,6 +17,8 @@
         Top="0"
         WindowStartupLocation="Manual"
         WindowStyle="None"
+        d:DesignHeight="420"
+        d:DesignWidth="793"
         x:ClassModifier="internal"
         mc:Ignorable="d">
     <Window.Background>
