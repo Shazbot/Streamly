@@ -1,9 +1,10 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.ComponentModel;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Reflection;
 using System.Text;
-using Newtonsoft.Json;
 
 namespace LeStreamsFace
 {
@@ -14,28 +15,36 @@ namespace LeStreamsFace
 
     internal class Stream : INotifyPropertyChanged
     {
-        private string _name;
-        private string _title;
-        private int _viewers;
-        private string _id;
-        private StreamingSite _site;
-        private bool _isFavorite;
-        private string _gameName;
-        private string channelId;
-        private string _thumbnailURI;
+        private string _name = string.Empty;
+        private string _title = string.Empty;
+        private int _viewers = -1;
+        private string _id = "-1";
+        private StreamingSite _site = StreamingSite.TwitchTv;
+        private bool _isFavorite = false;
+        private string _gameName = string.Empty;
+        private string _channelId = string.Empty;
+        private string _thumbnailURI = string.Empty;
 
+        [JsonProperty(PropertyName = "Name")]
         public string Name
         {
             get { return _name; }
-            private set { _name = value; onPropertyChanged(this, "Name"); }
+            private set { if (value == null) return; _name = value; onPropertyChanged(this, "Name"); }
         }
 
+        [JsonProperty(PropertyName = "Title")]
         public string Title
         {
             get { return _title; }
-            private set { _title = value.TrimEnd(new[] { ' ', '\n' }); onPropertyChanged(this, "Title"); }
+            private set
+            {
+                if (value == null) return;
+                _title = value.TrimEnd(new[] { ' ', '\n' });
+                onPropertyChanged(this, "Title");
+            }
         }
 
+        [JsonProperty(PropertyName = "Viewers")]
         public int Viewers
         {
             get { return _viewers; }
@@ -46,15 +55,17 @@ namespace LeStreamsFace
         public string Id
         {
             get { return _id; }
-            set { _id = value; onPropertyChanged(this, "Id"); }
+            set { if (value == null) return; _id = value; onPropertyChanged(this, "Id"); }
         }
 
+        [JsonProperty(PropertyName = "Site")]
         public StreamingSite Site
         {
             get { return _site; }
             protected set { _site = value; onPropertyChanged(this, "Site"); }
         }
 
+        [JsonProperty(PropertyName = "IsFavorite")]
         public bool IsFavorite
         {
             get { return _isFavorite; }
@@ -65,31 +76,38 @@ namespace LeStreamsFace
         public string GameName
         {
             get { return _gameName; }
-            private set { _gameName = value; onPropertyChanged(this, "GameName"); }
+            private set { if (value == null) return; _gameName = value; onPropertyChanged(this, "GameName"); }
         }
 
+        [JsonProperty(PropertyName = "ChannelId")]
         public string ChannelId
         {
-            get { return channelId; }
-            protected set { channelId = value; onPropertyChanged(this, "ChannelId"); }
+            get { return _channelId; }
+            protected set { if (value == null) return; _channelId = value; onPropertyChanged(this, "ChannelId"); }
         }
 
         public string LoginNameTwtv
         {
             get { return _loginNameTwtv; }
-            set { _loginNameTwtv = value; onPropertyChanged(this, "LoginNameTwtv"); }
+            set { if (value == null) return; _loginNameTwtv = value; onPropertyChanged(this, "LoginNameTwtv"); }
         }
 
+        [JsonProperty(PropertyName = "ThumbnailURI")]
         public string ThumbnailURI
         {
             get { return _thumbnailURI; }
-            set { _thumbnailURI = value; onPropertyChanged(this, "ThumbnailURI"); }
+            set
+            {
+                if (value == null) return;
+                _thumbnailURI = value;
+                onPropertyChanged(this, "ThumbnailURI");
+            }
         }
 
         private string _loginNameTwtv;
         public bool GottenViaAutoGetFavs = false;
 
-        protected Stream()
+        public Stream()
         {
         }
 
@@ -99,9 +117,10 @@ namespace LeStreamsFace
             Title = title;
             Viewers = viewers;
             Id = id;
-            GameName = gameName;
+            GameName = gameName ?? string.Empty;
             Site = streamingSite;
             ChannelId = channelId;
+            ThumbnailURI = string.Empty;
 
             IsFavorite = ConfigManager.Instance.FavoriteStreams.Any(stream => stream.ChannelId == channelId);
         }
@@ -203,6 +222,17 @@ namespace LeStreamsFace
                 stringBuilder.Append(property.Name + ": " + property.GetValue(this, null) + Environment.NewLine);
             }
             return stringBuilder.ToString();
+        }
+
+        [ContractInvariantMethod]
+        private void ObjectInvariant()
+        {
+            Contract.Invariant(this._name != null);
+            Contract.Invariant(this._title != null);
+            Contract.Invariant(this._id != null);
+            Contract.Invariant(this._gameName != null);
+            Contract.Invariant(this._channelId != null);
+            Contract.Invariant(this._thumbnailURI != null);
         }
     }
 }

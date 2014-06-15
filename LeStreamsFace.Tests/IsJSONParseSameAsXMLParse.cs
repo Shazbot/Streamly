@@ -1,14 +1,18 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Mime;
+using System.Text;
 using System.Threading.Tasks;
 using ApprovalTests;
 using ApprovalTests.Reporters;
 using FluentAssertions;
 using LeStreamsFace.StreamParsers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Newtonsoft.Json.Linq;
 using RestSharp;
+using RestSharp.Extensions;
 using Xunit;
 
 namespace LeStreamsFace.Tests
@@ -52,6 +56,36 @@ namespace LeStreamsFace.Tests
             var streamsFromXML = XMLparser.GetStreamsFromContent((await twitchXMLResponse).Content).OrderByDescending(stream => stream.Viewers).ToArray();
 
             streamsFromJSON.Take(50).Should().BeSubsetOf(streamsFromXML);
+        }
+
+        [Fact(Skip = "Can't handle 9000 streams")]
+//        [Fact]
+        public async Task CanWeGetAllStreams()
+        {
+            var JSONparser = new TwitchJSONStreamParser();
+            var client = new RestClient("https://api.twitch.tv/kraken/streams?limit=100");
+            client.AddHandler("application/json", new RestSharpJsonNetSerializer());
+            var response = await client.ExecuteTaskAsync<JObject>(new RestRequest());
+            var numStreams = response.Data["_total"].ToObject<int>();
+
+            int numStreamsProcessed = 0;
+            var tasks = new List<Task<string>>();
+            do
+            {
+                numStreamsProcessed += 100;
+                var newTask = Task.Run(async () =>
+                                             {
+                                                 var newClient = new RestClient("https://api.twitch.tv/kraken/streams?limit=100&offset=" + numStreamsProcessed);
+                                                 var newResponse = await newClient.ExecuteTaskAsync(new RestRequest());
+                                                 return newResponse.Content;
+                                             });
+                tasks.Add(newTask);
+            } while (numStreamsProcessed < numStreams);//1000); // not using numStreams
+
+            Task.WaitAll(tasks.ToArray());
+
+            var streams = JSONparser.GetStreamsFromContent(response.Content).ToList();
+            streams.AddRange(tasks.SelectMany(task => JSONparser.GetStreamsFromContent(task.Result)));
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Windows.Threading;
 
@@ -10,6 +11,8 @@ namespace LeStreamsFace
         // programmatic version of default(Type)
         public static object GetDefault(this Type type)
         {
+            if (type == null) return null;
+
             if (type.IsValueType)
             {
                 return Activator.CreateInstance(type);
@@ -19,16 +22,22 @@ namespace LeStreamsFace
 
         public static bool Contains(this string source, string toCheck, StringComparison comp)
         {
+            if (source == null) return false;
+
             return source.IndexOf(toCheck, comp) >= 0;
         }
 
         public static bool ContainsIgnoreCase(this string source, string toCheck)
         {
+            if (source == null) return false;
+
             return source.Contains(toCheck, StringComparison.OrdinalIgnoreCase);
         }
 
         public static void ForEach<T>(this IEnumerable<T> enumeration, Action<T> action)
         {
+            if (enumeration == null) return;
+
             foreach (T item in enumeration)
             {
                 action(item);

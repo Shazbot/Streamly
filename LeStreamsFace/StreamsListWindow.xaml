@@ -3,7 +3,6 @@
                            xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                            xmlns:LeStreamsFace="clr-namespace:LeStreamsFace"
                            xmlns:MetroControls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-                           xmlns:Updater="clr-namespace:LeStreamsFace.Updater"
                            xmlns:con="clr-namespace:Kent.Boogaart.Converters.Markup;assembly=Kent.Boogaart.Converters"
                            xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                            xmlns:lib="http://schemas.leschemasface.com/2012/xaml/presentation"
@@ -739,7 +738,6 @@
                     <StackPanel>
                         <StackPanel Margin="10,20,0,0" Orientation="Horizontal">
                             <TextBlock FontSize="14" Text="Check for updates:" />
-                            <Updater:UpdaterView x:Name="Updater" Margin="5,0,0,0" />
                         </StackPanel>
                         <TextBlock Margin="10,12,10,0" FontSize="14">
                             <Hyperlink NavigateUri="http://shazbot.github.com/LeStreamsFace/" RequestNavigate="Hyperlink_RequestNavigate">LeStreamsFace website</Hyperlink>

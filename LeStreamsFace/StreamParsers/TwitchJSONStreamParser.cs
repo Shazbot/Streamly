@@ -1,14 +1,11 @@
-using System.Collections.Generic;
-using System.Linq;
-using System.Xml.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using RestSharp;
-using RestSharp.Deserializers;
+using Newtonsoft.Json.Serialization;
+using System.Collections.Generic;
 
 namespace LeStreamsFace.StreamParsers
 {
-    class TwitchJSONStreamParser : IStreamParser<JToken>
+    internal class TwitchJSONStreamParser : IStreamParser<JToken>
     {
         public IEnumerable<Stream> GetStreamsFromContent(string content)
         {
@@ -24,12 +21,23 @@ namespace LeStreamsFace.StreamParsers
         {
             var channelObject = jObject["channel"];
             // so we don't have to make setters for all these fields in stream
-            jObject["Name"] = channelObject["display_name"];
-            jObject["Title"] = channelObject["status"];
-            jObject["ChannelId"] = channelObject["_id"];
-            jObject["LoginNameTwtv"] = channelObject["name"];
-            jObject["ThumbnailURI"] = channelObject["video_banner"];
-            return jObject.ToObject<Stream>();
+            jObject["Name"] = channelObject["display_name"] ?? "";
+            jObject["Title"] = channelObject["status"] ?? "";
+            jObject["ChannelId"] = channelObject["_id"] ?? "";
+            jObject["LoginNameTwtv"] = channelObject["name"] ?? "";
+            jObject["ThumbnailURI"] = channelObject["video_banner"] ?? "";
+
+            var jsonSerializerSettings = new JsonSerializerSettings()
+                                         {
+                                             NullValueHandling = NullValueHandling.Ignore,
+                                             Error = SerializerErrorHandler
+                                         };
+            return jObject.ToObject<Stream>(JsonSerializer.Create(jsonSerializerSettings));
+        }
+
+        private void SerializerErrorHandler(object sender, ErrorEventArgs errorEventArgs)
+        {
+            var eventArgs = errorEventArgs;
         }
     }
 }

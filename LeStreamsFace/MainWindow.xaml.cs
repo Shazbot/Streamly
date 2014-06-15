@@ -42,11 +42,13 @@ namespace LeStreamsFace
 
         public delegate void ExitDelegate(object sender, EventArgs e);
 
-        private readonly IStreamParser<XElement> _streamParser;
+        private readonly IStreamParser<XElement> _streamParserXML;
+        private readonly IStreamParser<JToken> _streamParserJSON;
 
-        public MainWindow(IStreamParser<XElement> streamParser)
+        public MainWindow(IStreamParser<XElement> streamParserXML, IStreamParser<JToken> streamParserJSON)
         {
-            _streamParser = streamParser;
+            _streamParserXML = streamParserXML;
+            _streamParserJSON = streamParserJSON;
 #if DEBUG
             var traceListener = new TextWriterTraceListener(System.IO.File.CreateText("Trace.txt"));
             Debug.Listeners.Add(traceListener);
@@ -200,39 +202,46 @@ namespace LeStreamsFace
 
             try
             {
-                var twitchTask = Task.Factory.StartNew( () =>
-                                                        {
-                                                            var twitchResponse = new RestClient("http://api.justin.tv/api/stream/list.xml?category=gaming&limit=100").SinglePageResponse();
-                                                            return _streamParser.GetStreamsFromContent(twitchResponse.Content);
-                                                        }, TaskCreationOptions.PreferFairness);
+//                var twitchTask = Task.Factory.StartNew( () =>
+//                                                        {
+//                                                            var twitchResponse = new RestClient("https://api.twitch.tv/kraken/streams?limit=100").SinglePageResponse();
+//                                                            return _streamParserJSON.GetStreamsFromContent(twitchResponse.Content);
+//                                                        }, TaskCreationOptions.PreferFairness);
+
+                
               
                 var streamsList = new List<Stream>();
                 var closedStreams = new List<Stream>();
 
                 // check twitch fav streams through a channel request
-                if (ConfigManager.Instance.AutoCheckFavorites)
-                {
-                    try
-                    {
-                        await Task.Factory.StartNew( () => CheckFavoriteTwitchStreamsManually(newStreamsList, streamsList));
-                    }
-                    catch (Exception) { }
-                    closedStreams.AddRange(StreamsManager.Streams.Where(stream => stream.GottenViaAutoGetFavs && !streamsList.Contains(stream)).ToList());
-                }
+//                if (ConfigManager.Instance.AutoCheckFavorites)
+//                {
+//                    try
+//                    {
+//                        await Task.Factory.StartNew( () => CheckFavoriteTwitchStreamsManually(newStreamsList, streamsList));
+//                    }
+//                    catch (Exception) { }
+//                    closedStreams.AddRange(StreamsManager.Streams.Where(stream => stream.GottenViaAutoGetFavs && !streamsList.Contains(stream)).ToList());
+//                }
 
                 IEnumerable<Stream> twitchFetchedStreams = Enumerable.Empty<Stream>();
-                try
-                {
-                    twitchFetchedStreams = await twitchTask;
-                }
-                catch (Exception exception)
-                {
-                    if (firstRun) // need to not spam user
-                    {
-                        iconWindow.notificationItem.BalloonTip("Trouble reading from TWITCHTV", "REQUEST FAILED", toolTipIcon: ToolTipIcon.Error);
-                    }
-                    Debug.WriteLine(exception);
-                }
+
+//                                                            var twitchResponse = new RestClient("https://api.twitch.tv/kraken/streams?limit=100").SinglePageResponse();
+                var twitchResponse = await new RestClient("https://api.twitch.tv/kraken/streams?limit=100").ExecuteTaskAsync(new RestRequest());
+
+                twitchFetchedStreams = _streamParserJSON.GetStreamsFromContent(twitchResponse.Content);
+//                try
+//                {
+//                    twitchFetchedStreams = await twitchTask;
+//                }
+//                catch (Exception exception)
+//                {
+//                    if (firstRun) // need to not spam user
+//                    {
+//                        iconWindow.notificationItem.BalloonTip("Trouble reading from TWITCHTV", "REQUEST FAILED", toolTipIcon: ToolTipIcon.Error);
+//                    }
+//                    Debug.WriteLine(exception);
+//                }
 
                 // add streams we didn't get from favs to streamsList, new streams to newStreamsList
                 foreach (Stream stream in twitchFetchedStreams)
@@ -446,7 +455,7 @@ namespace LeStreamsFace
             {
                 try
                 {
-                    gottenFavs.Add(_streamParser.GetStreamFromElement(xElement));
+                    gottenFavs.Add(_streamParserXML.GetStreamFromElement(xElement));
                 }
                 catch (NullReferenceException)
                 {

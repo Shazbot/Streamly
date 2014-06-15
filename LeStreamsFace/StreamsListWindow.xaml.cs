@@ -18,7 +18,6 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 using System.Xml.Linq;
-using LeStreamsFace.Updater;
 using MahApps.Metro.Controls;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -58,11 +57,6 @@ namespace LeStreamsFace
             this.streamsDataGrid.ItemsSource = StreamsManager.Streams;
             this.favoritesListBox.ItemsSource = ConfigManager.Instance.FavoriteStreams;
 
-            var updaterViewModel = new UpdaterViewModel();
-            Updater.DataContext = updaterViewModel;
-            Updater.CheckForUpdateButton.Click += updaterViewModel.CheckForUpdate;
-            updaterViewModel.CheckForUpdate();
-
             if (ConfigManager.Instance.SaveWindowPosition)
             {
                 WindowStartupLocation = WindowStartupLocation.Manual;
@@ -78,8 +72,6 @@ namespace LeStreamsFace
         {
             TypeDescriptor.GetProperties(this.streamsDataGrid)["ItemsSource"].RemoveValueChanged(this.streamsDataGrid, new EventHandler(blockedItemsListBox_ItemsSourceChanged));
             timeBlockCheck = null;
-            Updater.CheckForUpdateButton.Click -= ((UpdaterViewModel)Updater.DataContext).CheckForUpdate;
-            Updater.DataContext = null;
 
             gameStreamsPlot.Model = null;
             gameViewersPlot.Model = null;
