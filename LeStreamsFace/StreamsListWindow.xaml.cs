@@ -436,7 +436,7 @@ namespace LeStreamsFace
 
             gameIconsPanel.Visibility = e.NewSize.Width <= 465 ? Visibility.Collapsed : Visibility.Visible;
 
-            this.Title = e.NewSize.Width <= 700 ? string.Empty : "Do you even watch streams?";
+            this.Title = e.NewSize.Width <= 700 ? string.Empty : "More streams than you can shake a stick at";
         }
 
         private void UnfavoriteButton_Click(object sender, RoutedEventArgs e)

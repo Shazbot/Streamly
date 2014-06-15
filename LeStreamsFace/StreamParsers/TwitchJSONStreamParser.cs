@@ -25,7 +25,8 @@ namespace LeStreamsFace.StreamParsers
             jObject["Title"] = channelObject["status"] ?? "";
             jObject["ChannelId"] = channelObject["_id"] ?? "";
             jObject["LoginNameTwtv"] = channelObject["name"] ?? "";
-            jObject["ThumbnailURI"] = channelObject["video_banner"] ?? "";
+
+            jObject["ThumbnailURI"] = jObject["preview"]["large"] ?? "";
 
             var jsonSerializerSettings = new JsonSerializerSettings()
                                          {
