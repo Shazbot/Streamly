@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using LeStreamsFace.StreamParsers;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using RestSharp;
 using System;
@@ -41,13 +42,13 @@ namespace LeStreamsFace
 
         public delegate void ExitDelegate(object sender, EventArgs e);
 
-        private IStreamParser _streamParser;
+        private readonly IStreamParser _streamParser;
 
         public MainWindow(IStreamParser streamParser)
         {
             _streamParser = streamParser;
 #if DEBUG
-            TextWriterTraceListener traceListener = new TextWriterTraceListener(System.IO.File.CreateText("Trace.txt"));
+            var traceListener = new TextWriterTraceListener(System.IO.File.CreateText("Trace.txt"));
             Debug.Listeners.Add(traceListener);
             Debug.AutoFlush = true;
 #endif
@@ -126,7 +127,8 @@ namespace LeStreamsFace
             fullscreenWaitTimer.Stop();
 
             // remove duplicates in unreportedFavs, and display currently existing favorites
-            foreach (Stream unreportedStream in unreportedFavs.GroupBy(stream => stream.Id).Select(grouping => grouping.Last())
+            foreach (Stream unreportedStream in unreportedFavs.GroupBy(stream => stream.Id)
+                                                    .Select(grouping => grouping.Last())
                                                     .Favorites()
                                                     .Where(stream => StreamsManager.Streams.Any(stream1 => stream1 == stream)))
             {
@@ -201,18 +203,7 @@ namespace LeStreamsFace
                 var twitchTask = Task.Factory.StartNew( () =>
                                                         {
                                                             var twitchResponse = new RestClient("http://api.justin.tv/api/stream/list.xml?category=gaming&limit=100").SinglePageResponse();
-                                                            IEnumerable<XElement> streams = XDocument.Parse(twitchResponse.Content).Descendants("stream");
-                                                            var createdStreams = new List<Stream>();
-
-                                                            foreach (XElement xElement in streams)
-                                                            {
-                                                                try
-                                                                {
-                                                                    createdStreams.Add(_streamParser.GetStreamFromXElement(xElement));
-                                                                }
-                                                                catch (NullReferenceException) { }
-                                                            }
-                                                            return createdStreams;
+                                                            return _streamParser.GetStreamsFromContent(twitchResponse.Content);
                                                         }, TaskCreationOptions.PreferFairness);
               
                 var streamsList = new List<Stream>();
@@ -223,7 +214,7 @@ namespace LeStreamsFace
                 {
                     try
                     {
-                        await Task.Factory.StartNew( () => CheckFavoriteStreamsManually(newStreamsList, streamsList));
+                        await Task.Factory.StartNew( () => CheckFavoriteTwitchStreamsManually(newStreamsList, streamsList));
                     }
                     catch (Exception) { }
                     closedStreams.AddRange(StreamsManager.Streams.Where(stream => stream.GottenViaAutoGetFavs && !streamsList.Contains(stream)).ToList());
@@ -243,23 +234,8 @@ namespace LeStreamsFace
                     Debug.WriteLine(exception);
                 }
 
-                IEnumerable<Stream> ownedFetchedStreams = Enumerable.Empty<Stream>();
-                try
-                {
-//                    ownedFetchedStreams = await ownedTask;
-                }
-                catch (Exception exception)
-                {
-
-                    if (firstRun) // need to not spam user
-                    {
-                        iconWindow.notificationItem.BalloonTip("Trouble reading from OWNEDTV", "REQUEST FAILED", toolTipIcon: ToolTipIcon.Error);
-                    }
-                    Debug.WriteLine(exception);
-                }
-
                 // add streams we didn't get from favs to streamsList, new streams to newStreamsList
-                foreach (Stream stream in twitchFetchedStreams.Concat(ownedFetchedStreams))
+                foreach (Stream stream in twitchFetchedStreams)
                 {
                     if (!streamsList.Contains(stream))
                     {
@@ -438,7 +414,7 @@ namespace LeStreamsFace
             return timeBlocking;
         }
 
-        public static bool DuringTimeBlockCheck()
+        private static bool DuringTimeBlockCheck()
         {
             // e.g. 0600-2200
             if (ConfigManager.Instance.FromSpan <= ConfigManager.Instance.ToSpan)
@@ -452,8 +428,7 @@ namespace LeStreamsFace
                    || DateTime.Now.TimeOfDay <= ConfigManager.Instance.ToSpan;
         }
 
-        // only checking twitch
-        private void CheckFavoriteStreamsManually(List<Stream> newStreamsList, List<Stream> streamsList)
+        private void CheckFavoriteTwitchStreamsManually(List<Stream> newStreamsList, List<Stream> streamsList)
         {
             if (!ConfigManager.Instance.FavoriteStreams.Any()) return;
 

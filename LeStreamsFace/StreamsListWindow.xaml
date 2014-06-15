@@ -10,7 +10,7 @@
                            xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                            xmlns:oxy="http://oxyplot.codeplex.com"
                            Name="window"
-                           Title="Do you even watch streams?"
+                           Title="More streams than you can shake a stick at"
                            MinWidth="150"
                            MinHeight="100"
                            AllowsTransparency="True"
@@ -22,6 +22,7 @@
                                           Mode=TwoWay,
                                           Source={x:Static LeStreamsFace:ConfigManager.Instance}}"
                            MouseLeftButtonDown="window_MouseLeftButtonDown"
+                           NonActiveWindowTitleBrush="{DynamicResource WindowTitleColorBrush}"
                            Opacity="{Binding WinOpacity,
                                              Mode=TwoWay,
                                              Source={x:Static LeStreamsFace:ConfigManager.Instance}}"
@@ -679,10 +680,10 @@
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions>
                         <oxy:PlotView Name="gameViewersPlot"
-                                  Grid.Column="0"
-                                  Background="Transparent"
-                                  Model="{Binding ViewersPerGamePlotModel,
-                                                  Source={x:Static LeStreamsFace:ConfigManager.Instance}}" />
+                                      Grid.Column="0"
+                                      Background="Transparent"
+                                      Model="{Binding ViewersPerGamePlotModel,
+                                                      Source={x:Static LeStreamsFace:ConfigManager.Instance}}" />
                         <ListBox Name="gameViewersList"
                                  Grid.Column="1"
                                  HorizontalContentAlignment="Stretch"
@@ -704,11 +705,11 @@
                             </ListBox.ItemTemplate>
                         </ListBox>
                         <oxy:PlotView Name="gameStreamsPlot"
-                                  Grid.Column="0"
-                                  Background="Transparent"
-                                  Model="{Binding StreamsPerGamePlotModel,
-                                                  Source={x:Static LeStreamsFace:ConfigManager.Instance}}"
-                                  Visibility="Collapsed" />
+                                      Grid.Column="0"
+                                      Background="Transparent"
+                                      Model="{Binding StreamsPerGamePlotModel,
+                                                      Source={x:Static LeStreamsFace:ConfigManager.Instance}}"
+                                      Visibility="Collapsed" />
                         <ListBox Name="gameStreamsList"
                                  Grid.Column="1"
                                  HorizontalContentAlignment="Stretch"

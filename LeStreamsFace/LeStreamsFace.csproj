@@ -61,7 +61,7 @@
     <CodeContractsFailBuildOnWarnings>False</CodeContractsFailBuildOnWarnings>
     <CodeContractsBeingOptimisticOnExternal>True</CodeContractsBeingOptimisticOnExternal>
     <CodeContractsRuntimeCheckingLevel>Full</CodeContractsRuntimeCheckingLevel>
-    <CodeContractsReferenceAssembly>%28none%29</CodeContractsReferenceAssembly>
+    <CodeContractsReferenceAssembly>DoNotBuild</CodeContractsReferenceAssembly>
     <CodeContractsAnalysisWarningLevel>0</CodeContractsAnalysisWarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
@@ -182,8 +182,9 @@
     <Compile Include="ConfigManager.cs" />
     <Compile Include="Converters\GameNameToIconUriConverter.cs" />
     <Compile Include="Extensions.cs" />
-    <Compile Include="IStreamParser.cs" />
+    <Compile Include="StreamParsers\IStreamParser.cs" />
     <Compile Include="RestSharpJsonNetSerializer.cs" />
+    <Compile Include="StreamParsers\TwitchJSONStreamParser.cs" />
     <Compile Include="Stream\FavoriteStream.cs" />
     <Compile Include="GameIconAdorner.cs" />
     <Compile Include="NonNegativeIntegerValidationRule.cs" />
@@ -212,7 +213,7 @@
     <Compile Include="Stream\Stream.cs" />
     <Compile Include="StreamsManager.cs" />
     <Compile Include="Taskbar.cs" />
-    <Compile Include="TwitchStreamParser.cs" />
+    <Compile Include="StreamParsers\TwitchXMLStreamParser.cs" />
     <Compile Include="Updater\UpdaterChangesView.xaml.cs">
       <DependentUpon>UpdaterChangesView.xaml</DependentUpon>
     </Compile>

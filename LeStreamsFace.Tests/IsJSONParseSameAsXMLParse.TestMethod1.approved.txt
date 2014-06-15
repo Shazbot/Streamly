@@ -1,0 +1,1101 @@
+﻿[0] = Name: beyondthesummit
+Title: DK vs Newbee - ECL WB Final w/ @BTSGodz & Lysander
+Viewers: 41016
+Id: 9911682736
+Site: TwitchTv
+IsFavorite: False
+GameName: Dota 2
+ChannelId: 29578325
+LoginNameTwtv: beyondthesummit
+ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_beyondthesummit-630x473.jpg
+
+[1] = Name: cryaotic
+Title: Late Night with Cry and Russ
+Viewers: 12244
+Id: 9911165088
+Site: TwitchTv
+IsFavorite: False
+GameName: Contagion
+ChannelId: 7951350
+LoginNameTwtv: cryaotic
+ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_cryaotic-630x473.jpg
+
+[2] = Name: trick2g
+Title: Trick2g | On Euw Atm | GG Rito
+Viewers: 7581
+Id: 9910587984
+Site: TwitchTv
+IsFavorite: False
+GameName: League of Legends
+ChannelId: 28036688
+LoginNameTwtv: trick2g
+ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_trick2g-630x473.jpg
+
+[3] = Name: scarra
+Title: Scarra's stream | RANKED IS UP
+Viewers: 5660
+Id: 9912263648
+Site: TwitchTv
+IsFavorite: False
+GameName: League of Legends
+ChannelId: 22253819
+LoginNameTwtv: scarra
+ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_scarra-630x473.jpg
+
+[4] = Name: ludendi
+Title: Team Ludendi presents speedrunning at DreamHack Summer 2014!
+Viewers: 4938
+Id: 9911305984
+Site: TwitchTv
+IsFavorite: False
+GameName: Street Fighter 2010: The Final Fight
+ChannelId: 28673774
+LoginNameTwtv: ludendi
+ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_ludendi-630x473.jpg
+
+[5] = Name: trumpsc
+Title: Trump's Bindings
+Viewers: 4525
+Id: 9908699920
+Site: TwitchTv
+IsFavorite: False
+GameName: The Binding of Isaac
+ChannelId: 14836307
+LoginNameTwtv: trumpsc
+ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_trumpsc-630x473.jpg
+
+[6] = Name: kdl_en
+Title: [KDL Live]
+Viewers: 4391
+Id: 9911879696
+Site: TwitchTv
+IsFavorite: False
+GameName: Dota 2
+ChannelId: 56749116
+LoginNameTwtv: kdl_en
+ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_kdl_en-630x473.jpg
+
+[7] = Name: mushisgosu
+Title: hi im Gosu - ADC - Diamond 1 93 LP
+Viewers: 4255
+Id: 9909470848
+Site: TwitchTv
+IsFavorite: False
+GameName: League of Legends
+ChannelId: 41939266
+LoginNameTwtv: mushisgosu
+ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_mushisgosu-630x473.jpg
+
+[8] = Name: dreamleague_v1lat
+Title: DreamLeague LAN Finals | Day 1 Rebroadcast | by v1lat & CaspeRRR
+Viewers: 4153
+Id: 9909617424
+Site: TwitchTv
+IsFavorite: False
+GameName: Dota 2
+ChannelId: 50904520
+LoginNameTwtv: dreamleague_v1lat
+ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_dreamleague_v1lat-630x473.jpg
+
+[9] = Name: mym_alkapone
+Title: EuroTruck Cumbiero HD
+Viewers: 3743
+Id: 9911070272
+Site: TwitchTv
+IsFavorite: False
+GameName: Euro Truck Simulator 2
+ChannelId: 31478096
+LoginNameTwtv: mym_alkapone
+ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_mym_alkapone-630x473.jpg
+
+[10] = Name: lethalfrag
+Title: ASCENSION HYPE!! Pack Opening / Rift Runs - http://store.steampowered.com/app/257730/
+Viewers: 3250
+Id: 9911487136
+Site: TwitchTv
+IsFavorite: False
+GameName: Infinity Wars
+ChannelId: 23460970
+LoginNameTwtv: lethalfrag
+ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_lethalfrag-630x473.jpg
+
+[11] = Name: versuta
+Title: Supa mida? NOOOOO!!! SUPA FIDA-.-azaz!
+Viewers: 3224
+Id: 9912360192
+Site: TwitchTv
+IsFavorite: False
+GameName: Dota 2
+ChannelId: 21802540
+LoginNameTwtv: versuta
+ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_versuta-630x473.jpg
+
+[12] = Name: flosd
+Title: BoxBox - (Subscribers try out !dailybonus and !soulmate)
+Viewers: 2869
+Id: 9912296384
+Site: TwitchTv
+IsFavorite: False
+GameName: League of Legends
+ChannelId: 38881685
+LoginNameTwtv: flosd
+ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_flosd-630x473.jpg
+
+[13] = Name: showvideogames
+Title: 395+ Hour Mario Kart Marathon - Giveaways Prizes - Mario Kart 8 - Online Races - 8 Subs +1 Hour - Wii U Giveaway - Final Days
+Viewers: 2814
+Id: 9899700352
+Site: TwitchTv
+IsFavorite: False
+GameName: Mario Kart 8
+ChannelId: 45837105
+LoginNameTwtv: showvideogames
+ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_showvideogames-630x473.jpg
+
+[14] = Name: aclprosc2
+Title: #WCSANZ (OCE/SEA) Season 3 Stage 2: KingKong (Z) vs Iaguz (T)
+Viewers: 2789
+Id: 9911144608
+Site: TwitchTv
+IsFavorite: False
+GameName: StarCraft II: Heart of the Swarm
+ChannelId: 29714457
+LoginNameTwtv: aclprosc2
+ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_aclprosc2-630x473.jpg
+
+[15] = Name: maximilian_dood
+Title: Mario Kart 8 with Subscribers!
+Viewers: 2703
+Id: 9911910224
+Site: TwitchTv
+IsFavorite: False
+GameName: Mario Kart 8
+ChannelId: 30104304
+LoginNameTwtv: maximilian_dood
+ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_maximilian_dood-630x473.jpg
+
+[16] = Name: skumbagkrepo
+Title: EG Krepo [No advertisements, just chillin' relaxin all cool.]
+Viewers: 2664
+Id: 9909614288
+Site: TwitchTv
+IsFavorite: False
+GameName: League of Legends
+ChannelId: 38865198
+LoginNameTwtv: skumbagkrepo
+ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_skumbagkrepo-630x473.jpg
+
+[17] = Name: deernadia
+Title: (っ◕‿◕)っ Gib Golden Drood (っ◕‿◕)っ
+Viewers: 2555
+Id: 9911419424
+Site: TwitchTv
+IsFavorite: False
+GameName: Hearthstone: Heroes of Warcraft
+ChannelId: 55859980
+LoginNameTwtv: deernadia
+ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_deernadia-630x473.jpg
+
+[18] = Name: thyak
+Title: *ESPA�OL* FORO DE DISCUSION CON OZRAK Y SKYSHOCK
+Viewers: 2551
+Id: 9912673088
+Site: TwitchTv
+IsFavorite: False
+GameName: League of Legends
+ChannelId: 30928536
+LoginNameTwtv: thyak
+ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_thyak-630x473.jpg
+
+[19] = Name: scglive
+Title: SCG Open Series Columbus featuring The Invitational - June 13-15, 2014
+Viewers: 2439
+Id: 9891769984
+Site: TwitchTv
+IsFavorite: False
+GameName: Magic: The Gathering
+ChannelId: 22480377
+LoginNameTwtv: scglive
+ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_scglive-630x473.jpg
+
+[20] = Name: goodideagaming
+Title: ☑GIG☑ - RIP - Crusader Gearing Challenge! 5th Passive Slot INC (HF Amulets)! 2.1 PTR Tuesday (Leaked Date)! - Rip The Gigger is Dead.
+Viewers: 2279
+Id: 9911821056
+Site: TwitchTv
+IsFavorite: False
+GameName: Diablo III: Reaper of Souls
+ChannelId: 29227153
+LoginNameTwtv: goodideagaming
+ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_goodideagaming-630x473.jpg
+
+[21] = Name: dansgaming
+Title: Dansgaming: The Legend of Zelda: A Link Between Worlds (3DS)
+Viewers: 2211
+Id: 9911512592
+Site: TwitchTv
+IsFavorite: False
+GameName: The Legend of Zelda: A Link Between Worlds
+ChannelId: 7236692
+LoginNameTwtv: dansgaming
+ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_dansgaming-630x473.jpg
+
+[22] = Name: bostv
+Title: Tournament Tryouts! Balls of Steel round 2! Over 1k in prizes!
+Viewers: 2064
+Id: 9909912848
+Site: TwitchTv
+IsFavorite: False
+GameName: The Binding of Isaac
+ChannelId: 63327203
+LoginNameTwtv: bostv
+ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_bostv-630x473.jpg
+
+[23] = Name: sirhcez
+Title: NASUS | SINGED | NEW BUILD | #1 SLEEP STREAM | SirhcEz
+Viewers: 1984
+Id: 9912004768
+Site: TwitchTv
+IsFavorite: False
+GameName: League of Legends
+ChannelId: 27934574
+LoginNameTwtv: sirhcez
+ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_sirhcez-630x473.jpg
+
+[24] = Name: peroniogh
+Title: (PT-BR) PeronioLIVE - AMONG THE SLEEP - Sorteio as 3:30h
+Viewers: 1853
+Id: 9910703392
+Site: TwitchTv
+IsFavorite: False
+GameName: Among The Sleep
+ChannelId: 35750532
+LoginNameTwtv: peroniogh
+ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_peroniogh-630x473.jpg
+
+[25] = Name: zilea
+Title: Zilea - 2x NA legend as control pally. Ordered Wii U Deluxe Edition w/ Mario Kart 8!
+Viewers: 1809
+Id: 9912545440
+Site: TwitchTv
+IsFavorite: False
+GameName: Hearthstone: Heroes of Warcraft
+ChannelId: 4535698
+LoginNameTwtv: zilea
+ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_zilea-630x473.jpg
+
+[26] = Name: pauseunpause
+Title: Scary Games Saturday + Beer
+Viewers: 1470
+Id: 9910669808
+Site: TwitchTv
+IsFavorite: False
+GameName: DreadOut
+ChannelId: 22856032
+LoginNameTwtv: pauseunpause
+ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_pauseunpause-630x473.jpg
+
+[27] = Name: twitchplayspokemon
+Title: Twitch Plays Pokemon (Enter button inputs via chat!!!)
+Viewers: 1443
+Id: 9911368464
+Site: TwitchTv
+IsFavorite: False
+GameName: Pok�mon Black/White
+ChannelId: 56648155
+LoginNameTwtv: twitchplayspokemon
+ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_twitchplayspokemon-630x473.jpg
+
+[28] = Name: crimsix
+Title: $8s | World Champion EG Crimsix
+Viewers: 1319
+Id: 9912155488
+Site: TwitchTv
+IsFavorite: False
+GameName: Call of Duty: Ghosts
+ChannelId: 11454896
+LoginNameTwtv: crimsix
+ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_crimsix-630x473.jpg
+
+[29] = Name: dexter_bl
+Title: 25% off Wildstar | Sloppy Saturday | 500+ HR Stream +1hr per 4 sub! Giveaways!
+Viewers: 1319
+Id: 9855387872
+Site: TwitchTv
+IsFavorite: False
+GameName: WildStar
+ChannelId: 10180554
+LoginNameTwtv: dexter_bl
+ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_dexter_bl-630x473.jpg
+
+[30] = Name: darthkin0002
+Title: [tw]有種都來住中路By卡特神 中國服上分ing 目前鑽五
+Viewers: 1305
+Id: 9911346384
+Site: TwitchTv
+IsFavorite: False
+GameName: League of Legends
+ChannelId: 36122931
+LoginNameTwtv: darthkin0002
+ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_darthkin0002-630x473.jpg
+
+[31] = Name: lolgeranimo
+Title: #Geranimo! | ADC Academy! | I'm back! | NA Challenger? | Learn to AD | Q&A between Qs |
+Viewers: 1288
+Id: 9909889952
+Site: TwitchTv
+IsFavorite: False
+GameName: League of Legends
+ChannelId: 44334603
+LoginNameTwtv: lolgeranimo
+ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_lolgeranimo-630x473.jpg
+
+[32] = Name: jahmillionaire
+Title: mage3k
+Viewers: 1266
+Id: 9909836112
+Site: TwitchTv
+IsFavorite: False
+GameName: World of Warcraft: Mists of Pandaria
+ChannelId: 26229743
+LoginNameTwtv: jahmillionaire
+ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_jahmillionaire-630x473.jpg
+
+[33] = Name: fathersongaming
+Title: Papa went to bed - Survivin
+Viewers: 1212
+Id: 9910647744
+Site: TwitchTv
+IsFavorite: False
+GameName: DayZ
+ChannelId: 21924993
+LoginNameTwtv: fathersongaming
+ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_fathersongaming-630x473.jpg
+
+[34] = Name: showdownsmash
+Title: NorCal Monthlies #5 - GRAND FINALS - ZHUUUU, Shroomed, PPU, HMW, Scar, Alan, Toph, Ky, Tang, Hyuga, Laudandus - http://challonge.com/NCM5
+Viewers: 1192
+Id: 9908128992
+Site: TwitchTv
+IsFavorite: False
+GameName: Super Smash Bros. Melee
+ChannelId: 59420086
+LoginNameTwtv: showdownsmash
+ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_showdownsmash-630x473.jpg
+
+[35] = Name: wootystyle
+Title: Road to AFRO! :: Drunk Stream! Shots for Subs!
+Viewers: 1138
+Id: 9911696224
+Site: TwitchTv
+IsFavorite: False
+GameName: Counter-Strike: Global Offensive
+ChannelId: 35980760
+LoginNameTwtv: wootystyle
+ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_wootystyle-630x473.jpg
+
+[36] = Name: carcinogensda
+Title: [24 hour Resident Evil Marathon - How many can I beat in a day?] (FAQ/Schedule: http://pastebin.com/dF16jxu7)
+Viewers: 1135
+Id: 9904222160
+Site: TwitchTv
+IsFavorite: False
+GameName: Resident Evil
+ChannelId: 14891712
+LoginNameTwtv: carcinogensda
+ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_carcinogensda-630x473.jpg
+
+[37] = Name: brandon505
+Title: Destiny with Brandon (PS4)
+Viewers: 1124
+Id: 9908166496
+Site: TwitchTv
+IsFavorite: False
+GameName: Destiny
+ChannelId: 6659152
+LoginNameTwtv: brandon505
+ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_brandon505-630x473.jpg
+
+[38] = Name: steel_tv
+Title: @iBUYPOWER steel - 720p 60fps - "toxic" CS:GO player - 10mans!
+Viewers: 1080
+Id: 9910613632
+Site: TwitchTv
+IsFavorite: False
+GameName: Counter-Strike: Global Offensive
+ChannelId: 26202775
+LoginNameTwtv: steel_tv
+ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_steel_tv-630x473.jpg
+
+[39] = Name: narokuu
+Title: |English| |Narokuu|  Giveaway after every game. Let's feed!
+Viewers: 1048
+Id: 9911117488
+Site: TwitchTv
+IsFavorite: False
+GameName: Dota 2
+ChannelId: 27951325
+LoginNameTwtv: narokuu
+ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_narokuu-630x473.jpg
+
+[40] = Name: 5hizzle
+Title: Arma 3 - King of the Hill Shenanigans
+Viewers: 1042
+Id: 9911755664
+Site: TwitchTv
+IsFavorite: False
+GameName: ArmA III
+ChannelId: 22694682
+LoginNameTwtv: 5hizzle
+ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_5hizzle-630x473.jpg
+
+[41] = Name: welovegames
+Title: WelovegamesTV
+Viewers: 995
+Id: 9911970352
+Site: TwitchTv
+IsFavorite: False
+GameName: 
+ChannelId: 30814134
+LoginNameTwtv: welovegames
+ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_welovegames-630x473.jpg
+
+[42] = Name: wyld
+Title: BuildGuild Modded S04 - Ultra Hard Survival - Day Seven
+Viewers: 982
+Id: 9912828800
+Site: TwitchTv
+IsFavorite: False
+GameName: Minecraft
+ChannelId: 36972151
+LoginNameTwtv: wyld
+ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_wyld-630x473.jpg
+
+[43] = Name: machinegunnerusmc
+Title: 5 rp giveaway's  Duo Q on Smurf with Amber ||Celebrating 4 years out of the Marine Corps and 1 month w/Sub Button
+Viewers: 946
+Id: 9908674592
+Site: TwitchTv
+IsFavorite: False
+GameName: League of Legends
+ChannelId: 29693067
+LoginNameTwtv: machinegunnerusmc
+ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_machinegunnerusmc-630x473.jpg
+
+[44] = Name: sovitia
+Title: Sovitia :3 | Diamond ADC Ranked | Q&A Between Games
+Viewers: 892
+Id: 9909924016
+Site: TwitchTv
+IsFavorite: False
+GameName: League of Legends
+ChannelId: 31778135
+LoginNameTwtv: sovitia
+ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_sovitia-630x473.jpg
+
+[45] = Name: puncayshun
+Title: 70 star runs for 48
+Viewers: 881
+Id: 9912323648
+Site: TwitchTv
+IsFavorite: False
+GameName: Super Mario 64
+ChannelId: 30105209
+LoginNameTwtv: puncayshun
+ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_puncayshun-630x473.jpg
+
+[46] = Name: meclipse
+Title: GOAL - 300 SUBS! (280) w/ Shroud! | 720p/60 FPS | Follow @mEclipseTV
+Viewers: 858
+Id: 9912044944
+Site: TwitchTv
+IsFavorite: False
+GameName: Counter-Strike: Global Offensive
+ChannelId: 37402112
+LoginNameTwtv: meclipse
+ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_meclipse-630x473.jpg
+
+[47] = Name: elicherlol
+Title: [BR] Elicher - Top laner Diamante 1 | nano playlist | ADC night =3
+Viewers: 848
+Id: 9911252608
+Site: TwitchTv
+IsFavorite: False
+GameName: League of Legends
+ChannelId: 36474786
+LoginNameTwtv: elicherlol
+ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_elicherlol-630x473.jpg
+
+[48] = Name: crumps2
+Title: ALL ENDINGS Chrono Trigger - run 3/5
+Viewers: 831
+Id: 9909326288
+Site: TwitchTv
+IsFavorite: False
+GameName: Chrono Trigger
+ChannelId: 19107317
+LoginNameTwtv: crumps2
+ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_crumps2-630x473.jpg
+
+[49] = Name: swifty
+Title: Swifty 24 Hour Stream / At DreamHack!
+Viewers: 822
+Id: 9911303680
+Site: TwitchTv
+IsFavorite: False
+GameName: World of Warcraft: Mists of Pandaria
+ChannelId: 23524577
+LoginNameTwtv: swifty
+ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_swifty-630x473.jpg
+
+[50] = Name: kiki7611190
+Title: ヾ(⌒(_�･ㅅ･`)_韓服鑽1台服菁英蠻王陳貓台 Tryndamere--TW Challenger, Korean Diamond1 發問前看下方Q&A \( ˘�ω�˘ )/
+Viewers: 788
+Id: 9911592848
+Site: TwitchTv
+IsFavorite: False
+GameName: League of Legends
+ChannelId: 38646527
+LoginNameTwtv: kiki7611190
+ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_kiki7611190-630x473.jpg
+
+[51] = Name: koopatroopa787
+Title: SoberKoopa - THE LONE CANNON - Masters DE Farming - UPDATE SOON!
+Viewers: 775
+Id: 9910807616
+Site: TwitchTv
+IsFavorite: False
+GameName: Clash of Clans
+ChannelId: 54567086
+LoginNameTwtv: koopatroopa787
+ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_koopatroopa787-630x473.jpg
+
+[52] = Name: alisha12287
+Title: Live in Florida with Emily zomoor chair pid Paul wigman
+Viewers: 772
+Id: 9912492784
+Site: TwitchTv
+IsFavorite: False
+GameName: RuneScape
+ChannelId: 43871381
+LoginNameTwtv: alisha12287
+ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_alisha12287-630x473.jpg
+
+[53] = Name: inozemec
+Title: Leo Stream (RU) Марафон 24 часа
+Viewers: 768
+Id: 9909049952
+Site: TwitchTv
+IsFavorite: False
+GameName: Dota 2
+ChannelId: 36957524
+LoginNameTwtv: inozemec
+ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_inozemec-630x473.jpg
+
+[54] = Name: iamkeeferz
+Title: POWER HOUR ROUND 2 + LEVEL 3 CLUES
+Viewers: 765
+Id: 9910920208
+Site: TwitchTv
+IsFavorite: False
+GameName: RuneScape
+ChannelId: 38011347
+LoginNameTwtv: iamkeeferz
+ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_iamkeeferz-630x473.jpg
+
+[55] = Name: magic
+Title: Grand Prix Moscow, June 14-15, Standard
+Viewers: 726
+Id: 9912239312
+Site: TwitchTv
+IsFavorite: False
+GameName: Magic: The Gathering
+ChannelId: 26991613
+LoginNameTwtv: magic
+ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_magic-630x473.jpg
+
+[56] = Name: vinesauce
+Title: Informative Broadcast Title with DireBoar
+Viewers: 710
+Id: 9912384848
+Site: TwitchTv
+IsFavorite: False
+GameName: Trials Fusion
+ChannelId: 25725272
+LoginNameTwtv: vinesauce
+ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_vinesauce-630x473.jpg
+
+[57] = Name: cinnamontoastken
+Title: RESIDENT EVIL 4
+Viewers: 701
+Id: 9909056752
+Site: TwitchTv
+IsFavorite: False
+GameName: Resident Evil 4
+ChannelId: 30482057
+LoginNameTwtv: cinnamontoastken
+ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_cinnamontoastken-630x473.jpg
+
+[58] = Name: krazyness
+Title: Krazyness NA Ranked / Primetime Draven sorteo [English/Spanish]
+Viewers: 687
+Id: 9912603600
+Site: TwitchTv
+IsFavorite: False
+GameName: League of Legends
+ChannelId: 2128782
+LoginNameTwtv: krazyness
+ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_krazyness-630x473.jpg
+
+[59] = Name: bodil40
+Title: Minecraft HEXXIT COOP Subscriber Server HYPE HYPE
+Viewers: 678
+Id: 9911469040
+Site: TwitchTv
+IsFavorite: False
+GameName: minecraft
+ChannelId: 36236399
+LoginNameTwtv: bodil40
+ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_bodil40-630x473.jpg
+
+[60] = Name: riotgamesoceania
+Title: NA LCS W4D1 - Rebroadcast
+Viewers: 672
+Id: 9911433808
+Site: TwitchTv
+IsFavorite: False
+GameName: League of Legends
+ChannelId: 46273272
+LoginNameTwtv: riotgamesoceania
+ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_riotgamesoceania-630x473.jpg
+
+[61] = Name: competitive_online
+Title: Smite with Wolfy I Rawr
+Viewers: 642
+Id: 9911505360
+Site: TwitchTv
+IsFavorite: False
+GameName: Smite
+ChannelId: 16433726
+LoginNameTwtv: competitive_online
+ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_competitive_online-630x473.jpg
+
+[62] = Name: cmayy
+Title: Snipein till I pass out. Taking Song requests!!
+Viewers: 631
+Id: 9912056992
+Site: TwitchTv
+IsFavorite: False
+GameName: Smite
+ChannelId: 36610672
+LoginNameTwtv: cmayy
+ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_cmayy-630x473.jpg
+
+[63] = Name: ogssupernova
+Title: Code S Terran SuperNova KR Ladder!!
+Viewers: 630
+Id: 9911386464
+Site: TwitchTv
+IsFavorite: False
+GameName: StarCraft II: Heart of the Swarm
+ChannelId: 27913876
+LoginNameTwtv: ogssupernova
+ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_ogssupernova-630x473.jpg
+
+[64] = Name: bigfoltz
+Title: Solo KEMS r NAH? w/ @Bigfoltz
+Viewers: 627
+Id: 9910987696
+Site: TwitchTv
+IsFavorite: False
+GameName: Call of Duty: Ghosts
+ChannelId: 32607302
+LoginNameTwtv: bigfoltz
+ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_bigfoltz-630x473.jpg
+
+[65] = Name: flamesword
+Title: OpTic House 2014 Live #OpTicBeard
+Viewers: 603
+Id: 9912081296
+Site: TwitchTv
+IsFavorite: False
+GameName: Halo 3
+ChannelId: 22090129
+LoginNameTwtv: flamesword
+ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_flamesword-630x473.jpg
+
+[66] = Name: ryuzilla
+Title: 24 Hour stream HYPE!  3PM EST Start time.  Saturday-Sunday.
+Viewers: 571
+Id: 9906356368
+Site: TwitchTv
+IsFavorite: False
+GameName: Counter-Strike: Global Offensive
+ChannelId: 44473716
+LoginNameTwtv: ryuzilla
+ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_ryuzilla-630x473.jpg
+
+[67] = Name: teaselol
+Title: Tease - 3s RMD w/ Poolz & Humanbeing | Rdruid Pov
+Viewers: 544
+Id: 9910468816
+Site: TwitchTv
+IsFavorite: False
+GameName: World of Warcraft: Mists of Pandaria
+ChannelId: 29902952
+LoginNameTwtv: teaselol
+ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_teaselol-630x473.jpg
+
+[68] = Name: alkaizerx
+Title: ヽ(◉◡◔)ﾉ
+Viewers: 538
+Id: 9909845024
+Site: TwitchTv
+IsFavorite: False
+GameName: Diablo III: Reaper of Souls
+ChannelId: 35916854
+LoginNameTwtv: alkaizerx
+ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_alkaizerx-630x473.jpg
+
+[69] = Name: standy12
+Title: SweetCamper 鑽1 幹 日本被逆轉 有夠幹! 碎念台
+累了(雷了)就關
+Viewers: 517
+Id: 9911678864
+Site: TwitchTv
+IsFavorite: False
+GameName: League of Legends
+ChannelId: 46960174
+LoginNameTwtv: standy12
+ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_standy12-630x473.jpg
+
+[70] = Name: jukebox360
+Title: DRUNKEN RANT
+Viewers: 509
+Id: 9909552336
+Site: TwitchTv
+IsFavorite: False
+GameName: Call of Duty: Ghosts
+ChannelId: 2765645
+LoginNameTwtv: jukebox360
+ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_jukebox360-630x473.jpg
+
+[71] = Name: skyasi
+Title: Skyasi  -Why do creepers keep blowing up my SkyBlock!  ლ(ಠ益ಠლ
+Viewers: 487
+Id: 9910097568
+Site: TwitchTv
+IsFavorite: False
+GameName: Minecraft
+ChannelId: 51849906
+LoginNameTwtv: skyasi
+ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_skyasi-630x473.jpg
+
+[72] = Name: sorujin
+Title: Sorujin | Minecraft: Agrarian Skies | #MenuLive
+Viewers: 487
+Id: 9909603856
+Site: TwitchTv
+IsFavorite: False
+GameName: Minecraft
+ChannelId: 35057209
+LoginNameTwtv: sorujin
+ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_sorujin-630x473.jpg
+
+[73] = Name: netenho1
+Title: Netenho 00:00 to de volta!!
+Viewers: 476
+Id: 9912138464
+Site: TwitchTv
+IsFavorite: False
+GameName: Point Blank
+ChannelId: 42604220
+LoginNameTwtv: netenho1
+ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_netenho1-630x473.jpg
+
+[74] = Name: jerpdoesgames
+Title: Dark Souls 2 - Scientific Cheese (PC)
+Viewers: 473
+Id: 9912360944
+Site: TwitchTv
+IsFavorite: False
+GameName: Dark Souls II
+ChannelId: 26627520
+LoginNameTwtv: jerpdoesgames
+ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_jerpdoesgames-630x473.jpg
+
+[75] = Name: silentsentry
+Title: Battle Royale - 1080p
+Viewers: 471
+Id: 9909487104
+Site: TwitchTv
+IsFavorite: False
+GameName: ArmA III
+ChannelId: 56625428
+LoginNameTwtv: silentsentry
+ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_silentsentry-630x473.jpg
+
+[76] = Name: liquidken
+Title: KING OF SMASH streaming Super Smash Bros Melee With Hotbid LiquidKDJ manacloud and LIL FUMI (coming later) Q and A E3/Smash WII U today
+Viewers: 457
+Id: 9911768064
+Site: TwitchTv
+IsFavorite: False
+GameName: Super Smash Bros. Melee
+ChannelId: 15954674
+LoginNameTwtv: liquidken
+ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_liquidken-630x473.jpg
+
+[77] = Name: rageweawer
+Title: Boosting Anyone To Master League For Free - Get Free Stuff For Donation Day 62 (ง �̀_�́)ง
+Viewers: 447
+Id: 9911864880
+Site: TwitchTv
+IsFavorite: False
+GameName: StarCraft II: Heart of the Swarm
+ChannelId: 28034886
+LoginNameTwtv: rageweawer
+ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_rageweawer-630x473.jpg
+
+[78] = Name: fefosampaio
+Title: lol lol lol brazil meu irmao
+Viewers: 440
+Id: 9912706480
+Site: TwitchTv
+IsFavorite: False
+GameName: League of Legends
+ChannelId: 39166170
+LoginNameTwtv: fefosampaio
+ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_fefosampaio-630x473.jpg
+
+[79] = Name: romarionz
+Title: Стримчик PWI
+Viewers: 422
+Id: 9904470512
+Site: TwitchTv
+IsFavorite: False
+GameName: Perfect World International
+ChannelId: 39804139
+LoginNameTwtv: romarionz
+ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_romarionz-630x473.jpg
+
+[80] = Name: sllverlady1
+Title: [ENG/FR]    ᔕLᒪⅤᗴᖇᒪᗩᕍᎩ1 白金
+Viewers: 414
+Id: 9911419008
+Site: TwitchTv
+IsFavorite: False
+GameName: League of Legends
+ChannelId: 47515032
+LoginNameTwtv: sllverlady1
+ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_sllverlady1-630x473.jpg
+
+[81] = Name: teamkhaos
+Title: Saturday Slugfest from Lynnwood WA.  INJ, UMvC3, USF4 and more!  Brackets at http://gameclucks.challonge.com/
+Viewers: 402
+Id: 9908718240
+Site: TwitchTv
+IsFavorite: False
+GameName: BlazBlue: Chrono Phantasma
+ChannelId: 18437614
+LoginNameTwtv: teamkhaos
+ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_teamkhaos-630x473.jpg
+
+[82] = Name: skunkodor
+Title: "Happy Stream" ft. Frazmk4 and Poptarttally appearances made by Ginger J and dem Wifeys | Day 104
+Viewers: 384
+Id: 9911437936
+Site: TwitchTv
+IsFavorite: False
+GameName: League of Legends
+ChannelId: 36831324
+LoginNameTwtv: skunkodor
+ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_skunkodor-630x473.jpg
+
+[83] = Name: kyl3collins
+Title: [BR] Competitivo
+Viewers: 384
+Id: 9907888432
+Site: TwitchTv
+IsFavorite: False
+GameName: Dota 2
+ChannelId: 62697676
+LoginNameTwtv: kyl3collins
+ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_kyl3collins-630x473.jpg
+
+[84] = Name: saltybet
+Title: Salty's Dream Cast Casino! Place your bets at saltybet.com
+Viewers: 382
+Id: 9885857328
+Site: TwitchTv
+IsFavorite: False
+GameName: M.U.G.E.N
+ChannelId: 43201452
+LoginNameTwtv: saltybet
+ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_saltybet-630x473.jpg
+
+[85] = Name: anatomyz
+Title: Paper Mario Any% Speedruns
+Viewers: 380
+Id: 9909598944
+Site: TwitchTv
+IsFavorite: False
+GameName: Paper Mario
+ChannelId: 25247091
+LoginNameTwtv: anatomyz
+ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_anatomyz-630x473.jpg
+
+[86] = Name: modogrinder1
+Title: 1962 RATING Vintage Masters Draft
+Viewers: 377
+Id: 9912700448
+Site: TwitchTv
+IsFavorite: False
+GameName: Magic: The Gathering
+ChannelId: 32054439
+LoginNameTwtv: modogrinder1
+ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_modogrinder1-630x473.jpg
+
+[87] = Name: kiwikid
+Title: solo challenger queue
+Viewers: 377
+Id: 9912293312
+Site: TwitchTv
+IsFavorite: False
+GameName: League of Legends
+ChannelId: 31650369
+LoginNameTwtv: kiwikid
+ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_kiwikid-630x473.jpg
+
+[88] = Name: shahzam
+Title: ShahZaM - Pro CS:GO ScrimZ
+Viewers: 366
+Id: 9908568048
+Site: TwitchTv
+IsFavorite: False
+GameName: Counter-Strike: Global Offensive
+ChannelId: 38433240
+LoginNameTwtv: shahzam
+ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_shahzam-630x473.jpg
+
+[89] = Name: shadowqwe
+Title: Dignitas Shadowq - Diamond Support with commentary
+Viewers: 361
+Id: 9912617904
+Site: TwitchTv
+IsFavorite: False
+GameName: Smite
+ChannelId: 28090370
+LoginNameTwtv: shadowqwe
+ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_shadowqwe-630x473.jpg
+
+[90] = Name: crumbzz
+Title: dignitas Crumbz Challenger jungler . Wardlord.  #Supertramp
+Viewers: 359
+Id: 9912671232
+Site: TwitchTv
+IsFavorite: False
+GameName: League of Legends
+ChannelId: 28914510
+LoginNameTwtv: crumbzz
+ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_crumbzz-630x473.jpg
+
+[91] = Name: d3lor1
+Title: [Click Here]
+Viewers: 350
+Id: 9909085648
+Site: TwitchTv
+IsFavorite: False
+GameName: League of Legends
+ChannelId: 39346171
+LoginNameTwtv: d3lor1
+ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_d3lor1-630x473.jpg
+
+[92] = Name: simcopter1
+Title: Interactive and Methodical Arenas With SimCopter1; 65.03% Win Rate! [Warlock]
+Viewers: 337
+Id: 9910239072
+Site: TwitchTv
+IsFavorite: False
+GameName: Hearthstone: Heroes of Warcraft
+ChannelId: 60216187
+LoginNameTwtv: simcopter1
+ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_simcopter1-630x473.jpg
+
+[93] = Name: slayish
+Title: � Chilled stream. The forest! | Join the Slay army!! �
+Viewers: 331
+Id: 9911726864
+Site: TwitchTv
+IsFavorite: False
+GameName: The Forest
+ChannelId: 25911266
+LoginNameTwtv: slayish
+ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_slayish-630x473.jpg
+
+[94] = Name: rwhitegoose
+Title: GoldenEye 007 Speedruns : Night 9 of Silo Agent 1:01 WR attempts [ ** FAQ & Tutorial ** http://bombch.us/lka ]
+Viewers: 326
+Id: 9912462864
+Site: TwitchTv
+IsFavorite: False
+GameName: GoldenEye 007
+ChannelId: 29159207
+LoginNameTwtv: rwhitegoose
+ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_rwhitegoose-630x473.jpg
+
+[95] = Name: zealot711
+Title: Lvl 50 Medic - Healing Veteran Dungeon Silvers/Golds & World Bosses Tomorrow! - CREDD Giveaways Daily!
+Viewers: 324
+Id: 9911880208
+Site: TwitchTv
+IsFavorite: False
+GameName: WildStar
+ChannelId: 25412137
+LoginNameTwtv: zealot711
+ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_zealot711-630x473.jpg
+
+[96] = Name: apdrop
+Title: R1 to Legend?  - (>‿<✿) Druid(& everything else :o) 6x Lgnd
+Viewers: 323
+Id: 9912653664
+Site: TwitchTv
+IsFavorite: False
+GameName: Hearthstone: Heroes of Warcraft
+ChannelId: 32560951
+LoginNameTwtv: apdrop
+ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_apdrop-630x473.jpg
+
+[97] = Name: captainrogue
+Title: stuff n things
+Viewers: 323
+Id: 9911533360
+Site: TwitchTv
+IsFavorite: False
+GameName: League of Legends
+ChannelId: 25770017
+LoginNameTwtv: captainrogue
+ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_captainrogue-630x473.jpg
+
+[98] = Name: liquescent
+Title: Path to partnership | Sh*t Faced Saturday! Inebriated liquorscent is inebriated
+Viewers: 322
+Id: 9912575056
+Site: TwitchTv
+IsFavorite: False
+GameName: Battlefield Hardline
+ChannelId: 37287831
+LoginNameTwtv: liquescent
+ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_liquescent-630x473.jpg
+
+[99] = Name: uzra
+Title: 【Uzra】ヾ＠～＠ノ NA Rank 拼#1
+Viewers: 321
+Id: 9911046544
+Site: TwitchTv
+IsFavorite: False
+GameName: Hearthstone: Heroes of Warcraft
+ChannelId: 11692694
+LoginNameTwtv: uzra
+ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_uzra-630x473.jpg
+

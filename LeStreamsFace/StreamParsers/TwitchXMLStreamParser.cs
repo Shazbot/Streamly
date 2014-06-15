@@ -1,9 +1,28 @@
-﻿using System.Xml.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Xml.Linq;
 
-namespace LeStreamsFace
+namespace LeStreamsFace.StreamParsers
 {
-    internal class TwitchStreamParser : IStreamParser
+    internal class TwitchXMLStreamParser : IStreamParser
     {
+        public IEnumerable<Stream> GetStreamsFromContent(string content)
+        {
+            var createdStreams = new List<Stream>();
+
+            var streams = XDocument.Parse(content).Descendants("stream");
+            foreach (var xElement in streams)
+            {
+                try
+                {
+                    createdStreams.Add(GetStreamFromXElement(xElement));
+                }
+                catch (NullReferenceException) { }
+            }
+
+            return createdStreams;
+        }
+
         public Stream GetStreamFromXElement(XElement xElement)
         {
             string name = null, gameName = "", title = "", id = null, channelId = null, thumbnailURI;

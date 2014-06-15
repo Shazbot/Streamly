@@ -1,5 +1,8 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Linq;
+using System.Reflection;
+using System.Text;
 using Newtonsoft.Json;
 
 namespace LeStreamsFace
@@ -189,6 +192,16 @@ namespace LeStreamsFace
         public static bool operator !=(Stream a, Stream b)
         {
             return !(a == b);
+        }
+
+        public override string ToString()
+        {
+            var stringBuilder = new StringBuilder();
+            foreach (var property in typeof(Stream).GetProperties(BindingFlags.Public | BindingFlags.Instance))
+            {
+                stringBuilder.Append(property.Name + ": " + property.GetValue(this, null) + Environment.NewLine);
+            }
+            return stringBuilder.ToString();
         }
     }
 }
