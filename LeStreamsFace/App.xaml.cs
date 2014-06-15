@@ -32,7 +32,7 @@ namespace LeStreamsFace
             // now using Costura to load assemblies
 //            AppDomain.CurrentDomain.AssemblyResolve += new ResolveEventHandler(Target);
 
-            new MainWindow();
+            new MainWindow(new TwitchStreamParser());
         }
 
         internal static void ExitApp()

@@ -41,8 +41,11 @@ namespace LeStreamsFace
 
         public delegate void ExitDelegate(object sender, EventArgs e);
 
-        public MainWindow()
+        private IStreamParser _streamParser;
+
+        public MainWindow(IStreamParser streamParser)
         {
+            _streamParser = streamParser;
 #if DEBUG
             TextWriterTraceListener traceListener = new TextWriterTraceListener(System.IO.File.CreateText("Trace.txt"));
             Debug.Listeners.Add(traceListener);
@@ -201,38 +204,17 @@ namespace LeStreamsFace
                                                             IEnumerable<XElement> streams = XDocument.Parse(twitchResponse.Content).Descendants("stream");
                                                             var createdStreams = new List<Stream>();
 
-                                                            foreach (XElement stream in streams)
+                                                            foreach (XElement xElement in streams)
                                                             {
                                                                 try
                                                                 {
-                                                                    createdStreams.Add(LoadTwStreamFromXml(stream));
+                                                                    createdStreams.Add(_streamParser.GetStreamFromXElement(xElement));
                                                                 }
                                                                 catch (NullReferenceException) { }
                                                             }
                                                             return createdStreams;
                                                         }, TaskCreationOptions.PreferFairness);
-
-//                owned.tv currently offline
-//                var ownedTask = Task.Factory.StartNew( () =>
-//                                                          {
-//                                                              var ownedResponse = new RestClient("http://api.own3d.tv/live").SinglePageResponse();
-//                                                              //                                                              XDocument.Load("owned.xml");
-//                                                              IEnumerable<XElement> streams = XDocument.Parse(ownedResponse.Content).Descendants("item");
-//                                                              var createdStreams = new List<Stream>();
-//
-//                                                              foreach (XElement stream in streams)
-//                                                              {
-//                                                                  try
-//                                                                  {
-//                                                                      createdStreams.Add(LoadOwnedStreamFromXml(stream));
-//                                                                  }
-//                                                                  catch (NullReferenceException) { }
-//                                                              }
-//                                                              return createdStreams;
-//                                                          }, TaskCreationOptions.PreferFairness);
-
-                
-
+              
                 var streamsList = new List<Stream>();
                 var closedStreams = new List<Stream>();
 
@@ -485,11 +467,11 @@ namespace LeStreamsFace
             XDocument xDocument = XDocument.Parse(twitchFavsResponse.Content);
 
             var gottenFavs = new List<Stream>();
-            foreach (XElement stream in xDocument.Element("streams").Elements("stream"))
+            foreach (XElement xElement in xDocument.Element("streams").Elements("stream"))
             {
                 try
                 {
-                    gottenFavs.Add(LoadTwStreamFromXml(stream));
+                    gottenFavs.Add(_streamParser.GetStreamFromXElement(xElement));
                 }
                 catch (NullReferenceException)
                 {
@@ -507,68 +489,6 @@ namespace LeStreamsFace
                 streamsList.Add(stream);
             }
             Debug.WriteLine("TIMER TO RETRIEVE FAVORITES: " + (DateTime.Now - now).TotalSeconds);
-        }
-
-        private Stream LoadTwStreamFromXml(XElement stream)
-        {
-            string name = null, gameName = "", title = "", id = null, channelId = null, thumbnailURI;
-            string twitchLogin = null;
-            int viewers = 0;
-
-            name = stream.Element("channel").Element("title").Value;
-            viewers = int.Parse(stream.Element("channel_count").Value);
-            id = stream.Element("id").Value;
-            title = (string)stream.Element("title") ?? "";
-            gameName = (string)stream.Element("meta_game") ?? "";
-            twitchLogin = stream.Element("channel").Element("login").Value;
-            channelId = stream.Element("channel").Element("id").Value;
-
-            //            thumbnailURI = stream.Element("channel").Element("screen_cap_url_large").Value;
-            thumbnailURI = stream.Element("channel").Element("screen_cap_url_huge").Value;
-
-            if (gameName == "StarCraft II: Wings of Liberty")
-            {
-                gameName = "StarCraft II";
-            }
-
-            if (name == title)
-            {
-                title = string.Empty;
-            }
-            title = title.Replace("\\n", " ");
-
-            var newStream = new Stream(name, title, viewers, id, channelId, gameName, StreamingSite.TwitchTv) { LoginNameTwtv = twitchLogin, ThumbnailURI = thumbnailURI };
-            return newStream;
-        }
-
-        private Stream LoadOwnedStreamFromXml(XElement ownedStream)
-        {
-            string name = null, gameName = null, title = null, id = null, thumbnailURI = null;
-            int viewers = 0;
-
-            // channel name worthless in owned
-            //                        name = ownedStream.Element("author").Value.Replace("rss@own3d.tv (", "");
-            //                        name = name.Remove(name.Length - 1, 1);
-            name = ownedStream.Element("title").Value;
-            title = name;
-            viewers = int.Parse(ownedStream.Element("misc").Attribute("viewers").Value);
-            id = ownedStream.Element("guid").Value;
-            gameName = ownedStream.Element("misc").Attribute("game").Value;
-//            thumbnailURI = ownedStream.Element("thumbnail").Value;
-            thumbnailURI = "http://owned.vo.llnwd.net/e2/live/live_tn_" + id.Substring(id.LastIndexOf('/') + 1) + "_.jpg?1348800268";
-
-            if (gameName == "Diablo 3")
-            {
-                gameName = "Diablo III";
-            }
-
-            if (name == title)
-            {
-                title = string.Empty;
-            }
-
-            var newStream = new Stream(name, title, viewers, id, id, gameName, StreamingSite.OwnedTv) { LoginNameTwtv = name, ThumbnailURI = thumbnailURI };
-            return newStream;
         }
 
         private void Window_SourceInitialized(object sender, EventArgs e)
