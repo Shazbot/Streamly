@@ -678,7 +678,7 @@
                             <ColumnDefinition />
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions>
-                        <oxy:Plot Name="gameViewersPlot"
+                        <oxy:PlotView Name="gameViewersPlot"
                                   Grid.Column="0"
                                   Background="Transparent"
                                   Model="{Binding ViewersPerGamePlotModel,
@@ -703,7 +703,7 @@
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
                         </ListBox>
-                        <oxy:Plot Name="gameStreamsPlot"
+                        <oxy:PlotView Name="gameStreamsPlot"
                                   Grid.Column="0"
                                   Background="Transparent"
                                   Model="{Binding StreamsPerGamePlotModel,
