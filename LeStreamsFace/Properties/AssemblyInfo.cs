@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Markup;
 
-[assembly: InternalsVisibleTo("UnitTestProject")]
+[assembly: InternalsVisibleTo("LeStreamsFace.Tests")]
 //[assembly: ThemeInfo(ResourceDictionaryLocation.SourceAssembly, ResourceDictionaryLocation.SourceAssembly)]
 //[assembly: XmlnsDefinition("http://schemas.leschemasface.com/2012/xaml/presentation", "LeHostsFileFace")]
 // General Information about an assembly is controlled through the following

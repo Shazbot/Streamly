@@ -3,14 +3,13 @@
                            xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                            xmlns:LeStreamsFace="clr-namespace:LeStreamsFace"
                            xmlns:MetroControls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-                           xmlns:Updater="clr-namespace:LeStreamsFace.Updater"
                            xmlns:con="clr-namespace:Kent.Boogaart.Converters.Markup;assembly=Kent.Boogaart.Converters"
                            xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                            xmlns:lib="http://schemas.leschemasface.com/2012/xaml/presentation"
                            xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                            xmlns:oxy="http://oxyplot.codeplex.com"
                            Name="window"
-                           Title="Do you even watch streams?"
+                           Title="More streams than you can shake a stick at"
                            MinWidth="150"
                            MinHeight="100"
                            AllowsTransparency="True"
@@ -22,6 +21,7 @@
                                           Mode=TwoWay,
                                           Source={x:Static LeStreamsFace:ConfigManager.Instance}}"
                            MouseLeftButtonDown="window_MouseLeftButtonDown"
+                           NonActiveWindowTitleBrush="{DynamicResource WindowTitleColorBrush}"
                            Opacity="{Binding WinOpacity,
                                              Mode=TwoWay,
                                              Source={x:Static LeStreamsFace:ConfigManager.Instance}}"
@@ -679,10 +679,10 @@
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions>
                         <oxy:PlotView Name="gameViewersPlot"
-                                  Grid.Column="0"
-                                  Background="Transparent"
-                                  Model="{Binding ViewersPerGamePlotModel,
-                                                  Source={x:Static LeStreamsFace:ConfigManager.Instance}}" />
+                                      Grid.Column="0"
+                                      Background="Transparent"
+                                      Model="{Binding ViewersPerGamePlotModel,
+                                                      Source={x:Static LeStreamsFace:ConfigManager.Instance}}" />
                         <ListBox Name="gameViewersList"
                                  Grid.Column="1"
                                  HorizontalContentAlignment="Stretch"
@@ -704,11 +704,11 @@
                             </ListBox.ItemTemplate>
                         </ListBox>
                         <oxy:PlotView Name="gameStreamsPlot"
-                                  Grid.Column="0"
-                                  Background="Transparent"
-                                  Model="{Binding StreamsPerGamePlotModel,
-                                                  Source={x:Static LeStreamsFace:ConfigManager.Instance}}"
-                                  Visibility="Collapsed" />
+                                      Grid.Column="0"
+                                      Background="Transparent"
+                                      Model="{Binding StreamsPerGamePlotModel,
+                                                      Source={x:Static LeStreamsFace:ConfigManager.Instance}}"
+                                      Visibility="Collapsed" />
                         <ListBox Name="gameStreamsList"
                                  Grid.Column="1"
                                  HorizontalContentAlignment="Stretch"
@@ -738,7 +738,6 @@
                     <StackPanel>
                         <StackPanel Margin="10,20,0,0" Orientation="Horizontal">
                             <TextBlock FontSize="14" Text="Check for updates:" />
-                            <Updater:UpdaterView x:Name="Updater" Margin="5,0,0,0" />
                         </StackPanel>
                         <TextBlock Margin="10,12,10,0" FontSize="14">
                             <Hyperlink NavigateUri="http://shazbot.github.com/LeStreamsFace/" RequestNavigate="Hyperlink_RequestNavigate">LeStreamsFace website</Hyperlink>

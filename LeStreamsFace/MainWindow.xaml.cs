@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using LeStreamsFace.StreamParsers;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using RestSharp;
 using System;
@@ -41,10 +42,15 @@ namespace LeStreamsFace
 
         public delegate void ExitDelegate(object sender, EventArgs e);
 
-        public MainWindow()
+        private readonly IStreamParser<XElement> _streamParserXML;
+        private readonly IStreamParser<JToken> _streamParserJSON;
+
+        public MainWindow(IStreamParser<XElement> streamParserXML, IStreamParser<JToken> streamParserJSON)
         {
+            _streamParserXML = streamParserXML;
+            _streamParserJSON = streamParserJSON;
 #if DEBUG
-            TextWriterTraceListener traceListener = new TextWriterTraceListener(System.IO.File.CreateText("Trace.txt"));
+            var traceListener = new TextWriterTraceListener(System.IO.File.CreateText("Trace.txt"));
             Debug.Listeners.Add(traceListener);
             Debug.AutoFlush = true;
 #endif
@@ -123,7 +129,8 @@ namespace LeStreamsFace
             fullscreenWaitTimer.Stop();
 
             // remove duplicates in unreportedFavs, and display currently existing favorites
-            foreach (Stream unreportedStream in unreportedFavs.GroupBy(stream => stream.Id).Select(grouping => grouping.Last())
+            foreach (Stream unreportedStream in unreportedFavs.GroupBy(stream => stream.Id)
+                                                    .Select(grouping => grouping.Last())
                                                     .Favorites()
                                                     .Where(stream => StreamsManager.Streams.Any(stream1 => stream1 == stream)))
             {
@@ -195,89 +202,49 @@ namespace LeStreamsFace
 
             try
             {
-                var twitchTask = Task.Factory.StartNew( () =>
-                                                        {
-                                                            var twitchResponse = new RestClient("http://api.justin.tv/api/stream/list.xml?category=gaming&limit=100").SinglePageResponse();
-                                                            IEnumerable<XElement> streams = XDocument.Parse(twitchResponse.Content).Descendants("stream");
-                                                            var createdStreams = new List<Stream>();
-
-                                                            foreach (XElement stream in streams)
-                                                            {
-                                                                try
-                                                                {
-                                                                    createdStreams.Add(LoadTwStreamFromXml(stream));
-                                                                }
-                                                                catch (NullReferenceException) { }
-                                                            }
-                                                            return createdStreams;
-                                                        }, TaskCreationOptions.PreferFairness);
-
-//                owned.tv currently offline
-//                var ownedTask = Task.Factory.StartNew( () =>
-//                                                          {
-//                                                              var ownedResponse = new RestClient("http://api.own3d.tv/live").SinglePageResponse();
-//                                                              //                                                              XDocument.Load("owned.xml");
-//                                                              IEnumerable<XElement> streams = XDocument.Parse(ownedResponse.Content).Descendants("item");
-//                                                              var createdStreams = new List<Stream>();
-//
-//                                                              foreach (XElement stream in streams)
-//                                                              {
-//                                                                  try
-//                                                                  {
-//                                                                      createdStreams.Add(LoadOwnedStreamFromXml(stream));
-//                                                                  }
-//                                                                  catch (NullReferenceException) { }
-//                                                              }
-//                                                              return createdStreams;
-//                                                          }, TaskCreationOptions.PreferFairness);
+//                var twitchTask = Task.Factory.StartNew( () =>
+//                                                        {
+//                                                            var twitchResponse = new RestClient("https://api.twitch.tv/kraken/streams?limit=100").SinglePageResponse();
+//                                                            return _streamParserJSON.GetStreamsFromContent(twitchResponse.Content);
+//                                                        }, TaskCreationOptions.PreferFairness);
 
                 
-
+              
                 var streamsList = new List<Stream>();
                 var closedStreams = new List<Stream>();
 
                 // check twitch fav streams through a channel request
-                if (ConfigManager.Instance.AutoCheckFavorites)
-                {
-                    try
-                    {
-                        await Task.Factory.StartNew( () => CheckFavoriteStreamsManually(newStreamsList, streamsList));
-                    }
-                    catch (Exception) { }
-                    closedStreams.AddRange(StreamsManager.Streams.Where(stream => stream.GottenViaAutoGetFavs && !streamsList.Contains(stream)).ToList());
-                }
+//                if (ConfigManager.Instance.AutoCheckFavorites)
+//                {
+//                    try
+//                    {
+//                        await Task.Factory.StartNew( () => CheckFavoriteTwitchStreamsManually(newStreamsList, streamsList));
+//                    }
+//                    catch (Exception) { }
+//                    closedStreams.AddRange(StreamsManager.Streams.Where(stream => stream.GottenViaAutoGetFavs && !streamsList.Contains(stream)).ToList());
+//                }
 
                 IEnumerable<Stream> twitchFetchedStreams = Enumerable.Empty<Stream>();
-                try
-                {
-                    twitchFetchedStreams = await twitchTask;
-                }
-                catch (Exception exception)
-                {
-                    if (firstRun) // need to not spam user
-                    {
-                        iconWindow.notificationItem.BalloonTip("Trouble reading from TWITCHTV", "REQUEST FAILED", toolTipIcon: ToolTipIcon.Error);
-                    }
-                    Debug.WriteLine(exception);
-                }
 
-                IEnumerable<Stream> ownedFetchedStreams = Enumerable.Empty<Stream>();
-                try
-                {
-//                    ownedFetchedStreams = await ownedTask;
-                }
-                catch (Exception exception)
-                {
+//                                                            var twitchResponse = new RestClient("https://api.twitch.tv/kraken/streams?limit=100").SinglePageResponse();
+                var twitchResponse = await new RestClient("https://api.twitch.tv/kraken/streams?limit=100").ExecuteTaskAsync(new RestRequest());
 
-                    if (firstRun) // need to not spam user
-                    {
-                        iconWindow.notificationItem.BalloonTip("Trouble reading from OWNEDTV", "REQUEST FAILED", toolTipIcon: ToolTipIcon.Error);
-                    }
-                    Debug.WriteLine(exception);
-                }
+                twitchFetchedStreams = _streamParserJSON.GetStreamsFromContent(twitchResponse.Content);
+//                try
+//                {
+//                    twitchFetchedStreams = await twitchTask;
+//                }
+//                catch (Exception exception)
+//                {
+//                    if (firstRun) // need to not spam user
+//                    {
+//                        iconWindow.notificationItem.BalloonTip("Trouble reading from TWITCHTV", "REQUEST FAILED", toolTipIcon: ToolTipIcon.Error);
+//                    }
+//                    Debug.WriteLine(exception);
+//                }
 
                 // add streams we didn't get from favs to streamsList, new streams to newStreamsList
-                foreach (Stream stream in twitchFetchedStreams.Concat(ownedFetchedStreams))
+                foreach (Stream stream in twitchFetchedStreams)
                 {
                     if (!streamsList.Contains(stream))
                     {
@@ -456,7 +423,7 @@ namespace LeStreamsFace
             return timeBlocking;
         }
 
-        public static bool DuringTimeBlockCheck()
+        private static bool DuringTimeBlockCheck()
         {
             // e.g. 0600-2200
             if (ConfigManager.Instance.FromSpan <= ConfigManager.Instance.ToSpan)
@@ -470,8 +437,7 @@ namespace LeStreamsFace
                    || DateTime.Now.TimeOfDay <= ConfigManager.Instance.ToSpan;
         }
 
-        // only checking twitch
-        private void CheckFavoriteStreamsManually(List<Stream> newStreamsList, List<Stream> streamsList)
+        private void CheckFavoriteTwitchStreamsManually(List<Stream> newStreamsList, List<Stream> streamsList)
         {
             if (!ConfigManager.Instance.FavoriteStreams.Any()) return;
 
@@ -485,11 +451,11 @@ namespace LeStreamsFace
             XDocument xDocument = XDocument.Parse(twitchFavsResponse.Content);
 
             var gottenFavs = new List<Stream>();
-            foreach (XElement stream in xDocument.Element("streams").Elements("stream"))
+            foreach (XElement xElement in xDocument.Element("streams").Elements("stream"))
             {
                 try
                 {
-                    gottenFavs.Add(LoadTwStreamFromXml(stream));
+                    gottenFavs.Add(_streamParserXML.GetStreamFromElement(xElement));
                 }
                 catch (NullReferenceException)
                 {
@@ -507,68 +473,6 @@ namespace LeStreamsFace
                 streamsList.Add(stream);
             }
             Debug.WriteLine("TIMER TO RETRIEVE FAVORITES: " + (DateTime.Now - now).TotalSeconds);
-        }
-
-        private Stream LoadTwStreamFromXml(XElement stream)
-        {
-            string name = null, gameName = "", title = "", id = null, channelId = null, thumbnailURI;
-            string twitchLogin = null;
-            int viewers = 0;
-
-            name = stream.Element("channel").Element("title").Value;
-            viewers = int.Parse(stream.Element("channel_count").Value);
-            id = stream.Element("id").Value;
-            title = (string)stream.Element("title") ?? "";
-            gameName = (string)stream.Element("meta_game") ?? "";
-            twitchLogin = stream.Element("channel").Element("login").Value;
-            channelId = stream.Element("channel").Element("id").Value;
-
-            //            thumbnailURI = stream.Element("channel").Element("screen_cap_url_large").Value;
-            thumbnailURI = stream.Element("channel").Element("screen_cap_url_huge").Value;
-
-            if (gameName == "StarCraft II: Wings of Liberty")
-            {
-                gameName = "StarCraft II";
-            }
-
-            if (name == title)
-            {
-                title = string.Empty;
-            }
-            title = title.Replace("\\n", " ");
-
-            var newStream = new Stream(name, title, viewers, id, channelId, gameName, StreamingSite.TwitchTv) { LoginNameTwtv = twitchLogin, ThumbnailURI = thumbnailURI };
-            return newStream;
-        }
-
-        private Stream LoadOwnedStreamFromXml(XElement ownedStream)
-        {
-            string name = null, gameName = null, title = null, id = null, thumbnailURI = null;
-            int viewers = 0;
-
-            // channel name worthless in owned
-            //                        name = ownedStream.Element("author").Value.Replace("rss@own3d.tv (", "");
-            //                        name = name.Remove(name.Length - 1, 1);
-            name = ownedStream.Element("title").Value;
-            title = name;
-            viewers = int.Parse(ownedStream.Element("misc").Attribute("viewers").Value);
-            id = ownedStream.Element("guid").Value;
-            gameName = ownedStream.Element("misc").Attribute("game").Value;
-//            thumbnailURI = ownedStream.Element("thumbnail").Value;
-            thumbnailURI = "http://owned.vo.llnwd.net/e2/live/live_tn_" + id.Substring(id.LastIndexOf('/') + 1) + "_.jpg?1348800268";
-
-            if (gameName == "Diablo 3")
-            {
-                gameName = "Diablo III";
-            }
-
-            if (name == title)
-            {
-                title = string.Empty;
-            }
-
-            var newStream = new Stream(name, title, viewers, id, id, gameName, StreamingSite.OwnedTv) { LoginNameTwtv = name, ThumbnailURI = thumbnailURI };
-            return newStream;
         }
 
         private void Window_SourceInitialized(object sender, EventArgs e)

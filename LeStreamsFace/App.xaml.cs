@@ -3,6 +3,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading;
 using System.Windows;
+using LeStreamsFace.StreamParsers;
 
 namespace LeStreamsFace
 {
@@ -32,7 +33,7 @@ namespace LeStreamsFace
             // now using Costura to load assemblies
 //            AppDomain.CurrentDomain.AssemblyResolve += new ResolveEventHandler(Target);
 
-            new MainWindow();
+            new MainWindow(new TwitchXMLStreamParser(), new TwitchJSONStreamParser());
         }
 
         internal static void ExitApp()
