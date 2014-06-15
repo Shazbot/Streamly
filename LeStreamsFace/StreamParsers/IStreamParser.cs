@@ -3,10 +3,10 @@ using System.Xml.Linq;
 
 namespace LeStreamsFace.StreamParsers
 {
-    internal interface IStreamParser
+    internal interface IStreamParser<T>
     {
         IEnumerable<Stream> GetStreamsFromContent(string content);
 
-        Stream GetStreamFromXElement(XElement xElement);
+        Stream GetStreamFromElement(T xElement);
     }
 }

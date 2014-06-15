@@ -61,6 +61,7 @@ namespace LeStreamsFace
             set { _isFavorite = value; onPropertyChanged(this, "IsFavorite"); }
         }
 
+        [JsonProperty(PropertyName = "game")]
         public string GameName
         {
             get { return _gameName; }

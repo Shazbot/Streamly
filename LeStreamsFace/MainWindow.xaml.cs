@@ -42,9 +42,9 @@ namespace LeStreamsFace
 
         public delegate void ExitDelegate(object sender, EventArgs e);
 
-        private readonly IStreamParser _streamParser;
+        private readonly IStreamParser<XElement> _streamParser;
 
-        public MainWindow(IStreamParser streamParser)
+        public MainWindow(IStreamParser<XElement> streamParser)
         {
             _streamParser = streamParser;
 #if DEBUG
@@ -446,7 +446,7 @@ namespace LeStreamsFace
             {
                 try
                 {
-                    gottenFavs.Add(_streamParser.GetStreamFromXElement(xElement));
+                    gottenFavs.Add(_streamParser.GetStreamFromElement(xElement));
                 }
                 catch (NullReferenceException)
                 {

@@ -4,7 +4,7 @@ using System.Xml.Linq;
 
 namespace LeStreamsFace.StreamParsers
 {
-    internal class TwitchXMLStreamParser : IStreamParser
+    internal class TwitchXMLStreamParser : IStreamParser<XElement>
     {
         public IEnumerable<Stream> GetStreamsFromContent(string content)
         {
@@ -15,7 +15,7 @@ namespace LeStreamsFace.StreamParsers
             {
                 try
                 {
-                    createdStreams.Add(GetStreamFromXElement(xElement));
+                    createdStreams.Add(GetStreamFromElement(xElement));
                 }
                 catch (NullReferenceException) { }
             }
@@ -23,7 +23,7 @@ namespace LeStreamsFace.StreamParsers
             return createdStreams;
         }
 
-        public Stream GetStreamFromXElement(XElement xElement)
+        public Stream GetStreamFromElement(XElement xElement)
         {
             string name = null, gameName = "", title = "", id = null, channelId = null, thumbnailURI;
             string twitchLogin = null;

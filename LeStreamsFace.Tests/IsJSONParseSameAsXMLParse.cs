@@ -14,14 +14,26 @@ namespace LeStreamsFace.Tests
     {
         [UseReporter(typeof(DiffReporter))]
         [Fact]
-        public void TestMethod1()
+        public void XMLParseApproval()
         {
             var input = File.ReadAllText(@"data/streams online.xml");
 
             var parserXML = new TwitchXMLStreamParser();
             var streams = parserXML.GetStreamsFromContent(input);
 
-            Approvals.VerifyAll(streams.Select(stream => stream.ToString()), "");
+            Approvals.VerifyAll(streams, "");
+        }
+
+        [UseReporter(typeof(DiffReporter))]
+        [Fact]
+        public void JSONParseApproval()
+        {
+            var input = File.ReadAllText(@"data/streams online.json");
+
+            var parseJSON = new TwitchJSONStreamParser();
+            var streams = parseJSON.GetStreamsFromContent(input);
+
+            Approvals.VerifyAll(streams, "");
         }
     }
 }

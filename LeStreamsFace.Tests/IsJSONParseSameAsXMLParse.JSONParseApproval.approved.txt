@@ -1,0 +1,275 @@
+﻿[0] = Name: DreamLeague
+Title: Alliance vs Evil Geniuses - Playoff ASUS ROG DreamLeauge Season 1
+Viewers: 49772
+Id: 9914729856
+Site: TwitchTv
+IsFavorite: False
+GameName: Dota 2
+ChannelId: 50160915
+LoginNameTwtv: dreamleague
+ThumbnailURI: http://static-cdn.jtvnw.net/jtv_user_pictures/dreamleague-channel_offline_image-3e7bb4869ba4cfc3-640x360.png
+
+[1] = Name: DreamLeague_v1lat
+Title: Cloud9 -vs- Mouz LIVE | DreamLeague LAN Finals | Day 2 | by v1lat & CaspeRRR
+Viewers: 46628
+Id: 9914624784
+Site: TwitchTv
+IsFavorite: False
+GameName: Dota 2
+ChannelId: 50904520
+LoginNameTwtv: dreamleague_v1lat
+ThumbnailURI: http://static-cdn.jtvnw.net/jtv_user_pictures/dreamleague_v1lat-channel_offline_image-cbde93e67b3e7a51-640x360.png
+
+[2] = Name: DreamhackCS
+Title: DreamHack Steelseries CS:GO Championship
+Viewers: 31412
+Id: 9914720176
+Site: TwitchTv
+IsFavorite: False
+GameName: Counter-Strike: Global Offensive
+ChannelId: 22859264
+LoginNameTwtv: dreamhackcs
+ThumbnailURI: http://static-cdn.jtvnw.net/jtv_user_pictures/dreamhackcs-channel_offline_image-80769e05262c2b00-640x360.png
+
+[3] = Name: BeyondTheSummit
+Title: DK vs Newbee - ECL Grand Final bo3 w/ @LDdota & @ZyoriTV
+Viewers: 28325
+Id: 9911682736
+Site: TwitchTv
+IsFavorite: False
+GameName: Dota 2
+ChannelId: 29578325
+LoginNameTwtv: beyondthesummit
+ThumbnailURI: http://static-cdn.jtvnw.net/jtv_user_pictures/beyondthesummit-channel_offline_image-53bd7662904b95e3-640x360.jpeg
+
+[4] = Name: DreamhackSC2
+Title: DreamHack Open: Summer 2014 - Day 1
+Viewers: 27538
+Id: 9914790272
+Site: TwitchTv
+IsFavorite: False
+GameName: StarCraft II: Heart of the Swarm
+ChannelId: 22859340
+LoginNameTwtv: dreamhacksc2
+ThumbnailURI: http://static-cdn.jtvnw.net/jtv_user_pictures/dreamhacksc2-channel_offline_image-9380f79859073e81-640x360.png
+
+[5] = Name: Trick2g
+Title: Flamedyr | Duo with Sirhcez | The Gates will Open |
+Viewers: 15451
+Id: 9910587984
+Site: TwitchTv
+IsFavorite: False
+GameName: League of Legends
+ChannelId: 28036688
+LoginNameTwtv: trick2g
+ThumbnailURI: http://static-cdn.jtvnw.net/jtv_user_pictures/trick2g-channel_offline_image-d5742d05aa9f4caa-640x360.png
+
+[6] = Name: Nightblue3
+Title: Nightblue | Challenger Solo Queue | Q&A in Queue | S4/S3 NA Challenger | Showing you how to gain elo | Jungle Main |
+Viewers: 11449
+Id: 9915141216
+Site: TwitchTv
+IsFavorite: False
+GameName: League of Legends
+ChannelId: 26946000
+LoginNameTwtv: nightblue3
+ThumbnailURI: http://static-cdn.jtvnw.net/jtv_user_pictures/nightblue3-channel_offline_image-fd133496acaadb7c-640x360.jpeg
+
+[7] = Name: flosd
+Title: BoxBox
+Viewers: 11908
+Id: 9912296384
+Site: TwitchTv
+IsFavorite: False
+GameName: League of Legends
+ChannelId: 38881685
+LoginNameTwtv: flosd
+ThumbnailURI: http://static-cdn.jtvnw.net/jtv_user_pictures/flosd-channel_offline_image-79339e326c17b718-640x360.png
+
+[8] = Name: MaSsanSC
+Title: TSM MaSsan 10x Legendary  Laddering on NA!
+Viewers: 11782
+Id: 9913486128
+Site: TwitchTv
+IsFavorite: False
+GameName: Hearthstone: Heroes of Warcraft
+ChannelId: 31665430
+LoginNameTwtv: massansc
+ThumbnailURI: http://static-cdn.jtvnw.net/jtv_user_pictures/massansc-channel_offline_image-38fff44328958bf2-640x360.png
+
+[9] = Name: DreamhackLoL
+Title: DreamHack League of Legends Championship - by Plantronics
+Viewers: 8450
+Id: 9914239920
+Site: TwitchTv
+IsFavorite: False
+GameName: League of Legends
+ChannelId: 26362946
+LoginNameTwtv: dreamhacklol
+ThumbnailURI: http://static-cdn.jtvnw.net/jtv_user_pictures/dreamhacklol-channel_offline_image-47efd5ecf7613a70-640x360.png
+
+[10] = Name: wethelambsTV
+Title: WETHELAMBS TV -  NiP v SK Semi Final bo3
+Viewers: 6074
+Id: 9915019120
+Site: TwitchTv
+IsFavorite: False
+GameName: Counter-Strike: Global Offensive
+ChannelId: 55551669
+LoginNameTwtv: wethelambstv
+ThumbnailURI: 
+
+[11] = Name: wickd
+Title: [A] Wickd HyperX getting carried by twitch chat
+Viewers: 4967
+Id: 9915058432
+Site: TwitchTv
+IsFavorite: False
+GameName: League of Legends
+ChannelId: 38865245
+LoginNameTwtv: wickd
+ThumbnailURI: http://static-cdn.jtvnw.net/jtv_user_pictures/wickd-channel_offline_image-ee6fd82e559dbf03-640x360.jpeg
+
+[12] = Name: SCGLive
+Title: SCG Open Series Columbus featuring The Invitational - June 13-15, 2014
+Viewers: 4830
+Id: 9891769984
+Site: TwitchTv
+IsFavorite: False
+GameName: Magic: The Gathering
+ChannelId: 22480377
+LoginNameTwtv: scglive
+ThumbnailURI: http://static-cdn.jtvnw.net/jtv_user_pictures/scglive-channel_offline_image-c2c07f71730d6e78-640x360.jpeg
+
+[13] = Name: asiagodtonegg3be0
+Title: 亞洲飽春 台肥烘培航 - 呷胖登場 <3 :: Taiwan Rank  Diamond I :: Gragas God
+Viewers: 4740
+Id: 9914143216
+Site: TwitchTv
+IsFavorite: False
+GameName: League of Legends
+ChannelId: 43177431
+LoginNameTwtv: asiagodtonegg3be0
+ThumbnailURI: http://static-cdn.jtvnw.net/jtv_user_pictures/asiagodtonegg3be0-channel_offline_image-a081d4141b92f364-640x360.png
+
+[14] = Name: MiSTakElolz
+Title: MiSTakE - 韓服鑽一天梯。Diamond 1 SoloQ on KR server. (中文/Eng)
+Viewers: 4234
+Id: 9913870864
+Site: TwitchTv
+IsFavorite: False
+GameName: League of Legends
+ChannelId: 29825457
+LoginNameTwtv: mistakelolz
+ThumbnailURI: http://static-cdn.jtvnw.net/jtv_user_pictures/mistakelolz-channel_offline_image-4a8407f5e819a535-640x360.jpeg
+
+[15] = Name: Ludendi
+Title: Team Ludendi presents speedrunning at DreamHack Summer 2014!
+Viewers: 4014
+Id: 9911305984
+Site: TwitchTv
+IsFavorite: False
+GameName: The Legend of Zelda: Ocarina of Time
+ChannelId: 28673774
+LoginNameTwtv: ludendi
+ThumbnailURI: http://static-cdn.jtvnw.net/jtv_user_pictures/ludendi-channel_offline_image-821fc3728572551f-640x360.jpeg
+
+[16] = Name: Nervarien
+Title: Nervarien Diamond I 80~ LP
+Viewers: 3800
+Id: 9915508224
+Site: TwitchTv
+IsFavorite: False
+GameName: League of Legends
+ChannelId: 25452510
+LoginNameTwtv: nervarien
+ThumbnailURI: http://static-cdn.jtvnw.net/jtv_user_pictures/nervarien-channel_offline_image-f9126935d97e7959-640x360.jpeg
+
+[17] = Name: TaKeTV
+Title: [GER] DHOPEN Summer - Day 2
+Viewers: 3451
+Id: 9914972896
+Site: TwitchTv
+IsFavorite: False
+GameName: StarCraft II: Heart of the Swarm
+ChannelId: 30186974
+LoginNameTwtv: taketv
+ThumbnailURI: http://static-cdn.jtvnw.net/jtv_user_pictures/taketv-channel_offline_image-ae6b906cfba6f362-640x360.png
+
+[18] = Name: ceh9
+Title: Titan vs. HellRaisers @ DREAMHACK by ceh9
+Viewers: 3204
+Id: 9915242368
+Site: TwitchTv
+IsFavorite: False
+GameName: Counter-Strike: Global Offensive
+ChannelId: 39176562
+LoginNameTwtv: ceh9
+ThumbnailURI: http://static-cdn.jtvnw.net/jtv_user_pictures/ceh9-channel_offline_image-d74f12197860fcd6-640x360.jpeg
+
+[19] = Name: Swifty
+Title: Swifty 24 Hour Stream / Gaming at the Dreamhack!
+Viewers: 3205
+Id: 9911303680
+Site: TwitchTv
+IsFavorite: False
+GameName: World of Warcraft: Mists of Pandaria
+ChannelId: 23524577
+LoginNameTwtv: swifty
+ThumbnailURI: http://static-cdn.jtvnw.net/jtv_user_pictures/swifty-channel_offline_image-ca421e997608d2de-640x360.jpeg
+
+[20] = Name: Smitegame
+Title: SWC EU Week 6 - Elo Fishers vs Exposed Secrets
+Viewers: 2733
+Id: 9915006480
+Site: TwitchTv
+IsFavorite: False
+GameName: Smite
+ChannelId: 31500812
+LoginNameTwtv: smitegame
+ThumbnailURI: http://static-cdn.jtvnw.net/jtv_user_pictures/smitegame-channel_offline_image-2c721f4c3d8270df-640x360.jpeg
+
+[21] = Name: GSstudio_CSGO
+Title: DreamHack Summer @Leniniw
+Viewers: 2688
+Id: 9915548128
+Site: TwitchTv
+IsFavorite: False
+GameName: Counter-Strike: Global Offensive
+ChannelId: 46601916
+LoginNameTwtv: gsstudio_csgo
+ThumbnailURI: http://static-cdn.jtvnw.net/jtv_user_pictures/gsstudio_csgo-channel_offline_image-983b230d2207b5ac-640x360.jpeg
+
+[22] = Name: mobilmobil
+Title: 老皮台「惡靈古堡 : 啟示錄」DAY4
+Viewers: 2639
+Id: 9915058896
+Site: TwitchTv
+IsFavorite: False
+GameName: Resident Evil: Revelations
+ChannelId: 29518572
+LoginNameTwtv: mobilmobil
+ThumbnailURI: http://static-cdn.jtvnw.net/jtv_user_pictures/mobilmobil-channel_offline_image-6bf701334c763e55-640x360.jpeg
+
+[23] = Name: ThaldrinLol
+Title: WF Thaldrin duo WF Lethilion Türkiye Sunucusu Şampiyonluk Aşaması Dereceli Oyunlar [TR]
+Viewers: 2523
+Id: 9915042416
+Site: TwitchTv
+IsFavorite: False
+GameName: League of Legends
+ChannelId: 46595619
+LoginNameTwtv: thaldrinlol
+ThumbnailURI: http://static-cdn.jtvnw.net/jtv_user_pictures/thaldrinlol-channel_offline_image-c33b7e0cf938e959-640x360.jpeg
+
+[24] = Name: x5tv
+Title: Brasil Gaming League Crossfire
+Viewers: 2424
+Id: 9915455968
+Site: TwitchTv
+IsFavorite: False
+GameName: Crossfire
+ChannelId: 40584032
+LoginNameTwtv: x5tv
+ThumbnailURI: 
+
