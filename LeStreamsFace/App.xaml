@@ -3,9 +3,18 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:myns="clr-namespace:LeStreamsFace">
     <Application.Resources>
-        <myns:CutoffConverter x:Key="WidthConverter" Cutoff="150" />
-
-        <!--  wpf bug: http://bengribaudo.com/blog/2010/08/19/106/bug-single-application-resources-entry-ignored  -->
-        <Style TargetType="{x:Type Rectangle}" />
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colors.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
+                <ResourceDictionary Source="Resources/Icons.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <myns:CutoffConverter x:Key="WidthConverter" Cutoff="150" />
+            <!--  wpf bug: http://bengribaudo.com/blog/2010/08/19/106/bug-single-application-resources-entry-ignored  -->
+            <Style TargetType="{x:Type Rectangle}" />
+        </ResourceDictionary>
     </Application.Resources>
 </Application>
