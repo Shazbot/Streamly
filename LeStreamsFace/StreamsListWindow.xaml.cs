@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Reflection;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -18,6 +19,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 using System.Xml.Linq;
+using LeStreamsFace.StreamParsers;
 using MahApps.Metro.Controls;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -65,6 +67,23 @@ namespace LeStreamsFace
             {
                 Width = 1000;
                 Height = 580;
+            }
+
+            PopulateGamesPanel();
+        }
+
+        private async void PopulateGamesPanel()
+        {
+            try
+            {
+                gamesFlyout.IsOpen = true;
+                var twitchResponse = await new RestClient("https://api.twitch.tv/kraken/games/top?limit=100").ExecuteTaskAsync(new RestRequest());
+                var topGamesJObject = JsonConvert.DeserializeObject<JObject>(twitchResponse.Content)["top"];
+                var a = topGamesJObject.Children().Select(token => new {game = token["game"]["name"].ToString(), thumbnail = token["game"]["box"]["medium"].ToString()});
+                gamesPanel.ItemsSource = a;
+            }
+            catch (Exception)
+            {
             }
         }
 

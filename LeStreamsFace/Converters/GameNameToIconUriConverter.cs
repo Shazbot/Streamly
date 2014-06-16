@@ -9,6 +9,9 @@ namespace LeStreamsFace
     public class GameNameToIconUriConverter : MarkupExtension, IValueConverter
     {
         private static GameNameToIconUriConverter _converter = null;
+        public GameNameToIconUriConverter()
+        {
+        }
 
         public override object ProvideValue(IServiceProvider serviceProvider)
         {

@@ -134,6 +134,65 @@
         </MetroControls:WindowCommands>
     </MetroControls:MetroWindow.WindowCommands>
 
+    <MetroControls:MetroWindow.Flyouts>
+        <MetroControls:FlyoutsControl>
+            <MetroControls:Flyout x:Name="gamesFlyout"
+                                  Width="{Binding RelativeSource={RelativeSource FindAncestor,
+                                                                                 AncestorType=MetroControls:MetroWindow},
+                                                  Path=ActualWidth}"
+                                  Margin="100 0 0 0"
+                                  Header="Games"
+                                  Position="Right"
+                                  Theme="Accent">
+                <Grid Margin="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0"
+                               Text="GAMES"
+                               TextAlignment="Center" />
+
+                    <ListBox x:Name="gamesPanel"
+                             Grid.Row="1"
+                             Background="Transparent"
+                             ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                        <ListBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel Orientation="Horizontal" />
+                            </ItemsPanelTemplate>
+                        </ListBox.ItemsPanel>
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <Image Width="136"
+                                           Height="190"
+                                           Margin="5"
+                                           RenderOptions.BitmapScalingMode="NearestNeighbor"
+                                           RenderOptions.EdgeMode="Unspecified"
+                                           Source="{Binding thumbnail,
+                                                            IsAsync=True}"
+                                           ToolTipService.ToolTip="{Binding game}" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                    <UniformGrid Grid.Row="2"
+                                 Margin="10"
+                                 Columns="2">
+                        <Button Margin="10"
+                                Content="Create"
+                                Style="{DynamicResource SquareButtonStyle}" />
+                        <Button Margin="10"
+                                Content="Cancel"
+                                Style="{DynamicResource SquareButtonStyle}" />
+                    </UniformGrid>
+                </Grid>
+            </MetroControls:Flyout>
+        </MetroControls:FlyoutsControl>
+    </MetroControls:MetroWindow.Flyouts>
+
     <MetroControls:MetroContentControl>
         <Grid>
             <TabControl>
