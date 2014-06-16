@@ -107,11 +107,9 @@ namespace LeStreamsFace
         private string _loginNameTwtv;
         public bool GottenViaAutoGetFavs = false;
 
-        public Stream()
-        {
-        }
+//        public Stream() { } // we don't want the deserializer to call this
 
-        public Stream(string name, string title, int viewers, string id, string channelId, string gameName, StreamingSite streamingSite)
+        public Stream(string name, string title, int viewers, string id, string channelId, string gameName, StreamingSite streamingSite = StreamingSite.TwitchTv)
         {
             Name = name;
             Title = title;

@@ -213,6 +213,7 @@ namespace LeStreamsFace
                 var streamsList = new List<Stream>();
                 var closedStreams = new List<Stream>();
 
+                //TODO By tomorrow
                 // check twitch fav streams through a channel request
 //                if (ConfigManager.Instance.AutoCheckFavorites)
 //                {
