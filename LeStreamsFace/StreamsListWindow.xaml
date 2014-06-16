@@ -161,7 +161,8 @@
                     <ListBox x:Name="gamesPanel"
                              Grid.Row="1"
                              Background="Transparent"
-                             ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                             ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                             SelectionChanged="GamesPanel_OnSelectionChanged">
                         <ListBox.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <WrapPanel Orientation="Horizontal" />

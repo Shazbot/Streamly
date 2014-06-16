@@ -704,5 +704,10 @@ namespace LeStreamsFace
             {
             }
         }
+
+        private void GamesPanel_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var newlySelected = e.AddedItems;
+        }
     }
 }
