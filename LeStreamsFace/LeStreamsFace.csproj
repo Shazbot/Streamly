@@ -27,7 +27,7 @@
     <WarningLevel>4</WarningLevel>
     <PlatformTarget>x86</PlatformTarget>
     <Prefer32Bit>false</Prefer32Bit>
-    <CodeContractsEnableRuntimeChecking>True</CodeContractsEnableRuntimeChecking>
+    <CodeContractsEnableRuntimeChecking>False</CodeContractsEnableRuntimeChecking>
     <CodeContractsRuntimeOnlyPublicSurface>False</CodeContractsRuntimeOnlyPublicSurface>
     <CodeContractsRuntimeThrowOnFailure>False</CodeContractsRuntimeThrowOnFailure>
     <CodeContractsRuntimeCallSiteRequires>False</CodeContractsRuntimeCallSiteRequires>
@@ -189,6 +189,7 @@
     <Compile Include="Converters\GameNameToIconUriConverter.cs" />
     <Compile Include="Converters\InvertBooleanConverter.cs" />
     <Compile Include="Extensions\Extensions.cs" />
+    <Compile Include="GamesViewModel.cs" />
     <Compile Include="StreamParsers\IStreamParser.cs" />
     <Compile Include="RestSharpJsonNetSerializer.cs" />
     <Compile Include="StreamParsers\TwitchJSONStreamParser.cs" />

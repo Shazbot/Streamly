@@ -32,6 +32,7 @@ using Clipboard = System.Windows.Clipboard;
 using Control = System.Windows.Controls.Control;
 using DataGrid = System.Windows.Controls.DataGrid;
 using KeyEventArgs = System.Windows.Input.KeyEventArgs;
+using ListBox = System.Windows.Controls.ListBox;
 using MessageBox = System.Windows.MessageBox;
 using MouseEventArgs = System.Windows.Input.MouseEventArgs;
 using TextBox = System.Windows.Controls.TextBox;
@@ -80,7 +81,7 @@ namespace LeStreamsFace
 //                gamesFlyout.IsOpen = true;
                 var twitchResponse = await new RestClient("https://api.twitch.tv/kraken/games/top?limit=100").ExecuteTaskAsync(new RestRequest());
                 var topGamesJObject = JsonConvert.DeserializeObject<JObject>(twitchResponse.Content)["top"];
-                var a = topGamesJObject.Children().Select(token => new {game = token["game"]["name"].ToString(), thumbnail = token["game"]["box"]["medium"].ToString()});
+                var a = topGamesJObject.Children().Select(token => new GamesViewModel(token["game"]["name"].ToString(), token["game"]["box"]["medium"].ToString()));
                 gamesPanel.ItemsSource = a;
             }
             catch (Exception)
@@ -705,9 +706,17 @@ namespace LeStreamsFace
             }
         }
 
-        private void GamesPanel_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        private async void GamesPanel_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var newlySelected = e.AddedItems;
+            var selectedGame = ((ListBox)sender).SelectedItem as GamesViewModel;
+            var name = selectedGame.GameName;
+
+            var twitchResponse = await new RestClient("https://api.twitch.tv/kraken/search/streams?limit=20&q=" + name).ExecuteTaskAsync(new RestRequest());
+            var streams = (new TwitchJSONStreamParser()).GetStreamsFromContent(twitchResponse.Content);
+
+            selectedGameFlyout.Header = name;
+            selectedGamesPanel.ItemsSource = streams;
+            selectedGameFlyout.IsOpen = true;
         }
     }
 }

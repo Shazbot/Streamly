@@ -154,9 +154,7 @@
                         <RowDefinition Height="*" />
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
-                    <TextBlock Grid.Row="0"
-                               Text="GAMES"
-                               TextAlignment="Center" />
+                    <StackPanel Grid.Row="0" />
 
                     <ListBox x:Name="gamesPanel"
                              Grid.Row="1"
@@ -176,24 +174,24 @@
                                            Margin="5"
                                            RenderOptions.BitmapScalingMode="NearestNeighbor"
                                            RenderOptions.EdgeMode="Unspecified"
-                                           Source="{Binding thumbnail,
+                                           Source="{Binding Thumbnail,
                                                             IsAsync=True}"
-                                           ToolTipService.ToolTip="{Binding game}" />
+                                           ToolTipService.ToolTip="{Binding GameName}" />
                                 </StackPanel>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>
 
-                    <UniformGrid Grid.Row="2"
-                                 Margin="10"
-                                 Columns="2">
-                        <Button Margin="10"
-                                Content="Create"
-                                Style="{DynamicResource SquareButtonStyle}" />
-                        <Button Margin="10"
-                                Content="Cancel"
-                                Style="{DynamicResource SquareButtonStyle}" />
-                    </UniformGrid>
+                    <!--  <UniformGrid Grid.Row="2"  -->
+                    <!--  Margin="10"  -->
+                    <!--  Columns="2">  -->
+                    <!--  <Button Margin="10"  -->
+                    <!--  Content="Create"  -->
+                    <!--  Style="{DynamicResource SquareButtonStyle}" />  -->
+                    <!--  <Button Margin="10"  -->
+                    <!--  Content="Cancel"  -->
+                    <!--  Style="{DynamicResource SquareButtonStyle}" />  -->
+                    <!--  </UniformGrid>  -->
                 </Grid>
             </MetroControls:Flyout>
 
@@ -202,9 +200,6 @@
                                                                                  AncestorType=MetroControls:MetroWindow},
                                                   Path=ActualWidth}"
                                   Margin="100 0 0 0"
-                                  Header="{Binding }"
-                                  IsOpen="{Binding IsChecked,
-                                                   ElementName=toggleGamesPanelButton}"
                                   Position="Right"
                                   Theme="Accent">
                 <Grid Margin="10">
@@ -213,9 +208,7 @@
                         <RowDefinition Height="*" />
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
-                    <TextBlock Grid.Row="0"
-                               Text="GAMES"
-                               TextAlignment="Center" />
+                    <StackPanel Grid.Row="0" />
 
                     <ListBox x:Name="selectedGamesPanel"
                              Grid.Row="1"
@@ -229,29 +222,49 @@
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel>
-                                    <Image Width="136"
-                                           Height="190"
-                                           Margin="5"
+                                    <Image Width="256"
+                                           Height="160"
+                                           Margin="0"
                                            RenderOptions.BitmapScalingMode="NearestNeighbor"
                                            RenderOptions.EdgeMode="Unspecified"
-                                           Source="{Binding thumbnail,
+                                           Source="{Binding ThumbnailURI,
                                                             IsAsync=True}"
-                                           ToolTipService.ToolTip="{Binding game}" />
+                                           ToolTipService.ToolTip="{Binding Name}" />
+                                    <!--  <StackPanel>  -->
+
+                                    <TextBlock FontFamily="Segoe UI Symbol"
+                                               FontSize="16"
+                                               Foreground="White">
+                                        <TextBlock.Text>
+                                            <MultiBinding StringFormat="{}{0} viewers on {1}">
+                                                <Binding Path="Viewers" />
+                                                <Binding Path="Name" />
+                                            </MultiBinding>
+                                        </TextBlock.Text>
+                                    </TextBlock>
+
+                                    <TextBlock MaxWidth="256"
+                                               FontFamily="Segoe UI Symbol"
+                                               FontSize="16"
+                                               Foreground="White"
+                                               Text="{Binding Title}" />
+
+                                    <!--  </StackPanel>  -->
                                 </StackPanel>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>
 
-                    <UniformGrid Grid.Row="2"
-                                 Margin="10"
-                                 Columns="2">
-                        <Button Margin="10"
-                                Content="Create"
-                                Style="{DynamicResource SquareButtonStyle}" />
-                        <Button Margin="10"
-                                Content="Cancel"
-                                Style="{DynamicResource SquareButtonStyle}" />
-                    </UniformGrid>
+                    <!--  <UniformGrid Grid.Row="2"  -->
+                    <!--  Margin="10"  -->
+                    <!--  Columns="2">  -->
+                    <!--  <Button Margin="10"  -->
+                    <!--  Content="Create"  -->
+                    <!--  Style="{DynamicResource SquareButtonStyle}" />  -->
+                    <!--  <Button Margin="10"  -->
+                    <!--  Content="Cancel"  -->
+                    <!--  Style="{DynamicResource SquareButtonStyle}" />  -->
+                    <!--  </UniformGrid>  -->
                 </Grid>
             </MetroControls:Flyout>
         </MetroControls:FlyoutsControl>
