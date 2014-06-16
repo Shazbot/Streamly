@@ -39,7 +39,7 @@ namespace LeStreamsFace
             private set
             {
                 if (value == null) return;
-                _title = value.TrimEnd(new[] { ' ', '\n' });
+                _title = value.Replace("\r\n", " ").Replace("\n", " ").TrimEnd(new[] { ' ', '\n' });
                 onPropertyChanged(this, "Title");
             }
         }

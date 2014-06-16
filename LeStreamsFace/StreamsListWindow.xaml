@@ -68,6 +68,18 @@
                     </DataTrigger>
                 </Style.Triggers>
             </Style>
+            <Style x:Key="textBlockInSelectedGamePanel" TargetType="{x:Type TextBlock}">
+                <Style.Setters>
+                    <Setter Property="Foreground" Value="White" />
+                    <Setter Property="Opacity" Value="0.85" />
+                </Style.Setters>
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding IsMouseOver, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type StackPanel}}}" Value="True">
+                        <Setter Property="Opacity" Value="1" />
+                        <!--  <Setter Property="Foreground" Value="Black" />  -->
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
             <BitmapImage x:Key="questionMarkImage" UriSource="/LeStreamsFace;component/Resources/appbar.question.png" />
             <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
         </ResourceDictionary>
@@ -142,7 +154,7 @@
                                   Width="{Binding RelativeSource={RelativeSource FindAncestor,
                                                                                  AncestorType=MetroControls:MetroWindow},
                                                   Path=ActualWidth}"
-                                  Margin="100 0 0 0"
+                                  Margin="0 0 0 0"
                                   Header="Games"
                                   IsOpen="{Binding IsChecked,
                                                    ElementName=toggleGamesPanelButton}"
@@ -156,11 +168,15 @@
                     </Grid.RowDefinitions>
                     <StackPanel Grid.Row="0" />
 
-                    <ListBox x:Name="gamesPanel"
+                    <ListBox x:Name="gamesPanel" Margin="20,0,20,0"
                              Grid.Row="1"
+                             HorizontalAlignment="Center"
                              Background="Transparent"
                              ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                              SelectionChanged="GamesPanel_OnSelectionChanged">
+                        <ListBox.Resources>
+                            <SolidColorBrush x:Key="AccentColorBrush3" Color="Transparent" />
+                        </ListBox.Resources>
                         <ListBox.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <WrapPanel Orientation="Horizontal" />
@@ -199,8 +215,8 @@
                                   Width="{Binding RelativeSource={RelativeSource FindAncestor,
                                                                                  AncestorType=MetroControls:MetroWindow},
                                                   Path=ActualWidth}"
-                                  Margin="100 0 0 0"
-                                  Position="Right"
+                                  Margin="0 0 0 0"
+                                  Position="Left"
                                   Theme="Accent">
                 <Grid Margin="10">
                     <Grid.RowDefinitions>
@@ -210,10 +226,16 @@
                     </Grid.RowDefinitions>
                     <StackPanel Grid.Row="0" />
 
-                    <ListBox x:Name="selectedGamesPanel"
+                    <ListBox x:Name="selectedGamesPanel" Margin="20,0,20,0"
                              Grid.Row="1"
+                             HorizontalAlignment="Center"
                              Background="Transparent"
                              ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+
+                        <ListBox.Resources>
+                            <SolidColorBrush x:Key="AccentColorBrush3" Color="Transparent" />
+                        </ListBox.Resources>
+
                         <ListBox.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <WrapPanel Orientation="Horizontal" />
@@ -221,7 +243,11 @@
                         </ListBox.ItemsPanel>
                         <ListBox.ItemTemplate>
                             <DataTemplate>
-                                <StackPanel Margin="5,5,5,10">
+                                <StackPanel Width="260"
+                                            Height="200"
+                                            Margin="5,5,5,10"
+                                            HorizontalAlignment="Center">
+
                                     <Image Width="256"
                                            Height="160"
                                            Margin="0"
@@ -230,10 +256,22 @@
                                            Source="{Binding ThumbnailURI,
                                                             IsAsync=True}" />
 
-                                    <TextBlock Margin="5,5,0,0"
+                                    <TextBlock MaxWidth="256"
+                                               Margin="5,5,0,0"
                                                FontSize="13"
-                                               Foreground="White"
-                                               Opacity="0.85">
+                                               Text="{Binding Title}"
+                                               TextTrimming="CharacterEllipsis">
+                                        <TextBlock.Style>
+                                            <StaticResource ResourceKey="textBlockInSelectedGamePanel" />
+                                        </TextBlock.Style>
+                                    </TextBlock>
+
+                                    <TextBlock x:Name="selectedGamePanelStreamText"
+                                               Margin="5,0,0,0"
+                                               FontSize="13">
+                                        <TextBlock.Style>
+                                            <StaticResource ResourceKey="textBlockInSelectedGamePanel" />
+                                        </TextBlock.Style>
                                         <TextBlock.Text>
                                             <MultiBinding StringFormat="{}{0} viewers on {1}">
                                                 <Binding Path="Viewers" />
@@ -242,12 +280,6 @@
                                         </TextBlock.Text>
                                     </TextBlock>
 
-                                    <TextBlock MaxWidth="256"
-                                               Margin="5,0,0,0"
-                                               FontSize="13"
-                                               Foreground="White"
-                                               Opacity="0.85"
-                                               Text="{Binding Title}" />
                                 </StackPanel>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
