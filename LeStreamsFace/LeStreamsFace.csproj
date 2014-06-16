@@ -85,6 +85,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Resources\Entypo.ttf" />
+    <Reference Include="CefSharp">
+      <HintPath>..\packages\CefSharp.Wpf.1.25.7\lib\net40\CefSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="CefSharp.Wpf">
+      <HintPath>..\packages\CefSharp.Wpf.1.25.7\lib\net40\CefSharp.Wpf.dll</HintPath>
+    </Reference>
     <Reference Include="Kent.Boogaart.Converters">
       <HintPath>..\packages\Kent.Boogaart.Converters.1.3.1\lib\net40\Kent.Boogaart.Converters.dll</HintPath>
     </Reference>
@@ -132,6 +138,7 @@
       <HintPath>..\packages\RestSharp.104.4.0\lib\net4-client\RestSharp.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
