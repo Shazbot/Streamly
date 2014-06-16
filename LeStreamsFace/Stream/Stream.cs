@@ -107,20 +107,22 @@ namespace LeStreamsFace
         private string _loginNameTwtv;
         public bool GottenViaAutoGetFavs = false;
 
-//        public Stream() { } // we don't want the deserializer to call this
+//        public Stream()
+//        {
+//        } // we don't want the deserializer to call this
 
-        public Stream(string name, string title, int viewers, string id, string channelId, string gameName, StreamingSite streamingSite = StreamingSite.TwitchTv)
+        public Stream(string name, string title, int? viewers, string id, string channelId, string gameName, StreamingSite streamingSite = StreamingSite.TwitchTv)//:this()
         {
-            Name = name;
-            Title = title;
-            Viewers = viewers;
-            Id = id;
+            Name = name ?? string.Empty;
+            Title = title ?? string.Empty;
+            Viewers = viewers.GetValueOrDefault();
+            Id = id ?? string.Empty;
             GameName = gameName ?? string.Empty;
             Site = streamingSite;
-            ChannelId = channelId;
+            ChannelId = channelId ?? string.Empty;
             ThumbnailURI = string.Empty;
 
-            IsFavorite = ConfigManager.Instance.FavoriteStreams.Any(stream => stream.ChannelId == channelId);
+            IsFavorite = ConfigManager.Instance.FavoriteStreams.Any(stream => stream.ChannelId == ChannelId);
         }
 
         public string GetUrl()

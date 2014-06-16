@@ -7,7 +7,7 @@ IsFavorite: False
 GameName: Dota 2
 ChannelId: 50160915
 LoginNameTwtv: dreamleague
-ThumbnailURI: http://static-cdn.jtvnw.net/jtv_user_pictures/dreamleague-channel_offline_image-3e7bb4869ba4cfc3-640x360.png
+ThumbnailURI: http://static-cdn.jtvnw.net/previews-ttv/live_user_dreamleague-640x400.jpg
 
 [1] = Name: DreamLeague_v1lat
 Title: Empire -vs- The Alliance LIVE | DreamLeague LAN Finals | Day 2 | by v1lat & CaspeRRR
@@ -18,7 +18,7 @@ IsFavorite: False
 GameName: Dota 2
 ChannelId: 50904520
 LoginNameTwtv: dreamleague_v1lat
-ThumbnailURI: http://static-cdn.jtvnw.net/jtv_user_pictures/dreamleague_v1lat-channel_offline_image-cbde93e67b3e7a51-640x360.png
+ThumbnailURI: http://static-cdn.jtvnw.net/previews-ttv/live_user_dreamleague_v1lat-640x400.jpg
 
 [2] = Name: DreamhackSC2
 Title: DreamHack Open: Summer 2014 - Day 1
@@ -29,7 +29,7 @@ IsFavorite: False
 GameName: StarCraft II: Heart of the Swarm
 ChannelId: 22859340
 LoginNameTwtv: dreamhacksc2
-ThumbnailURI: http://static-cdn.jtvnw.net/jtv_user_pictures/dreamhacksc2-channel_offline_image-9380f79859073e81-640x360.png
+ThumbnailURI: http://static-cdn.jtvnw.net/previews-ttv/live_user_dreamhacksc2-640x400.jpg
 
 [3] = Name: Nightblue3
 Title: Nightblue | Challenger Solo Queue | Q&A in Queue | S4/S3 NA Challenger | Showing you how to gain elo | Jungle Main |
@@ -40,7 +40,7 @@ IsFavorite: False
 GameName: League of Legends
 ChannelId: 26946000
 LoginNameTwtv: nightblue3
-ThumbnailURI: http://static-cdn.jtvnw.net/jtv_user_pictures/nightblue3-channel_offline_image-fd133496acaadb7c-640x360.jpeg
+ThumbnailURI: http://static-cdn.jtvnw.net/previews-ttv/live_user_nightblue3-640x400.jpg
 
 [4] = Name: DreamhackCS
 Title: DreamHack Steelseries CS:GO Championship
@@ -51,7 +51,7 @@ IsFavorite: False
 GameName: Counter-Strike: Global Offensive
 ChannelId: 22859264
 LoginNameTwtv: dreamhackcs
-ThumbnailURI: http://static-cdn.jtvnw.net/jtv_user_pictures/dreamhackcs-channel_offline_image-80769e05262c2b00-640x360.png
+ThumbnailURI: http://static-cdn.jtvnw.net/previews-ttv/live_user_dreamhackcs-640x400.jpg
 
 [5] = Name: sodapoppin
 Title: <@SodapoppinTV> Sh*t Show Sunday #43 (Subs recommend games for me to play)  Streaming from Dreamhack. I will take snus today.
@@ -62,7 +62,7 @@ IsFavorite: False
 GameName: World of Warcraft: Mists of Pandaria
 ChannelId: 26301881
 LoginNameTwtv: sodapoppin
-ThumbnailURI: http://static-cdn.jtvnw.net/jtv_user_pictures/sodapoppin-channel_offline_image-edead2b545a61a56-640x360.jpeg
+ThumbnailURI: http://static-cdn.jtvnw.net/previews-ttv/live_user_sodapoppin-640x400.jpg
 
 [6] = Name: TSM_TheOddOne
 Title: TSM TheOddOne EUW Subwars
@@ -73,7 +73,7 @@ IsFavorite: False
 GameName: League of Legends
 ChannelId: 30080840
 LoginNameTwtv: tsm_theoddone
-ThumbnailURI: http://static-cdn.jtvnw.net/jtv_user_pictures/tsm_theoddone-channel_offline_image-cbac951bb25f73aa-640x360.png
+ThumbnailURI: http://static-cdn.jtvnw.net/previews-ttv/live_user_tsm_theoddone-640x400.jpg
 
 [7] = Name: DreamhackLoL
 Title: DreamHack League of Legends Championship - by Plantronics
@@ -84,7 +84,7 @@ IsFavorite: False
 GameName: League of Legends
 ChannelId: 26362946
 LoginNameTwtv: dreamhacklol
-ThumbnailURI: http://static-cdn.jtvnw.net/jtv_user_pictures/dreamhacklol-channel_offline_image-47efd5ecf7613a70-640x360.png
+ThumbnailURI: http://static-cdn.jtvnw.net/previews-ttv/live_user_dreamhacklol-640x400.jpg
 
 [8] = Name: LIRIK
 Title: GAMES AND STUFF - @DatGuyLirik
@@ -95,7 +95,7 @@ IsFavorite: False
 GameName: DayZ
 ChannelId: 23161357
 LoginNameTwtv: lirik
-ThumbnailURI: http://static-cdn.jtvnw.net/jtv_user_pictures/lirik-channel_offline_image-40bc891e487a3f16-640x360.png
+ThumbnailURI: http://static-cdn.jtvnw.net/previews-ttv/live_user_lirik-640x400.jpg
 
 [9] = Name: SCGLive
 Title: SCG Open Series Columbus featuring The Invitational - June 13-15, 2014
@@ -106,7 +106,7 @@ IsFavorite: False
 GameName: Magic: The Gathering
 ChannelId: 22480377
 LoginNameTwtv: scglive
-ThumbnailURI: http://static-cdn.jtvnw.net/jtv_user_pictures/scglive-channel_offline_image-c2c07f71730d6e78-640x360.jpeg
+ThumbnailURI: http://static-cdn.jtvnw.net/previews-ttv/live_user_scglive-640x400.jpg
 
 [10] = Name: PhantomL0rd
 Title: PhantomL0rd @ DREAMHACK!!
@@ -117,7 +117,7 @@ IsFavorite: False
 GameName: League of Legends
 ChannelId: 37701508
 LoginNameTwtv: phantoml0rd
-ThumbnailURI: http://static-cdn.jtvnw.net/jtv_user_pictures/phantoml0rd-channel_offline_image-6d666f34cfab7773-640x360.png
+ThumbnailURI: http://static-cdn.jtvnw.net/previews-ttv/live_user_phantoml0rd-640x400.jpg
 
 [11] = Name: MushIsGosu
 Title: hi im Gosu - ADC - Diamond 1 98 LP
@@ -128,7 +128,7 @@ IsFavorite: False
 GameName: League of Legends
 ChannelId: 41939266
 LoginNameTwtv: mushisgosu
-ThumbnailURI: http://static-cdn.jtvnw.net/jtv_user_pictures/mushisgosu-channel_offline_image-9b435b00cca4baaa-640x360.jpeg
+ThumbnailURI: http://static-cdn.jtvnw.net/previews-ttv/live_user_mushisgosu-640x400.jpg
 
 [12] = Name: Kolento
 Title: Playing constructed on EU.
@@ -139,7 +139,7 @@ IsFavorite: False
 GameName: Hearthstone: Heroes of Warcraft
 ChannelId: 29107421
 LoginNameTwtv: kolento
-ThumbnailURI: 
+ThumbnailURI: http://static-cdn.jtvnw.net/previews-ttv/live_user_kolento-640x400.jpg
 
 [13] = Name: Smitegame
 Title: SWC EU Week 6 Finals - Cloud 9 (1)  vs Agilitas (0) Game 2
@@ -150,7 +150,7 @@ IsFavorite: False
 GameName: Smite
 ChannelId: 31500812
 LoginNameTwtv: smitegame
-ThumbnailURI: http://static-cdn.jtvnw.net/jtv_user_pictures/smitegame-channel_offline_image-2c721f4c3d8270df-640x360.jpeg
+ThumbnailURI: http://static-cdn.jtvnw.net/previews-ttv/live_user_smitegame-640x400.jpg
 
 [14] = Name: x5tv
 Title: Brasil Gaming League Crossfire
@@ -161,7 +161,7 @@ IsFavorite: False
 GameName: Crossfire
 ChannelId: 40584032
 LoginNameTwtv: x5tv
-ThumbnailURI: 
+ThumbnailURI: http://static-cdn.jtvnw.net/previews-ttv/live_user_x5tv-640x400.jpg
 
 [15] = Name: ceh9
 Title: OPENING CASES before Na`Vi vs Fsid3 @ DREAMHACK by ceh9
@@ -172,7 +172,7 @@ IsFavorite: False
 GameName: Counter-Strike: Global Offensive
 ChannelId: 39176562
 LoginNameTwtv: ceh9
-ThumbnailURI: http://static-cdn.jtvnw.net/jtv_user_pictures/ceh9-channel_offline_image-d74f12197860fcd6-640x360.jpeg
+ThumbnailURI: http://static-cdn.jtvnw.net/previews-ttv/live_user_ceh9-640x400.jpg
 
 [16] = Name: Sevadus
 Title: Simulator Sunday! .:. @sevadus .:. sevadus.tv
@@ -183,7 +183,7 @@ IsFavorite: False
 GameName: SIMCITY (2013)
 ChannelId: 25553391
 LoginNameTwtv: sevadus
-ThumbnailURI: http://static-cdn.jtvnw.net/jtv_user_pictures/sevadus-channel_offline_image-a24c411982078268-640x360.png
+ThumbnailURI: http://static-cdn.jtvnw.net/previews-ttv/live_user_sevadus-640x400.jpg
 
 [17] = Name: SparkofPhoenixTV
 Title:  [German] Minecraft Galaxy (Attack of the B Team) 19:00 - 21:00 Uhr! (So 15.06)
@@ -194,7 +194,7 @@ IsFavorite: False
 GameName: Minecraft
 ChannelId: 36464115
 LoginNameTwtv: sparkofphoenixtv
-ThumbnailURI: http://static-cdn.jtvnw.net/jtv_user_pictures/sparkofphoenixtv-channel_offline_image-d1cfaadb1cf108cb-640x360.jpeg
+ThumbnailURI: http://static-cdn.jtvnw.net/previews-ttv/live_user_sparkofphoenixtv-640x400.jpg
 
 [18] = Name: Nervarien
 Title: Nervarien lvling up smurf
@@ -205,7 +205,7 @@ IsFavorite: False
 GameName: League of Legends
 ChannelId: 25452510
 LoginNameTwtv: nervarien
-ThumbnailURI: http://static-cdn.jtvnw.net/jtv_user_pictures/nervarien-channel_offline_image-f9126935d97e7959-640x360.jpeg
+ThumbnailURI: http://static-cdn.jtvnw.net/previews-ttv/live_user_nervarien-640x400.jpg
 
 [19] = Name: QuickyBaby
 Title: QuickyBaby || 3050+ WN8 || 15/06/2014
@@ -216,7 +216,7 @@ IsFavorite: False
 GameName: World of Tanks
 ChannelId: 30623831
 LoginNameTwtv: quickybaby
-ThumbnailURI: http://static-cdn.jtvnw.net/jtv_user_pictures/quickybaby-channel_offline_image-3cd75bdbc3fa0415-640x360.jpeg
+ThumbnailURI: http://static-cdn.jtvnw.net/previews-ttv/live_user_quickybaby-640x400.jpg
 
 [20] = Name: sparcmaclived
 Title: Sparc Mac - Elite Clue Hunt [10 hours dry]
@@ -227,7 +227,7 @@ IsFavorite: False
 GameName: RuneScape
 ChannelId: 41244221
 LoginNameTwtv: sparcmaclived
-ThumbnailURI: http://static-cdn.jtvnw.net/jtv_user_pictures/sparcmaclived-channel_offline_image-bd6668d6b15b34a4-640x360.png
+ThumbnailURI: http://static-cdn.jtvnw.net/previews-ttv/live_user_sparcmaclived-640x400.jpg
 
 [21] = Name: asiagodtonegg3be0
 Title: 亞洲飽春 台肥烘培航 - 呷胖登場 <3 :: Taiwan Rank  Diamond I :: Gragas God
@@ -238,7 +238,7 @@ IsFavorite: False
 GameName: League of Legends
 ChannelId: 43177431
 LoginNameTwtv: asiagodtonegg3be0
-ThumbnailURI: http://static-cdn.jtvnw.net/jtv_user_pictures/asiagodtonegg3be0-channel_offline_image-a081d4141b92f364-640x360.png
+ThumbnailURI: http://static-cdn.jtvnw.net/previews-ttv/live_user_asiagodtonegg3be0-640x400.jpg
 
 [22] = Name: ShowVideoGames
 Title: 400+ Hour FINAL DAY Mario Kart Marathon - Giveaways Prizes - Mario Kart 8 - Online Races - 8 Subs +1 Hour - Wii U Giveaway
@@ -249,7 +249,7 @@ IsFavorite: False
 GameName: Mario Kart 8
 ChannelId: 45837105
 LoginNameTwtv: showvideogames
-ThumbnailURI: http://static-cdn.jtvnw.net/jtv_user_pictures/showvideogames-channel_offline_image-94b7737ff136dc79-640x360.png
+ThumbnailURI: http://static-cdn.jtvnw.net/previews-ttv/live_user_showvideogames-640x400.jpg
 
 [23] = Name: MiSTakElolz
 Title: MiSTakE - 韓服鑽一天梯。Diamond 1 SoloQ on KR server. (中文/Eng)
@@ -260,7 +260,7 @@ IsFavorite: False
 GameName: League of Legends
 ChannelId: 29825457
 LoginNameTwtv: mistakelolz
-ThumbnailURI: http://static-cdn.jtvnw.net/jtv_user_pictures/mistakelolz-channel_offline_image-4a8407f5e819a535-640x360.jpeg
+ThumbnailURI: http://static-cdn.jtvnw.net/previews-ttv/live_user_mistakelolz-640x400.jpg
 
 [24] = Name: Swifty
 Title: Swifty 24 Hour Stream / Gaming at the Dreamhack!
@@ -271,7 +271,7 @@ IsFavorite: False
 GameName: World of Warcraft: Mists of Pandaria
 ChannelId: 23524577
 LoginNameTwtv: swifty
-ThumbnailURI: http://static-cdn.jtvnw.net/jtv_user_pictures/swifty-channel_offline_image-ca421e997608d2de-640x360.jpeg
+ThumbnailURI: http://static-cdn.jtvnw.net/previews-ttv/live_user_swifty-640x400.jpg
 
 [25] = Name: LegendaryLea
 Title: Dreamhack Stream Day 2. I finally slept for longer than three hours \^_^/ Hall B Row 8 seat 46
@@ -282,7 +282,7 @@ IsFavorite: False
 GameName: Hearthstone: Heroes of Warcraft
 ChannelId: 37116492
 LoginNameTwtv: legendarylea
-ThumbnailURI: http://static-cdn.jtvnw.net/jtv_user_pictures/legendarylea-channel_offline_image-55d032a53846f38a-640x360.png
+ThumbnailURI: http://static-cdn.jtvnw.net/previews-ttv/live_user_legendarylea-640x400.jpg
 
 [26] = Name: BeyondTheSummit
 Title: REBROADCAST: ECL LAN Finals - DK vs NB (WB Finals), iG vs Loser (LB Finals), then Grand Finals
@@ -293,7 +293,7 @@ IsFavorite: False
 GameName: Dota 2
 ChannelId: 29578325
 LoginNameTwtv: beyondthesummit
-ThumbnailURI: http://static-cdn.jtvnw.net/jtv_user_pictures/beyondthesummit-channel_offline_image-53bd7662904b95e3-640x360.jpeg
+ThumbnailURI: http://static-cdn.jtvnw.net/previews-ttv/live_user_beyondthesummit-640x400.jpg
 
 [27] = Name: Ludendi
 Title: Team Ludendi presents speedrunning at DreamHack Summer 2014!
@@ -304,7 +304,7 @@ IsFavorite: False
 GameName: Donkey Kong Country 2: Diddy's Kong Quest
 ChannelId: 28673774
 LoginNameTwtv: ludendi
-ThumbnailURI: http://static-cdn.jtvnw.net/jtv_user_pictures/ludendi-channel_offline_image-821fc3728572551f-640x360.jpeg
+ThumbnailURI: http://static-cdn.jtvnw.net/previews-ttv/live_user_ludendi-640x400.jpg
 
 [28] = Name: DaSquirrelsNuts
 Title: SPINTIRES Developer Interview | Da-Nut-House
@@ -315,7 +315,7 @@ IsFavorite: False
 GameName: Spin Tires
 ChannelId: 30196776
 LoginNameTwtv: dasquirrelsnuts
-ThumbnailURI: http://static-cdn.jtvnw.net/jtv_user_pictures/dasquirrelsnuts-channel_offline_image-acfab8e7464a6f0d-640x360.jpeg
+ThumbnailURI: http://static-cdn.jtvnw.net/previews-ttv/live_user_dasquirrelsnuts-640x400.jpg
 
 [29] = Name: TaKeTV
 Title: [GER] DHOPEN Summer - Day 2
@@ -326,7 +326,7 @@ IsFavorite: False
 GameName: StarCraft II: Heart of the Swarm
 ChannelId: 30186974
 LoginNameTwtv: taketv
-ThumbnailURI: http://static-cdn.jtvnw.net/jtv_user_pictures/taketv-channel_offline_image-ae6b906cfba6f362-640x360.png
+ThumbnailURI: http://static-cdn.jtvnw.net/previews-ttv/live_user_taketv-640x400.jpg
 
 [30] = Name: CohhCarnage
 Title: [V. Hard/Hardcore/No Ranged] Fallout: New Vegas - The drug-addicted, kleptomaniac Ninja playthrough (!fnvninja for info) - [Day 244]
@@ -337,7 +337,7 @@ IsFavorite: False
 GameName: Fallout: New Vegas
 ChannelId: 26610234
 LoginNameTwtv: cohhcarnage
-ThumbnailURI: http://static-cdn.jtvnw.net/jtv_user_pictures/cohhcarnage-channel_offline_image-8479907fa45237d3-640x360.jpeg
+ThumbnailURI: http://static-cdn.jtvnw.net/previews-ttv/live_user_cohhcarnage-640x400.jpg
 
 [31] = Name: gnumme
 Title: Русский стрим от Гнума! Слабоумие и отвага на арене и в ранкеде. Ja!
@@ -348,7 +348,7 @@ IsFavorite: False
 GameName: Hearthstone: Heroes of Warcraft
 ChannelId: 40022691
 LoginNameTwtv: gnumme
-ThumbnailURI: http://static-cdn.jtvnw.net/jtv_user_pictures/gnumme-channel_offline_image-2d2e54936cf4b578-640x360.jpeg
+ThumbnailURI: http://static-cdn.jtvnw.net/previews-ttv/live_user_gnumme-640x400.jpg
 
 [32] = Name: BASETRADETV
 Title: Jjakji vs Mana - DHOpen [English] by BaseTradeTV
@@ -359,7 +359,7 @@ IsFavorite: False
 GameName: StarCraft II: Heart of the Swarm
 ChannelId: 36619478
 LoginNameTwtv: basetradetv
-ThumbnailURI: http://static-cdn.jtvnw.net/jtv_user_pictures/basetradetv-channel_offline_image-28c3ea5e5e1f916b-640x360.png
+ThumbnailURI: http://static-cdn.jtvnw.net/previews-ttv/live_user_basetradetv-640x400.jpg
 
 [33] = Name: infinitecrisis
 Title: Dreamhack clash! Dignitas vs. Na'Vi! $2000 per win!
@@ -370,7 +370,7 @@ IsFavorite: False
 GameName: Infinite Crisis
 ChannelId: 41293043
 LoginNameTwtv: infinitecrisis
-ThumbnailURI: http://static-cdn.jtvnw.net/jtv_user_pictures/infinitecrisis-channel_offline_image-0f3df1652a5be26e-640x360.png
+ThumbnailURI: http://static-cdn.jtvnw.net/previews-ttv/live_user_infinitecrisis-640x400.jpg
 
 [34] = Name: dreamleague_es
 Title: [ES] ASUS ROG DreamLeague - LAN  Alliance (1)  vs Empire (0)  B03  - Día 2
@@ -381,7 +381,7 @@ IsFavorite: False
 GameName: Dota 2
 ChannelId: 57886797
 LoginNameTwtv: dreamleague_es
-ThumbnailURI: http://static-cdn.jtvnw.net/jtv_user_pictures/dreamleague_es-channel_offline_image-e48a7b3324327f69-640x360.png
+ThumbnailURI: http://static-cdn.jtvnw.net/previews-ttv/live_user_dreamleague_es-640x400.jpg
 
 [35] = Name: Virtuspro1SC2
 Title: DreamHack Summer, Группа В: Snute, HerO, Jjakji, Dayshi
@@ -392,7 +392,7 @@ IsFavorite: False
 GameName: StarCraft II: Heart of the Swarm
 ChannelId: 28648640
 LoginNameTwtv: virtuspro1sc2
-ThumbnailURI: http://static-cdn.jtvnw.net/jtv_user_pictures/virtuspro1sc2-channel_offline_image-d1ce74b2b8b2b903-640x360.jpeg
+ThumbnailURI: http://static-cdn.jtvnw.net/previews-ttv/live_user_virtuspro1sc2-640x400.jpg
 
 [36] = Name: Ducksauce
 Title: [Ducksauce] - Streaming for St. Jude Children's Hospital!
@@ -403,7 +403,7 @@ IsFavorite: False
 GameName: Hearthstone: Heroes of Warcraft
 ChannelId: 31606651
 LoginNameTwtv: ducksauce
-ThumbnailURI: http://static-cdn.jtvnw.net/jtv_user_pictures/ducksauce-channel_offline_image-a9b847362cdf2f19-640x360.png
+ThumbnailURI: http://static-cdn.jtvnw.net/previews-ttv/live_user_ducksauce-640x400.jpg
 
 [37] = Name: Furkay
 Title: [GER] A Wizard's Lizard [nosrl]
@@ -414,10 +414,10 @@ IsFavorite: False
 GameName: A Wizard's Lizard
 ChannelId: 29514354
 LoginNameTwtv: furkay
-ThumbnailURI: http://static-cdn.jtvnw.net/jtv_user_pictures/furkay-channel_offline_image-a052bac7a9786555-640x360.png
+ThumbnailURI: http://static-cdn.jtvnw.net/previews-ttv/live_user_furkay-640x400.jpg
 
 [38] = Name: KittyPlaysGames
-Title:  DREAMHACK SWEDEN DAY 2 :D Giveaways planned here for tomorrow :D Hall B Row 8
+Title:  DREAMHACK SWEDEN DAY 2 :D Giveaways planned here for tomorrow :D Hall B Row 8
 Viewers: 1402
 Id: 9918060288
 Site: TwitchTv
@@ -425,7 +425,7 @@ IsFavorite: False
 GameName: Counter-Strike: Global Offensive
 ChannelId: 39627315
 LoginNameTwtv: kittyplaysgames
-ThumbnailURI: http://static-cdn.jtvnw.net/jtv_user_pictures/kittyplaysgames-channel_offline_image-5ad263d65cada69d-640x360.jpeg
+ThumbnailURI: http://static-cdn.jtvnw.net/previews-ttv/live_user_kittyplaysgames-640x400.jpg
 
 [39] = Name: best_korea_63
 Title: Korea SoloQ - Challengers 2500+ Elo
@@ -436,7 +436,7 @@ IsFavorite: False
 GameName: League of Legends
 ChannelId: 64418217
 LoginNameTwtv: best_korea_63
-ThumbnailURI: 
+ThumbnailURI: http://static-cdn.jtvnw.net/previews-ttv/live_user_best_korea_63-640x400.jpg
 
 [40] = Name: TabzzHD
 Title: [A] Tabzz HyperX
@@ -447,7 +447,7 @@ IsFavorite: False
 GameName: League of Legends
 ChannelId: 37891479
 LoginNameTwtv: tabzzhd
-ThumbnailURI: 
+ThumbnailURI: http://static-cdn.jtvnw.net/previews-ttv/live_user_tabzzhd-640x400.jpg
 
 [41] = Name: TwitchPlaysPokemon
 Title: Twitch Plays Pokemon (Enter button inputs via chat!!!)
@@ -458,7 +458,7 @@ IsFavorite: False
 GameName: Pokémon Black/White
 ChannelId: 56648155
 LoginNameTwtv: twitchplayspokemon
-ThumbnailURI: 
+ThumbnailURI: http://static-cdn.jtvnw.net/previews-ttv/live_user_twitchplayspokemon-640x400.jpg
 
 [42] = Name: EmStarcraft
 Title: DH Open ­ Polish stream by EmSc2Tv
@@ -469,7 +469,7 @@ IsFavorite: False
 GameName: StarCraft II: Heart of the Swarm
 ChannelId: 20899820
 LoginNameTwtv: emstarcraft
-ThumbnailURI: http://static-cdn.jtvnw.net/jtv_user_pictures/emstarcraft-channel_offline_image-1d6c7c18dd40a49d-640x360.png
+ThumbnailURI: http://static-cdn.jtvnw.net/previews-ttv/live_user_emstarcraft-640x400.jpg
 
 [43] = Name: TheKedosZone
 Title: TheKedosZone - German Live Let's Play
@@ -480,7 +480,7 @@ IsFavorite: False
 GameName: Minecraft
 ChannelId: 21739612
 LoginNameTwtv: thekedoszone
-ThumbnailURI: http://static-cdn.jtvnw.net/jtv_user_pictures/thekedoszone-channel_offline_image-74c5f3a0fae22e2b-640x360.jpeg
+ThumbnailURI: http://static-cdn.jtvnw.net/previews-ttv/live_user_thekedoszone-640x400.jpg
 
 [44] = Name: Wootystyle
 Title: Road to AFRO! :: Gut Knife Blue Steel(200pt) Giveaway!
@@ -491,7 +491,7 @@ IsFavorite: False
 GameName: Counter-Strike: Global Offensive
 ChannelId: 35980760
 LoginNameTwtv: wootystyle
-ThumbnailURI: http://static-cdn.jtvnw.net/jtv_user_pictures/wootystyle-channel_offline_image-92a88f1ca8c49356-640x360.png
+ThumbnailURI: http://static-cdn.jtvnw.net/previews-ttv/live_user_wootystyle-640x400.jpg
 
 [45] = Name: Alinity
 Title: Alinity || Ahri Cosplay - 10 squats per sub, don't make me sweaty! Short stream before running to the hospital :)
@@ -502,7 +502,7 @@ IsFavorite: False
 GameName: World of Warcraft: Mists of Pandaria
 ChannelId: 38718052
 LoginNameTwtv: alinity
-ThumbnailURI: http://static-cdn.jtvnw.net/jtv_user_pictures/alinity-channel_offline_image-bdeedf1a0bfe9a63-640x360.png
+ThumbnailURI: http://static-cdn.jtvnw.net/previews-ttv/live_user_alinity-640x400.jpg
 
 [46] = Name: Pokelawls
 Title: President of LOL | EUW 5-0 RANKED! | D1 ADC/MARKSMAN | Teaching you how to improve!.. sometimes. |
@@ -513,7 +513,7 @@ IsFavorite: False
 GameName: League of Legends
 ChannelId: 12943173
 LoginNameTwtv: pokelawls
-ThumbnailURI: http://static-cdn.jtvnw.net/jtv_user_pictures/pokelawls-channel_offline_image-f8d97fc15a428e49-640x360.png
+ThumbnailURI: http://static-cdn.jtvnw.net/previews-ttv/live_user_pokelawls-640x400.jpg
 
 [47] = Name: Dexter_BL
 Title: 25% off Wildstar | Beer for Breakfast | 500+ HR Stream +1hr per 4 sub! Giveaways!
@@ -524,7 +524,7 @@ IsFavorite: False
 GameName: WildStar
 ChannelId: 10180554
 LoginNameTwtv: dexter_bl
-ThumbnailURI: http://static-cdn.jtvnw.net/jtv_user_pictures/dexter_bl-channel_offline_image-80e86c53c34a4f4e-640x360.png
+ThumbnailURI: http://static-cdn.jtvnw.net/previews-ttv/live_user_dexter_bl-640x400.jpg
 
 [48] = Name: Xargon0731
 Title: Xargon實況台【一場LOL  等等L4D2大團】
@@ -535,7 +535,7 @@ IsFavorite: False
 GameName: Left 4 Dead 2
 ChannelId: 47250099
 LoginNameTwtv: xargon0731
-ThumbnailURI: http://static-cdn.jtvnw.net/jtv_user_pictures/xargon0731-channel_offline_image-8bd399811e556726-640x360.jpeg
+ThumbnailURI: http://static-cdn.jtvnw.net/previews-ttv/live_user_xargon0731-640x400.jpg
 
 [49] = Name: lolstarladder
 Title:  Starladder.TV Starseries GameDay 17
@@ -546,11 +546,10 @@ IsFavorite: False
 GameName: League of Legends
 ChannelId: 54882935
 LoginNameTwtv: lolstarladder
-ThumbnailURI: http://static-cdn.jtvnw.net/jtv_user_pictures/lolstarladder-channel_offline_image-4eb9d3ba504b5668-640x360.png
+ThumbnailURI: http://static-cdn.jtvnw.net/previews-ttv/live_user_lolstarladder-640x400.jpg
 
 [50] = Name: A1taOda
-Title: Калибровочка 8-1
-Показываю как делать 5к+
+Title: Калибровочка 8-1 Показываю как делать 5к+
 Viewers: 1046
 Id: 9913602640
 Site: TwitchTv
@@ -558,7 +557,7 @@ IsFavorite: False
 GameName: Dota 2
 ChannelId: 51435464
 LoginNameTwtv: a1taoda
-ThumbnailURI: http://static-cdn.jtvnw.net/jtv_user_pictures/a1taoda-channel_offline_image-63cc1322dbda3959-640x360.jpeg
+ThumbnailURI: http://static-cdn.jtvnw.net/previews-ttv/live_user_a1taoda-640x400.jpg
 
 [51] = Name: TrumpSC
 Title: Trump Watches Dreamhack come chat about it yo~  (http://www.viagame.com/channels/hearthstone-championship/)
@@ -569,7 +568,7 @@ IsFavorite: False
 GameName: Hearthstone: Heroes of Warcraft
 ChannelId: 14836307
 LoginNameTwtv: trumpsc
-ThumbnailURI: http://static-cdn.jtvnw.net/jtv_user_pictures/trumpsc-channel_offline_image-9ae960504a085bd3-640x360.jpeg
+ThumbnailURI: http://static-cdn.jtvnw.net/previews-ttv/live_user_trumpsc-640x400.jpg
 
 [52] = Name: Swiftor
 Title: Some Destiny before I hang out with Dad. Happy Fathers Day to all the dads out there!
@@ -580,7 +579,7 @@ IsFavorite: False
 GameName: Destiny
 ChannelId: 274625
 LoginNameTwtv: swiftor
-ThumbnailURI: http://static-cdn.jtvnw.net/jtv_user_pictures/swiftor-channel_offline_image-9b170bbb62388cbd-640x360.png
+ThumbnailURI: http://static-cdn.jtvnw.net/previews-ttv/live_user_swiftor-640x400.jpg
 
 [53] = Name: ESLTV_Hungary
 Title: LoLfoglalás elődöntő: Wasteland Heroes  vs Nem volt jobb jungler  Kommentátor: PierceTheHeaven & Arwyll
@@ -591,11 +590,10 @@ IsFavorite: False
 GameName: League of Legends
 ChannelId: 52245511
 LoginNameTwtv: esltv_hungary
-ThumbnailURI: http://static-cdn.jtvnw.net/jtv_user_pictures/esltv_hungary-channel_offline_image-ecc03d0925bf4273-640x360.png
+ThumbnailURI: http://static-cdn.jtvnw.net/previews-ttv/live_user_esltv_hungary-640x400.jpg
 
 [54] = Name: luke4316live
 Title: MONDIALI IN FIFA! SPACCHETTAMENTO TIME - XBOX ONE -
-
 Viewers: 1007
 Id: 9916658656
 Site: TwitchTv
@@ -603,7 +601,7 @@ IsFavorite: False
 GameName: FIFA 14
 ChannelId: 43725651
 LoginNameTwtv: luke4316live
-ThumbnailURI: http://static-cdn.jtvnw.net/jtv_user_pictures/luke4316live-channel_offline_image-6e9b0153e10603e1-640x360.png
+ThumbnailURI: http://static-cdn.jtvnw.net/previews-ttv/live_user_luke4316live-640x400.jpg
 
 [55] = Name: LAGTVMaximusBlack
 Title: Future TSM Water Boy MaximusBlack & The FellowShip Of The Bouses!
@@ -614,7 +612,7 @@ IsFavorite: False
 GameName: League of Legends
 ChannelId: 23945610
 LoginNameTwtv: lagtvmaximusblack
-ThumbnailURI: http://static-cdn.jtvnw.net/jtv_user_pictures/lagtvmaximusblack-channel_offline_image-05ce0221800cb345-640x360.jpeg
+ThumbnailURI: http://static-cdn.jtvnw.net/previews-ttv/live_user_lagtvmaximusblack-640x400.jpg
 
 [56] = Name: SoupOrHero
 Title: Male Gamer does 2nd Elite
@@ -625,7 +623,7 @@ IsFavorite: False
 GameName: RuneScape
 ChannelId: 27184484
 LoginNameTwtv: souporhero
-ThumbnailURI: http://static-cdn.jtvnw.net/jtv_user_pictures/souporhero-channel_offline_image-732d81ac590a2f70-640x360.png
+ThumbnailURI: http://static-cdn.jtvnw.net/previews-ttv/live_user_souporhero-640x400.jpg
 
 [57] = Name: TheMooseClub
 Title: 3v3 | Voidleague EUW Tournament FINAL | The Moose Club
@@ -636,7 +634,7 @@ IsFavorite: False
 GameName: League of Legends
 ChannelId: 60273639
 LoginNameTwtv: themooseclub
-ThumbnailURI: http://static-cdn.jtvnw.net/jtv_user_pictures/themooseclub-channel_offline_image-75dfe5baadff00c4-640x360.jpeg
+ThumbnailURI: http://static-cdn.jtvnw.net/previews-ttv/live_user_themooseclub-640x400.jpg
 
 [58] = Name: heyitsBBG
 Title: 24 Hour Charity Stream For Children's Cancer (Hopes & Heroes Foundation)
@@ -647,7 +645,7 @@ IsFavorite: False
 GameName: Call of Duty: Ghosts
 ChannelId: 22168893
 LoginNameTwtv: heyitsbbg
-ThumbnailURI: http://static-cdn.jtvnw.net/jtv_user_pictures/heyitsbbg-channel_offline_image-3108c517d50d068b-640x360.png
+ThumbnailURI: http://static-cdn.jtvnw.net/previews-ttv/live_user_heyitsbbg-640x400.jpg
 
 [59] = Name: Moondye7
 Title: ヽ༼ຈل͜ຈ༽ﾉ 15.06.2014 DayZ Stream ! Wann 19-21 Uhr ! HEUTE ᕕ( ᐛ )ᕗ
@@ -658,7 +656,7 @@ IsFavorite: False
 GameName: DayZ
 ChannelId: 35933008
 LoginNameTwtv: moondye7
-ThumbnailURI: http://static-cdn.jtvnw.net/jtv_user_pictures/moondye7-channel_offline_image-870d23768d61cb9d-640x360.jpeg
+ThumbnailURI: http://static-cdn.jtvnw.net/previews-ttv/live_user_moondye7-640x400.jpg
 
 [60] = Name: MrMaikAp
 Title: 16 Uhr offizieller Stream start!!! #MaikUnity
@@ -669,7 +667,7 @@ IsFavorite: False
 GameName: League of Legends
 ChannelId: 48467303
 LoginNameTwtv: mrmaikap
-ThumbnailURI: http://static-cdn.jtvnw.net/jtv_user_pictures/mrmaikap-channel_offline_image-f5a8d04f9a606e69-640x360.png
+ThumbnailURI: http://static-cdn.jtvnw.net/previews-ttv/live_user_mrmaikap-640x400.jpg
 
 [61] = Name: GisadoX
 Title: DH Open - Korean stream by Gisado
@@ -680,7 +678,7 @@ IsFavorite: False
 GameName: StarCraft II: Heart of the Swarm
 ChannelId: 38750150
 LoginNameTwtv: gisadox
-ThumbnailURI: http://static-cdn.jtvnw.net/jtv_user_pictures/gisadox-channel_offline_image-1cd87c2faabd9e4d-640x360.png
+ThumbnailURI: http://static-cdn.jtvnw.net/previews-ttv/live_user_gisadox-640x400.jpg
 
 [62] = Name: Tankistarladder
 Title: Tanki Online Starladder.tv
@@ -691,7 +689,7 @@ IsFavorite: False
 GameName: Tanki Online
 ChannelId: 62297903
 LoginNameTwtv: tankistarladder
-ThumbnailURI: http://static-cdn.jtvnw.net/jtv_user_pictures/tankistarladder-channel_offline_image-850d10d16673a60c-640x360.jpeg
+ThumbnailURI: http://static-cdn.jtvnw.net/previews-ttv/live_user_tankistarladder-640x400.jpg
 
 [63] = Name: chinglishtv
 Title: Chinglish Live from Dreamhack | #stillalive #hypetrain #subtrain
@@ -702,7 +700,7 @@ IsFavorite: False
 GameName: World of Warcraft: Mists of Pandaria
 ChannelId: 38779717
 LoginNameTwtv: chinglishtv
-ThumbnailURI: http://static-cdn.jtvnw.net/jtv_user_pictures/chinglishtv-channel_offline_image-957d966f6280a842-640x360.jpeg
+ThumbnailURI: http://static-cdn.jtvnw.net/previews-ttv/live_user_chinglishtv-640x400.jpg
 
 [64] = Name: LegendOfGamer
 Title: [NA] - RIP League Chat - Short Stream (Maybe) Doing Team Builder IRL (Gold & Above)
@@ -713,7 +711,7 @@ IsFavorite: False
 GameName: League of Legends
 ChannelId: 12263105
 LoginNameTwtv: legendofgamer
-ThumbnailURI: http://static-cdn.jtvnw.net/jtv_user_pictures/legendofgamer-channel_offline_image-9f30327c99d599c2-640x360.png
+ThumbnailURI: http://static-cdn.jtvnw.net/previews-ttv/live_user_legendofgamer-640x400.jpg
 
 [65] = Name: Hotted89
 Title: <HOTTED> AT DREAMHACK!  Moonkin RBGS! Warlords Alpha and more!! RAZER GIVEAWAYS next @2500 Viewers!
@@ -724,7 +722,7 @@ IsFavorite: False
 GameName: World of Warcraft: Mists of Pandaria
 ChannelId: 20260659
 LoginNameTwtv: hotted89
-ThumbnailURI: http://static-cdn.jtvnw.net/jtv_user_pictures/hotted89-channel_offline_image-abc2ce9c6e9cd67c-640x360.png
+ThumbnailURI: http://static-cdn.jtvnw.net/previews-ttv/live_user_hotted89-640x400.jpg
 
 [66] = Name: MilleniumTV
 Title: Dreamhack Summer 2014
@@ -735,7 +733,7 @@ IsFavorite: False
 GameName: StarCraft II: Heart of the Swarm
 ChannelId: 26213147
 LoginNameTwtv: milleniumtv
-ThumbnailURI: 
+ThumbnailURI: http://static-cdn.jtvnw.net/previews-ttv/live_user_milleniumtv-640x400.jpg
 
 [67] = Name: UselessMouth
 Title: Mario Party 8 - Отдыхаем и Играем
@@ -746,7 +744,7 @@ IsFavorite: False
 GameName: Mario Party 8
 ChannelId: 22877031
 LoginNameTwtv: uselessmouth
-ThumbnailURI: http://static-cdn.jtvnw.net/jtv_user_pictures/uselessmouth-channel_offline_image-9aa34b249ed0871b-640x360.png
+ThumbnailURI: http://static-cdn.jtvnw.net/previews-ttv/live_user_uselessmouth-640x400.jpg
 
 [68] = Name: Ass_inFire
 Title: TOP 1 EU PLAYS RU.
@@ -757,7 +755,7 @@ IsFavorite: False
 GameName: World of Tanks
 ChannelId: 62271603
 LoginNameTwtv: ass_infire
-ThumbnailURI: http://static-cdn.jtvnw.net/jtv_user_pictures/ass_infire-channel_offline_image-cd32527ee1eefbc8-640x360.png
+ThumbnailURI: http://static-cdn.jtvnw.net/previews-ttv/live_user_ass_infire-640x400.jpg
 
 [69] = Name: yznb
 Title: Yacine 'yzn' Laghmari | #MATCHMAKING
@@ -768,7 +766,7 @@ IsFavorite: False
 GameName: Counter-Strike: Global Offensive
 ChannelId: 31582993
 LoginNameTwtv: yznb
-ThumbnailURI: http://static-cdn.jtvnw.net/jtv_user_pictures/yznb-channel_offline_image-e0a786d078f077a2-640x360.jpeg
+ThumbnailURI: http://static-cdn.jtvnw.net/previews-ttv/live_user_yznb-640x400.jpg
 
 [70] = Name: RiotGamesEL
 Title: Αναβάθμιση στο Φαράγγι των Επικαλεστών
@@ -779,7 +777,7 @@ IsFavorite: False
 GameName: League of Legends
 ChannelId: 36514204
 LoginNameTwtv: riotgamesel
-ThumbnailURI: 
+ThumbnailURI: http://static-cdn.jtvnw.net/previews-ttv/live_user_riotgamesel-640x400.jpg
 
 [71] = Name: Aiekillu
 Title: [Fr] On test deux nouveaux jeux : Zoo Park et Spintires ensuite BATTLE ROYALE!
@@ -790,7 +788,7 @@ IsFavorite: False
 GameName: Spin Tires
 ChannelId: 27085209
 LoginNameTwtv: aiekillu
-ThumbnailURI: http://static-cdn.jtvnw.net/jtv_user_pictures/aiekillu-channel_offline_image-52c77458bf0285ee-640x360.jpeg
+ThumbnailURI: http://static-cdn.jtvnw.net/previews-ttv/live_user_aiekillu-640x400.jpg
 
 [72] = Name: GamingLive_TV
 Title: [FR] DreamHack Summer 2014 avec LDLC & VakarM sur GamingLive ! Day-2
@@ -801,7 +799,7 @@ IsFavorite: False
 GameName: Counter-Strike: Global Offensive
 ChannelId: 62240511
 LoginNameTwtv: gaminglive_tv
-ThumbnailURI: 
+ThumbnailURI: http://static-cdn.jtvnw.net/previews-ttv/live_user_gaminglive_tv-640x400.jpg
 
 [73] = Name: LegendsBRtv
 Title: Raidcall Torneio dos Legends -GRUPO ID 2020 - CHAT E SORTEIOS
@@ -812,7 +810,7 @@ IsFavorite: False
 GameName: League of Legends
 ChannelId: 30803782
 LoginNameTwtv: legendsbrtv
-ThumbnailURI: http://static-cdn.jtvnw.net/jtv_user_pictures/legendsbrtv-channel_offline_image-7e26785ee9d87a4c-640x360.png
+ThumbnailURI: http://static-cdn.jtvnw.net/previews-ttv/live_user_legendsbrtv-640x400.jpg
 
 [74] = Name: Dreamhack
 Title: Dreamhack Main Stage Summer 2014
@@ -823,7 +821,7 @@ IsFavorite: False
 GameName: 
 ChannelId: 186012
 LoginNameTwtv: dreamhack
-ThumbnailURI: http://static-cdn.jtvnw.net/jtv_user_pictures/dreamhack-channel_offline_image-d80b98436c9143e5-640x360.png
+ThumbnailURI: http://static-cdn.jtvnw.net/previews-ttv/live_user_dreamhack-640x400.jpg
 
 [75] = Name: TorNis
 Title: Fez | So many secrets! [ENG/RUS]
@@ -834,7 +832,7 @@ IsFavorite: False
 GameName: Fez
 ChannelId: 21794966
 LoginNameTwtv: tornis
-ThumbnailURI: http://static-cdn.jtvnw.net/jtv_user_pictures/tornis-channel_offline_image-31cef15e8305faf6-640x360.jpeg
+ThumbnailURI: http://static-cdn.jtvnw.net/previews-ttv/live_user_tornis-640x400.jpg
 
 [76] = Name: Esvper
 Title: [NA/TW] QnA Between games :3
@@ -845,7 +843,7 @@ IsFavorite: False
 GameName: League of Legends
 ChannelId: 31131760
 LoginNameTwtv: esvper
-ThumbnailURI: http://static-cdn.jtvnw.net/jtv_user_pictures/esvper-channel_offline_image-de853edb29fde042-640x360.jpeg
+ThumbnailURI: http://static-cdn.jtvnw.net/previews-ttv/live_user_esvper-640x400.jpg
 
 [77] = Name: Bigdaddyden76
 Title: Bigdaddyden The Witch Doctor,2.5 Mil DPS Toxic Hound Build!!  Sub Button Hype! G Series DX Racer Chair! Show No.#287
@@ -856,7 +854,7 @@ IsFavorite: False
 GameName: Diablo III: Reaper of Souls
 ChannelId: 40525367
 LoginNameTwtv: bigdaddyden76
-ThumbnailURI: http://static-cdn.jtvnw.net/jtv_user_pictures/bigdaddyden76-channel_offline_image-a9598a5151965e03-640x360.jpeg
+ThumbnailURI: http://static-cdn.jtvnw.net/previews-ttv/live_user_bigdaddyden76-640x400.jpg
 
 [78] = Name: xSmaK
 Title: SmaK - DayZ!
@@ -867,7 +865,7 @@ IsFavorite: False
 GameName: DayZ
 ChannelId: 30782393
 LoginNameTwtv: xsmak
-ThumbnailURI: http://static-cdn.jtvnw.net/jtv_user_pictures/xsmak-channel_offline_image-0be58b3a7ed99ad0-640x360.jpeg
+ThumbnailURI: http://static-cdn.jtvnw.net/previews-ttv/live_user_xsmak-640x400.jpg
 
 [79] = Name: Luddeyaao
 Title: Luddeyaao playing miraclehoe live from DH :)
@@ -878,7 +876,7 @@ IsFavorite: False
 GameName: Hearthstone: Heroes of Warcraft
 ChannelId: 37891914
 LoginNameTwtv: luddeyaao
-ThumbnailURI: 
+ThumbnailURI: http://static-cdn.jtvnw.net/previews-ttv/live_user_luddeyaao-640x400.jpg
 
 [80] = Name: Shoami
 Title: German / English Challenger || SoloQ #TheRealGragas #TheThreshPrince || 1000 Follower Crazy Giveaway 24 HOURS STREAM
@@ -889,7 +887,7 @@ IsFavorite: False
 GameName: League of Legends
 ChannelId: 60452432
 LoginNameTwtv: shoami
-ThumbnailURI: http://static-cdn.jtvnw.net/jtv_user_pictures/shoami-channel_offline_image-4402eaa3635f8c84-640x360.png
+ThumbnailURI: http://static-cdn.jtvnw.net/previews-ttv/live_user_shoami-640x400.jpg
 
 [81] = Name: AmanSeddiqi
 Title: PACKS AND Watching ECU vs SUI
@@ -900,7 +898,7 @@ IsFavorite: False
 GameName: FIFA 14
 ChannelId: 29933100
 LoginNameTwtv: amanseddiqi
-ThumbnailURI: http://static-cdn.jtvnw.net/jtv_user_pictures/amanseddiqi-channel_offline_image-6ffe713bcd797038-640x360.jpeg
+ThumbnailURI: http://static-cdn.jtvnw.net/previews-ttv/live_user_amanseddiqi-640x400.jpg
 
 [82] = Name: FACEITTV
 Title: FACEIT.com - DHS14 CS:GO - DAY 2 - NEXT: GROUP D MATCHES
@@ -911,7 +909,7 @@ IsFavorite: False
 GameName: Counter-Strike: Global Offensive
 ChannelId: 27942990
 LoginNameTwtv: faceittv
-ThumbnailURI: http://static-cdn.jtvnw.net/jtv_user_pictures/faceittv-channel_offline_image-2b045320ab83c23b-640x360.jpeg
+ThumbnailURI: http://static-cdn.jtvnw.net/previews-ttv/live_user_faceittv-640x400.jpg
 
 [83] = Name: SkyCraftProduction
 Title: Minecraft SkyWars - FR :)
@@ -922,7 +920,7 @@ IsFavorite: False
 GameName: Minecraft
 ChannelId: 44836545
 LoginNameTwtv: skycraftproduction
-ThumbnailURI: 
+ThumbnailURI: http://static-cdn.jtvnw.net/previews-ttv/live_user_skycraftproduction-640x400.jpg
 
 [84] = Name: TrU3Ta1ent
 Title: USF4 Ranked with Bipson! He sexy
@@ -933,7 +931,7 @@ IsFavorite: False
 GameName: Ultra Street Fighter IV
 ChannelId: 48286022
 LoginNameTwtv: tru3ta1ent
-ThumbnailURI: http://static-cdn.jtvnw.net/jtv_user_pictures/tru3ta1ent-channel_offline_image-b9bcca5ae878732c-640x360.png
+ThumbnailURI: http://static-cdn.jtvnw.net/previews-ttv/live_user_tru3ta1ent-640x400.jpg
 
 [85] = Name: gamezet_show
 Title: Pashka League of Legends   Team ranked 18 +
@@ -944,7 +942,7 @@ IsFavorite: False
 GameName: League of Legends
 ChannelId: 25104208
 LoginNameTwtv: gamezet_show
-ThumbnailURI: http://static-cdn.jtvnw.net/jtv_user_pictures/gamezet_show-channel_offline_image-27d8b5c0f4dbff02-640x360.png
+ThumbnailURI: http://static-cdn.jtvnw.net/previews-ttv/live_user_gamezet_show-640x400.jpg
 
 [86] = Name: Lassiz
 Title: Dignitas.Lassiz - SMITE - FapFapFap - Only 1 Loki
@@ -955,7 +953,7 @@ IsFavorite: False
 GameName: Smite
 ChannelId: 23397860
 LoginNameTwtv: lassiz
-ThumbnailURI: http://static-cdn.jtvnw.net/jtv_user_pictures/lassiz-channel_offline_image-e21da3b30586a7d5-640x360.jpeg
+ThumbnailURI: http://static-cdn.jtvnw.net/previews-ttv/live_user_lassiz-640x400.jpg
 
 [87] = Name: Rotpilz
 Title: [GER] Rotpilz - Minecraft GALAXY
@@ -966,7 +964,7 @@ IsFavorite: False
 GameName: Minecraft
 ChannelId: 45743861
 LoginNameTwtv: rotpilz
-ThumbnailURI: http://static-cdn.jtvnw.net/jtv_user_pictures/rotpilz-channel_offline_image-026796008624c140-640x360.png
+ThumbnailURI: http://static-cdn.jtvnw.net/previews-ttv/live_user_rotpilz-640x400.jpg
 
 [88] = Name: Rikhh
 Title: Silver Veteran Dungeons, 50 Stalker dps | Attuned & Ready | Realm First 50 Exile Hazak - EU | 50 Stalker DPS - Vet Dungeons | Nihilum
@@ -977,7 +975,7 @@ IsFavorite: False
 GameName: WildStar
 ChannelId: 37361120
 LoginNameTwtv: rikhh
-ThumbnailURI: http://static-cdn.jtvnw.net/jtv_user_pictures/rikhh-channel_offline_image-ee348ef424169de9-640x360.jpeg
+ThumbnailURI: http://static-cdn.jtvnw.net/previews-ttv/live_user_rikhh-640x400.jpg
 
 [89] = Name: asfodelpw
 Title: Пара боев
@@ -988,7 +986,7 @@ IsFavorite: False
 GameName: Prime World
 ChannelId: 45195765
 LoginNameTwtv: asfodelpw
-ThumbnailURI: 
+ThumbnailURI: http://static-cdn.jtvnw.net/previews-ttv/live_user_asfodelpw-640x400.jpg
 
 [90] = Name: Soultran
 Title: Rank 1 Sion God.  Diamond 1 60 Lp <<GIVEAWAY @ 1500 follow mystery skin ᕕ( ᐛ )ᕗ Diamond 1.Enjoy and learn roaming Beast MODE!
@@ -999,7 +997,7 @@ IsFavorite: False
 GameName: League of Legends
 ChannelId: 23071462
 LoginNameTwtv: soultran
-ThumbnailURI: 
+ThumbnailURI: http://static-cdn.jtvnw.net/previews-ttv/live_user_soultran-640x400.jpg
 
 [91] = Name: denissniderTV
 Title: REI DA MONTANHA
@@ -1010,7 +1008,7 @@ IsFavorite: False
 GameName: DayZ
 ChannelId: 35782417
 LoginNameTwtv: denissnidertv
-ThumbnailURI: http://static-cdn.jtvnw.net/jtv_user_pictures/denissnidertv-channel_offline_image-bb17a20e08650626-640x360.jpeg
+ThumbnailURI: http://static-cdn.jtvnw.net/previews-ttv/live_user_denissnidertv-640x400.jpg
 
 [92] = Name: 99Damage
 Title: DreamHack Summer 2014 - German Stream by 99Damage
@@ -1021,7 +1019,7 @@ IsFavorite: False
 GameName: Counter-Strike: Global Offensive
 ChannelId: 24208138
 LoginNameTwtv: 99damage
-ThumbnailURI: http://static-cdn.jtvnw.net/jtv_user_pictures/99damage-channel_offline_image-ea079b08c28a382e-640x360.jpeg
+ThumbnailURI: http://static-cdn.jtvnw.net/previews-ttv/live_user_99damage-640x400.jpg
 
 [93] = Name: ESL_LOL_Brasil
 Title: GO4LOL #85 - Tabela http://bit.ly/1lxhbVt
@@ -1032,7 +1030,7 @@ IsFavorite: False
 GameName: League of Legends
 ChannelId: 36791492
 LoginNameTwtv: esl_lol_brasil
-ThumbnailURI: http://static-cdn.jtvnw.net/jtv_user_pictures/esl_lol_brasil-channel_offline_image-ef84e06b0a636ae7-640x360.png
+ThumbnailURI: http://static-cdn.jtvnw.net/previews-ttv/live_user_esl_lol_brasil-640x400.jpg
 
 [94] = Name: Biinny
 Title: Super Mario 64 - 70 Star Speed Runs (N64)
@@ -1043,7 +1041,7 @@ IsFavorite: False
 GameName: Super Mario 64
 ChannelId: 22192342
 LoginNameTwtv: biinny
-ThumbnailURI: http://static-cdn.jtvnw.net/jtv_user_pictures/biinny-channel_offline_image-9e8c0b046591ae86-640x360.jpeg
+ThumbnailURI: http://static-cdn.jtvnw.net/previews-ttv/live_user_biinny-640x400.jpg
 
 [95] = Name: roxkisAbver
 Title: [RU] hearthstone
@@ -1054,7 +1052,7 @@ IsFavorite: False
 GameName: Hearthstone: Heroes of Warcraft
 ChannelId: 25046512
 LoginNameTwtv: roxkisabver
-ThumbnailURI: 
+ThumbnailURI: http://static-cdn.jtvnw.net/previews-ttv/live_user_roxkisabver-640x400.jpg
 
 [96] = Name: Gamebreakertv
 Title: Convert to Raid - Sundays at 9am PDT!
@@ -1065,7 +1063,7 @@ IsFavorite: False
 GameName: World of Warcraft: Mists of Pandaria
 ChannelId: 9507374
 LoginNameTwtv: gamebreakertv
-ThumbnailURI: 
+ThumbnailURI: http://static-cdn.jtvnw.net/previews-ttv/live_user_gamebreakertv-640x400.jpg
 
 [97] = Name: SonyaTheEvil
 Title: DreamHack HYPE \^o^/  <333 40k HYPE!!!
@@ -1076,7 +1074,7 @@ IsFavorite: False
 GameName: Dota 2
 ChannelId: 55299511
 LoginNameTwtv: sonyatheevil
-ThumbnailURI: http://static-cdn.jtvnw.net/jtv_user_pictures/sonyatheevil-channel_offline_image-06933abc40355f48-640x360.jpeg
+ThumbnailURI: http://static-cdn.jtvnw.net/previews-ttv/live_user_sonyatheevil-640x400.jpg
 
 [98] = Name: IEBattleGrounds
 Title: Super Smash Sundays - Super Arcade 24hr Smash Event - Twitch $250 Pot Bonus - Follow @OXY_Crimson @iebattlegrounds for updates - #SSS
@@ -1087,7 +1085,7 @@ IsFavorite: False
 GameName: Super Smash Bros. Melee
 ChannelId: 18768172
 LoginNameTwtv: iebattlegrounds
-ThumbnailURI: http://static-cdn.jtvnw.net/jtv_user_pictures/iebattlegrounds-channel_offline_image-2160e1891ad59132-640x360.png
+ThumbnailURI: http://static-cdn.jtvnw.net/previews-ttv/live_user_iebattlegrounds-640x400.jpg
 
 [99] = Name: ImCoty
 Title: UMG Wager Matches - Partnered with @ASTROGaming
@@ -1098,5 +1096,5 @@ IsFavorite: False
 GameName: Call of Duty: Ghosts
 ChannelId: 21685437
 LoginNameTwtv: imcoty
-ThumbnailURI: http://static-cdn.jtvnw.net/jtv_user_pictures/imcoty-channel_offline_image-fa85d137d96c7fed-640x360.png
+ThumbnailURI: http://static-cdn.jtvnw.net/previews-ttv/live_user_imcoty-640x400.jpg
 

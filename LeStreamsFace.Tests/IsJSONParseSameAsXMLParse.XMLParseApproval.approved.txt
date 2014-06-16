@@ -758,8 +758,7 @@ LoginNameTwtv: alkaizerx
 ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_alkaizerx-630x473.jpg
 
 [69] = Name: standy12
-Title: SweetCamper 鑽1 幹 日本被逆轉 有夠幹! 碎念台
-累了(雷了)就關
+Title: SweetCamper 鑽1 幹 日本被逆轉 有夠幹! 碎念台 累了(雷了)就關
 Viewers: 517
 Id: 9911678864
 Site: TwitchTv
