@@ -33,7 +33,7 @@ namespace LeStreamsFace
             return false;
         }
 
-        internal static bool IsWindowInForeground(IntPtr hWnd)
+        public static bool IsWindowInForeground(IntPtr hWnd)
         {
             return hWnd == GetForegroundWindow();
         }
@@ -76,6 +76,20 @@ namespace LeStreamsFace
         }
 
         #endregion UserInactive
+
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
+        public static extern IntPtr SendMessage(IntPtr hWnd, UInt32 Msg, IntPtr wParam, IntPtr lParam);
+
+        [Flags]
+        public enum WindowMessages
+        {
+            // ...
+
+            WM_SYSCOMMAND = 0x0112,
+            WM_LBUTTONUP = 0x0202,
+
+            // ...
+        }
 
         #region user32
 

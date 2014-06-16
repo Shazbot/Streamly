@@ -4,6 +4,7 @@
                            xmlns:LeStreamsFace="clr-namespace:LeStreamsFace"
                            xmlns:MetroControls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
                            xmlns:con="clr-namespace:Kent.Boogaart.Converters.Markup;assembly=Kent.Boogaart.Converters"
+                           xmlns:converters="clr-namespace:LeStreamsFace.Converters"
                            xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                            xmlns:lib="http://schemas.leschemasface.com/2012/xaml/presentation"
                            xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -121,6 +122,7 @@
                 <Button Click="ChangeTab_Click"
                         Content="streams"
                         Tag="{Binding ElementName=streamsTabItem}" />
+                <ToggleButton Name="toggleGamesPanelButton" Content="games" />
                 <Button Click="ChangeTab_Click"
                         Content="config"
                         Tag="{Binding ElementName=configTabItem}" />
@@ -142,6 +144,8 @@
                                                   Path=ActualWidth}"
                                   Margin="100 0 0 0"
                                   Header="Games"
+                                  IsOpen="{Binding IsChecked,
+                                                   ElementName=toggleGamesPanelButton}"
                                   Position="Right"
                                   Theme="Accent">
                 <Grid Margin="10">

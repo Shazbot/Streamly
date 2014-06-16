@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Net;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -76,7 +77,7 @@ namespace LeStreamsFace
         {
             try
             {
-                gamesFlyout.IsOpen = true;
+//                gamesFlyout.IsOpen = true;
                 var twitchResponse = await new RestClient("https://api.twitch.tv/kraken/games/top?limit=100").ExecuteTaskAsync(new RestRequest());
                 var topGamesJObject = JsonConvert.DeserializeObject<JObject>(twitchResponse.Content)["top"];
                 var a = topGamesJObject.Children().Select(token => new {game = token["game"]["name"].ToString(), thumbnail = token["game"]["box"]["medium"].ToString()});
@@ -598,6 +599,16 @@ namespace LeStreamsFace
             }
             catch (InvalidOperationException)
             {
+            }
+        }
+
+        public new void DragMove()
+        {
+            var hs = (HwndSource)PresentationSource.FromVisual(this);
+            if (WindowState == WindowState.Normal)
+            {
+                NativeMethods.SendMessage(hs.Handle, ((uint) NativeMethods.WindowMessages.WM_SYSCOMMAND), (IntPtr)0xf012, IntPtr.Zero);
+                NativeMethods.SendMessage(hs.Handle, ((uint) NativeMethods.WindowMessages.WM_LBUTTONUP), IntPtr.Zero, IntPtr.Zero);
             }
         }
 
