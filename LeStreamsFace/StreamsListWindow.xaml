@@ -221,20 +221,19 @@
                         </ListBox.ItemsPanel>
                         <ListBox.ItemTemplate>
                             <DataTemplate>
-                                <StackPanel>
+                                <StackPanel Margin="5,5,5,10">
                                     <Image Width="256"
                                            Height="160"
                                            Margin="0"
                                            RenderOptions.BitmapScalingMode="NearestNeighbor"
                                            RenderOptions.EdgeMode="Unspecified"
                                            Source="{Binding ThumbnailURI,
-                                                            IsAsync=True}"
-                                           ToolTipService.ToolTip="{Binding Name}" />
-                                    <!--  <StackPanel>  -->
+                                                            IsAsync=True}" />
 
-                                    <TextBlock FontFamily="Segoe UI Symbol"
-                                               FontSize="16"
-                                               Foreground="White">
+                                    <TextBlock Margin="5,5,0,0"
+                                               FontSize="13"
+                                               Foreground="White"
+                                               Opacity="0.85">
                                         <TextBlock.Text>
                                             <MultiBinding StringFormat="{}{0} viewers on {1}">
                                                 <Binding Path="Viewers" />
@@ -244,12 +243,11 @@
                                     </TextBlock>
 
                                     <TextBlock MaxWidth="256"
-                                               FontFamily="Segoe UI Symbol"
-                                               FontSize="16"
+                                               Margin="5,0,0,0"
+                                               FontSize="13"
                                                Foreground="White"
+                                               Opacity="0.85"
                                                Text="{Binding Title}" />
-
-                                    <!--  </StackPanel>  -->
                                 </StackPanel>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
