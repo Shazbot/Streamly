@@ -208,8 +208,8 @@
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MouseUtilities.cs" />
-    <Compile Include="NativeMethods.cs" />
+    <Compile Include="Windows Interop\MouseUtilities.cs" />
+    <Compile Include="Windows Interop\NativeMethods.cs" />
     <Compile Include="Tray Icon\NotificationAreaIcon.cs" />
     <Compile Include="NotificationWindow.xaml.cs">
       <DependentUpon>NotificationWindow.xaml</DependentUpon>
@@ -219,7 +219,7 @@
     <Compile Include="Properties\Settings.Designer.cs" />
     <Compile Include="Stream\Stream.cs" />
     <Compile Include="StreamsManager.cs" />
-    <Compile Include="Taskbar.cs" />
+    <Compile Include="Windows Interop\Taskbar.cs" />
     <Compile Include="StreamParsers\TwitchXMLStreamParser.cs" />
   </ItemGroup>
   <ItemGroup>
