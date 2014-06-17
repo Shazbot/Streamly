@@ -165,5 +165,11 @@ namespace LeStreamsFace
             get { return _inputText; }
             set { PropertyChanged.ChangeAndNotify(ref _inputText, value, () => InputText); }
         }
+
+        private void WebView_OnLoaded(object sender, RoutedEventArgs e)
+        {
+            var wings = @"<object type=""application/x-shockwave-flash"" height=""" + "100%"+ @""" width=""" + "100%" + @""" id=""live_embed_player_flash"" data=""http://www.twitch.tv/widgets/live_embed_player.swf?channel=wingsofdeath"" bgcolor=""#000000""><param name=""allowFullScreen"" value=""true"" /><param name=""allowScriptAccess"" value=""always"" /><param name=""allowNetworking"" value=""all"" /><param name=""movie"" value=""http://www.twitch.tv/widgets/live_embed_player.swf"" /><param name=""flashvars"" value=""hostname=www.twitch.tv&channel=wingsofdeath&auto_play=true&start_volume=25"" /></object><a href=""http://www.twitch.tv/wingsofdeath"" style=""padding:2px 0px 4px; display:block; width:345px; font-weight:normal; font-size:10px;text-decoration:underline; text-align:center;"">Watch live video from Wingsofdeath on www.twitch.tv</a>";
+            webView.LoadHtml(wings, "arst");// = wings;
+        }
     }
 }

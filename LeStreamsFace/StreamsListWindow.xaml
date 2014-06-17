@@ -218,7 +218,7 @@
                                                                                  AncestorType=MetroControls:MetroWindow},
                                                   Path=ActualWidth}"
                                   Margin="0 0 0 0"
-                                  Position="Left"
+                                  Position="Right"
                                   Theme="Accent">
                 <Grid Margin="10">
                     <Grid.RowDefinitions>
@@ -297,7 +297,7 @@
                                   Margin="0 0 0 0"
                                   IsModal="True"
                                   IsOpen="True"
-                                  Position="Left"
+                                  Position="Right"
                                   Theme="Accent">
                 <Grid Margin="10">
                     <Grid.RowDefinitions>

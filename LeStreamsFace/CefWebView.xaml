@@ -15,7 +15,10 @@
                          MinHeight="500"
                          HorizontalAlignment="Stretch"
                          VerticalAlignment="Stretch"
+                         Address="www.google.com"
                          Background="AliceBlue"
+                         Foreground="AliceBlue"
+                         Loaded="WebView_OnLoaded"
                          ToolTip="a"
                          WebBrowser="{Binding WebBrowser,
                                               Mode=OneWayToSource}" />
