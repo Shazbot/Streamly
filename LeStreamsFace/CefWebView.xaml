@@ -15,9 +15,8 @@
                          MinHeight="500"
                          HorizontalAlignment="Stretch"
                          VerticalAlignment="Stretch"
-                         Background="AliceBlue" ToolTip="a"
-                         RenderOptions.BitmapScalingMode="NearestNeighbor"
-                         UseLayoutRounding="True"
+                         Background="AliceBlue"
+                         ToolTip="a"
                          WebBrowser="{Binding WebBrowser,
                                               Mode=OneWayToSource}" />
             <TextBlock Text="{Binding Html}" />
