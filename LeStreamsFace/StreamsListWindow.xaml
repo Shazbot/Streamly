@@ -9,6 +9,7 @@
                            xmlns:lib="http://schemas.leschemasface.com/2012/xaml/presentation"
                            xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                            xmlns:oxy="http://oxyplot.codeplex.com"
+                           xmlns:wpf="clr-namespace:CefSharp.Wpf;assembly=CefSharp.Wpf"
                            Name="window"
                            Title="More streams than you can shake a stick at"
                            MinWidth="150"
@@ -168,8 +169,9 @@
                     </Grid.RowDefinitions>
                     <StackPanel Grid.Row="0" />
 
-                    <ListBox x:Name="gamesPanel" Margin="20,0,20,0"
+                    <ListBox x:Name="gamesPanel"
                              Grid.Row="1"
+                             Margin="20,0,20,0"
                              HorizontalAlignment="Center"
                              Background="Transparent"
                              ScrollViewer.HorizontalScrollBarVisibility="Disabled"
@@ -226,8 +228,9 @@
                     </Grid.RowDefinitions>
                     <StackPanel Grid.Row="0" />
 
-                    <ListBox x:Name="selectedGamesPanel" Margin="20,0,20,0"
+                    <ListBox x:Name="selectedGamesPanel"
                              Grid.Row="1"
+                             Margin="20,0,20,0"
                              HorizontalAlignment="Center"
                              Background="Transparent"
                              ScrollViewer.HorizontalScrollBarVisibility="Disabled">
@@ -284,17 +287,32 @@
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>
+                </Grid>
+            </MetroControls:Flyout>
 
-                    <!--  <UniformGrid Grid.Row="2"  -->
-                    <!--  Margin="10"  -->
-                    <!--  Columns="2">  -->
-                    <!--  <Button Margin="10"  -->
-                    <!--  Content="Create"  -->
-                    <!--  Style="{DynamicResource SquareButtonStyle}" />  -->
-                    <!--  <Button Margin="10"  -->
-                    <!--  Content="Cancel"  -->
-                    <!--  Style="{DynamicResource SquareButtonStyle}" />  -->
-                    <!--  </UniformGrid>  -->
+            <MetroControls:Flyout x:Name="cefFlyout"
+                                  Width="{Binding RelativeSource={RelativeSource FindAncestor,
+                                                                                 AncestorType=MetroControls:MetroWindow},
+                                                  Path=ActualWidth}"
+                                  Margin="0 0 0 0"
+                                  IsModal="True"
+                                  IsOpen="True"
+                                  Position="Left"
+                                  Theme="Accent">
+                <Grid Margin="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Row="0" />
+                    <StackPanel Grid.Row="1">
+                        <LeStreamsFace:CefWebView x:Name="cefWebView"
+                                                  HorizontalAlignment="Stretch"
+                                                  VerticalAlignment="Stretch" />
+                    </StackPanel>
+
+
                 </Grid>
             </MetroControls:Flyout>
         </MetroControls:FlyoutsControl>

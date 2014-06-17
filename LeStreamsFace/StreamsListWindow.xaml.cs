@@ -73,6 +73,8 @@ namespace LeStreamsFace
             }
 
             PopulateGamesPanel();
+//            var wings = @"<object type=""application/x-shockwave-flash"" height=""378"" width=""620"" id=""live_embed_player_flash"" data=""http://www.twitch.tv/widgets/live_embed_player.swf?channel=wingsofdeath"" bgcolor=""#000000""><param name=""allowFullScreen"" value=""true"" /><param name=""allowScriptAccess"" value=""always"" /><param name=""allowNetworking"" value=""all"" /><param name=""movie"" value=""http://www.twitch.tv/widgets/live_embed_player.swf"" /><param name=""flashvars"" value=""hostname=www.twitch.tv&channel=wingsofdeath&auto_play=true&start_volume=25"" /></object><a href=""http://www.twitch.tv/wingsofdeath"" style=""padding:2px 0px 4px; display:block; width:345px; font-weight:normal; font-size:10px;text-decoration:underline; text-align:center;"">Watch live video from Wingsofdeath on www.twitch.tv</a>";
+//            cefWebView.WebBrowser.LoadHtml(wings, wings);// = wings;
         }
 
         private async void PopulateGamesPanel()
@@ -522,7 +524,7 @@ namespace LeStreamsFace
 
         private void window_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            if (!streamsTabItem.IsSelected)
+            if (!streamsTabItem.IsSelected || Flyouts.GetChildObjects().Cast<Flyout>().Any(flyout => flyout.IsOpen))
             {
                 return;
             }
@@ -594,25 +596,27 @@ namespace LeStreamsFace
 
         private void window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+            if (cefFlyout.IsOpen) return;
+
             e.Handled = true;
             try
             {
-                DragMove();
+//                DragMove();
             }
             catch (InvalidOperationException)
             {
             }
         }
 
-        public new void DragMove()
-        {
-            var hs = (HwndSource)PresentationSource.FromVisual(this);
-            if (WindowState == WindowState.Normal)
-            {
-                NativeMethods.SendMessage(hs.Handle, ((uint) NativeMethods.WindowMessages.WM_SYSCOMMAND), (IntPtr)0xf012, IntPtr.Zero);
-                NativeMethods.SendMessage(hs.Handle, ((uint) NativeMethods.WindowMessages.WM_LBUTTONUP), IntPtr.Zero, IntPtr.Zero);
-            }
-        }
+//        public new void DragMove()
+//        {
+//            var hs = (HwndSource)PresentationSource.FromVisual(this);
+//            if (WindowState == WindowState.Normal)
+//            {
+//                NativeMethods.SendMessage(hs.Handle, ((uint) NativeMethods.WindowMessages.WM_SYSCOMMAND), (IntPtr)0xf012, IntPtr.Zero);
+//                NativeMethods.SendMessage(hs.Handle, ((uint) NativeMethods.WindowMessages.WM_LBUTTONUP), IntPtr.Zero, IntPtr.Zero);
+//            }
+//        }
 
         private void RowMouseoverEvent(object sender, MouseEventArgs e)
         {
