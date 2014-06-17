@@ -217,11 +217,6 @@ namespace LeStreamsFace
             ConfigManager.Instance.WriteConfigXml();
         }
 
-        private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
-        {
-            System.Diagnostics.Process.Start(e.Uri.ToString());
-        }
-
         private void ChangeTab_Click(object sender, RoutedEventArgs e)
         {
             var tabItem = (sender as FrameworkElement).Tag as TabItem;

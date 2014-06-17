@@ -176,6 +176,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Tabs\AboutTab.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Tray Icon\IconWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -217,6 +221,9 @@
       <DependentUpon>StreamsListWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\CutOffConverter.cs" />
+    <Compile Include="Tabs\AboutTab.xaml.cs">
+      <DependentUpon>AboutTab.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Tray Icon\IconWindow.xaml.cs">
       <DependentUpon>IconWindow.xaml</DependentUpon>
     </Compile>
@@ -265,6 +272,7 @@
     <Content Include="Resources\Entypo-license.txt" />
     <Content Include="Resources\WindowsIcons-license.txt" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
   <ProjectExtensions>
     <VisualStudio AllowExistingFolder="true" />

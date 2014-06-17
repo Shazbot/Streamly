@@ -50,6 +50,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.AnimatedTabControl.xaml" />
+                <ResourceDictionary Source="Tabs/AboutTab.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <Style x:Key="MyFocusVisualStyle" TargetType="{x:Type Control}">
                 <Setter Property="BorderBrush" Value="Transparent" />
@@ -81,6 +82,7 @@
                     </DataTrigger>
                 </Style.Triggers>
             </Style>
+
             <BitmapImage x:Key="questionMarkImage" UriSource="/LeStreamsFace;component/Resources/appbar.question.png" />
             <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
         </ResourceDictionary>
@@ -912,21 +914,8 @@
                 </TabItem>
                 <TabItem Name="aboutTabItem"
                          Header="About"
-                         Visibility="Collapsed">
-                    <StackPanel>
-                        <StackPanel Margin="10,20,0,0" Orientation="Horizontal">
-                            <TextBlock FontSize="14" Text="Check for updates:" />
-                        </StackPanel>
-                        <TextBlock Margin="10,12,10,0" FontSize="14">
-                            <Hyperlink NavigateUri="http://shazbot.github.com/LeStreamsFace/" RequestNavigate="Hyperlink_RequestNavigate">LeStreamsFace website</Hyperlink>
-                        </TextBlock>
-                        <TextBlock Margin="10,12,10,0" FontSize="14">
-                            Awe and gratitude to
-                            <Hyperlink NavigateUri="http://mahapps.com/MahApps.Metro/" RequestNavigate="Hyperlink_RequestNavigate">MahApps.Metro</Hyperlink>
-                            for the pretties
-                        </TextBlock>
-                    </StackPanel>
-                </TabItem>
+                         Style="{StaticResource aboutTabStyle}"
+                         Visibility="Collapsed" />
             </TabControl>
         </Grid>
     </MetroControls:MetroContentControl>
