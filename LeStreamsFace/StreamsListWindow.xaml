@@ -313,25 +313,22 @@
                                   Width="{Binding RelativeSource={RelativeSource FindAncestor,
                                                                                  AncestorType=MetroControls:MetroWindow},
                                                   Path=ActualWidth}"
+                                  Height="{Binding RelativeSource={RelativeSource FindAncestor,
+                                                                                  AncestorType=MetroControls:MetroWindow},
+                                                   Path=ActualHeight}"
                                   Margin="0 0 0 0"
                                   IsModal="True"
+                                  Padding="0"
                                   Position="Right"
                                   Theme="Accent">
-                <Grid Margin="10">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-                    <StackPanel Grid.Row="0" />
-                    <StackPanel Grid.Row="1">
-                        <LeStreamsFace:CefWebView x:Name="cefWebView"
-                                                  HorizontalAlignment="Stretch"
-                                                  VerticalAlignment="Stretch" />
-                    </StackPanel>
-
-
-                </Grid>
+                <MetroControls:Flyout.HeaderTemplate>
+                    <DataTemplate />
+                </MetroControls:Flyout.HeaderTemplate>
+                <StackPanel Margin="0">
+                    <LeStreamsFace:CefWebView x:Name="cefWebView" Padding="0" Margin="0"
+                                              HorizontalAlignment="Stretch"
+                                              VerticalAlignment="Stretch" />
+                </StackPanel>
             </MetroControls:Flyout>
         </MetroControls:FlyoutsControl>
     </MetroControls:MetroWindow.Flyouts>

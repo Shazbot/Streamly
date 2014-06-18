@@ -9,9 +9,9 @@
              mc:Ignorable="d">
     <Grid>
 
-        <StackPanel VerticalAlignment="Stretch">
+        <StackPanel VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
             <wpf:WebView x:Name="webView"
-                         MinWidth="500"
+                         MinWidth="500" Margin="0" Padding="0"
                          MinHeight="500"
                          HorizontalAlignment="Stretch"
                          VerticalAlignment="Stretch"
