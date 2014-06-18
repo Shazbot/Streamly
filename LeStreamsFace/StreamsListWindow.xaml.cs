@@ -728,18 +728,29 @@ namespace LeStreamsFace
                 return;
             }
 
-            var url = @"<object type=""application/x-shockwave-flash"" height=""100%"" width=""100%"" id=""live_embed_player_flash"" data=""http://www.twitch.tv/widgets/live_embed_player.swf?channel="+stream.LoginNameTwtv+@""" bgcolor=""#000000""><param name=""allowFullScreen"" value=""false"" /><param name=""allowScriptAccess"" value=""always"" /><param name=""allowNetworking"" value=""all"" /><param name=""movie"" value=""http://www.twitch.tv/widgets/live_embed_player.swf"" /><param name=""flashvars"" value=""hostname=www.twitch.tv&channel="+stream.LoginNameTwtv+@"&auto_play=false&start_volume=25"" /></object>";
-            Console.WriteLine(url);
+            var newStreamingTab = new TabItem();
+            newStreamingTab.Header = stream.LoginNameTwtv;
+            newStreamingTab.Visibility = Visibility.Collapsed;
+            newStreamingTab.Content = stream.LoginNameTwtv;
+            tabControl.Items.Add(newStreamingTab);
+            newStreamingTab.IsSelected = true;
+
 //
 //            cefWebView.WebBrowser.Address = url;
 
 //            var wings = @"<object type=""application/x-shockwave-flash"" height=""" + "100%" + @""" width=""" + "100%" + @""" id=""live_embed_player_flash"" data=""http://www.twitch.tv/widgets/live_embed_player.swf?channel=wingsofdeath"" bgcolor=""#000000""><param name=""allowFullScreen"" value=""true"" /><param name=""allowScriptAccess"" value=""always"" /><param name=""allowNetworking"" value=""all"" /><param name=""movie"" value=""http://www.twitch.tv/widgets/live_embed_player.swf"" /><param name=""flashvars"" value=""hostname=www.twitch.tv&channel=wingsofdeath&auto_play=true&start_volume=25"" /></object><a href=""http://www.twitch.tv/wingsofdeath"" style=""padding:2px 0px 4px; display:block; width:345px; font-weight:normal; font-size:10px;text-decoration:underline; text-align:center;"">Watch live video from Wingsofdeath on www.twitch.tv</a>";
 //            cefWebView.WebBrowser.LoadHtml(wings, "arst");// = wings;
 
-            cefFlyout.IsOpen = true;
+            var url = @"<object type=""application/x-shockwave-flash"" height=""100%"" width=""100%"" style=""overflow:hidden; width:100%; height:100%; margin:0; padding:0; border:0;"" id=""live_embed_player_flash"" data=""http://www.twitch.tv/widgets/live_embed_player.swf?channel=" + stream.LoginNameTwtv + @""" bgcolor=""#000000""><param name=""allowFullScreen"" value=""false"" /><param name=""allowScriptAccess"" value=""always"" /><param name=""allowNetworking"" value=""all"" /><param name=""movie"" value=""http://www.twitch.tv/widgets/live_embed_player.swf"" /><param name=""flashvars"" value=""hostname=www.twitch.tv&channel=" + stream.LoginNameTwtv + @"&auto_play=true&start_volume=25"" /></object>";
+            url = @"<div style=""overflow:hidden;"">" + url + @"</div>";
+            gamesFlyout.IsOpen = false;
+            selectedGameFlyout.IsOpen = false;
+
+//            cefWebView.webView.LoadHtml(url, stream.LoginNameTwtv);
+//            cefFlyout.IsOpen = true;
 
 //            cefWebView.webView.LoadHtml(wings, "about:blank");// = wings;
-            cefWebView.webView.LoadHtml(url, stream.LoginNameTwtv);// = wings;
+            // = wings;
 //            cefWebView.webView.WebBrowser.LoadHtml(url, "about:blank");// = wings;
 //            cefWebView.webView.WebBrowser.Address = "www.google.com";
 
@@ -755,5 +766,4 @@ namespace LeStreamsFace
 //            }
 
         }
-    }
 }

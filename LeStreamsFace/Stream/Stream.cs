@@ -25,6 +25,8 @@ namespace LeStreamsFace
         private string _channelId = string.Empty;
         private string _thumbnailURI = string.Empty;
 
+        private string _loginNameTwtv;
+
         [JsonProperty(PropertyName = "Name")]
         public string Name
         {
@@ -104,7 +106,6 @@ namespace LeStreamsFace
             }
         }
 
-        private string _loginNameTwtv;
         public bool GottenViaAutoGetFavs = false;
 
 //        public Stream()

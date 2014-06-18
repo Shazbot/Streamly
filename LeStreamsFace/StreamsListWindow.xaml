@@ -165,6 +165,116 @@
         </MetroControls:WindowCommands>
     </MetroControls:MetroWindow.WindowCommands>
 
+    <MetroControls:MetroWindow.LeftWindowCommands>
+        <MetroControls:WindowCommands>
+
+            <StackPanel Orientation="Horizontal">
+                <Button ToolTipService.InitialShowDelay="100">
+                    <Button.ToolTip>
+                        <ToolTip Background="Black"
+                                 Content="{Binding Name}"
+                                 Foreground="White"
+                                 Placement="Bottom" />
+                    </Button.ToolTip>
+                    <Rectangle Width="22"
+                               Height="22"
+                               Fill="{Binding RelativeSource={RelativeSource AncestorType=Button},
+                                              Path=Foreground}">
+                        <Rectangle.OpacityMask>
+                            <VisualBrush Stretch="Uniform" Visual="{StaticResource appbar_youtube_play}" />
+                        </Rectangle.OpacityMask>
+                    </Rectangle>
+                </Button>
+
+                <Button ToolTipService.InitialShowDelay="100">
+                    <Button.ToolTip>
+                        <ToolTip Background="Black"
+                                 Content="{Binding Name}"
+                                 Foreground="White"
+                                 Placement="Bottom" />
+                    </Button.ToolTip>
+                    <Rectangle Width="22"
+                               Height="22"
+                               Fill="{Binding RelativeSource={RelativeSource AncestorType=Button},
+                                              Path=Foreground}">
+                        <Rectangle.OpacityMask>
+                            <VisualBrush Stretch="Uniform" Visual="{StaticResource appbar_youtube_play}" />
+                        </Rectangle.OpacityMask>
+                    </Rectangle>
+                </Button>
+
+                <Button ToolTipService.InitialShowDelay="100">
+                    <Button.ToolTip>
+                        <ToolTip Background="Black"
+                                 Content="{Binding Name}"
+                                 Foreground="White"
+                                 Placement="Bottom" />
+                    </Button.ToolTip>
+                    <Rectangle Width="22"
+                               Height="22"
+                               Fill="{Binding RelativeSource={RelativeSource AncestorType=Button},
+                                              Path=Foreground}">
+                        <Rectangle.OpacityMask>
+                            <VisualBrush Stretch="Uniform" Visual="{StaticResource appbar_youtube_play}" />
+                        </Rectangle.OpacityMask>
+                    </Rectangle>
+                </Button>
+
+                <Button ToolTipService.InitialShowDelay="100">
+                    <Button.ToolTip>
+                        <ToolTip Background="Black"
+                                 Content="{Binding Name}"
+                                 Foreground="White"
+                                 Placement="Bottom" />
+                    </Button.ToolTip>
+                    <Rectangle Width="22"
+                               Height="22"
+                               Fill="{Binding RelativeSource={RelativeSource AncestorType=Button},
+                                              Path=Foreground}">
+                        <Rectangle.OpacityMask>
+                            <VisualBrush Stretch="Uniform" Visual="{StaticResource appbar_youtube_play}" />
+                        </Rectangle.OpacityMask>
+                    </Rectangle>
+                </Button>
+            </StackPanel>
+
+            <Button Margin="0, 0, 0, 0">
+                <Button.Resources>
+                    <ResourceDictionary>
+                        <ResourceDictionary.MergedDictionaries>
+                            <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/flatbutton.xaml" />
+                        </ResourceDictionary.MergedDictionaries>
+                        <SolidColorBrush x:Key="FlatButtonForegroundBrush" Color="White" />
+                        <SolidColorBrush x:Key="FlatButtonPressedBackgroundBrush" Color="Transparent" />
+                    </ResourceDictionary>
+                </Button.Resources>
+                <Button.Style>
+                    <Style BasedOn="{StaticResource MetroFlatButton}" TargetType="{x:Type Button}">
+                        <Setter Property="Background" Value="Transparent" />
+                        <Setter Property="Opacity" Value="0.75" />
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Opacity" Value="1" />
+                                <Setter Property="Background" Value="Transparent"></Setter>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+                <Button.ToolTip>
+                    <ToolTip Background="Black"
+                             Content="Close tab"
+                             Foreground="White"
+                             Placement="Bottom" />
+                </Button.ToolTip>
+                <Rectangle Width="17" Height="17" Fill="White">
+                    <Rectangle.OpacityMask>
+                        <VisualBrush Stretch="Uniform"  Visual="{DynamicResource appbar_app_remove}" />
+                    </Rectangle.OpacityMask>
+                </Rectangle>
+            </Button>
+        </MetroControls:WindowCommands>
+    </MetroControls:MetroWindow.LeftWindowCommands>
+
     <MetroControls:MetroWindow.Flyouts>
         <MetroControls:FlyoutsControl>
             <MetroControls:Flyout x:Name="gamesFlyout"
@@ -325,9 +435,11 @@
                     <DataTemplate />
                 </MetroControls:Flyout.HeaderTemplate>
                 <StackPanel Margin="0">
-                    <LeStreamsFace:CefWebView x:Name="cefWebView" Padding="0" Margin="0"
+                    <LeStreamsFace:CefWebView x:Name="cefWebView"
+                                              Margin="0"
                                               HorizontalAlignment="Stretch"
-                                              VerticalAlignment="Stretch" />
+                                              VerticalAlignment="Stretch"
+                                              Padding="0" />
                 </StackPanel>
             </MetroControls:Flyout>
         </MetroControls:FlyoutsControl>
@@ -335,7 +447,7 @@
 
     <MetroControls:MetroContentControl>
         <Grid>
-            <TabControl>
+            <TabControl Name="tabControl">
                 <TabItem Name="streamsTabItem"
                          Header="Streams"
                          IsSelected="True"
