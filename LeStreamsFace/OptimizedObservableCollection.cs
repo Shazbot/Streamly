@@ -11,6 +11,7 @@ namespace LeStreamsFace
 {
     public class OptimizedObservableCollection<T> : ObservableCollection<T>
     {
+        private readonly Object _thisLock = new Object();
         private bool suppressOnCollectionChanged;
 
         public void AddRange(IEnumerable<T> items)
@@ -22,18 +23,21 @@ namespace LeStreamsFace
 
             if (items.Any())
             {
-                try
+                lock (_thisLock)
                 {
-                    suppressOnCollectionChanged = true;
-                    foreach (var item in items)
+                    try
                     {
-                        Add(item);
+                        suppressOnCollectionChanged = true;
+                        foreach (var item in items)
+                        {
+                            Add(item);
+                        }
                     }
-                }
-                finally
-                {
-                    suppressOnCollectionChanged = false;
-                    OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+                    finally
+                    {
+                        suppressOnCollectionChanged = false;
+                        OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+                    }
                 }
             }
         }
@@ -47,21 +51,30 @@ namespace LeStreamsFace
 
             if (items.Any())
             {
-                try
+                lock (_thisLock)
                 {
-                    suppressOnCollectionChanged = true;
-                    foreach (var item in items)
+                    try
                     {
-                        Remove(item);
+                        suppressOnCollectionChanged = true;
+                        foreach (var item in items)
+                        {
+                            Remove(item);
+                        }
                     }
-                }
-                finally
-                {
-                    suppressOnCollectionChanged = false;
-                    OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+                    finally
+                    {
+                        suppressOnCollectionChanged = false;
+                        OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+                    }
                 }
             }
         }
+
+        public void RemoveAll()
+        {
+            RemoveRange(Items.ToList());
+        }
+
         protected override void OnCollectionChanged(NotifyCollectionChangedEventArgs e)
         {
             if (!suppressOnCollectionChanged)

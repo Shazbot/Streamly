@@ -43,6 +43,7 @@
                                          Source={x:Static LeStreamsFace:ConfigManager.Instance}}"
                            WindowStartupLocation="CenterScreen"
                            WindowStyle="None"
+                           d:DataContext="{d:DesignInstance LeStreamsFace:StreamsListViewModel}"
                            d:DesignHeight="300"
                            d:DesignWidth="300"
                            x:ClassModifier="internal"
@@ -151,7 +152,11 @@
                 <Button Click="ChangeTab_Click"
                         Content="streams"
                         Tag="{Binding ElementName=streamsTabItem}" />
-                <ToggleButton Name="toggleGamesPanelButton" Content="games" />
+                <ToggleButton Name="toggleGamesPanelButton"
+                              Command="{Binding GamesPanelButtonPressed}"
+                              Content="games"
+                              IsChecked="{Binding IsGamesPanelOpen,
+                                                  Mode=OneWay}" />
                 <Button Click="ChangeTab_Click"
                         Content="config"
                         Tag="{Binding ElementName=configTabItem}" />
@@ -168,77 +173,35 @@
     <MetroControls:MetroWindow.LeftWindowCommands>
         <MetroControls:WindowCommands>
 
-            <StackPanel Orientation="Horizontal">
-                <Button ToolTipService.InitialShowDelay="100">
-                    <Button.ToolTip>
-                        <ToolTip Background="Black"
-                                 Content="{Binding Name}"
-                                 Foreground="White"
-                                 Placement="Bottom" />
-                    </Button.ToolTip>
-                    <Rectangle Width="22"
-                               Height="22"
-                               Fill="{Binding RelativeSource={RelativeSource AncestorType=Button},
-                                              Path=Foreground}">
-                        <Rectangle.OpacityMask>
-                            <VisualBrush Stretch="Uniform" Visual="{StaticResource appbar_youtube_play}" />
-                        </Rectangle.OpacityMask>
-                    </Rectangle>
-                </Button>
+            <ItemsControl ItemsSource="{Binding RunningStreams}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Button ToolTipService.InitialShowDelay="100">
+                            <Button.ToolTip>
+                                <ToolTip Background="Black"
+                                         Content="{Binding Name}"
+                                         Foreground="White"
+                                         Placement="Bottom" />
+                            </Button.ToolTip>
+                            <Rectangle Width="22"
+                                       Height="22"
+                                       Fill="{Binding RelativeSource={RelativeSource AncestorType=Button},
+                                                      Path=Foreground}">
+                                <Rectangle.OpacityMask>
+                                    <VisualBrush Stretch="Uniform" Visual="{StaticResource appbar_youtube_play}" />
+                                </Rectangle.OpacityMask>
+                            </Rectangle>
+                        </Button>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
 
-                <Button ToolTipService.InitialShowDelay="100">
-                    <Button.ToolTip>
-                        <ToolTip Background="Black"
-                                 Content="{Binding Name}"
-                                 Foreground="White"
-                                 Placement="Bottom" />
-                    </Button.ToolTip>
-                    <Rectangle Width="22"
-                               Height="22"
-                               Fill="{Binding RelativeSource={RelativeSource AncestorType=Button},
-                                              Path=Foreground}">
-                        <Rectangle.OpacityMask>
-                            <VisualBrush Stretch="Uniform" Visual="{StaticResource appbar_youtube_play}" />
-                        </Rectangle.OpacityMask>
-                    </Rectangle>
-                </Button>
-
-                <Button ToolTipService.InitialShowDelay="100">
-                    <Button.ToolTip>
-                        <ToolTip Background="Black"
-                                 Content="{Binding Name}"
-                                 Foreground="White"
-                                 Placement="Bottom" />
-                    </Button.ToolTip>
-                    <Rectangle Width="22"
-                               Height="22"
-                               Fill="{Binding RelativeSource={RelativeSource AncestorType=Button},
-                                              Path=Foreground}">
-                        <Rectangle.OpacityMask>
-                            <VisualBrush Stretch="Uniform" Visual="{StaticResource appbar_youtube_play}" />
-                        </Rectangle.OpacityMask>
-                    </Rectangle>
-                </Button>
-
-                <Button ToolTipService.InitialShowDelay="100">
-                    <Button.ToolTip>
-                        <ToolTip Background="Black"
-                                 Content="{Binding Name}"
-                                 Foreground="White"
-                                 Placement="Bottom" />
-                    </Button.ToolTip>
-                    <Rectangle Width="22"
-                               Height="22"
-                               Fill="{Binding RelativeSource={RelativeSource AncestorType=Button},
-                                              Path=Foreground}">
-                        <Rectangle.OpacityMask>
-                            <VisualBrush Stretch="Uniform" Visual="{StaticResource appbar_youtube_play}" />
-                        </Rectangle.OpacityMask>
-                    </Rectangle>
-                </Button>
-            </StackPanel>
-
-            <Button Margin="0, 0, 0, 0">
+            <Button Margin="0, 0, 0, 0" Visibility="{Binding CloseStreamsButtonVisibility, Converter={StaticResource BooleanToVisibilityConverter}}">
                 <Button.Resources>
                     <ResourceDictionary>
                         <ResourceDictionary.MergedDictionaries>
@@ -255,7 +218,7 @@
                         <Style.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
                                 <Setter Property="Opacity" Value="1" />
-                                <Setter Property="Background" Value="Transparent"></Setter>
+                                <Setter Property="Background" Value="Transparent" />
                             </Trigger>
                         </Style.Triggers>
                     </Style>
@@ -266,9 +229,11 @@
                              Foreground="White"
                              Placement="Bottom" />
                 </Button.ToolTip>
-                <Rectangle Width="17" Height="17" Fill="White">
+                <Rectangle Width="17"
+                           Height="17"
+                           Fill="White">
                     <Rectangle.OpacityMask>
-                        <VisualBrush Stretch="Uniform"  Visual="{DynamicResource appbar_app_remove}" />
+                        <VisualBrush Stretch="Uniform" Visual="{DynamicResource appbar_app_remove}" />
                     </Rectangle.OpacityMask>
                 </Rectangle>
             </Button>
@@ -284,8 +249,7 @@
                                   Margin="0 0 0 0"
                                   Header="Games"
                                   IsModal="True"
-                                  IsOpen="{Binding IsChecked,
-                                                   ElementName=toggleGamesPanelButton}"
+                                  IsOpen="{Binding IsGamesPanelOpen}"
                                   Position="Right"
                                   Theme="Accent">
                 <Grid Margin="10">
@@ -301,7 +265,9 @@
                              Margin="20,0,20,0"
                              HorizontalAlignment="Center"
                              Background="Transparent"
+                             ItemsSource="{Binding Games}"
                              ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                             SelectedItem="{Binding GamesPanelSelectedGame}"
                              SelectionChanged="GamesPanel_OnSelectionChanged">
                         <ListBox.Resources>
                             <SolidColorBrush x:Key="AccentColorBrush3" Color="Transparent" />
@@ -326,17 +292,6 @@
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>
-
-                    <!--  <UniformGrid Grid.Row="2"  -->
-                    <!--  Margin="10"  -->
-                    <!--  Columns="2">  -->
-                    <!--  <Button Margin="10"  -->
-                    <!--  Content="Create"  -->
-                    <!--  Style="{DynamicResource SquareButtonStyle}" />  -->
-                    <!--  <Button Margin="10"  -->
-                    <!--  Content="Cancel"  -->
-                    <!--  Style="{DynamicResource SquareButtonStyle}" />  -->
-                    <!--  </UniformGrid>  -->
                 </Grid>
             </MetroControls:Flyout>
 
@@ -346,6 +301,7 @@
                                                   Path=ActualWidth}"
                                   Margin="0 0 0 0"
                                   IsModal="True"
+                                  IsOpen="{Binding IsStreamsPanelOpen}"
                                   Position="Right"
                                   Theme="Accent">
                 <Grid Margin="10">
@@ -361,8 +317,9 @@
                              Margin="20,0,20,0"
                              HorizontalAlignment="Center"
                              Background="Transparent"
+                             ItemsSource="{Binding Streams}"
                              ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                             SelectionChanged="SelectedGamesPanel_OnSelectionChanged">
+                             SelectedItem="{Binding StreamsPanelSelectedStream}">
 
                         <ListBox.Resources>
                             <SolidColorBrush x:Key="AccentColorBrush3" Color="Transparent" />
@@ -448,6 +405,20 @@
     <MetroControls:MetroContentControl>
         <Grid>
             <TabControl Name="tabControl">
+                <!--  <TabControl.ItemTemplate>  -->
+                <!--  <DataTemplate>  -->
+                <!--  <TextBlock>  -->
+                <!--  <TextBlock Text="{Binding GameName}"/>  -->
+                <!--  </TextBlock>  -->
+                <!--  </DataTemplate>  -->
+                <!--  </TabControl.ItemTemplate>  -->
+                <!--  <TabControl.ContentTemplate>  -->
+                <!--  <DataTemplate>  -->
+                <!--  <TextBlock>  -->
+                <!--  This is <TextBlock Text="{Binding GameName}"/>  -->
+                <!--  </TextBlock>  -->
+                <!--  </DataTemplate>  -->
+                <!--  </TabControl.ContentTemplate>  -->
                 <TabItem Name="streamsTabItem"
                          Header="Streams"
                          IsSelected="True"
@@ -1041,6 +1012,17 @@
                          Header="About"
                          Style="{StaticResource aboutTabStyle}"
                          Visibility="Collapsed" />
+            </TabControl>
+            <TabControl ItemsSource="{Binding Games}">
+                <TabControl.ItemTemplate>
+                    <DataTemplate>
+                        <TabItem Header="astrst">
+                            <StackPanel Margin="10" Orientation="Horizontal">
+                                <TextBlock Text="{Binding GameName}" />
+                            </StackPanel>
+                        </TabItem>
+                    </DataTemplate>
+                </TabControl.ItemTemplate>
             </TabControl>
         </Grid>
     </MetroControls:MetroContentControl>

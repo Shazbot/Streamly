@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Diagnostics;
 using System.Diagnostics.Contracts;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Windows.Threading;
 
 namespace LeStreamsFace
@@ -54,6 +57,19 @@ namespace LeStreamsFace
                 action();
             };
             delayTimer.Start();
+        }
+
+        public static string GetVariableName<T>(Expression<Func<T>> expression)
+        {
+            var body = ((MemberExpression)expression.Body);
+
+            return body.Member.Name;
+        }
+
+        // put an extension on PropertyChangedEventHandler
+        public static string GetVariableName<T>(this PropertyChangedEventHandler propertyChanged, Expression<Func<T>> expression)
+        {
+            return GetVariableName(expression);
         }
     }
 }

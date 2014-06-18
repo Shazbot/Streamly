@@ -3,9 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Net;
-using System.Reflection;
-using System.Runtime.InteropServices;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -16,29 +13,22 @@ using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
-using System.Xml.Linq;
 using LeStreamsFace.StreamParsers;
 using MahApps.Metro.Controls;
-using MahApps.Metro.Controls.Dialogs;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using RestSharp;
-using RestSharp.Extensions;
-using Application = System.Windows.Application;
 using Button = System.Windows.Controls.Button;
 using CheckBox = System.Windows.Controls.CheckBox;
 using Clipboard = System.Windows.Clipboard;
 using Control = System.Windows.Controls.Control;
-using DataGrid = System.Windows.Controls.DataGrid;
 using KeyEventArgs = System.Windows.Input.KeyEventArgs;
 using ListBox = System.Windows.Controls.ListBox;
 using MessageBox = System.Windows.MessageBox;
 using MouseEventArgs = System.Windows.Input.MouseEventArgs;
 using TextBox = System.Windows.Controls.TextBox;
-using ToolTip = System.Windows.Controls.ToolTip;
 
 namespace LeStreamsFace
 {
@@ -49,6 +39,7 @@ namespace LeStreamsFace
     {
         private bool doFilterGames = true;
         private Func<bool> timeBlockCheck;
+        private StreamsListViewModel vm;
 
         public StreamsListWindow(Func<bool> timeBlockCheck)
         {
@@ -73,24 +64,7 @@ namespace LeStreamsFace
                 Height = 580;
             }
 
-            PopulateGamesPanel();
-//            var wings = @"<object type=""application/x-shockwave-flash"" height=""378"" width=""620"" id=""live_embed_player_flash"" data=""http://www.twitch.tv/widgets/live_embed_player.swf?channel=wingsofdeath"" bgcolor=""#000000""><param name=""allowFullScreen"" value=""true"" /><param name=""allowScriptAccess"" value=""always"" /><param name=""allowNetworking"" value=""all"" /><param name=""movie"" value=""http://www.twitch.tv/widgets/live_embed_player.swf"" /><param name=""flashvars"" value=""hostname=www.twitch.tv&channel=wingsofdeath&auto_play=true&start_volume=25"" /></object><a href=""http://www.twitch.tv/wingsofdeath"" style=""padding:2px 0px 4px; display:block; width:345px; font-weight:normal; font-size:10px;text-decoration:underline; text-align:center;"">Watch live video from Wingsofdeath on www.twitch.tv</a>";
-//            cefWebView.WebBrowser.LoadHtml(wings, wings);// = wings;
-        }
-
-        private async void PopulateGamesPanel()
-        {
-            try
-            {
-//                gamesFlyout.IsOpen = true;
-                var twitchResponse = await new RestClient("https://api.twitch.tv/kraken/games/top?limit=100").ExecuteTaskAsync(new RestRequest());
-                var topGamesJObject = JsonConvert.DeserializeObject<JObject>(twitchResponse.Content)["top"];
-                var a = topGamesJObject.Children().Select(token => new GamesViewModel(token["game"]["name"].ToString(), token["game"]["box"]["medium"].ToString()));
-                gamesPanel.ItemsSource = a;
-            }
-            catch (Exception)
-            {
-            }
+            DataContext = vm = new StreamsListViewModel(this);
         }
 
         private void window_Closed(object sender, EventArgs e)
@@ -709,20 +683,13 @@ namespace LeStreamsFace
 
         private async void GamesPanel_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var selectedGame = ((ListBox)sender).SelectedItem as GamesViewModel;
-            var name = selectedGame.GameName;
-
-            var twitchResponse = await new RestClient("https://api.twitch.tv/kraken/search/streams?limit=20&q=" + name).ExecuteTaskAsync(new RestRequest());
-            var streams = (new TwitchJSONStreamParser()).GetStreamsFromContent(twitchResponse.Content);
-
-            selectedGameFlyout.Header = name;
-            selectedGamesPanel.ItemsSource = streams;
-            selectedGameFlyout.IsOpen = true;
+//            selectedGameFlyout.Header = name;
+//            selectedGamesPanel.ItemsSource = streams;
         }
 
         private async void SelectedGamesPanel_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var stream = ((ListBox)sender).SelectedItem as Stream;
+            var stream = ((ListBox) sender).SelectedItem as Stream;
             if (stream == null)
             {
                 return;
@@ -766,4 +733,5 @@ namespace LeStreamsFace
 //            }
 
         }
+    }
 }

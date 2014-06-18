@@ -202,15 +202,19 @@
     <Compile Include="CefWebView.xaml.cs">
       <DependentUpon>CefWebView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Commands\AwaitableDelegateCommand.cs" />
     <Compile Include="ConfigManager.cs" />
     <Compile Include="Converters\GameNameToIconUriConverter.cs" />
     <Compile Include="Converters\InvertBooleanConverter.cs" />
+    <Compile Include="Commands\DelegateCommand.cs" />
     <Compile Include="Extensions\Extensions.cs" />
     <Compile Include="GamesViewModel.cs" />
     <Compile Include="CefSharp\PropertyChangedExtensionMethods.cs" />
+    <Compile Include="Properties\Annotations.cs" />
     <Compile Include="StreamParsers\IStreamParser.cs" />
     <Compile Include="RestSharpJsonNetSerializer.cs" />
     <Compile Include="StreamParsers\TwitchJSONStreamParser.cs" />
+    <Compile Include="StreamsListViewModel.cs" />
     <Compile Include="Stream\FavoriteStream.cs" />
     <Compile Include="GameIconAdorner.cs" />
     <Compile Include="NonNegativeIntegerValidationRule.cs" />
