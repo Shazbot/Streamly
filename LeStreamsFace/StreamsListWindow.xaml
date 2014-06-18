@@ -396,11 +396,11 @@
                     <DataTemplate />
                 </MetroControls:Flyout.HeaderTemplate>
                 <StackPanel Margin="0">
-                    <LeStreamsFace:CefWebView x:Name="cefWebView"
-                                              Margin="0"
-                                              HorizontalAlignment="Stretch"
-                                              VerticalAlignment="Stretch"
-                                              Padding="0" />
+<!--                    <LeStreamsFace:CefWebView x:Name="cefWebView"-->
+<!--                                                      Margin="0"-->
+<!--                                                      HorizontalAlignment="Stretch"-->
+<!--                                                      VerticalAlignment="Stretch"-->
+<!--                                                      Padding="0" />-->
                 </StackPanel>
             </MetroControls:Flyout>
         </MetroControls:FlyoutsControl>
@@ -418,7 +418,17 @@
                 </TabControl.ItemTemplate>
                 <TabControl.ContentTemplate>
                     <DataTemplate>
-                        <TextBlock Text="{Binding Name}" />
+                    <Grid>
+<!--                        <StackPanel>-->
+<!--                            <TextBlock Text="{Binding Name}" />-->
+<!--                            <LeStreamsFace:CefWebView Html="{Binding EmbedHtmlCode}"-->
+                            <LeStreamsFace:CefWebView Html="www.google.com"
+                                                      Margin="0"
+                                                      HorizontalAlignment="Stretch"
+                                                      VerticalAlignment="Stretch"
+                                                      Padding="0" />
+<!--                            </StackPanel>-->
+                        </Grid>
                     </DataTemplate>
                 </TabControl.ContentTemplate>
             </TabControl>

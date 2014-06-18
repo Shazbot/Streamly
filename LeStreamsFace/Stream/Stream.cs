@@ -156,6 +156,17 @@ namespace LeStreamsFace
             }
         }
 
+        public string EmbedHtmlCode
+        {
+            get
+            {
+                if (Site != StreamingSite.TwitchTv) throw new ArgumentException("no supporterino");
+                var url = @"<object type=""application/x-shockwave-flash"" height=""100%"" width=""100%"" style=""overflow:hidden; width:100%; height:100%; margin:0; padding:0; border:0;"" id=""live_embed_player_flash"" data=""http://www.twitch.tv/widgets/live_embed_player.swf?channel=" + LoginNameTwtv + @""" bgcolor=""#000000""><param name=""allowFullScreen"" value=""false"" /><param name=""allowScriptAccess"" value=""always"" /><param name=""allowNetworking"" value=""all"" /><param name=""movie"" value=""http://www.twitch.tv/widgets/live_embed_player.swf"" /><param name=""flashvars"" value=""hostname=www.twitch.tv&channel=" + LoginNameTwtv + @"&auto_play=true&start_volume=25"" /></object>";
+                url = @"<div style=""overflow:hidden;"">" + url + @"</div>";
+                return url;
+            }
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         private void onPropertyChanged(object sender, string propertyName)
