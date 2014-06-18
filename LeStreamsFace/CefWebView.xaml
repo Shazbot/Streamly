@@ -15,16 +15,17 @@
                          MinHeight="500"
                          HorizontalAlignment="Stretch"
                          VerticalAlignment="Stretch"
-                         Address="www.google.com"
-                         Background="AliceBlue"
-                         Foreground="AliceBlue"
                          Loaded="WebView_OnLoaded"
-                         ToolTip="a"
+                         PreviewMouseMove="WebView_OnPreviewMouseMove"
+                         ToolTip=""
+                         ToolTipOpening="WebView_OnToolTipOpening"
                          WebBrowser="{Binding WebBrowser,
                                               Mode=OneWayToSource}" />
-            <TextBlock Text="{Binding Html}" />
-            <TextBox Text="{Binding InputText}" />
-            <Button Click="ButtonBase_OnClick" />
         </StackPanel>
     </Grid>
 </UserControl>
+
+<!--  RenderOptions.BitmapScalingMode="NearestNeighbor"  -->
+<!--  UseLayoutRounding="True"  -->
+<!--  TextOptions.TextFormattingMode="Display"  -->
+<!--  TextOptions.TextFormattingMode="Ideal"  -->

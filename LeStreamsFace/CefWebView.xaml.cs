@@ -1,5 +1,8 @@
 ﻿using System.ComponentModel;
+using System.Diagnostics;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
+using System.Windows.Input;
 using CefSharp;
 using System;
 using System.Windows;
@@ -17,32 +20,35 @@ namespace LeStreamsFace
         {
             InitializeComponent();
             DataContext = this;
+        }
 
-           
-
+        private void WebBrowserOnLoadCompleted(object sender, LoadCompletedEventArgs url)
+        {
+            Debugger.Break();
         }
 
         private IWpfWebBrowser webBrowser;
-        private string _inputText;
 
         public IWpfWebBrowser WebBrowser
         {
             get { return webBrowser; }
-            set { PropertyChanged.ChangeAndNotify(ref webBrowser, value, () => WebBrowser); }
+            set
+            {
+                PropertyChanged.ChangeAndNotify(ref webBrowser, value, () => WebBrowser);
+            }
         }
         public static void Init()
         {
             var settings = new CefSettings()
                            {
-                               BrowserSubprocessPath = "CefSharp.BrowserSubprocess.exe"
+//                               BrowserSubprocessPath = "CefSharp.BrowserSubprocess.exe"
                            };
-            settings.RegisterScheme(new CefCustomScheme
-            {
-                SchemeName = CefSharpSchemeHandlerFactory.SchemeName,
-                SchemeHandlerFactory = new CefSharpSchemeHandlerFactory()
-            });
+//            settings.RegisterScheme(new CefCustomScheme
+//            {
+//                SchemeName = CefSharpSchemeHandlerFactory.SchemeName,
+//                SchemeHandlerFactory = new CefSharpSchemeHandlerFactory()
+//            });
             Cef.Initialize(settings);
-
 
             //            CefSharp.Settings settings = new CefSharp.Settings();
             //            if (CEF.Initialize(settings))
@@ -102,9 +108,11 @@ namespace LeStreamsFace
 
         private static void HtmlChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
+            // does this even fire
+            // IsBrowserInitialized should maybe be webView.WebBrowser != null
             var htmlPreview = (CefWebView)d;
             if (htmlPreview.webView != null && htmlPreview.webView.IsBrowserInitialized)
-                htmlPreview.webView.LoadHtml((string)e.NewValue, "www.customHTML.com.net.org");
+                htmlPreview.webView.LoadHtml((string)e.NewValue, "url");
         }
 
         private static void FileNameChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -152,24 +160,22 @@ namespace LeStreamsFace
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
-        {
-            webBrowser.Address = InputText;
-
-            var wings = @"<object type=""application/x-shockwave-flash"" height="""+webView.Height+@""" width="""+webView.Width+@""" id=""live_embed_player_flash"" data=""http://www.twitch.tv/widgets/live_embed_player.swf?channel=wingsofdeath"" bgcolor=""#000000""><param name=""allowFullScreen"" value=""true"" /><param name=""allowScriptAccess"" value=""always"" /><param name=""allowNetworking"" value=""all"" /><param name=""movie"" value=""http://www.twitch.tv/widgets/live_embed_player.swf"" /><param name=""flashvars"" value=""hostname=www.twitch.tv&channel=wingsofdeath&auto_play=true&start_volume=25"" /></object><a href=""http://www.twitch.tv/wingsofdeath"" style=""padding:2px 0px 4px; display:block; width:345px; font-weight:normal; font-size:10px;text-decoration:underline; text-align:center;"">Watch live video from Wingsofdeath on www.twitch.tv</a>";
-            webView.LoadHtml(wings, "arst");// = wings;
-        }
-
-        public string InputText
-        {
-            get { return _inputText; }
-            set { PropertyChanged.ChangeAndNotify(ref _inputText, value, () => InputText); }
-        }
-
         private void WebView_OnLoaded(object sender, RoutedEventArgs e)
+        {     
+//            return;
+            var wings = @"<object type=""application/x-shockwave-flash"" height=""" + "100%"+ @""" width=""" + "100%" + @""" id=""live_embed_player_flash"" data=""http://www.twitch.tv/widgets/live_embed_player.swf?channel=wingsofdeath"" bgcolor=""#000000""><param name=""allowFullScreen"" value=""false"" /><param name=""allowScriptAccess"" value=""always"" /><param name=""allowNetworking"" value=""all"" /><param name=""movie"" value=""http://www.twitch.tv/widgets/live_embed_player.swf"" /><param name=""flashvars"" value=""hostname=www.twitch.tv&channel=wingsofdeath&auto_play=true&start_volume=25"" /></object>";
+            Console.WriteLine(wings);
+            //webView.LoadHtml(wings, "arst");// = wings;
+        }
+
+        private void WebView_OnToolTipOpening(object sender, ToolTipEventArgs e)
         {
-            var wings = @"<object type=""application/x-shockwave-flash"" height=""" + "100%"+ @""" width=""" + "100%" + @""" id=""live_embed_player_flash"" data=""http://www.twitch.tv/widgets/live_embed_player.swf?channel=wingsofdeath"" bgcolor=""#000000""><param name=""allowFullScreen"" value=""true"" /><param name=""allowScriptAccess"" value=""always"" /><param name=""allowNetworking"" value=""all"" /><param name=""movie"" value=""http://www.twitch.tv/widgets/live_embed_player.swf"" /><param name=""flashvars"" value=""hostname=www.twitch.tv&channel=wingsofdeath&auto_play=true&start_volume=25"" /></object><a href=""http://www.twitch.tv/wingsofdeath"" style=""padding:2px 0px 4px; display:block; width:345px; font-weight:normal; font-size:10px;text-decoration:underline; text-align:center;"">Watch live video from Wingsofdeath on www.twitch.tv</a>";
-            webView.LoadHtml(wings, "arst");// = wings;
+            e.Handled = true;
+        }
+
+        private void WebView_OnPreviewMouseMove(object sender, MouseEventArgs e)
+        {
+            e.Handled = true;
         }
     }
 }

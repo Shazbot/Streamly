@@ -22,6 +22,7 @@ using System.Windows.Threading;
 using System.Xml.Linq;
 using LeStreamsFace.StreamParsers;
 using MahApps.Metro.Controls;
+using MahApps.Metro.Controls.Dialogs;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using RestSharp;
@@ -696,14 +697,14 @@ namespace LeStreamsFace
 
         private void WrapPanel_OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            e.Handled = true;
-            try
-            {
-                DragMove();
-            }
-            catch (InvalidOperationException)
-            {
-            }
+//            e.Handled = true;
+//            try
+//            {
+//                DragMove();
+//            }
+//            catch (InvalidOperationException)
+//            {
+//            }
         }
 
         private async void GamesPanel_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -717,6 +718,42 @@ namespace LeStreamsFace
             selectedGameFlyout.Header = name;
             selectedGamesPanel.ItemsSource = streams;
             selectedGameFlyout.IsOpen = true;
+        }
+
+        private async void SelectedGamesPanel_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var stream = ((ListBox)sender).SelectedItem as Stream;
+            if (stream == null)
+            {
+                return;
+            }
+
+            var url = @"<object type=""application/x-shockwave-flash"" height=""100%"" width=""100%"" id=""live_embed_player_flash"" data=""http://www.twitch.tv/widgets/live_embed_player.swf?channel="+stream.LoginNameTwtv+@""" bgcolor=""#000000""><param name=""allowFullScreen"" value=""false"" /><param name=""allowScriptAccess"" value=""always"" /><param name=""allowNetworking"" value=""all"" /><param name=""movie"" value=""http://www.twitch.tv/widgets/live_embed_player.swf"" /><param name=""flashvars"" value=""hostname=www.twitch.tv&channel="+stream.LoginNameTwtv+@"&auto_play=false&start_volume=25"" /></object>";
+            Console.WriteLine(url);
+//
+//            cefWebView.WebBrowser.Address = url;
+
+//            var wings = @"<object type=""application/x-shockwave-flash"" height=""" + "100%" + @""" width=""" + "100%" + @""" id=""live_embed_player_flash"" data=""http://www.twitch.tv/widgets/live_embed_player.swf?channel=wingsofdeath"" bgcolor=""#000000""><param name=""allowFullScreen"" value=""true"" /><param name=""allowScriptAccess"" value=""always"" /><param name=""allowNetworking"" value=""all"" /><param name=""movie"" value=""http://www.twitch.tv/widgets/live_embed_player.swf"" /><param name=""flashvars"" value=""hostname=www.twitch.tv&channel=wingsofdeath&auto_play=true&start_volume=25"" /></object><a href=""http://www.twitch.tv/wingsofdeath"" style=""padding:2px 0px 4px; display:block; width:345px; font-weight:normal; font-size:10px;text-decoration:underline; text-align:center;"">Watch live video from Wingsofdeath on www.twitch.tv</a>";
+//            cefWebView.WebBrowser.LoadHtml(wings, "arst");// = wings;
+
+            cefFlyout.IsOpen = true;
+
+//            cefWebView.webView.LoadHtml(wings, "about:blank");// = wings;
+            cefWebView.webView.LoadHtml(url, stream.LoginNameTwtv);// = wings;
+//            cefWebView.webView.WebBrowser.LoadHtml(url, "about:blank");// = wings;
+//            cefWebView.webView.WebBrowser.Address = "www.google.com";
+
+//            var dialog = (BaseMetroDialog)this.Resources["LoadingDialog"];
+//            if (cefWebView.webView == null || cefWebView.WebBrowser == null)
+//            {
+//                await this.ShowMetroDialogAsync(dialog);
+//                while (cefWebView.webView == null || cefWebView.WebBrowser == null)
+//                {
+//                    await TaskEx.Delay(200);
+//                }
+//                await this.HideMetroDialogAsync(dialog);
+//            }
+
         }
     }
 }

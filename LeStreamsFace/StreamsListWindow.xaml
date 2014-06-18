@@ -6,6 +6,7 @@
                            xmlns:con="clr-namespace:Kent.Boogaart.Converters.Markup;assembly=Kent.Boogaart.Converters"
                            xmlns:converters="clr-namespace:LeStreamsFace.Converters"
                            xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                           xmlns:dialogs="clr-namespace:MahApps.Metro.Controls.Dialogs;assembly=MahApps.Metro"
                            xmlns:lib="http://schemas.leschemasface.com/2012/xaml/presentation"
                            xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                            xmlns:oxy="http://oxyplot.codeplex.com"
@@ -35,6 +36,7 @@
                                                   Converter={con:ExpressionConverter {}!{0}}}"
                            SizeChanged="WindowSizeChanged"
                            SizeToContent="Manual"
+                           SnapsToDevicePixels="True"
                            SourceInitialized="window_SourceInitialized"
                            Top="{Binding WinTop,
                                          Mode=TwoWay,
@@ -82,6 +84,18 @@
                     </DataTrigger>
                 </Style.Triggers>
             </Style>
+
+            <dialogs:SimpleDialog x:Key="LoadingDialog"
+                                  x:Name="LoadingDialog"
+                                  Title="Loading...">
+                <MetroControls:MetroProgressBar Width="{Binding Width,
+                                                                ElementName=LoadingDialog}"
+                                                Margin="0, 10, 0, 0"
+                                                Foreground="{DynamicResource AccentColorBrush}"
+                                                IsIndeterminate="True"
+                                                Maximum="100"
+                                                Minimum="0" />
+            </dialogs:SimpleDialog>
 
             <BitmapImage x:Key="questionMarkImage" UriSource="/LeStreamsFace;component/Resources/appbar.question.png" />
             <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
@@ -159,6 +173,7 @@
                                                   Path=ActualWidth}"
                                   Margin="0 0 0 0"
                                   Header="Games"
+                                  IsModal="True"
                                   IsOpen="{Binding IsChecked,
                                                    ElementName=toggleGamesPanelButton}"
                                   Position="Right"
@@ -220,6 +235,7 @@
                                                                                  AncestorType=MetroControls:MetroWindow},
                                                   Path=ActualWidth}"
                                   Margin="0 0 0 0"
+                                  IsModal="True"
                                   Position="Right"
                                   Theme="Accent">
                 <Grid Margin="10">
@@ -235,7 +251,8 @@
                              Margin="20,0,20,0"
                              HorizontalAlignment="Center"
                              Background="Transparent"
-                             ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                             ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                             SelectionChanged="SelectedGamesPanel_OnSelectionChanged">
 
                         <ListBox.Resources>
                             <SolidColorBrush x:Key="AccentColorBrush3" Color="Transparent" />
@@ -298,7 +315,6 @@
                                                   Path=ActualWidth}"
                                   Margin="0 0 0 0"
                                   IsModal="True"
-                                  IsOpen="True"
                                   Position="Right"
                                   Theme="Accent">
                 <Grid Margin="10">
