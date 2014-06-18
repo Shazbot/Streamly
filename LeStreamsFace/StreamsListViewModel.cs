@@ -31,8 +31,14 @@ namespace LeStreamsFace
             _runningStreams.CollectionChanged += RunningStreamsOnCollectionChanged;
 
             GamesPanelButtonPressed = new DelegateCommand(ToggleGamesPanel);
+            StreamingTabClicked = new DelegateCommand(() => IsAnyStreamTabOpen = true);
 
             FetchGames();
+
+            // TODO
+
+            RunningStreams.Add(new Stream("wingsofdeathx","wings",123,"123","ra","asr",StreamingSite.TwitchTv));
+            IsAnyStreamTabOpen = true;
         }
 
         private async void FetchGames()
@@ -135,6 +141,9 @@ namespace LeStreamsFace
         public bool IsStreamsPanelOpen { get; set; }
 
         public ICommand GamesPanelButtonPressed { get; private set; }
+        public ICommand StreamingTabClicked { get; private set; }
+
+        public bool IsAnyStreamTabOpen { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
 

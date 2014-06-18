@@ -234,6 +234,7 @@
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\ValueConverterGroup.cs" />
     <Compile Include="Windows Interop\MouseUtilities.cs" />
     <Compile Include="Windows Interop\NativeMethods.cs" />
     <Compile Include="Tray Icon\NotificationAreaIcon.cs" />

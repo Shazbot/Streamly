@@ -26,8 +26,9 @@ namespace LeStreamsFace.Converters
         public object Convert(object value, Type targetType, object parameter,
             System.Globalization.CultureInfo culture)
         {
-            if (targetType != typeof(bool))
-                throw new InvalidOperationException("The target must be a boolean");
+            // commented out for clowny use in a multiple converter chain
+//            if (targetType != typeof(bool))
+//                throw new InvalidOperationException("The target must be a boolean");
 
 //            if (value.GetType() != typeof(bool))
 //                throw new InvalidOperationException("The target must be a boolean");
