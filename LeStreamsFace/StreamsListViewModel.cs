@@ -37,8 +37,12 @@ namespace LeStreamsFace
 
             // TODO
 
+            var str = new Stream("wingsofdeathx","wings",123,"123","ra","asr",StreamingSite.TwitchTv);
+            RunningStreams.Add(str);
+            RunningStreams.Add(new Stream("wingsofdeathx","wings",123,"123","ra","asr",StreamingSite.TwitchTv));
             RunningStreams.Add(new Stream("wingsofdeathx","wings",123,"123","ra","asr",StreamingSite.TwitchTv));
             IsAnyStreamTabOpen = true;
+            SelectedStreamTab = str;
         }
 
         private async void FetchGames()
@@ -85,6 +89,7 @@ namespace LeStreamsFace
         #region Streams
 
         private readonly OptimizedObservableCollection<Stream> _streams = new OptimizedObservableCollection<Stream>();
+        private Stream _selectedStreamTab;
 
         public OptimizedObservableCollection<Stream> Streams
         {
@@ -144,6 +149,16 @@ namespace LeStreamsFace
         public ICommand StreamingTabClicked { get; private set; }
 
         public bool IsAnyStreamTabOpen { get; set; }
+
+        public Stream SelectedStreamTab
+        {
+            get { return _selectedStreamTab; }
+            set
+            {
+                if (value == _selectedStreamTab) return;
+                _selectedStreamTab = value;
+            }
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
