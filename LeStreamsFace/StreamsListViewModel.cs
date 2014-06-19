@@ -38,6 +38,7 @@ namespace LeStreamsFace
             // TODO
 
             var str = new Stream("wingsofdeathx","wings",123,"123","ra","asr",StreamingSite.TwitchTv);
+            str.LoginNameTwtv = "wingsofdeath";
             RunningStreams.Add(str);
             RunningStreams.Add(new Stream("wingsofdeathx","wings",123,"123","ra","asr",StreamingSite.TwitchTv));
             RunningStreams.Add(new Stream("wingsofdeathx","wings",123,"123","ra","asr",StreamingSite.TwitchTv));

@@ -396,11 +396,11 @@
                     <DataTemplate />
                 </MetroControls:Flyout.HeaderTemplate>
                 <StackPanel Margin="0">
-<!--                    <LeStreamsFace:CefWebView x:Name="cefWebView"-->
-<!--                                                      Margin="0"-->
-<!--                                                      HorizontalAlignment="Stretch"-->
-<!--                                                      VerticalAlignment="Stretch"-->
-<!--                                                      Padding="0" />-->
+                    <LeStreamsFace:CefWebView x:Name="cefWebView"
+                                              Margin="0"
+                                              HorizontalAlignment="Stretch"
+                                              VerticalAlignment="Stretch"
+                                              Padding="0" />
                 </StackPanel>
             </MetroControls:Flyout>
         </MetroControls:FlyoutsControl>
@@ -418,16 +418,19 @@
                 </TabControl.ItemTemplate>
                 <TabControl.ContentTemplate>
                     <DataTemplate>
-                    <Grid>
-<!--                        <StackPanel>-->
-<!--                            <TextBlock Text="{Binding Name}" />-->
-<!--                            <LeStreamsFace:CefWebView Html="{Binding EmbedHtmlCode}"-->
-                            <LeStreamsFace:CefWebView Html="www.google.com"
-                                                      Margin="0"
-                                                      HorizontalAlignment="Stretch"
-                                                      VerticalAlignment="Stretch"
-                                                      Padding="0" />
-<!--                            </StackPanel>-->
+                        <Grid>
+                            <StackPanel Background="Brown">
+                                <TextBlock Text="{Binding Name}" />
+                                <TextBlock Text="{Binding EmbedHtmlCode}" />
+                                <!--  <LeStreamsFace:CefWebView Html="{Binding EmbedHtmlCode}"  -->
+                                <LeStreamsFace:CefWebView MinWidth="1000"
+                                                          MinHeight="800"
+                                                          Margin="0"
+                                                          HorizontalAlignment="Stretch"
+                                                          VerticalAlignment="Stretch"
+                                                          Html="{Binding EmbedHtmlCode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                          Padding="0" />
+                            </StackPanel>
                         </Grid>
                     </DataTemplate>
                 </TabControl.ContentTemplate>

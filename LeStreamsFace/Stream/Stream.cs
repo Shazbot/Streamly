@@ -91,7 +91,11 @@ namespace LeStreamsFace
         public string LoginNameTwtv
         {
             get { return _loginNameTwtv; }
-            set { if (value == null) return; _loginNameTwtv = value; onPropertyChanged(this, "LoginNameTwtv"); }
+            set
+            {
+                if (value == null) return; _loginNameTwtv = value; onPropertyChanged(this, "LoginNameTwtv");
+                onPropertyChanged(this, Extensions.GetVariableName(() => EmbedHtmlCode));
+            }
         }
 
         [JsonProperty(PropertyName = "ThumbnailURI")]

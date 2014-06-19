@@ -1,4 +1,6 @@
-﻿using CefSharp;
+﻿using System.Threading;
+using System.Threading.Tasks;
+using CefSharp;
 using CefSharp.Wpf;
 using PropertyChanged;
 using System;
@@ -42,13 +44,13 @@ namespace LeStreamsFace
         {
             var settings = new CefSettings()
                            {
-                               //                               BrowserSubprocessPath = "CefSharp.BrowserSubprocess.exe"
+//                                                              BrowserSubprocessPath = "CefSharp.BrowserSubprocess.exe"
                            };
-            //            settings.RegisterScheme(new CefCustomScheme
-            //            {
-            //                SchemeName = CefSharpSchemeHandlerFactory.SchemeName,
-            //                SchemeHandlerFactory = new CefSharpSchemeHandlerFactory()
-            //            });
+//                        settings.RegisterScheme(new CefCustomScheme
+//                        {
+//                            SchemeName = CefSharpSchemeHandlerFactory.SchemeName,
+//                            SchemeHandlerFactory = new CefSharpSchemeHandlerFactory()
+//                        });
             Cef.Initialize(settings);
 
             //            CefSharp.Settings settings = new CefSharp.Settings();
@@ -73,7 +75,20 @@ namespace LeStreamsFace
             set
             {
                 SetValue(HtmlProperty, value);
-                webView.LoadHtml(Html, "url");
+                if (_loaded)
+                {
+                    webView.LoadHtml(Html, "url");
+                    return;
+                }
+                Task.Factory.StartNew(async () =>
+                                            {
+                                                while (!_loaded)
+                                                {
+                                                    await TaskEx.Delay(200);
+
+                                                }
+                                                webView.LoadHtml(Html, "url");
+                                            });
             }
         }
 
@@ -97,6 +112,8 @@ namespace LeStreamsFace
         public static DependencyProperty ScrollPercentageProperty =
             DependencyProperty.Register("ScrollPercentage", typeof(double), typeof(CefWebView), new PropertyMetadata(0d, ScrollPercentageChanged));
 
+        private bool _loaded;
+
         public string ScrollPercentage
         {
             get { return (string)GetValue(ScrollPercentageProperty); }
@@ -113,10 +130,13 @@ namespace LeStreamsFace
 
         private static void HtmlChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
+
+            var htmlPreview = (CefWebView)d;
+//            htmlPreview.webView.LoadHtml((string)e.NewValue, "url");
+
             // old cp'd code
             // does this even fire
             // IsBrowserInitialized should maybe be webView.WebBrowser != null
-            var htmlPreview = (CefWebView)d;
             if (htmlPreview.webView != null && htmlPreview.webView.IsBrowserInitialized)
                 htmlPreview.webView.LoadHtml((string)e.NewValue, "url");
         }
@@ -168,10 +188,13 @@ namespace LeStreamsFace
 
         private void WebView_OnLoaded(object sender, RoutedEventArgs e)
         {
+            _loaded = true;
+//                        webView.LoadHtml("<div></div>", "");// = wings;
+
             //            return;
             var wings = @"<object type=""application/x-shockwave-flash"" height=""" + "100%" + @""" width=""" + "100%" + @""" id=""live_embed_player_flash"" data=""http://www.twitch.tv/widgets/live_embed_player.swf?channel=wingsofdeath"" bgcolor=""#000000""><param name=""allowFullScreen"" value=""false"" /><param name=""allowScriptAccess"" value=""always"" /><param name=""allowNetworking"" value=""all"" /><param name=""movie"" value=""http://www.twitch.tv/widgets/live_embed_player.swf"" /><param name=""flashvars"" value=""hostname=www.twitch.tv&channel=wingsofdeath&auto_play=true&start_volume=25"" /></object>";
             Console.WriteLine(wings);
-            //webView.LoadHtml(wings, "arst");// = wings;
+            webView.LoadHtml(wings, "arst");// = wings;
         }
 
         private void WebView_OnToolTipOpening(object sender, ToolTipEventArgs e)
