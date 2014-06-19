@@ -1,7 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\CefSharp.Wpf.31.0.0-pre1\build\CefSharp.Wpf.props" Condition="Exists('..\packages\CefSharp.Wpf.31.0.0-pre1\build\CefSharp.Wpf.props')" />
-  <Import Project="..\packages\CefSharp.Common.31.0.0-pre1\build\CefSharp.Common.props" Condition="Exists('..\packages\CefSharp.Common.31.0.0-pre1\build\CefSharp.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
@@ -16,7 +14,7 @@
     <ExpressionBlendVersion>4.0.30816.0</ExpressionBlendVersion>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
-    <NuGetPackageImportStamp>94769d7f</NuGetPackageImportStamp>
+    <NuGetPackageImportStamp>4d4de016</NuGetPackageImportStamp>
     <CodeContractsAssemblyMode>0</CodeContractsAssemblyMode>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
@@ -87,6 +85,21 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Resources\Entypo.ttf" />
+    <Reference Include="CefSharp">
+      <HintPath>..\lib\CefSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="CefSharp.BrowserSubprocess">
+      <HintPath>..\lib\CefSharp.BrowserSubprocess.exe</HintPath>
+    </Reference>
+    <Reference Include="CefSharp.Core">
+      <HintPath>..\lib\CefSharp.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="CefSharp.Example">
+      <HintPath>..\lib\CefSharp.Example.dll</HintPath>
+    </Reference>
+    <Reference Include="CefSharp.Wpf">
+      <HintPath>..\lib\CefSharp.Wpf.dll</HintPath>
+    </Reference>
     <Reference Include="Kent.Boogaart.Converters">
       <HintPath>..\packages\Kent.Boogaart.Converters.1.3.1\lib\net40\Kent.Boogaart.Converters.dll</HintPath>
     </Reference>
@@ -94,9 +107,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Kent.Boogaart.HelperTrinity.1.5.3\lib\net40\Kent.Boogaart.HelperTrinity.dll</HintPath>
     </Reference>
-    <Reference Include="MahApps.Metro, Version=0.14.0.85, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="MahApps.Metro, Version=0.14.0.86, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\MahApps.Metro.0.14.0-ALPHA85\lib\net40\MahApps.Metro.dll</HintPath>
+      <HintPath>..\packages\MahApps.Metro.0.14.0-ALPHA86\lib\net40\MahApps.Metro.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Threading.Tasks">
@@ -152,7 +165,7 @@
     </Reference>
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\MahApps.Metro.0.14.0-ALPHA85\lib\net40\System.Windows.Interactivity.dll</HintPath>
+      <HintPath>..\packages\MahApps.Metro.0.14.0-ALPHA86\lib\net40\System.Windows.Interactivity.dll</HintPath>
     </Reference>
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml" />
@@ -176,6 +189,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Tabs\ConfigTab.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Tabs\AboutTab.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -197,8 +214,6 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CefSharp\CefSharpSchemeHandler.cs" />
-    <Compile Include="CefSharp\CefSharpSchemeHandlerFactory.cs" />
     <Compile Include="CefWebView.xaml.cs">
       <DependentUpon>CefWebView.xaml</DependentUpon>
     </Compile>
@@ -209,7 +224,6 @@
     <Compile Include="Commands\DelegateCommand.cs" />
     <Compile Include="Extensions\Extensions.cs" />
     <Compile Include="GamesViewModel.cs" />
-    <Compile Include="CefSharp\PropertyChangedExtensionMethods.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="StreamParsers\IStreamParser.cs" />
     <Compile Include="RestSharpJsonNetSerializer.cs" />
@@ -225,6 +239,9 @@
       <DependentUpon>StreamsListWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\CutOffConverter.cs" />
+    <Compile Include="Tabs\ConfigTab.xaml.cs">
+      <DependentUpon>ConfigTab.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Tabs\AboutTab.xaml.cs">
       <DependentUpon>AboutTab.xaml</DependentUpon>
     </Compile>
@@ -277,7 +294,12 @@
     <Content Include="Resources\Entypo-license.txt" />
     <Content Include="Resources\WindowsIcons-license.txt" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="CefSharp\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
   <ProjectExtensions>
     <VisualStudio AllowExistingFolder="true" />
@@ -293,16 +315,13 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Fody.1.24.0\build\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Fody.1.24.0\build\Fody.targets'))" />
-    <Error Condition="!Exists('..\packages\cef.redist.3.1650.1562-pre3\build\cef.redist.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\cef.redist.3.1650.1562-pre3\build\cef.redist.targets'))" />
-    <Error Condition="!Exists('..\packages\CefSharp.Common.31.0.0-pre1\build\CefSharp.Common.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\CefSharp.Common.31.0.0-pre1\build\CefSharp.Common.props'))" />
-    <Error Condition="!Exists('..\packages\CefSharp.Common.31.0.0-pre1\build\CefSharp.Common.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\CefSharp.Common.31.0.0-pre1\build\CefSharp.Common.targets'))" />
-    <Error Condition="!Exists('..\packages\CefSharp.Wpf.31.0.0-pre1\build\CefSharp.Wpf.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\CefSharp.Wpf.31.0.0-pre1\build\CefSharp.Wpf.props'))" />
   </Target>
-  <Import Project="..\packages\cef.redist.3.1650.1562-pre3\build\cef.redist.targets" Condition="Exists('..\packages\cef.redist.3.1650.1562-pre3\build\cef.redist.targets')" />
-  <Import Project="..\packages\CefSharp.Common.31.0.0-pre1\build\CefSharp.Common.targets" Condition="Exists('..\packages\CefSharp.Common.31.0.0-pre1\build\CefSharp.Common.targets')" />
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.17-beta\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.17-beta\tools\Microsoft.Bcl.Build.targets')" />
   <Target Name="EnsureBclBuildImported" BeforeTargets="BeforeBuild" Condition="'$(BclBuildImported)' == ''">
     <Error Condition="!Exists('..\packages\Microsoft.Bcl.Build.1.0.17-beta\tools\Microsoft.Bcl.Build.targets')" Text="This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=317567." HelpKeyword="BCLBUILD2001" />
     <Error Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.17-beta\tools\Microsoft.Bcl.Build.targets')" Text="The build restored NuGet packages. Build the project again to include these packages in the build. For more information, see http://go.microsoft.com/fwlink/?LinkID=317568." HelpKeyword="BCLBUILD2002" />
   </Target>
+  <PropertyGroup>
+    <PostBuildEvent>copy "$(SolutionDir)\lib\*" "$(TargetDir)"</PostBuildEvent>
+  </PropertyGroup>
 </Project>

@@ -252,7 +252,7 @@ namespace LeStreamsFace
                     {
                         if (!StreamsManager.Streams.Contains(stream))
                         {
-                            Debug.WriteLine("ADDED " + stream.Name + ", " + stream.Id);
+//                            Debug.WriteLine("ADDED " + stream.Name + ", " + stream.Id);
                             newStreamsList.Add(stream);
                         }
                         streamsList.Add(stream);
@@ -296,7 +296,7 @@ namespace LeStreamsFace
                     {
                         existingNotification.Close();
                     }
-                    Debug.WriteLine("REMOVED STREAM " + closedStream.Name);
+//                    Debug.WriteLine("REMOVED STREAM " + closedStream.Name);
                 }
                 StreamsManager.Streams.AddRange(newStreamsList);
 
@@ -369,7 +369,7 @@ namespace LeStreamsFace
             }
             finally
             {
-                Debug.WriteLine("".PadRight(45, '-'));
+//                Debug.WriteLine("".PadRight(45, '-'));
                 firstRun = false;
                 ConfigManager.Instance.Offline = !StreamsManager.Streams.Any();
                 if (ConfigManager.Instance.Offline)
@@ -469,12 +469,12 @@ namespace LeStreamsFace
                 stream.GottenViaAutoGetFavs = true;
                 if (!StreamsManager.Streams.Contains(stream))
                 {
-                    Debug.WriteLine("ADDED " + stream.Name + ", " + stream.Id + " FROM FAVORITES CHECK");
+//                    Debug.WriteLine("ADDED " + stream.Name + ", " + stream.Id + " FROM FAVORITES CHECK");
                     newStreamsList.Add(stream);
                 }
                 streamsList.Add(stream);
             }
-            Debug.WriteLine("TIMER TO RETRIEVE FAVORITES: " + (DateTime.Now - now).TotalSeconds);
+//            Debug.WriteLine("TIMER TO RETRIEVE FAVORITES: " + (DateTime.Now - now).TotalSeconds);
         }
 
         private void Window_SourceInitialized(object sender, EventArgs e)

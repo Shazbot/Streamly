@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections;
+﻿using OxyPlot;
+using OxyPlot.Series;
+using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
@@ -10,18 +10,21 @@ using System.Windows;
 using System.Windows.Resources;
 using System.Xml;
 using System.Xml.Linq;
-using OxyPlot;
-using OxyPlot.Series;
+using PropertyChanged;
 using MessageBox = System.Windows.MessageBox;
 
 namespace LeStreamsFace
 {
+    [ImplementPropertyChanged]
     internal class ConfigManager : INotifyPropertyChanged
     {
         public PlotModel StreamsPerGamePlotModel { get; set; }
+
         public PlotModel ViewersPerGamePlotModel { get; set; }
-        public OptimizedObservableCollection<Tuple<string,int>> StreamsPerGame { get; set; }
-        public OptimizedObservableCollection<Tuple<string,int>> ViewersPerGame { get; set; }
+
+        public OptimizedObservableCollection<Tuple<string, int>> StreamsPerGame { get; set; }
+
+        public OptimizedObservableCollection<Tuple<string, int>> ViewersPerGame { get; set; }
 
         public void UpdatePlotModel(IEnumerable<Stream> gameStreams)
         {
@@ -107,6 +110,8 @@ namespace LeStreamsFace
 
         private ConfigManager()
         {
+            FavoriteStreams = new OptimizedObservableCollection<FavoriteStream>();
+            AutoCheckFavorites = true;
             Offline = false;
         }
 
@@ -132,7 +137,8 @@ namespace LeStreamsFace
         public TimeSpan FromSpan = new TimeSpan(0, 0, 0);
         public TimeSpan ToSpan = new TimeSpan(0, 0, 0);
 
-        public readonly OptimizedObservableCollection<FavoriteStream> FavoriteStreams = new OptimizedObservableCollection<FavoriteStream>();
+        public OptimizedObservableCollection<FavoriteStream> FavoriteStreams { get; private set; }
+
         public List<string> BannedGames = new List<string>();
 
         private const string ConfigFileName = "config.xml";
@@ -262,7 +268,18 @@ namespace LeStreamsFace
         private int _triageStreams = 20;
 
         private bool initialConfigReadCompleted = false;
-        public bool AutoCheckFavorites = true;
+        private bool _autoCheckFavorites;
+
+        public bool AutoCheckFavorites
+        {
+            get { return _autoCheckFavorites; }
+            set
+            {
+                if (value == _autoCheckFavorites) return;
+                _autoCheckFavorites = value;
+                WriteConfigXml();
+            }
+        }
 
         public void ReadConfigXml()
         {
@@ -404,7 +421,9 @@ namespace LeStreamsFace
         }
 
 #pragma warning disable 67
+
         public event PropertyChangedEventHandler PropertyChanged;
+
 #pragma warning restore 67
     }
 }

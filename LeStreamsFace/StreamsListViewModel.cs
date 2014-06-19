@@ -1,49 +1,130 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Windows.Input;
+﻿using System.Windows.Controls;
 using LeStreamsFace.Annotations;
 using LeStreamsFace.StreamParsers;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using PropertyChanged;
 using RestSharp;
+using System;
+using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.ComponentModel;
+using System.Linq;
+using System.Net;
+using System.Runtime.CompilerServices;
+using System.Windows;
+using System.Windows.Input;
 
 namespace LeStreamsFace
 {
     [ImplementPropertyChanged]
-    class StreamsListViewModel : INotifyPropertyChanged
+    internal class StreamsListViewModel : INotifyPropertyChanged
     {
-        private StreamsListWindow _streamsListWindow;
+        private StreamsListWindow view;
 
         private GamesViewModel _gamesPanelSelectedGame;
         private Stream _streamsPanelSelectedStream;
 
-        public StreamsListViewModel(StreamsListWindow streamsListWindow)
+        public StreamsListViewModel(StreamsListWindow view)
         {
-            _streamsListWindow = streamsListWindow;
+            this.view = view;
 
             _runningStreams.CollectionChanged += RunningStreamsOnCollectionChanged;
 
-            GamesPanelButtonPressed = new DelegateCommand(ToggleGamesPanel);
-            StreamingTabClicked = new DelegateCommand(() => IsAnyStreamTabOpen = true);
+            GamesPanelButtonPressedCommand = new DelegateCommand(ToggleGamesPanel);
+            StreamingTabClickedCommand = new DelegateCommand(() => IsAnyStreamTabOpen = true);
+            GetTwitchFavoritesCommand = new DelegateCommand<string>(usernameOnTwitch => ImportTwitchFavorites(usernameOnTwitch));
+            RefreshViewCommand = new DelegateCommand(() => view.RefreshView());
+            UnfavoriteStreamCommand = new DelegateCommand<FavoriteStream>(param => UnfavoriteStream(param));
 
             FetchGames();
 
             // TODO
 
-            var str = new Stream("wingsofdeathx","wings",123,"123","ra","asr",StreamingSite.TwitchTv);
+            var str = new Stream("wingsofdeathx", "wings", 123, "123", "ra", "asr", StreamingSite.TwitchTv);
             str.LoginNameTwtv = "wingsofdeath";
             RunningStreams.Add(str);
-            RunningStreams.Add(new Stream("wingsofdeathx","wings",123,"123","ra","asr",StreamingSite.TwitchTv));
-            RunningStreams.Add(new Stream("wingsofdeathx","wings",123,"123","ra","asr",StreamingSite.TwitchTv));
-            IsAnyStreamTabOpen = true;
-            SelectedStreamTab = str;
+            RunningStreams.Add(new Stream("wingsofdeathx", "wings", 123, "123", "ra", "asr", StreamingSite.TwitchTv));
+            RunningStreams.Add(new Stream("wingsofdeathx", "wings", 123, "123", "ra", "asr", StreamingSite.TwitchTv));
+
+            //TODO if we want to start with a stream
+            //            IsAnyStreamTabOpen = true;
+            //            SelectedStreamTab = str;
+            // TODO maybe move this to switching tab logic
+            // TODO can we use the property itself or it's ok like this?
+            _timeWhenNotNotifyingTextInput = ConfigManager.Instance.FromSpan.ToString("hhmm") + '-' + ConfigManager.Instance.ToSpan.ToString("hhmm");
+            _bannedGamesTextInput = ConfigManager.Instance.BannedGames.Aggregate((s, s1) => s + ", " + s1);
+        }
+
+        public ICommand RefreshViewCommand { get; private set; }
+
+        public ICommand GetTwitchFavoritesCommand { get; private set; }
+
+        public ICommand UnfavoriteStreamCommand { get; private set; }
+
+        private void ImportTwitchFavorites(string usernameOnTwitch)
+        {
+            if (string.IsNullOrWhiteSpace(usernameOnTwitch))
+            {
+                return;
+            }
+
+            IEnumerable<Stream> favoritesFromTwitch;
+            try
+            {
+                var client = new RestClient("https://api.twitch.tv/kraken/users/" + usernameOnTwitch + "/follows/channels?limit=100");
+                var request = new RestRequest();
+                client.AddHandler("application/json", new RestSharpJsonNetSerializer());
+                var resp = client.Execute<JObject>(request);
+                if (resp.Data["error"] != null)
+                {
+                    throw new WebException();
+                }
+                favoritesFromTwitch = resp.Data["follows"].Select(token => (Stream)token["channel"].ToObject(typeof(Stream)));
+            }
+            catch (WebException)
+            {
+                MessageBox.Show("Username doesn't exist (404)", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            var needToWriteConfig = false;
+            foreach (var favoriteChannel in favoritesFromTwitch)
+            {
+                if (ConfigManager.Instance.FavoriteStreams.Where(stream => stream.Site == StreamingSite.TwitchTv).All(stream => favoriteChannel.Id != stream.ChannelId))
+                {
+                    ConfigManager.Instance.FavoriteStreams.Add(new FavoriteStream(favoriteChannel.Name, favoriteChannel.Id, StreamingSite.TwitchTv));
+                    StreamsManager.Streams.Where(stream => stream.Site == StreamingSite.TwitchTv && stream.ChannelId == favoriteChannel.Id).ToList().ForEach(stream => stream.IsFavorite = true);
+                    needToWriteConfig = true;
+                }
+            }
+
+            if (needToWriteConfig)
+            {
+                MessageBox.Show("Successfully imported favorites.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                ConfigManager.Instance.WriteConfigXml();
+                view.RefreshView();
+            }
+            else
+            {
+                MessageBox.Show("No new streams to import.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+        }
+
+        private void UnfavoriteStream(FavoriteStream streamToUnfavorite)
+        {
+            ConfigManager.Instance.FavoriteStreams.Remove(streamToUnfavorite);
+
+            var ourFavorites = StreamsManager.Streams.Where(stream => stream.ChannelId == streamToUnfavorite.ChannelId);
+            if (ourFavorites.Any())
+            {
+                foreach (var ourFavorite in ourFavorites)
+                {
+                    ourFavorite.IsFavorite = false;
+                }
+                view.RefreshView();
+                ConfigManager.Instance.WriteConfigXml();
+            }
         }
 
         private async void FetchGames()
@@ -61,9 +142,7 @@ namespace LeStreamsFace
 
         private void RunningStreamsOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs notifyCollectionChangedEventArgs)
         {
-            
         }
-
 
         #region RunningStreams
 
@@ -74,7 +153,7 @@ namespace LeStreamsFace
             get { return _runningStreams; }
         }
 
-        #endregion
+        #endregion RunningStreams
 
         #region Games
 
@@ -85,26 +164,30 @@ namespace LeStreamsFace
             get { return _games; }
         }
 
-        #endregion
+        #endregion Games
 
         #region Streams
 
         private readonly OptimizedObservableCollection<Stream> _streams = new OptimizedObservableCollection<Stream>();
         private Stream _selectedStreamTab;
+        private string _bannedGamesTextInput;
+        private string _timeWhenNotNotifyingTextInput;
+        private TabItem _selectedShellTab;
+        private bool _isConfigTabSelected;
 
         public OptimizedObservableCollection<Stream> Streams
         {
             get { return _streams; }
         }
 
-        #endregion
+        #endregion Streams
 
         public GamesViewModel GamesPanelSelectedGame
         {
             get { return _gamesPanelSelectedGame; }
             set
             {
-//                if (value == _gamesPanelSelectedGame) return;
+                //                if (value == _gamesPanelSelectedGame) return;
                 _gamesPanelSelectedGame = value;
                 FetchStreams(_gamesPanelSelectedGame.GameName);
                 IsStreamsPanelOpen = true;
@@ -146,10 +229,86 @@ namespace LeStreamsFace
 
         public bool IsStreamsPanelOpen { get; set; }
 
-        public ICommand GamesPanelButtonPressed { get; private set; }
-        public ICommand StreamingTabClicked { get; private set; }
+        public ICommand GamesPanelButtonPressedCommand { get; private set; }
+
+        public ICommand StreamingTabClickedCommand { get; private set; }
 
         public bool IsAnyStreamTabOpen { get; set; }
+
+        public string BannedGamesTextInput
+        {
+            get { return _bannedGamesTextInput; }
+            set
+            {
+                _bannedGamesTextInput = value;
+                FilterBannedGames(value);
+            }
+        }
+
+        private void FilterBannedGames(string bannedGamesInputText)
+        {
+            try
+            {
+                if (!string.IsNullOrWhiteSpace(bannedGamesInputText))
+                {
+                    var bannedGames = bannedGamesInputText.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries).Select(s => s.Trim());
+                    ConfigManager.Instance.BannedGames = bannedGames.ToList();
+                }
+                else
+                {
+                    ConfigManager.Instance.BannedGames.Clear();
+                }
+                ConfigManager.Instance.WriteConfigXml();
+                view.RefreshView();
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        public string TimeWhenNotNotifyingTextInput
+        {
+            get { return _timeWhenNotNotifyingTextInput; }
+            set
+            {
+                _timeWhenNotNotifyingTextInput = value;
+                DisableNotificationsDuringThisTime(value);
+            }
+        }
+
+        private void DisableNotificationsDuringThisTime(string timeInputText)
+        {
+            try
+            {
+                TimeSpan fromSpan = new TimeSpan(0, 0, 0);
+                TimeSpan toSpan = new TimeSpan(0, 0, 0);
+
+                if (!string.IsNullOrWhiteSpace(timeInputText))
+                {
+                    string from = timeInputText.Split('-')[0];
+                    string to = timeInputText.Split('-')[1];
+
+                    fromSpan = new TimeSpan(int.Parse(from.Substring(0, 2)), int.Parse(from.Substring(2, 2)), 0);
+                    toSpan = new TimeSpan(int.Parse(to.Substring(0, 2)), int.Parse(to.Substring(2, 2)), 0);
+
+                    if (fromSpan.TotalSeconds != 0 && toSpan.TotalSeconds != 0)
+                    {
+                        if (fromSpan.CompareTo(toSpan) == 0)
+                        {
+                            return;
+                        }
+                    }
+                }
+                ConfigManager.Instance.FromSpan = fromSpan;
+                ConfigManager.Instance.ToSpan = toSpan;
+                ConfigManager.Instance.WriteConfigXml();
+                // TODO think about if we need this check here
+                //                timeBlockCheck();
+            }
+            catch (Exception)
+            {
+            }
+        }
 
         public Stream SelectedStreamTab
         {
@@ -158,6 +317,24 @@ namespace LeStreamsFace
             {
                 if (value == _selectedStreamTab) return;
                 _selectedStreamTab = value;
+            }
+        }
+
+        public TabItem SelectedShellTab
+        {
+            get { return _selectedShellTab; }
+            set
+            {
+                _selectedShellTab = value;
+            }
+        }
+
+        public bool IsConfigTabSelected
+        {
+            get { return _isConfigTabSelected; }
+            set
+            {
+                _isConfigTabSelected = value;
             }
         }
 

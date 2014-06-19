@@ -1,6 +1,7 @@
 ﻿<UserControl x:Class="LeStreamsFace.CefWebView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:wpf="clr-namespace:CefSharp.Wpf;assembly=CefSharp.Wpf"
@@ -9,19 +10,36 @@
              mc:Ignorable="d">
     <Grid>
 
-        <StackPanel VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-            <wpf:WebView x:Name="webView"
-                         MinWidth="500" Margin="0" Padding="0"
-                         MinHeight="500"
-                         HorizontalAlignment="Stretch"
-                         VerticalAlignment="Stretch"
-                         Loaded="WebView_OnLoaded"
-                         PreviewMouseMove="WebView_OnPreviewMouseMove"
-                         ToolTip=""
-                         ToolTipOpening="WebView_OnToolTipOpening"
-                         WebBrowser="{Binding WebBrowser,
-                                              Mode=OneWayToSource}" />
-        </StackPanel>
+        <!--  <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinHeight="300" MinWidth="300">  -->
+        <wpf:ChromiumWebBrowser x:Name="browser"
+                                
+                                MinWidth="500" Margin="0, 0,0,0"
+                                MinHeight="500"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch" VerticalContentAlignment="Top"
+                                ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                                WebBrowser="{Binding WebBrowser,
+                                                     Mode=OneWayToSource}" />
+        <!--  <wpf:ChromiumWebBrowser x:Name="browser" />  -->
+        <!--  <wpf:WebView x:Name="webView"  -->
+        <!--  MinWidth="500" Margin="0" Padding="0"  -->
+        <!--  MinHeight="500"  -->
+        <!--  HorizontalAlignment="Stretch"  -->
+        <!--  VerticalAlignment="Stretch"  -->
+        <!--  Loaded="WebView_OnLoaded"  -->
+        <!--  PreviewMouseMove="WebView_OnPreviewMouseMove"  -->
+        <!--  ToolTip=""  -->
+        <!--  ToolTipOpening="WebView_OnToolTipOpening"  -->
+        <!--  WebBrowser="{Binding WebBrowser,  -->
+        <!--  Mode=OneWayToSource}" />  -->
+        <!--  </StackPanel>  -->
+
+<!--        Width="{Binding RelativeSource={RelativeSource FindAncestor,-->
+<!--                                                                               AncestorType=controls:MetroWindow},-->
+<!--                                                Path=ActualWidth}"-->
+<!--                                Height="{Binding RelativeSource={RelativeSource FindAncestor,-->
+<!--                                                                                AncestorType=controls:MetroWindow},-->
+<!--                                                 Path=ActualHeight}"-->
     </Grid>
 </UserControl>
 

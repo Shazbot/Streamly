@@ -15,10 +15,10 @@
                            Title="More streams than you can shake a stick at"
                            MinWidth="150"
                            MinHeight="100"
-                           AllowsTransparency="True"
                            Background="WhiteSmoke"
                            Closed="window_Closed"
                            Icon="/LeStreamsFace;component/Resources/App.ico"
+                           IgnoreTaskbarOnMaximize="True"
                            KeyDown="window_KeyDown"
                            Left="{Binding WinLeft,
                                           Mode=TwoWay,
@@ -53,6 +53,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.AnimatedTabControl.xaml" />
+                <ResourceDictionary Source="Tabs/ConfigTab.xaml" />
                 <ResourceDictionary Source="Tabs/AboutTab.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <Style x:Key="MyFocusVisualStyle" TargetType="{x:Type Control}">
@@ -157,7 +158,7 @@
                         Content="streams"
                         Tag="{Binding ElementName=streamsTabItem}" />
                 <ToggleButton Name="toggleGamesPanelButton"
-                              Command="{Binding GamesPanelButtonPressed}"
+                              Command="{Binding GamesPanelButtonPressedCommand}"
                               Content="games"
                               IsChecked="{Binding IsGamesPanelOpen,
                                                   Mode=OneWay}" />
@@ -185,7 +186,7 @@
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Button Command="{Binding DataContext.StreamingTabClicked, ElementName=window}" ToolTipService.InitialShowDelay="100">
+                        <Button Command="{Binding DataContext.StreamingTabClickedCommand, ElementName=window}" ToolTipService.InitialShowDelay="100">
                             <Button.ToolTip>
                                 <ToolTip Background="Black"
                                          Content="{Binding Name}"
@@ -395,21 +396,25 @@
                 <MetroControls:Flyout.HeaderTemplate>
                     <DataTemplate />
                 </MetroControls:Flyout.HeaderTemplate>
-                <StackPanel Margin="0">
+                <StackPanel Margin="0" ScrollViewer.VerticalScrollBarVisibility="Disabled">
                     <LeStreamsFace:CefWebView x:Name="cefWebView"
                                               Margin="0"
                                               HorizontalAlignment="Stretch"
                                               VerticalAlignment="Stretch"
-                                              Padding="0" />
+                                              Padding="0"
+                                              ScrollViewer.VerticalScrollBarVisibility="Disabled" />
                 </StackPanel>
             </MetroControls:Flyout>
         </MetroControls:FlyoutsControl>
     </MetroControls:MetroWindow.Flyouts>
 
     <MetroControls:MetroContentControl>
-        <Grid>
+        <Grid Margin="-11,-17,-28,-3">
 
-            <TabControl ItemsSource="{Binding RunningStreams}" SelectedItem="{Binding SelectedStreamTab}">
+            <TabControl ItemsSource="{Binding RunningStreams}"
+                        SelectedItem="{Binding SelectedStreamTab}"
+                        Visibility="{Binding IsAnyStreamTabOpen,
+                                             Converter={StaticResource BooleanToVisibilityConverter}}">
                 <TabControl.Resources />
                 <TabControl.ItemTemplate>
                     <DataTemplate>
@@ -419,24 +424,32 @@
                 <TabControl.ContentTemplate>
                     <DataTemplate>
                         <Grid>
-                            <StackPanel Background="Brown">
-                                <TextBlock Text="{Binding Name}" />
-                                <TextBlock Text="{Binding EmbedHtmlCode}" />
-                                <!--  <LeStreamsFace:CefWebView Html="{Binding EmbedHtmlCode}"  -->
-                                <LeStreamsFace:CefWebView MinWidth="1000"
-                                                          MinHeight="800"
-                                                          Margin="0"
-                                                          HorizontalAlignment="Stretch"
-                                                          VerticalAlignment="Stretch"
-                                                          Html="{Binding EmbedHtmlCode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                                          Padding="0" />
-                            </StackPanel>
+                            <!--  <StackPanel>  -->
+                            <!--  <TextBlock Text="{Binding Name}" />  -->
+                            <!--  <TextBlock Text="{Binding EmbedHtmlCode}" />  -->
+                            <!--  <LeStreamsFace:CefWebView Html="{Binding EmbedHtmlCode}"  -->
+                            <LeStreamsFace:CefWebView MinWidth="800"
+                                                      MinHeight="800"
+                                                      Margin="0"
+                                                      HorizontalAlignment="Stretch"
+                                                      VerticalAlignment="Stretch"
+                                                      Address="www.google.com"
+                                                      Html="{Binding DataContext.EmbedHtmlCode,
+                                                                     Mode=OneWay,
+                                                                     RelativeSource={RelativeSource AncestorType=Grid},
+                                                                     UpdateSourceTrigger=PropertyChanged}"
+                                                      Padding="0"
+                                                      Visibility="Collapsed" />
+                            <!--  </StackPanel>  -->
                         </Grid>
                     </DataTemplate>
                 </TabControl.ContentTemplate>
             </TabControl>
 
-            <TabControl Name="tabControl" Visibility="{Binding IsAnyStreamTabOpen, Converter={StaticResource InvertedBooleanToVisibilityConverter}}">
+            <TabControl Name="tabControl"
+                        SelectedItem="{Binding SelectedShellTab, Mode=OneWayToSource}"
+                        Visibility="{Binding IsAnyStreamTabOpen,
+                                             Converter={StaticResource InvertedBooleanToVisibilityConverter}}">
                 <TabItem Name="streamsTabItem"
                          Header="Streams"
                          IsSelected="True"
@@ -737,233 +750,9 @@
                     </Grid>
                 </TabItem>
                 <TabItem Name="configTabItem"
-                         Header="Config"
-                         Visibility="Collapsed">
-                    <ScrollViewer VerticalScrollBarVisibility="Auto">
-                        <WrapPanel x:Name="wrapPanel"
-                                   Background="Transparent"
-                                   MouseLeftButtonDown="WrapPanel_OnMouseLeftButtonDown">
-                            <StackPanel Margin="10,0,0,0"
-                                        HorizontalAlignment="Left"
-                                        VerticalAlignment="Top">
-                                <GroupBox HorizontalAlignment="Left">
-                                    <GroupBox.Header>
-                                        <Label Content="TwitchTV" FontSize="14" />
-                                    </GroupBox.Header>
-                                    <StackPanel Margin="2,2,10,2">
-                                        <TextBlock FontSize="14"
-                                                   Padding="0,0,0,5"
-                                                   Text="Type your twitch username to import your favorites:" />
-                                        <StackPanel Orientation="Horizontal">
-                                            <TextBox x:Name="twitchFavorites"
-                                                     Width="250"
-                                                     Margin="0,0,5,0"
-                                                     FontSize="14" />
-                                            <Button Click="TwitchFavorites_Click" Content="OK" />
-                                        </StackPanel>
-                                        <CheckBox x:Name="AutoCheckFavoritesCheckBox"
-                                                  Margin="0,12,0,0"
-                                                  VerticalContentAlignment="Center"
-                                                  Click="AutoCheckFavoritesCheckBox_Click"
-                                                  Content="Explicitly check favorite streams"
-                                                  FontSize="13.333"
-                                                  IsChecked="True"
-                                                  Padding="4,-3,0,0"
-                                                  Visibility="Collapsed" />
-                                    </StackPanel>
-                                </GroupBox>
-                                <StackPanel Margin="0,15,0,0"
-                                            HorizontalAlignment="Left"
-                                            Orientation="Horizontal">
-                                    <TextBlock VerticalAlignment="Center"
-                                               FontSize="14"
-                                               Text="Notifications timeout in seconds:" />
-                                    <TextBox x:Name="notificationTimeout"
-                                             Width="50"
-                                             Margin="5,0,0,0"
-                                             FontSize="14">
-                                        <!--  MetroControls:TextboxHelper.Watermark="{Binding NotificationTimeout, Source={x:Static LeStreamsFace:ConfigManager.Instance}}"  -->
-                                        <TextBox.Text>
-                                            <Binding NotifyOnSourceUpdated="True"
-                                                     Path="NotificationTimeout"
-                                                     Source="{x:Static LeStreamsFace:ConfigManager.Instance}"
-                                                     UpdateSourceTrigger="PropertyChanged">
-                                                <Binding.ValidationRules>
-                                                    <LeStreamsFace:NonNegativeIntegerValidationRule />
-                                                </Binding.ValidationRules>
-                                            </Binding>
-                                        </TextBox.Text>
-                                        <TextBox.Style>
-                                            <Style BasedOn="{StaticResource {x:Type TextBox}}" TargetType="{x:Type TextBox}">
-                                                <Style.Triggers>
-                                                    <Trigger Property="Validation.HasError" Value="True" />
-                                                </Style.Triggers>
-                                            </Style>
-                                        </TextBox.Style>
-                                    </TextBox>
-                                </StackPanel>
-                                <StackPanel Margin="0,10,0,0"
-                                            HorizontalAlignment="Left"
-                                            Orientation="Horizontal">
-                                    <TextBlock VerticalAlignment="Center"
-                                               FontSize="14"
-                                               Text="Hide non-fav streams below number of viewers:" />
-                                    <TextBox x:Name="minViewers"
-                                             Width="50"
-                                             Margin="5,0,0,0"
-                                             FontSize="14"
-                                             MetroControls:TextboxHelper.Watermark="{Binding TriageStreams,
-                                                                                             Source={x:Static LeStreamsFace:ConfigManager.Instance}}"
-                                             SourceUpdated="RefreshView">
-                                        <TextBox.Style>
-                                            <Style BasedOn="{StaticResource {x:Type TextBox}}" TargetType="{x:Type TextBox}">
-                                                <Style.Triggers>
-                                                    <Trigger Property="Validation.HasError" Value="True">
-                                                        <!--  <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors).CurrentItem.ErrorContent}" />  -->
-                                                    </Trigger>
-                                                </Style.Triggers>
-                                            </Style>
-                                        </TextBox.Style>
-                                        <TextBox.Text>
-                                            <Binding NotifyOnSourceUpdated="True"
-                                                     Path="TriageStreams"
-                                                     Source="{x:Static LeStreamsFace:ConfigManager.Instance}"
-                                                     UpdateSourceTrigger="PropertyChanged">
-                                                <Binding.ValidationRules>
-                                                    <LeStreamsFace:NonNegativeIntegerValidationRule />
-                                                </Binding.ValidationRules>
-                                            </Binding>
-                                        </TextBox.Text>
-                                    </TextBox>
-                                </StackPanel>
-                                <TextBlock Margin="0,10,0,0"
-                                           FontSize="14"
-                                           Text="Block games by name:" />
-                                <TextBox x:Name="BannedGamesTextBox"
-                                         MinWidth="250"
-                                         Margin="0,5,0,0"
-                                         HorizontalAlignment="Left"
-                                         HorizontalContentAlignment="Left"
-                                         VerticalContentAlignment="Center"
-                                         MetroControls:TextboxHelper.ClearTextButton="True"
-                                         MetroControls:TextboxHelper.Watermark="game a, game b"
-                                         TextChanged="BannedGamesTextBox_TextChanged" />
-                                <TextBlock Margin="0,10,0,0"
-                                           FontSize="14"
-                                           Text="Hide favorites and alerts between: (hhmm-hhmm)"
-                                           TextWrapping="Wrap" />
-                                <TextBox x:Name="DisabledTimeTextBox"
-                                         Width="100"
-                                         Margin="0,5,0,0"
-                                         HorizontalAlignment="Left"
-                                         HorizontalContentAlignment="Left"
-                                         VerticalContentAlignment="Center"
-                                         MetroControls:TextboxHelper.ClearTextButton="True"
-                                         MetroControls:TextboxHelper.Watermark="0000-0000"
-                                         TextChanged="DisabledTimeTextBox_TextChanged"
-                                         TextWrapping="Wrap" />
-                                <Slider Name="opacitySlider"
-                                        Width="160"
-                                        Height="20"
-                                        Margin="0,10,0,0"
-                                        HorizontalAlignment="Left"
-                                        Maximum="1"
-                                        Minimum="0.2"
-                                        ToolTipService.ToolTip="Opacity"
-                                        Value="{Binding Opacity,
-                                                        Mode=TwoWay,
-                                                        ElementName=window}" />
-
-                                <CheckBox Margin="0,12,0,0"
-                                          VerticalContentAlignment="Center"
-                                          Content="Remember window size and position"
-                                          FontSize="13.333"
-                                          IsChecked="{Binding SaveWindowPosition,
-                                                              Source={x:Static LeStreamsFace:ConfigManager.Instance},
-                                                              Mode=TwoWay}"
-                                          Padding="4,-3,0,0" />
-                                <CheckBox x:Name="HideTitleBarCheckBox"
-                                          Margin="0,12,0,0"
-                                          VerticalContentAlignment="Center"
-                                          Content="Hide title bar"
-                                          FontSize="13.333"
-                                          IsChecked="{Binding HideTitleBar,
-                                                              Source={x:Static LeStreamsFace:ConfigManager.Instance},
-                                                              Mode=TwoWay}"
-                                          Padding="4,-3,0,0" />
-                                <CheckBox x:Name="PinToDesktopCheckBox"
-                                          Margin="0,12,0,0"
-                                          VerticalContentAlignment="Center"
-                                          Content="Pin to desktop"
-                                          FontSize="13.333"
-                                          IsChecked="{Binding PinToDesktop,
-                                                              Source={x:Static LeStreamsFace:ConfigManager.Instance},
-                                                              Mode=TwoWay}"
-                                          Padding="4,-3,0,0"
-                                          ToolTip="Requires reopening the window"
-                                          ToolTipService.InitialShowDelay="0" />
-                            </StackPanel>
-                            <StackPanel Margin="0" VerticalAlignment="Top">
-                                <Expander Margin="20,15,10,15"
-                                          FontSize="14"
-                                          Header="Favorite streams"
-                                          IsExpanded="True">
-                                    <ListBox x:Name="favoritesListBox"
-                                             Height="282"
-                                             MinWidth="225"
-                                             HorizontalAlignment="Stretch"
-                                             VerticalAlignment="Stretch"
-                                             HorizontalContentAlignment="Stretch"
-                                             AlternationCount="2"
-                                             BorderThickness="0"
-                                             ScrollViewer.VerticalScrollBarVisibility="Auto">
-                                        <ListBox.ItemTemplate>
-                                            <DataTemplate>
-                                                <Grid Width="Auto">
-                                                    <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="*" />
-                                                        <ColumnDefinition Width="Auto" />
-                                                    </Grid.ColumnDefinitions>
-                                                    <TextBlock Grid.Column="0"
-                                                               HorizontalAlignment="Stretch"
-                                                               VerticalAlignment="Center"
-                                                               Text="{Binding LoginNameTwtv}" />
-                                                    <Button Grid.Column="1"
-                                                            Width="30"
-                                                            Height="30"
-                                                            VerticalAlignment="Top"
-                                                            Click="UnfavoriteButton_Click"
-                                                            Style="{DynamicResource MetroCircleButtonStyle}">
-                                                        <Rectangle Width="8" Height="8">
-                                                            <Rectangle.Fill>
-                                                                <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_close}" />
-                                                            </Rectangle.Fill>
-                                                        </Rectangle>
-                                                    </Button>
-                                                </Grid>
-                                            </DataTemplate>
-                                        </ListBox.ItemTemplate>
-                                        <ListBox.ItemContainerStyle>
-                                            <Style TargetType="{x:Type ListBoxItem}">
-                                                <Setter Property="FontSize" Value="14" />
-                                                <Setter Property="Padding" Value="5,5" />
-                                                <Setter Property="FocusVisualStyle" Value="{x:Null}" />
-                                                <Style.Triggers>
-                                                    <Trigger Property="ItemsControl.AlternationIndex" Value="0">
-                                                        <Setter Property="Background" Value="White" />
-                                                    </Trigger>
-                                                    <Trigger Property="ItemsControl.AlternationIndex" Value="1">
-                                                        <Setter Property="Background" Value="WhiteSmoke" />
-                                                    </Trigger>
-                                                </Style.Triggers>
-                                            </Style>
-                                        </ListBox.ItemContainerStyle>
-                                    </ListBox>
-                                </Expander>
-                            </StackPanel>
-                        </WrapPanel>
-                    </ScrollViewer>
-                </TabItem>
+                         Header="Config" IsSelected="{Binding IsConfigTabSelected, Mode=OneWayToSource}"
+                         Style="{StaticResource configTabStyle}"
+                         Visibility="Collapsed" />
                 <TabItem Name="statsTabItem"
                          Header="Stats"
                          Visibility="Collapsed">

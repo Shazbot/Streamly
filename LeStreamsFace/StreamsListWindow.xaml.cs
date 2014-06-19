@@ -1,9 +1,8 @@
-﻿using System;
+﻿using MahApps.Metro.Controls;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Net;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -15,18 +14,11 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Windows.Threading;
-using LeStreamsFace.StreamParsers;
-using MahApps.Metro.Controls;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using RestSharp;
 using Button = System.Windows.Controls.Button;
-using CheckBox = System.Windows.Controls.CheckBox;
 using Clipboard = System.Windows.Clipboard;
 using Control = System.Windows.Controls.Control;
 using KeyEventArgs = System.Windows.Input.KeyEventArgs;
 using ListBox = System.Windows.Controls.ListBox;
-using MessageBox = System.Windows.MessageBox;
 using MouseEventArgs = System.Windows.Input.MouseEventArgs;
 using TextBox = System.Windows.Controls.TextBox;
 
@@ -49,10 +41,10 @@ namespace LeStreamsFace
             NameScope.SetNameScope(windowCommands, NameScope.GetNameScope(this));
 
             TypeDescriptor.GetProperties(this.streamsDataGrid)["ItemsSource"].AddValueChanged(this.streamsDataGrid, new EventHandler(blockedItemsListBox_ItemsSourceChanged));
-            this.AutoCheckFavoritesCheckBox.IsChecked = ConfigManager.Instance.AutoCheckFavorites;
+            //          MOVED TO BINDING  this.AutoCheckFavoritesCheckBox.IsChecked = ConfigManager.Instance.AutoCheckFavorites;
             UpdateGameIconBackgrounds();
             this.streamsDataGrid.ItemsSource = StreamsManager.Streams;
-            this.favoritesListBox.ItemsSource = ConfigManager.Instance.FavoriteStreams;
+            //this.favoritesListBox.ItemsSource = ConfigManager.Instance.FavoriteStreams;
 
             if (ConfigManager.Instance.SaveWindowPosition)
             {
@@ -65,6 +57,14 @@ namespace LeStreamsFace
             }
 
             DataContext = vm = new StreamsListViewModel(this);
+
+            var url = @"<object type=""application/x-shockwave-flash"" height=""100%"" width=""100%"" style=""overflow:hidden; width:100%; height:100%; margin:0; padding:0; border:0;"" id=""live_embed_player_flash"" data=""http://www.twitch.tv/widgets/live_embed_player.swf?channel=" + "wingsofdeath" + @""" bgcolor=""#000000""><param name=""allowFullScreen"" value=""false"" /><param name=""allowScriptAccess"" value=""always"" /><param name=""allowNetworking"" value=""all"" /><param name=""movie"" value=""http://www.twitch.tv/widgets/live_embed_player.swf"" /><param name=""flashvars"" value=""hostname=www.twitch.tv&channel=" + "wingsofdeath" + @"&auto_play=true&start_volume=25"" /></object>";
+            //            url = @"<div style=""overflow:hidden;"">" + url + @"</div>";
+            //            gamesFlyout.IsOpen = false;
+            //            cefFlyout.IsOpen = true;
+            //	    cefWebView.browser.LoadHtml(url, "www.google.com");
+
+            configTabItem.IsSelected = true;
         }
 
         private void window_Closed(object sender, EventArgs e)
@@ -194,6 +194,8 @@ namespace LeStreamsFace
 
         private void ChangeTab_Click(object sender, RoutedEventArgs e)
         {
+            return;
+            // TODO MOVE THIS TO VM
             var tabItem = (sender as FrameworkElement).Tag as TabItem;
             if (tabItem == streamsTabItem)
             {
@@ -206,8 +208,8 @@ namespace LeStreamsFace
             }
             else if (tabItem == configTabItem)
             {
-                DisabledTimeTextBox.Text = ConfigManager.Instance.FromSpan.ToString("hhmm") + '-' + ConfigManager.Instance.ToSpan.ToString("hhmm");
-                BannedGamesTextBox.Text = ConfigManager.Instance.BannedGames.Aggregate((s, s1) => s + ", " + s1);
+                //                DisabledTimeTextBox.Text = ConfigManager.Instance.FromSpan.ToString("hhmm") + '-' + ConfigManager.Instance.ToSpan.ToString("hhmm");
+                //                BannedGamesTextBox.Text = ConfigManager.Instance.BannedGames.Aggregate((s, s1) => s + ", " + s1);
             }
             else if (tabItem == statsTabItem)
             {
@@ -227,56 +229,6 @@ namespace LeStreamsFace
             }
 
             tabItem.IsSelected = true;
-        }
-
-        private void TwitchFavorites_Click(object sender, RoutedEventArgs e)
-        {
-            string newBlockItem = this.twitchFavorites.Text;
-            if (string.IsNullOrWhiteSpace(newBlockItem))
-            {
-                return;
-            }
-
-            IEnumerable<Stream> favoritesFromTwitch;
-            try
-            {
-                var client = new RestClient("https://api.twitch.tv/kraken/users/" + newBlockItem + "/follows/channels?limit=100");
-                var request = new RestRequest();
-                client.AddHandler("application/json", new RestSharpJsonNetSerializer());
-                var resp = client.Execute<JObject>(request);
-                if (resp.Data["error"] != null)
-                {
-                    throw new WebException();
-                }
-                favoritesFromTwitch = resp.Data["follows"].Select(token => (Stream)token["channel"].ToObject(typeof(Stream)));
-            }
-            catch (WebException)
-            {
-                MessageBox.Show("Username doesn't exist (404)", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
-
-            var needToWriteConfig = false;
-            foreach (var favoriteChannel in favoritesFromTwitch)
-            {
-                if (ConfigManager.Instance.FavoriteStreams.Where(stream => stream.Site == StreamingSite.TwitchTv).All(stream => favoriteChannel.Id != stream.ChannelId))
-                {
-                    ConfigManager.Instance.FavoriteStreams.Add(new FavoriteStream(favoriteChannel.Name, favoriteChannel.Id, StreamingSite.TwitchTv));
-                    StreamsManager.Streams.Where(stream => stream.Site == StreamingSite.TwitchTv && stream.ChannelId == favoriteChannel.Id).ToList().ForEach(stream => stream.IsFavorite = true);
-                    needToWriteConfig = true;
-                }
-            }
-
-            if (needToWriteConfig)
-            {
-                MessageBox.Show("Successfully imported favorites.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
-                ConfigManager.Instance.WriteConfigXml();
-                RefreshView();
-            }
-            else
-            {
-                MessageBox.Show("No new streams to import.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
-            }
         }
 
         private void NameTitleTextBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -384,46 +336,6 @@ namespace LeStreamsFace
             SetGameIconBackground();
         }
 
-        private void DisabledTimeTextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            try
-            {
-                var disabledTime = ((TextBox)sender).Text;
-                TimeSpan fromSpan = new TimeSpan(0, 0, 0);
-                TimeSpan toSpan = new TimeSpan(0, 0, 0);
-
-                if (!string.IsNullOrWhiteSpace(disabledTime))
-                {
-                    string from = disabledTime.Split('-')[0];
-                    string to = disabledTime.Split('-')[1];
-
-                    fromSpan = new TimeSpan(int.Parse(from.Substring(0, 2)), int.Parse(from.Substring(2, 2)), 0);
-                    toSpan = new TimeSpan(int.Parse(to.Substring(0, 2)), int.Parse(to.Substring(2, 2)), 0);
-
-                    if (fromSpan.TotalSeconds != 0 && toSpan.TotalSeconds != 0)
-                    {
-                        if (fromSpan.CompareTo(toSpan) == 0)
-                        {
-                            return;
-                        }
-                    }
-                }
-                ConfigManager.Instance.FromSpan = fromSpan;
-                ConfigManager.Instance.ToSpan = toSpan;
-                ConfigManager.Instance.WriteConfigXml();
-                timeBlockCheck();
-            }
-            catch (Exception)
-            {
-            }
-        }
-
-        private void AutoCheckFavoritesCheckBox_Click(object sender, RoutedEventArgs e)
-        {
-            ConfigManager.Instance.AutoCheckFavorites = ((CheckBox)sender).IsChecked.Value;
-            ConfigManager.Instance.WriteConfigXml();
-        }
-
         private void WindowSizeChanged(object sender, SizeChangedEventArgs e)
         {
             changeTabButtons.Visibility = e.NewSize.Width <= 315 ? Visibility.Collapsed : Visibility.Visible;
@@ -433,47 +345,12 @@ namespace LeStreamsFace
             this.Title = e.NewSize.Width <= 700 ? string.Empty : "More streams than you can shake a stick at";
         }
 
-        private void UnfavoriteButton_Click(object sender, RoutedEventArgs e)
-        {
-            var sendersStream = (FavoriteStream)((Button)sender).DataContext;
-
-            ConfigManager.Instance.FavoriteStreams.Remove(sendersStream);
-
-            StreamsManager.Streams.Where(stream => stream.ChannelId == sendersStream.ChannelId).ToList().ForEach(
-                stream => stream.IsFavorite = false);
-
-            RefreshView();
-            ConfigManager.Instance.WriteConfigXml();
-        }
-
         public void RefreshView(object sender = null, DataTransferEventArgs dataTransferEventArgs = null)
         {
             ICollectionView view = CollectionViewSource.GetDefaultView(streamsDataGrid.ItemsSource);
             if (view != null)
             {
                 view.Refresh();
-            }
-        }
-
-        private void BannedGamesTextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            try
-            {
-                var bannedGamesText = ((TextBox)sender).Text;
-                if (!string.IsNullOrWhiteSpace(bannedGamesText))
-                {
-                    var bannedGames = bannedGamesText.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries).Select(s => s.Trim());
-                    ConfigManager.Instance.BannedGames = bannedGames.ToList();
-                }
-                else
-                {
-                    ConfigManager.Instance.BannedGames.Clear();
-                }
-                ConfigManager.Instance.WriteConfigXml();
-                RefreshView();
-            }
-            catch (Exception)
-            {
             }
         }
 
@@ -571,22 +448,22 @@ namespace LeStreamsFace
             e.Handled = true;
             try
             {
-//                DragMove();
+                //                DragMove();
             }
             catch (InvalidOperationException)
             {
             }
         }
 
-//        public new void DragMove()
-//        {
-//            var hs = (HwndSource)PresentationSource.FromVisual(this);
-//            if (WindowState == WindowState.Normal)
-//            {
-//                NativeMethods.SendMessage(hs.Handle, ((uint) NativeMethods.WindowMessages.WM_SYSCOMMAND), (IntPtr)0xf012, IntPtr.Zero);
-//                NativeMethods.SendMessage(hs.Handle, ((uint) NativeMethods.WindowMessages.WM_LBUTTONUP), IntPtr.Zero, IntPtr.Zero);
-//            }
-//        }
+        //        public new void DragMove()
+        //        {
+        //            var hs = (HwndSource)PresentationSource.FromVisual(this);
+        //            if (WindowState == WindowState.Normal)
+        //            {
+        //                NativeMethods.SendMessage(hs.Handle, ((uint) NativeMethods.WindowMessages.WM_SYSCOMMAND), (IntPtr)0xf012, IntPtr.Zero);
+        //                NativeMethods.SendMessage(hs.Handle, ((uint) NativeMethods.WindowMessages.WM_LBUTTONUP), IntPtr.Zero, IntPtr.Zero);
+        //            }
+        //        }
 
         private void RowMouseoverEvent(object sender, MouseEventArgs e)
         {
@@ -669,27 +546,27 @@ namespace LeStreamsFace
             }
         }
 
-        private void WrapPanel_OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        public void ConfigTabMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-//            e.Handled = true;
-//            try
-//            {
-//                DragMove();
-//            }
-//            catch (InvalidOperationException)
-//            {
-//            }
+            //            e.Handled = true;
+            //            try
+            //            {
+            //                DragMove();
+            //            }
+            //            catch (InvalidOperationException)
+            //            {
+            //            }
         }
 
         private async void GamesPanel_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-//            selectedGameFlyout.Header = name;
-//            selectedGamesPanel.ItemsSource = streams;
+            //            selectedGameFlyout.Header = name;
+            //            selectedGamesPanel.ItemsSource = streams;
         }
 
         private async void SelectedGamesPanel_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var stream = ((ListBox) sender).SelectedItem as Stream;
+            var stream = ((ListBox)sender).SelectedItem as Stream;
             if (stream == null)
             {
                 return;
@@ -702,36 +579,35 @@ namespace LeStreamsFace
             tabControl.Items.Add(newStreamingTab);
             newStreamingTab.IsSelected = true;
 
-//
-//            cefWebView.WebBrowser.Address = url;
+            //
+            //            cefWebView.WebBrowser.Address = url;
 
-//            var wings = @"<object type=""application/x-shockwave-flash"" height=""" + "100%" + @""" width=""" + "100%" + @""" id=""live_embed_player_flash"" data=""http://www.twitch.tv/widgets/live_embed_player.swf?channel=wingsofdeath"" bgcolor=""#000000""><param name=""allowFullScreen"" value=""true"" /><param name=""allowScriptAccess"" value=""always"" /><param name=""allowNetworking"" value=""all"" /><param name=""movie"" value=""http://www.twitch.tv/widgets/live_embed_player.swf"" /><param name=""flashvars"" value=""hostname=www.twitch.tv&channel=wingsofdeath&auto_play=true&start_volume=25"" /></object><a href=""http://www.twitch.tv/wingsofdeath"" style=""padding:2px 0px 4px; display:block; width:345px; font-weight:normal; font-size:10px;text-decoration:underline; text-align:center;"">Watch live video from Wingsofdeath on www.twitch.tv</a>";
-//            cefWebView.WebBrowser.LoadHtml(wings, "arst");// = wings;
+            //            var wings = @"<object type=""application/x-shockwave-flash"" height=""" + "100%" + @""" width=""" + "100%" + @""" id=""live_embed_player_flash"" data=""http://www.twitch.tv/widgets/live_embed_player.swf?channel=wingsofdeath"" bgcolor=""#000000""><param name=""allowFullScreen"" value=""true"" /><param name=""allowScriptAccess"" value=""always"" /><param name=""allowNetworking"" value=""all"" /><param name=""movie"" value=""http://www.twitch.tv/widgets/live_embed_player.swf"" /><param name=""flashvars"" value=""hostname=www.twitch.tv&channel=wingsofdeath&auto_play=true&start_volume=25"" /></object><a href=""http://www.twitch.tv/wingsofdeath"" style=""padding:2px 0px 4px; display:block; width:345px; font-weight:normal; font-size:10px;text-decoration:underline; text-align:center;"">Watch live video from Wingsofdeath on www.twitch.tv</a>";
+            //            cefWebView.WebBrowser.LoadHtml(wings, "arst");// = wings;
 
             var url = @"<object type=""application/x-shockwave-flash"" height=""100%"" width=""100%"" style=""overflow:hidden; width:100%; height:100%; margin:0; padding:0; border:0;"" id=""live_embed_player_flash"" data=""http://www.twitch.tv/widgets/live_embed_player.swf?channel=" + stream.LoginNameTwtv + @""" bgcolor=""#000000""><param name=""allowFullScreen"" value=""false"" /><param name=""allowScriptAccess"" value=""always"" /><param name=""allowNetworking"" value=""all"" /><param name=""movie"" value=""http://www.twitch.tv/widgets/live_embed_player.swf"" /><param name=""flashvars"" value=""hostname=www.twitch.tv&channel=" + stream.LoginNameTwtv + @"&auto_play=true&start_volume=25"" /></object>";
             url = @"<div style=""overflow:hidden;"">" + url + @"</div>";
             gamesFlyout.IsOpen = false;
             selectedGameFlyout.IsOpen = false;
 
-//            cefWebView.webView.LoadHtml(url, stream.LoginNameTwtv);
-//            cefFlyout.IsOpen = true;
+            //            cefWebView.webView.LoadHtml(url, stream.LoginNameTwtv);
+            //            cefFlyout.IsOpen = true;
 
-//            cefWebView.webView.LoadHtml(wings, "about:blank");// = wings;
+            //            cefWebView.webView.LoadHtml(wings, "about:blank");// = wings;
             // = wings;
-//            cefWebView.webView.WebBrowser.LoadHtml(url, "about:blank");// = wings;
-//            cefWebView.webView.WebBrowser.Address = "www.google.com";
+            //            cefWebView.webView.WebBrowser.LoadHtml(url, "about:blank");// = wings;
+            //            cefWebView.webView.WebBrowser.Address = "www.google.com";
 
-//            var dialog = (BaseMetroDialog)this.Resources["LoadingDialog"];
-//            if (cefWebView.webView == null || cefWebView.WebBrowser == null)
-//            {
-//                await this.ShowMetroDialogAsync(dialog);
-//                while (cefWebView.webView == null || cefWebView.WebBrowser == null)
-//                {
-//                    await TaskEx.Delay(200);
-//                }
-//                await this.HideMetroDialogAsync(dialog);
-//            }
-
+            //            var dialog = (BaseMetroDialog)this.Resources["LoadingDialog"];
+            //            if (cefWebView.webView == null || cefWebView.WebBrowser == null)
+            //            {
+            //                await this.ShowMetroDialogAsync(dialog);
+            //                while (cefWebView.webView == null || cefWebView.WebBrowser == null)
+            //                {
+            //                    await TaskEx.Delay(200);
+            //                }
+            //                await this.HideMetroDialogAsync(dialog);
+            //            }
         }
     }
 }
