@@ -65,6 +65,7 @@ namespace LeStreamsFace
             //	    cefWebView.browser.LoadHtml(url, "www.google.com");
 
             configTabItem.IsSelected = true;
+            streamsTabItem.IsSelected = true;
         }
 
         private void window_Closed(object sender, EventArgs e)
@@ -167,29 +168,6 @@ namespace LeStreamsFace
         private void blockedItemsListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             //            ((DataGrid)sender).SelectedCells.Clear();
-        }
-
-        private void Path_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            var starPath = ((Path)sender);
-
-            Stream stream = (Stream)starPath.DataContext;
-            stream.IsFavorite = !stream.IsFavorite;
-
-            RefreshView();
-
-            if (!stream.IsFavorite)
-            {
-                ConfigManager.Instance.FavoriteStreams.Remove(ConfigManager.Instance.FavoriteStreams.SingleOrDefault(stream1 => stream1.ChannelId == stream.ChannelId));
-            }
-            else
-            {
-                if (ConfigManager.Instance.FavoriteStreams.Where(stream1 => stream1.Site == stream.Site).All(stream1 => stream1.ChannelId != stream.ChannelId))
-                {
-                    ConfigManager.Instance.FavoriteStreams.Add(new FavoriteStream(stream.LoginNameTwtv, stream.ChannelId, stream.Site));
-                }
-            }
-            ConfigManager.Instance.WriteConfigXml();
         }
 
         private void ChangeTab_Click(object sender, RoutedEventArgs e)

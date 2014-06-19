@@ -7,6 +7,7 @@
                            xmlns:converters="clr-namespace:LeStreamsFace.Converters"
                            xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                            xmlns:dialogs="clr-namespace:MahApps.Metro.Controls.Dialogs;assembly=MahApps.Metro"
+                           xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
                            xmlns:lib="http://schemas.leschemasface.com/2012/xaml/presentation"
                            xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                            xmlns:oxy="http://oxyplot.codeplex.com"
@@ -447,7 +448,8 @@
             </TabControl>
 
             <TabControl Name="tabControl"
-                        SelectedItem="{Binding SelectedShellTab, Mode=OneWayToSource}"
+                        SelectedItem="{Binding SelectedShellTab,
+                                               Mode=OneWayToSource}"
                         Visibility="{Binding IsAnyStreamTabOpen,
                                              Converter={StaticResource InvertedBooleanToVisibilityConverter}}">
                 <TabItem Name="streamsTabItem"
@@ -583,13 +585,17 @@
                                                   Width="20"
                                                   Height="20"
                                                   Data="M 0,0 l 15,0 l 5,-15 l 5,15 l 15,0 l -10,10 l 4,15 l -15,-9 l -15,9 l 7,-15 Z"
-                                                  MouseLeftButtonDown="Path_MouseLeftButtonDown"
                                                   Stretch="Fill"
                                                   Stroke="Black"
                                                   StrokeThickness="1">
                                                 <Path.Fill>
                                                     <SolidColorBrush />
                                                 </Path.Fill>
+                                                <i:Interaction.Triggers>
+                                                    <i:EventTrigger EventName="MouseLeftButtonDown">
+                                                        <i:InvokeCommandAction Command="{Binding DataContext.FavoriteAStreamCommand, ElementName=window}" CommandParameter="{Binding}" />
+                                                    </i:EventTrigger>
+                                                </i:Interaction.Triggers>
                                             </Path>
                                             <DataTemplate.Triggers>
                                                 <DataTrigger Binding="{Binding Path=IsFavorite}" Value="True">
@@ -750,7 +756,9 @@
                     </Grid>
                 </TabItem>
                 <TabItem Name="configTabItem"
-                         Header="Config" IsSelected="{Binding IsConfigTabSelected, Mode=OneWayToSource}"
+                         Header="Config"
+                         IsSelected="{Binding IsConfigTabSelected,
+                                              Mode=OneWayToSource}"
                          Style="{StaticResource configTabStyle}"
                          Visibility="Collapsed" />
                 <TabItem Name="statsTabItem"

@@ -13,6 +13,16 @@ namespace LeStreamsFace
             return streamEnumeration.Where(stream => stream.IsFavorite);
         }
 
+        public static IEnumerable<Stream> FromSite(this IEnumerable<Stream> streams, StreamingSite streamingSite)
+        {
+            return streams.Where(stream => stream.Site == streamingSite);
+        }
+
+        public static bool NoStreamWithChannelId(this IEnumerable<Stream> streams, string channelIdToLookFor)
+        {
+            return streams.All(stream => stream.ChannelId != channelIdToLookFor);
+        } 
+
         public static void ThrowExceptions(this IRestResponse restResponse)
         {
             if (restResponse.ErrorException != null)

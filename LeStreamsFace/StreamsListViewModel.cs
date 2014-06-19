@@ -36,6 +36,7 @@ namespace LeStreamsFace
             GetTwitchFavoritesCommand = new DelegateCommand<string>(usernameOnTwitch => ImportTwitchFavorites(usernameOnTwitch));
             RefreshViewCommand = new DelegateCommand(() => view.RefreshView());
             UnfavoriteStreamCommand = new DelegateCommand<FavoriteStream>(param => UnfavoriteStream(param));
+            FavoriteAStreamCommand = new DelegateCommand<Stream>(stream => FavoriteAStream(stream));
 
             FetchGames();
 
@@ -54,6 +55,26 @@ namespace LeStreamsFace
             // TODO can we use the property itself or it's ok like this?
             _timeWhenNotNotifyingTextInput = ConfigManager.Instance.FromSpan.ToString("hhmm") + '-' + ConfigManager.Instance.ToSpan.ToString("hhmm");
             _bannedGamesTextInput = ConfigManager.Instance.BannedGames.Aggregate((s, s1) => s + ", " + s1);
+        }
+
+        private void FavoriteAStream(Stream stream)
+        {
+            stream.IsFavorite = !stream.IsFavorite;
+
+            view.RefreshView();
+
+            if (!stream.IsFavorite)
+            {
+                ConfigManager.Instance.FavoriteStreams.Remove(ConfigManager.Instance.FavoriteStreams.SingleOrDefault(stream1 => stream1.ChannelId == stream.ChannelId));
+            }
+            else
+            {
+                if (ConfigManager.Instance.FavoriteStreams.FromSite(stream.Site).NoStreamWithChannelId(stream.ChannelId))
+                {
+                    ConfigManager.Instance.FavoriteStreams.Add(new FavoriteStream(stream.LoginNameTwtv, stream.ChannelId, stream.Site));
+                }
+            }
+            ConfigManager.Instance.WriteConfigXml();
         }
 
         public ICommand RefreshViewCommand { get; private set; }
@@ -337,6 +358,8 @@ namespace LeStreamsFace
                 _isConfigTabSelected = value;
             }
         }
+
+        public ICommand FavoriteAStreamCommand { get; private set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
