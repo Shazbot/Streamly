@@ -12,11 +12,12 @@
 
         <!--  <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinHeight="300" MinWidth="300">  -->
         <wpf:ChromiumWebBrowser x:Name="browser"
-                                
-                                MinWidth="500" Margin="0, 0,0,0"
+                                MinWidth="500"
                                 MinHeight="500"
+                                Margin="0, 0,0,0"
                                 HorizontalAlignment="Stretch"
-                                VerticalAlignment="Stretch" VerticalContentAlignment="Top"
+                                VerticalAlignment="Stretch"
+                                VerticalContentAlignment="Top"
                                 ScrollViewer.VerticalScrollBarVisibility="Disabled"
                                 WebBrowser="{Binding WebBrowser,
                                                      Mode=OneWayToSource}" />
@@ -34,12 +35,12 @@
         <!--  Mode=OneWayToSource}" />  -->
         <!--  </StackPanel>  -->
 
-<!--        Width="{Binding RelativeSource={RelativeSource FindAncestor,-->
-<!--                                                                               AncestorType=controls:MetroWindow},-->
-<!--                                                Path=ActualWidth}"-->
-<!--                                Height="{Binding RelativeSource={RelativeSource FindAncestor,-->
-<!--                                                                                AncestorType=controls:MetroWindow},-->
-<!--                                                 Path=ActualHeight}"-->
+        <!--  Width="{Binding RelativeSource={RelativeSource FindAncestor,  -->
+        <!--  AncestorType=controls:MetroWindow},  -->
+        <!--  Path=ActualWidth}"  -->
+        <!--  Height="{Binding RelativeSource={RelativeSource FindAncestor,  -->
+        <!--  AncestorType=controls:MetroWindow},  -->
+        <!--  Path=ActualHeight}"  -->
     </Grid>
 </UserControl>
 

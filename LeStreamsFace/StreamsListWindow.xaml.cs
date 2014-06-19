@@ -1,4 +1,5 @@
-﻿using MahApps.Metro.Controls;
+﻿using System.Windows.Forms.VisualStyles;
+using MahApps.Metro.Controls;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -186,8 +187,8 @@ namespace LeStreamsFace
             }
             else if (tabItem == configTabItem)
             {
-                //                DisabledTimeTextBox.Text = ConfigManager.Instance.FromSpan.ToString("hhmm") + '-' + ConfigManager.Instance.ToSpan.ToString("hhmm");
-                //                BannedGamesTextBox.Text = ConfigManager.Instance.BannedGames.Aggregate((s, s1) => s + ", " + s1);
+//                                DisabledTimeTextBox.Text = ConfigManager.Instance.FromSpan.ToString("hhmm") + '-' + ConfigManager.Instance.ToSpan.ToString("hhmm");
+//                                BannedGamesTextBox.Text = ConfigManager.Instance.BannedGames.Aggregate((s, s1) => s + ", " + s1);
             }
             else if (tabItem == statsTabItem)
             {
@@ -202,11 +203,6 @@ namespace LeStreamsFace
                     }
                 }
             }
-            else if (tabItem == aboutTabItem)
-            {
-            }
-
-            tabItem.IsSelected = true;
         }
 
         private void NameTitleTextBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -421,7 +417,7 @@ namespace LeStreamsFace
 
         private void window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            if (cefFlyout.IsOpen) return;
+//            if (cefFlyout.IsOpen) return;
 
             e.Handled = true;
             try
@@ -586,6 +582,60 @@ namespace LeStreamsFace
             //                }
             //                await this.HideMetroDialogAsync(dialog);
             //            }
+        }
+
+        private bool ignoreNextMouseMove;
+
+        void DragMoveWindow(object sender, MouseButtonEventArgs e)
+        {
+            if (e.MiddleButton == MouseButtonState.Pressed) return;
+            if (e.RightButton == MouseButtonState.Pressed) return;
+            if (e.LeftButton != MouseButtonState.Pressed) return;
+            if (!vm.IsAnyStreamTabOpen) return;
+
+            if (WindowState == WindowState.Maximized && e.ClickCount != 2) return;
+
+            if (e.ClickCount == 2)
+            {
+                WindowState = WindowState == WindowState.Maximized ? WindowState.Normal : WindowState.Maximized;
+                ignoreNextMouseMove = true;
+                return;
+            }
+
+            DragMove();
+        }
+
+        void MouseMoveWindow(object sender, MouseEventArgs e)
+        {
+            if (ignoreNextMouseMove)
+            {
+                ignoreNextMouseMove = false;
+                return;
+            }
+
+            if (WindowState != WindowState.Maximized) return;
+
+            if (e.MiddleButton == MouseButtonState.Pressed) return;
+            if (e.RightButton == MouseButtonState.Pressed) return;
+            if (e.LeftButton != MouseButtonState.Pressed) return;
+//            if (!Header.IsMouseOver) return;
+
+            // Calculate correct left coordinate for multi-screen system
+            var mouseX = PointToScreen(Mouse.GetPosition(this)).X;
+            var width = RestoreBounds.Width;
+            var left = mouseX - width / 2;
+            if (left < 0) left = 0;
+
+            // Align left edge to fit the screen
+            var virtualScreenWidth = SystemParameters.VirtualScreenWidth;
+            if (left + width > virtualScreenWidth) left = virtualScreenWidth - width;
+
+            Top = 0;
+            Left = left;
+
+            WindowState = WindowState.Normal;
+
+            DragMove();
         }
     }
 }

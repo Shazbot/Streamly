@@ -43,7 +43,7 @@
                                          Mode=TwoWay,
                                          Source={x:Static LeStreamsFace:ConfigManager.Instance}}"
                            WindowStartupLocation="CenterScreen"
-                           WindowStyle="None"
+                           WindowStyle="SingleBorderWindow"
                            d:DataContext="{d:DesignInstance LeStreamsFace:StreamsListViewModel}"
                            d:DesignHeight="300"
                            d:DesignWidth="300"
@@ -155,23 +155,24 @@
                 </Button>
             </StackPanel>
             <StackPanel Name="changeTabButtons" Orientation="Horizontal">
-                <Button Click="ChangeTab_Click"
-                        Content="streams"
-                        Tag="{Binding ElementName=streamsTabItem}" />
+                <Button Command="{Binding ChangeShellTabCommand}"
+                        CommandParameter="{Binding ElementName=streamsTabItem}"
+                        Content="streams" />
                 <ToggleButton Name="toggleGamesPanelButton"
                               Command="{Binding GamesPanelButtonPressedCommand}"
                               Content="games"
                               IsChecked="{Binding IsGamesPanelOpen,
                                                   Mode=OneWay}" />
-                <Button Click="ChangeTab_Click"
+                <Button Command="{Binding ChangeShellTabCommand}"
+                        CommandParameter="{Binding ElementName=configTabItem}"
                         Content="config"
                         Tag="{Binding ElementName=configTabItem}" />
-                <Button Click="ChangeTab_Click"
-                        Content="stats"
-                        Tag="{Binding ElementName=statsTabItem}" />
-                <Button Click="ChangeTab_Click"
-                        Content="about"
-                        Tag="{Binding ElementName=aboutTabItem}" />
+                <Button Command="{Binding ChangeShellTabCommand}"
+                        CommandParameter="{Binding ElementName=statsTabItem}"
+                        Content="stats" />
+                <Button Command="{Binding ChangeShellTabCommand}"
+                        CommandParameter="{Binding ElementName=aboutTabItem}"
+                        Content="about" />
             </StackPanel>
         </MetroControls:WindowCommands>
     </MetroControls:MetroWindow.WindowCommands>
@@ -382,37 +383,50 @@
                 </Grid>
             </MetroControls:Flyout>
 
-            <MetroControls:Flyout x:Name="cefFlyout"
-                                  Width="{Binding RelativeSource={RelativeSource FindAncestor,
-                                                                                 AncestorType=MetroControls:MetroWindow},
-                                                  Path=ActualWidth}"
-                                  Height="{Binding RelativeSource={RelativeSource FindAncestor,
-                                                                                  AncestorType=MetroControls:MetroWindow},
-                                                   Path=ActualHeight}"
-                                  Margin="0 0 0 0"
-                                  IsModal="True"
-                                  Padding="0"
-                                  Position="Right"
-                                  Theme="Accent">
-                <MetroControls:Flyout.HeaderTemplate>
-                    <DataTemplate />
-                </MetroControls:Flyout.HeaderTemplate>
-                <StackPanel Margin="0" ScrollViewer.VerticalScrollBarVisibility="Disabled">
-                    <LeStreamsFace:CefWebView x:Name="cefWebView"
-                                              Margin="0"
-                                              HorizontalAlignment="Stretch"
-                                              VerticalAlignment="Stretch"
-                                              Padding="0"
-                                              ScrollViewer.VerticalScrollBarVisibility="Disabled" />
-                </StackPanel>
-            </MetroControls:Flyout>
+            <!--  <MetroControls:Flyout x:Name="cefFlyout"  -->
+            <!--  Width="{Binding RelativeSource={RelativeSource FindAncestor,  -->
+            <!--  AncestorType=MetroControls:MetroWindow},  -->
+            <!--  Path=ActualWidth}"  -->
+            <!--  Height="{Binding RelativeSource={RelativeSource FindAncestor,  -->
+            <!--  AncestorType=MetroControls:MetroWindow},  -->
+            <!--  Path=ActualHeight}"  -->
+            <!--  Margin="0 0 0 0"  -->
+            <!--  IsModal="True"  -->
+            <!--  Padding="0"  -->
+            <!--  Position="Right"  -->
+            <!--  Theme="Accent">  -->
+            <!--  <MetroControls:Flyout.HeaderTemplate>  -->
+            <!--  <DataTemplate />  -->
+            <!--  </MetroControls:Flyout.HeaderTemplate>  -->
+            <!--  <StackPanel Margin="0" ScrollViewer.VerticalScrollBarVisibility="Disabled">  -->
+            <!--  <LeStreamsFace:CefWebView x:Name="cefWebView"  -->
+            <!--  Margin="0"  -->
+            <!--  HorizontalAlignment="Stretch"  -->
+            <!--  VerticalAlignment="Stretch"  -->
+            <!--  Padding="0"  -->
+            <!--  ScrollViewer.VerticalScrollBarVisibility="Disabled" />  -->
+            <!--  </StackPanel>  -->
+            <!--  </MetroControls:Flyout>  -->
         </MetroControls:FlyoutsControl>
     </MetroControls:MetroWindow.Flyouts>
 
     <MetroControls:MetroContentControl>
-        <Grid Margin="-11,-17,-28,-3">
+        <!--  <Grid Margin="-11,-17,-28,-3">  -->
+        <Grid>
+            <Grid.Style>
+                <Style TargetType="{x:Type Grid}">
+                    <Style.Setters>
+                        <Setter Property="Margin" Value="0" />
+                    </Style.Setters>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IsAnyStreamTabOpen}" Value="True">
+                            <Setter Property="Margin" Value="-11,-17,-25,-3" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Grid.Style>
 
-            <TabControl ItemsSource="{Binding RunningStreams}"
+            <TabControl ItemsSource="{Binding RunningStreams}" MouseLeftButtonDown="DragMoveWindow" MouseMove="MouseMoveWindow"
                         SelectedItem="{Binding SelectedStreamTab}"
                         Visibility="{Binding IsAnyStreamTabOpen,
                                              Converter={StaticResource BooleanToVisibilityConverter}}">
@@ -425,23 +439,22 @@
                 <TabControl.ContentTemplate>
                     <DataTemplate>
                         <Grid>
-                            <!--  <StackPanel>  -->
-                            <!--  <TextBlock Text="{Binding Name}" />  -->
-                            <!--  <TextBlock Text="{Binding EmbedHtmlCode}" />  -->
-                            <!--  <LeStreamsFace:CefWebView Html="{Binding EmbedHtmlCode}"  -->
-                            <LeStreamsFace:CefWebView MinWidth="800"
-                                                      MinHeight="800"
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <LeStreamsFace:CefWebView Grid.Row="1"
+                                                      MinWidth="500"
+                                                      MinHeight="500"
                                                       Margin="0"
                                                       HorizontalAlignment="Stretch"
                                                       VerticalAlignment="Stretch"
-                                                      Address="www.google.com"
                                                       Html="{Binding DataContext.EmbedHtmlCode,
                                                                      Mode=OneWay,
                                                                      RelativeSource={RelativeSource AncestorType=Grid},
                                                                      UpdateSourceTrigger=PropertyChanged}"
-                                                      Padding="0"
-                                                      Visibility="Collapsed" />
-                            <!--  </StackPanel>  -->
+                                                      Padding="0" />
                         </Grid>
                     </DataTemplate>
                 </TabControl.ContentTemplate>

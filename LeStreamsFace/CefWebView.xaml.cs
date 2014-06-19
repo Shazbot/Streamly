@@ -24,13 +24,21 @@ namespace LeStreamsFace
             browser.RequestHandler = new RequestHandler();
 
             PropertyChanged += webView_PropertyChanged;
-            browser.IsBrowserInitializedChanged += (sender, args) => Dispatcher.BeginInvoke((Action)InitializeData);
+            browser.IsBrowserInitializedChanged += BrowserOnIsBrowserInitializedChanged;
             DataContext = this;
+        }
 
-//            var html = @"<object type=""application/x-shockwave-flash"" height=""100%"" width=""100%"" style=""overflow:hidden; width:100%; height:100%; margin:0; padding:0; border:0;"" id=""live_embed_player_flash"" data=""http://www.twitch.tv/widgets/live_embed_player.swf?channel=hotshotgg"" bgcolor=""#000000""><param name=""allowFullScreen"" value=""true"" /><param name=""allowScriptAccess"" value=""always"" /><param name=""allowNetworking"" value=""all"" /><param name=""movie"" value=""http://www.twitch.tv/widgets/live_embed_player.swf"" /><param name=""flashvars"" value=""hostname=www.twitch.tv&channel=hotshotgg&auto_play=true&start_volume=25"" /></object>";
-//            browser.LoadHtml(html, "a");
-//	    	    browser.WebBrowser.LoadHtml(html,"url");
+        private void BrowserOnIsBrowserInitializedChanged(object sender, DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs)
+        {
+            if ((bool)dependencyPropertyChangedEventArgs.NewValue)
+            {
+                Dispatcher.BeginInvoke((Action)InitializeData);
+		browser.FrameLoadStart+=BrowserOnFrameLoadStart;
+            }
+        }
 
+        private void BrowserOnFrameLoadStart(object sender, FrameLoadStartEventArgs args)
+        {
         }
 
         public string Address { get; set; }
@@ -42,8 +50,8 @@ namespace LeStreamsFace
         public IWpfWebBrowser WebBrowser
         {
             get { return webBrowser; }
-            set { webBrowser = value; }
-//            set { PropertyChanged.ChangeAndNotify(ref webBrowser, value, () => WebBrowser); }
+            //            set { webBrowser = value; }
+            set { PropertyChanged.ChangeAndNotify(ref webBrowser, value, () => WebBrowser); }
         }
 
         #region public string Html
@@ -65,39 +73,24 @@ namespace LeStreamsFace
         private static void HtmlChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var host = (CefWebView)d;
+            if (host.browser == null) return;
 
-	    host.browser.LoadHtml((string)e.NewValue, "url");
-//            //            htmlPreview.webView.LoadHtml((string)e.NewValue, "url");
-//
-//            // old cp'd code
-//            // does this even fire
-//            // IsBrowserInitialized should maybe be webView.WebBrowser != null
-//            if (browser != null && htmlPreview.webView.IsBrowserInitialized)
-//                htmlPreview.webView.LoadHtml((string)e.NewValue, "url");
+            host.browser.LoadHtml(((string)e.NewValue), "url");
         }
 
         private void webView_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             if (browser == null) return;
 
-            var isBrowserInitialized = browser.IsBrowserInitialized;
-
             switch (e.PropertyName)
             {
-                case "IsBrowserInitialized":
-                    if (browser.IsBrowserInitialized)
-                        Dispatcher.BeginInvoke((Action)InitializeData);
-                    break;
             }
         }
 
         private void InitializeData()
         {
-            var html = @"<object type=""application/x-shockwave-flash"" height=""100%"" width=""100%"" style=""overflow:hidden; width:100%; height:100%; margin:0; padding:0; border:0;"" id=""live_embed_player_flash"" data=""http://www.twitch.tv/widgets/live_embed_player.swf?channel=hotshotgg"" bgcolor=""#000000""><param name=""allowFullScreen"" value=""true"" /><param name=""allowScriptAccess"" value=""always"" /><param name=""allowNetworking"" value=""all"" /><param name=""movie"" value=""http://www.twitch.tv/widgets/live_embed_player.swf"" /><param name=""flashvars"" value=""hostname=www.twitch.tv&channel=hotshotgg&auto_play=true&start_volume=25"" /></object>";
-//            browser.LoadHtml(html, "a");
-//            browser.Address = "www.google.com";
-
-//            webBrowser.Address = "www.google.com";
+            //            var html = @"<object type=""application/x-shockwave-flash"" height=""100%"" width=""100%"" style=""overflow:hidden; width:100%; height:100%; margin:0; padding:0; border:0;"" id=""live_embed_player_flash"" data=""http://www.twitch.tv/widgets/live_embed_player.swf?channel=hotshotgg"" bgcolor=""#000000""><param name=""allowFullScreen"" value=""true"" /><param name=""allowScriptAccess"" value=""always"" /><param name=""allowNetworking"" value=""all"" /><param name=""movie"" value=""http://www.twitch.tv/widgets/live_embed_player.swf"" /><param name=""flashvars"" value=""hostname=www.twitch.tv&channel=hotshotgg&auto_play=true&start_volume=25"" /></object>";
+            browser.LoadHtml(Html, "url");
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

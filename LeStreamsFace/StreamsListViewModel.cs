@@ -32,11 +32,14 @@ namespace LeStreamsFace
             _runningStreams.CollectionChanged += RunningStreamsOnCollectionChanged;
 
             GamesPanelButtonPressedCommand = new DelegateCommand(ToggleGamesPanel);
-            StreamingTabClickedCommand = new DelegateCommand(() => IsAnyStreamTabOpen = true);
+            StreamingTabClickedCommand = new DelegateCommand(() => OpenExistingStreamingTab());
             GetTwitchFavoritesCommand = new DelegateCommand<string>(usernameOnTwitch => ImportTwitchFavorites(usernameOnTwitch));
             RefreshViewCommand = new DelegateCommand(() => view.RefreshView());
             UnfavoriteStreamCommand = new DelegateCommand<FavoriteStream>(param => UnfavoriteStream(param));
             FavoriteAStreamCommand = new DelegateCommand<Stream>(stream => FavoriteAStream(stream));
+            ChangeShellTabCommand = new DelegateCommand<TabItem>(tab => ChangeShellTab(tab));
+
+	    ShellContainerMargin = new Thickness(0);
 
             FetchGames();
 
@@ -53,8 +56,34 @@ namespace LeStreamsFace
             //            SelectedStreamTab = str;
             // TODO maybe move this to switching tab logic
             // TODO can we use the property itself or it's ok like this?
-            _timeWhenNotNotifyingTextInput = ConfigManager.Instance.FromSpan.ToString("hhmm") + '-' + ConfigManager.Instance.ToSpan.ToString("hhmm");
-            _bannedGamesTextInput = ConfigManager.Instance.BannedGames.Aggregate((s, s1) => s + ", " + s1);
+
+        }
+
+        private void OpenExistingStreamingTab()
+        {
+            IsAnyStreamTabOpen = true;
+        }
+
+        private void ChangeShellTab(TabItem tab)
+        {
+            IsGamesPanelOpen = false;
+            IsStreamsPanelOpen = false;
+
+            if (tab == view.streamsTabItem)
+            {
+                if (tab.IsSelected)
+                {
+//                    doFilterGames = !doFilterGames;
+
+                    view.RefreshView();
+                }
+            }
+            else if (tab == view.configTabItem)
+            {
+		            TimeWhenNotNotifyingTextInput = ConfigManager.Instance.FromSpan.ToString("hhmm") + '-' + ConfigManager.Instance.ToSpan.ToString("hhmm");
+            BannedGamesTextInput = ConfigManager.Instance.BannedGames.Aggregate((s, s1) => s + ", " + s1);
+            }
+            tab.IsSelected = true;
         }
 
         private void FavoriteAStream(Stream stream)
@@ -195,6 +224,7 @@ namespace LeStreamsFace
         private string _timeWhenNotNotifyingTextInput;
         private TabItem _selectedShellTab;
         private bool _isConfigTabSelected;
+        private Thickness _shellContainerMargin;
 
         public OptimizedObservableCollection<Stream> Streams
         {
@@ -238,7 +268,10 @@ namespace LeStreamsFace
             RunningStreams.Add(streamToStream);
             IsStreamsPanelOpen = false;
             IsGamesPanelOpen = false;
+            IsAnyStreamTabOpen = true;
             OnPropertyChanged(Extensions.GetVariableName(() => CloseStreamsButtonVisibility));
+
+            SelectedStreamTab = streamToStream;
         }
 
         public bool CloseStreamsButtonVisibility
@@ -261,6 +294,7 @@ namespace LeStreamsFace
             get { return _bannedGamesTextInput; }
             set
             {
+                if (value == _bannedGamesTextInput) return;
                 _bannedGamesTextInput = value;
                 FilterBannedGames(value);
             }
@@ -292,6 +326,7 @@ namespace LeStreamsFace
             get { return _timeWhenNotNotifyingTextInput; }
             set
             {
+                if (value == _timeWhenNotNotifyingTextInput) return;
                 _timeWhenNotNotifyingTextInput = value;
                 DisableNotificationsDuringThisTime(value);
             }
@@ -360,6 +395,17 @@ namespace LeStreamsFace
         }
 
         public ICommand FavoriteAStreamCommand { get; private set; }
+
+        public ICommand ChangeShellTabCommand { get; private set; }
+
+        public Thickness ShellContainerMargin
+        {
+            get { return _shellContainerMargin; }
+            set
+            {
+                _shellContainerMargin = value;
+            }
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
