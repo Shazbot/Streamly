@@ -2,12 +2,10 @@
 
 namespace LeStreamsFace
 {
-    internal class MyChromiumBasedBrowser : ChromiumWebBrowser
+    internal class MyChromiumWebBrowser : ChromiumWebBrowser
     {
         protected override void OnAddressChanged(string oldValue, string newValue)
         {
-            if (newValue.ToUpperInvariant().Contains("TWITCH")) return;
-
             base.OnAddressChanged(oldValue, newValue);
         }
     }

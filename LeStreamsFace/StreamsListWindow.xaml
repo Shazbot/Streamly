@@ -24,7 +24,9 @@
                            Left="{Binding WinLeft,
                                           Mode=TwoWay,
                                           Source={x:Static LeStreamsFace:ConfigManager.Instance}}"
-                           MouseLeftButtonDown="window_MouseLeftButtonDown"
+                           MouseDoubleClick="ShellViewMouseDoubleClick"
+                           MouseLeftButtonDown="DragMoveWindow"
+                           MouseMove="MouseMoveWindow"
                            NonActiveWindowTitleBrush="{DynamicResource WindowTitleColorBrush}"
                            Opacity="{Binding WinOpacity,
                                              Mode=TwoWay,
@@ -32,18 +34,18 @@
                            PreviewTextInput="window_PreviewTextInput"
                            ResizeMode="CanResizeWithGrip"
                            ShowIconOnTitleBar="False"
-                           ShowTitleBar="{Binding HideTitleBar,
-                                                  Source={x:Static LeStreamsFace:ConfigManager.Instance},
-                                                  Converter={con:ExpressionConverter {}!{0}}}"
                            SizeChanged="WindowSizeChanged"
+                           
                            SizeToContent="Manual"
+                           WindowTransitionsEnabled="False"
+                           UseLayoutRounding="False"
                            SnapsToDevicePixels="True"
                            SourceInitialized="window_SourceInitialized"
                            Top="{Binding WinTop,
                                          Mode=TwoWay,
                                          Source={x:Static LeStreamsFace:ConfigManager.Instance}}"
                            WindowStartupLocation="CenterScreen"
-                           WindowStyle="SingleBorderWindow"
+                           WindowStyle="None"
                            d:DataContext="{d:DesignInstance LeStreamsFace:StreamsListViewModel}"
                            d:DesignHeight="300"
                            d:DesignWidth="300"
@@ -112,11 +114,15 @@
     <Window.Style>
         <Style BasedOn="{StaticResource {x:Type MetroControls:MetroWindow}}" TargetType="{x:Type MetroControls:MetroWindow}">
             <Setter Property="FrameworkElement.FocusVisualStyle" Value="{x:Null}" />
+            <Setter Property="ShowTitleBar" Value="True" />
             <Style.Triggers>
                 <DataTrigger Binding="{Binding SaveWindowPosition, Source={x:Static LeStreamsFace:ConfigManager.Instance}}" Value="True">
                     <Setter Property="Width" Value="{Binding WinWidth, Mode=TwoWay, Source={x:Static LeStreamsFace:ConfigManager.Instance}}" />
                     <Setter Property="Height" Value="{Binding WinHeight, Mode=TwoWay, Source={x:Static LeStreamsFace:ConfigManager.Instance}}" />
                 </DataTrigger>
+<!--                <Trigger Property="WindowState" Value="Maximized">-->
+<!--                    <Setter Property="ShowTitleBar" Value="False" />-->
+<!--                </Trigger>-->
             </Style.Triggers>
         </Style>
     </Window.Style>
@@ -382,31 +388,6 @@
                     </ListBox>
                 </Grid>
             </MetroControls:Flyout>
-
-            <!--  <MetroControls:Flyout x:Name="cefFlyout"  -->
-            <!--  Width="{Binding RelativeSource={RelativeSource FindAncestor,  -->
-            <!--  AncestorType=MetroControls:MetroWindow},  -->
-            <!--  Path=ActualWidth}"  -->
-            <!--  Height="{Binding RelativeSource={RelativeSource FindAncestor,  -->
-            <!--  AncestorType=MetroControls:MetroWindow},  -->
-            <!--  Path=ActualHeight}"  -->
-            <!--  Margin="0 0 0 0"  -->
-            <!--  IsModal="True"  -->
-            <!--  Padding="0"  -->
-            <!--  Position="Right"  -->
-            <!--  Theme="Accent">  -->
-            <!--  <MetroControls:Flyout.HeaderTemplate>  -->
-            <!--  <DataTemplate />  -->
-            <!--  </MetroControls:Flyout.HeaderTemplate>  -->
-            <!--  <StackPanel Margin="0" ScrollViewer.VerticalScrollBarVisibility="Disabled">  -->
-            <!--  <LeStreamsFace:CefWebView x:Name="cefWebView"  -->
-            <!--  Margin="0"  -->
-            <!--  HorizontalAlignment="Stretch"  -->
-            <!--  VerticalAlignment="Stretch"  -->
-            <!--  Padding="0"  -->
-            <!--  ScrollViewer.VerticalScrollBarVisibility="Disabled" />  -->
-            <!--  </StackPanel>  -->
-            <!--  </MetroControls:Flyout>  -->
         </MetroControls:FlyoutsControl>
     </MetroControls:MetroWindow.Flyouts>
 
@@ -420,13 +401,13 @@
                     </Style.Setters>
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding IsAnyStreamTabOpen}" Value="True">
-                            <Setter Property="Margin" Value="-11,-17,-25,-3" />
+                            <Setter Property="Margin" Value="-11,-17,-28,-3" />
                         </DataTrigger>
                     </Style.Triggers>
                 </Style>
             </Grid.Style>
 
-            <TabControl ItemsSource="{Binding RunningStreams}" MouseLeftButtonDown="DragMoveWindow" MouseMove="MouseMoveWindow"
+            <TabControl ItemsSource="{Binding RunningStreams}"
                         SelectedItem="{Binding SelectedStreamTab}"
                         Visibility="{Binding IsAnyStreamTabOpen,
                                              Converter={StaticResource BooleanToVisibilityConverter}}">

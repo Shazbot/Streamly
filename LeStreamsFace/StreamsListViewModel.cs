@@ -1,5 +1,4 @@
-﻿using System.Windows.Controls;
-using LeStreamsFace.Annotations;
+﻿using LeStreamsFace.Annotations;
 using LeStreamsFace.StreamParsers;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -13,6 +12,7 @@ using System.Linq;
 using System.Net;
 using System.Runtime.CompilerServices;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace LeStreamsFace
@@ -39,7 +39,7 @@ namespace LeStreamsFace
             FavoriteAStreamCommand = new DelegateCommand<Stream>(stream => FavoriteAStream(stream));
             ChangeShellTabCommand = new DelegateCommand<TabItem>(tab => ChangeShellTab(tab));
 
-	    ShellContainerMargin = new Thickness(0);
+            ShellContainerMargin = new Thickness(0);
 
             FetchGames();
 
@@ -47,16 +47,13 @@ namespace LeStreamsFace
 
             var str = new Stream("wingsofdeathx", "wings", 123, "123", "ra", "asr", StreamingSite.TwitchTv);
             str.LoginNameTwtv = "wingsofdeath";
-            RunningStreams.Add(str);
-            RunningStreams.Add(new Stream("wingsofdeathx", "wings", 123, "123", "ra", "asr", StreamingSite.TwitchTv));
-            RunningStreams.Add(new Stream("wingsofdeathx", "wings", 123, "123", "ra", "asr", StreamingSite.TwitchTv));
+            //            RunningStreams.Add(str);
 
             //TODO if we want to start with a stream
-            //            IsAnyStreamTabOpen = true;
-            //            SelectedStreamTab = str;
+            //                        IsAnyStreamTabOpen = true;
+            //                        SelectedStreamTab = str;
             // TODO maybe move this to switching tab logic
             // TODO can we use the property itself or it's ok like this?
-
         }
 
         private void OpenExistingStreamingTab()
@@ -73,15 +70,15 @@ namespace LeStreamsFace
             {
                 if (tab.IsSelected)
                 {
-//                    doFilterGames = !doFilterGames;
+                    //                    doFilterGames = !doFilterGames;
 
                     view.RefreshView();
                 }
             }
             else if (tab == view.configTabItem)
             {
-		            TimeWhenNotNotifyingTextInput = ConfigManager.Instance.FromSpan.ToString("hhmm") + '-' + ConfigManager.Instance.ToSpan.ToString("hhmm");
-            BannedGamesTextInput = ConfigManager.Instance.BannedGames.Aggregate((s, s1) => s + ", " + s1);
+                TimeWhenNotNotifyingTextInput = ConfigManager.Instance.FromSpan.ToString("hhmm") + '-' + ConfigManager.Instance.ToSpan.ToString("hhmm");
+                BannedGamesTextInput = ConfigManager.Instance.BannedGames.Aggregate((s, s1) => s + ", " + s1);
             }
             tab.IsSelected = true;
         }

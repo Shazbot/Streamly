@@ -224,6 +224,7 @@
     <Compile Include="Commands\DelegateCommand.cs" />
     <Compile Include="Extensions\Extensions.cs" />
     <Compile Include="GamesViewModel.cs" />
+    <Compile Include="MyChromiumWebBrowser.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="StreamParsers\IStreamParser.cs" />
     <Compile Include="RestSharpJsonNetSerializer.cs" />

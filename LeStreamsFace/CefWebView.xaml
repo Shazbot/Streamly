@@ -3,24 +3,34 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:leStreamsFace="clr-namespace:LeStreamsFace"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:wpf="clr-namespace:CefSharp.Wpf;assembly=CefSharp.Wpf"
              d:DesignHeight="300"
              d:DesignWidth="300"
              mc:Ignorable="d">
     <Grid>
+        <Grid x:Name="Overlay"
+              Margin="0,8,0,20"
+              Panel.ZIndex="1000">
+            <Grid.Background>
+                <SolidColorBrush Opacity="0" Color="Beige" />
+            </Grid.Background>
+        </Grid>
 
         <!--  <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinHeight="300" MinWidth="300">  -->
-        <wpf:ChromiumWebBrowser x:Name="browser"
-                                MinWidth="500"
-                                MinHeight="500"
-                                Margin="0, 0,0,0"
-                                HorizontalAlignment="Stretch"
-                                VerticalAlignment="Stretch"
-                                VerticalContentAlignment="Top"
-                                ScrollViewer.VerticalScrollBarVisibility="Disabled"
-                                WebBrowser="{Binding WebBrowser,
-                                                     Mode=OneWayToSource}" />
+        <leStreamsFace:MyChromiumWebBrowser x:Name="browser" UseLayoutRounding="True" RenderOptions.EdgeMode="Aliased" RenderOptions.CachingHint="Cache"
+                                            RenderOptions.BitmapScalingMode="Fant"
+                                            MinWidth="500"
+                                            MinHeight="500"
+                                            Margin="0,0,0,0"
+                                            HorizontalAlignment="Stretch"
+                                            VerticalAlignment="Stretch"
+                                            VerticalContentAlignment="Top"
+                                            ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                                            ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                                            WebBrowser="{Binding WebBrowser,
+                                                                 Mode=OneWayToSource}" />
         <!--  <wpf:ChromiumWebBrowser x:Name="browser" />  -->
         <!--  <wpf:WebView x:Name="webView"  -->
         <!--  MinWidth="500" Margin="0" Padding="0"  -->

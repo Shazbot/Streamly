@@ -5,13 +5,9 @@ using LeStreamsFace.Annotations;
 using PropertyChanged;
 using System;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Runtime.CompilerServices;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
 
 namespace LeStreamsFace
 {
@@ -33,7 +29,7 @@ namespace LeStreamsFace
             if ((bool)dependencyPropertyChangedEventArgs.NewValue)
             {
                 Dispatcher.BeginInvoke((Action)InitializeData);
-		browser.FrameLoadStart+=BrowserOnFrameLoadStart;
+                browser.FrameLoadStart += BrowserOnFrameLoadStart;
             }
         }
 

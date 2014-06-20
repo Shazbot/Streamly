@@ -174,7 +174,6 @@ namespace LeStreamsFace
 
                         streamsWindow.Show();
                     }
-                    
                 }
             }
 
@@ -183,7 +182,7 @@ namespace LeStreamsFace
             // make sure we start topmost
             streamsWindow.Topmost = true;
             streamsWindow.Topmost = false;
-            streamsWindow.Focus();  
+            streamsWindow.Focus();
         }
 
         private void OnTrayExitClick(object sender, EventArgs e)
@@ -202,48 +201,46 @@ namespace LeStreamsFace
 
             try
             {
-//                var twitchTask = Task.Factory.StartNew( () =>
-//                                                        {
-//                                                            var twitchResponse = new RestClient("https://api.twitch.tv/kraken/streams?limit=100").SinglePageResponse();
-//                                                            return _streamParserJSON.GetStreamsFromContent(twitchResponse.Content);
-//                                                        }, TaskCreationOptions.PreferFairness);
+                //                var twitchTask = Task.Factory.StartNew( () =>
+                //                                                        {
+                //                                                            var twitchResponse = new RestClient("https://api.twitch.tv/kraken/streams?limit=100").SinglePageResponse();
+                //                                                            return _streamParserJSON.GetStreamsFromContent(twitchResponse.Content);
+                //                                                        }, TaskCreationOptions.PreferFairness);
 
-                
-              
                 var streamsList = new List<Stream>();
                 var closedStreams = new List<Stream>();
 
                 //TODO By tomorrow
                 // check twitch fav streams through a channel request
-//                if (ConfigManager.Instance.AutoCheckFavorites)
-//                {
-//                    try
-//                    {
-//                        await Task.Factory.StartNew( () => CheckFavoriteTwitchStreamsManually(newStreamsList, streamsList));
-//                    }
-//                    catch (Exception) { }
-//                    closedStreams.AddRange(StreamsManager.Streams.Where(stream => stream.GottenViaAutoGetFavs && !streamsList.Contains(stream)).ToList());
-//                }
+                //                if (ConfigManager.Instance.AutoCheckFavorites)
+                //                {
+                //                    try
+                //                    {
+                //                        await Task.Factory.StartNew( () => CheckFavoriteTwitchStreamsManually(newStreamsList, streamsList));
+                //                    }
+                //                    catch (Exception) { }
+                //                    closedStreams.AddRange(StreamsManager.Streams.Where(stream => stream.GottenViaAutoGetFavs && !streamsList.Contains(stream)).ToList());
+                //                }
 
                 IEnumerable<Stream> twitchFetchedStreams = Enumerable.Empty<Stream>();
 
                 // TODO By tomorrow
-//                var twitchResponse = await new RestClient("https://api.twitch.tv/kraken/streams?limit=100").ExecuteTaskAsync(new RestRequest());
-//                twitchFetchedStreams = _streamParserJSON.GetStreamsFromContent(twitchResponse.Content);
+                //                var twitchResponse = await new RestClient("https://api.twitch.tv/kraken/streams?limit=100").ExecuteTaskAsync(new RestRequest());
+                //                twitchFetchedStreams = _streamParserJSON.GetStreamsFromContent(twitchResponse.Content);
 
                 twitchFetchedStreams = _streamParserJSON.GetStreamsFromContent(File.ReadAllText("Resources/debug/json request for debug.json"));
-//                try
-//                {
-//                    twitchFetchedStreams = await twitchTask;
-//                }
-//                catch (Exception exception)
-//                {
-//                    if (firstRun) // need to not spam user
-//                    {
-//                        iconWindow.notificationItem.BalloonTip("Trouble reading from TWITCHTV", "REQUEST FAILED", toolTipIcon: ToolTipIcon.Error);
-//                    }
-//                    Debug.WriteLine(exception);
-//                }
+                //                try
+                //                {
+                //                    twitchFetchedStreams = await twitchTask;
+                //                }
+                //                catch (Exception exception)
+                //                {
+                //                    if (firstRun) // need to not spam user
+                //                    {
+                //                        iconWindow.notificationItem.BalloonTip("Trouble reading from TWITCHTV", "REQUEST FAILED", toolTipIcon: ToolTipIcon.Error);
+                //                    }
+                //                    Debug.WriteLine(exception);
+                //                }
 
                 // add streams we didn't get from favs to streamsList, new streams to newStreamsList
                 foreach (Stream stream in twitchFetchedStreams)
@@ -252,7 +249,7 @@ namespace LeStreamsFace
                     {
                         if (!StreamsManager.Streams.Contains(stream))
                         {
-//                            Debug.WriteLine("ADDED " + stream.Name + ", " + stream.Id);
+                            //                            Debug.WriteLine("ADDED " + stream.Name + ", " + stream.Id);
                             newStreamsList.Add(stream);
                         }
                         streamsList.Add(stream);
@@ -296,7 +293,7 @@ namespace LeStreamsFace
                     {
                         existingNotification.Close();
                     }
-//                    Debug.WriteLine("REMOVED STREAM " + closedStream.Name);
+                    //                    Debug.WriteLine("REMOVED STREAM " + closedStream.Name);
                 }
                 StreamsManager.Streams.AddRange(newStreamsList);
 
@@ -369,7 +366,7 @@ namespace LeStreamsFace
             }
             finally
             {
-//                Debug.WriteLine("".PadRight(45, '-'));
+                //                Debug.WriteLine("".PadRight(45, '-'));
                 firstRun = false;
                 ConfigManager.Instance.Offline = !StreamsManager.Streams.Any();
                 if (ConfigManager.Instance.Offline)
@@ -469,12 +466,12 @@ namespace LeStreamsFace
                 stream.GottenViaAutoGetFavs = true;
                 if (!StreamsManager.Streams.Contains(stream))
                 {
-//                    Debug.WriteLine("ADDED " + stream.Name + ", " + stream.Id + " FROM FAVORITES CHECK");
+                    //                    Debug.WriteLine("ADDED " + stream.Name + ", " + stream.Id + " FROM FAVORITES CHECK");
                     newStreamsList.Add(stream);
                 }
                 streamsList.Add(stream);
             }
-//            Debug.WriteLine("TIMER TO RETRIEVE FAVORITES: " + (DateTime.Now - now).TotalSeconds);
+            //            Debug.WriteLine("TIMER TO RETRIEVE FAVORITES: " + (DateTime.Now - now).TotalSeconds);
         }
 
         private void Window_SourceInitialized(object sender, EventArgs e)

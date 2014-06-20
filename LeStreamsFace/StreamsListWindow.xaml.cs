@@ -1,5 +1,4 @@
-﻿using System.Windows.Forms.VisualStyles;
-using MahApps.Metro.Controls;
+﻿using MahApps.Metro.Controls;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,7 +12,6 @@ using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using System.Windows.Threading;
 using Button = System.Windows.Controls.Button;
 using Clipboard = System.Windows.Clipboard;
@@ -187,8 +185,8 @@ namespace LeStreamsFace
             }
             else if (tabItem == configTabItem)
             {
-//                                DisabledTimeTextBox.Text = ConfigManager.Instance.FromSpan.ToString("hhmm") + '-' + ConfigManager.Instance.ToSpan.ToString("hhmm");
-//                                BannedGamesTextBox.Text = ConfigManager.Instance.BannedGames.Aggregate((s, s1) => s + ", " + s1);
+                //                                DisabledTimeTextBox.Text = ConfigManager.Instance.FromSpan.ToString("hhmm") + '-' + ConfigManager.Instance.ToSpan.ToString("hhmm");
+                //                                BannedGamesTextBox.Text = ConfigManager.Instance.BannedGames.Aggregate((s, s1) => s + ", " + s1);
             }
             else if (tabItem == statsTabItem)
             {
@@ -415,20 +413,6 @@ namespace LeStreamsFace
             }
         }
 
-        private void window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-//            if (cefFlyout.IsOpen) return;
-
-            e.Handled = true;
-            try
-            {
-                //                DragMove();
-            }
-            catch (InvalidOperationException)
-            {
-            }
-        }
-
         //        public new void DragMove()
         //        {
         //            var hs = (HwndSource)PresentationSource.FromVisual(this);
@@ -586,12 +570,11 @@ namespace LeStreamsFace
 
         private bool ignoreNextMouseMove;
 
-        void DragMoveWindow(object sender, MouseButtonEventArgs e)
+        private void DragMoveWindow(object sender, MouseButtonEventArgs e)
         {
             if (e.MiddleButton == MouseButtonState.Pressed) return;
             if (e.RightButton == MouseButtonState.Pressed) return;
             if (e.LeftButton != MouseButtonState.Pressed) return;
-            if (!vm.IsAnyStreamTabOpen) return;
 
             if (WindowState == WindowState.Maximized && e.ClickCount != 2) return;
 
@@ -605,8 +588,28 @@ namespace LeStreamsFace
             DragMove();
         }
 
-        void MouseMoveWindow(object sender, MouseEventArgs e)
+        private void ShellViewMouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
+            e.Handled = true;
+            //            if (DocumentIsOpen && !Header.IsMouseOver) return;
+            ToggleMaximized();
+            ignoreNextMouseMove = true;
+        }
+
+        private void ToggleMaximized()
+        {
+            WindowState = WindowState == WindowState.Maximized ? WindowState.Normal : WindowState.Maximized;
+        }
+
+        // when maximized snap it out by dragging the title bar
+        private void MouseMoveWindow(object sender, MouseEventArgs e)
+        {
+            var mouseY = Mouse.GetPosition(this).Y;
+            Console.WriteLine("mouse getPos is at:" + mouseY + " WHILE event is " + e.GetPosition(this).Y);
+
+            //            if (WindowState == WindowState.Maximized && e.GetPosition(this).Y <= 30 && !ShowTitleBar) ShowTitleBar = true;
+            //            if (WindowState == WindowState.Maximized && e.GetPosition(this).Y > 30 && ShowTitleBar) ShowTitleBar = false;
+
             if (ignoreNextMouseMove)
             {
                 ignoreNextMouseMove = false;
@@ -618,7 +621,10 @@ namespace LeStreamsFace
             if (e.MiddleButton == MouseButtonState.Pressed) return;
             if (e.RightButton == MouseButtonState.Pressed) return;
             if (e.LeftButton != MouseButtonState.Pressed) return;
-//            if (!Header.IsMouseOver) return;
+
+            //            var mouseY = Mouse.GetPosition(this).Y;
+            Console.WriteLine("mouse getPos is at:" + mouseY + " WHILE event is " + e.GetPosition(this).Y);
+            if (mouseY > TitlebarHeight) return; // don't snap out if we're over the height of the title bar
 
             // Calculate correct left coordinate for multi-screen system
             var mouseX = PointToScreen(Mouse.GetPosition(this)).X;
