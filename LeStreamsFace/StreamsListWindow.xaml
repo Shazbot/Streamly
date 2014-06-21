@@ -422,7 +422,6 @@
                 </Style>
             </Grid.Style>
 
-            <!--  <LeStreamsFace:NonReloadingTabControl Margin="0"  -->
             <TabControl Margin="0"
                         Background="Black"
                         BorderBrush="Black"
