@@ -1,6 +1,8 @@
 ﻿using MahApps.Metro.Controls;
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows;
@@ -28,22 +30,21 @@ namespace LeStreamsFace
     /// </summary>
     internal partial class StreamsListWindow : MetroWindow
     {
-        private bool doFilterGames = true;
         private Func<bool> timeBlockCheck;
         private StreamsListViewModel vm;
 
         public StreamsListWindow(Func<bool> timeBlockCheck)
         {
             InitializeComponent();
+            DataContext = vm = new StreamsListViewModel(this);
+
             this.timeBlockCheck = timeBlockCheck;
 
             NameScope.SetNameScope(windowCommands, NameScope.GetNameScope(this));
 
             TypeDescriptor.GetProperties(this.streamsDataGrid)["ItemsSource"].AddValueChanged(this.streamsDataGrid, new EventHandler(blockedItemsListBox_ItemsSourceChanged));
-            //          MOVED TO BINDING  this.AutoCheckFavoritesCheckBox.IsChecked = ConfigManager.Instance.AutoCheckFavorites;
             UpdateGameIconBackgrounds();
             this.streamsDataGrid.ItemsSource = StreamsManager.Streams;
-            //this.favoritesListBox.ItemsSource = ConfigManager.Instance.FavoriteStreams;
 
             if (ConfigManager.Instance.SaveWindowPosition)
             {
@@ -54,8 +55,6 @@ namespace LeStreamsFace
                 Width = 1000;
                 Height = 580;
             }
-
-            DataContext = vm = new StreamsListViewModel(this);
 
             var url = @"<object type=""application/x-shockwave-flash"" height=""100%"" width=""100%"" style=""overflow:hidden; width:100%; height:100%; margin:0; padding:0; border:0;"" id=""live_embed_player_flash"" data=""http://www.twitch.tv/widgets/live_embed_player.swf?channel=" + "wingsofdeath" + @""" bgcolor=""#000000""><param name=""allowFullScreen"" value=""false"" /><param name=""allowScriptAccess"" value=""always"" /><param name=""allowNetworking"" value=""all"" /><param name=""movie"" value=""http://www.twitch.tv/widgets/live_embed_player.swf"" /><param name=""flashvars"" value=""hostname=www.twitch.tv&channel=" + "wingsofdeath" + @"&auto_play=true&start_volume=25"" /></object>";
             //            url = @"<div style=""overflow:hidden;"">" + url + @"</div>";
@@ -83,7 +82,7 @@ namespace LeStreamsFace
             {
                 using (view.DeferRefresh())
                 {
-                    view.Filter = Filter;
+                    view.Filter = vm.Filter;
 
                     if (view.CanSort)
                     {
@@ -93,75 +92,6 @@ namespace LeStreamsFace
                     }
                 }
             }
-        }
-
-        private bool Filter(object o)
-        {
-            Stream stream = (Stream)o;
-
-            if (stream.IsFavorite && MainWindow.WasTimeBlocking)
-            {
-                return false;
-            }
-
-            var searchText = searchTextBox.Text;
-            if (!string.IsNullOrWhiteSpace(searchText))
-            {
-                if (stream.Name.ToLower().Contains(searchText.ToLower())
-                        || stream.Title.ToLower().Contains(searchText.ToLower())
-                        || stream.GameName.ToLower().Contains(searchText.ToLower()))
-                {
-                    return true;
-                }
-                return false;
-            }
-
-            if (ConfigManager.Instance.BannedGames.Any(stream.GameName.ContainsIgnoreCase))
-            {
-                return false;
-            }
-
-            if (stream.Viewers < ConfigManager.Instance.TriageStreams && !stream.IsFavorite)
-            {
-                return false;
-            }
-
-            if (doFilterGames)
-            {
-                if (StreamsManager.Filters.Any(pair => pair.Value ?? false))
-                {
-                    foreach (
-                        KeyValuePair<FiltersEnum, bool?> keyValuePair in
-                            StreamsManager.Filters.Where(pair => pair.Value == true))
-                    {
-                        var description =
-                            ((DescriptionAttribute)
-                             typeof(FiltersEnum).GetMember(keyValuePair.Key.ToString())[0].GetCustomAttributes(
-                                 typeof(DescriptionAttribute), false)[0]).Description;
-                        if (stream.GameName == description)
-                        {
-                            return true;
-                        }
-                    }
-                    return false;
-                }
-
-                foreach (
-                    KeyValuePair<FiltersEnum, bool?> keyValuePair in
-                        StreamsManager.Filters.Where(pair => pair.Value == false))
-                {
-                    var description =
-                        ((DescriptionAttribute)
-                         typeof(FiltersEnum).GetMember(keyValuePair.Key.ToString())[0].GetCustomAttributes(
-                             typeof(DescriptionAttribute), false)[0]).Description;
-                    if (stream.GameName == description)
-                    {
-                        return false;
-                    }
-                }
-            }
-
-            return true;
         }
 
         private void blockedItemsListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -178,7 +108,7 @@ namespace LeStreamsFace
             {
                 if (streamsTabItem.IsSelected)
                 {
-                    doFilterGames = !doFilterGames;
+                    vm.GameFilteringByIconsEnabled = !vm.GameFilteringByIconsEnabled;
 
                     RefreshView();
                 }
@@ -225,22 +155,24 @@ namespace LeStreamsFace
 
         private void GameIconButton_Click(object sender, RoutedEventArgs e)
         {
-            doFilterGames = true;
+            vm.GameFilteringByIconsEnabled = true;
 
             FiltersEnum myFiltersEnum = (FiltersEnum)((Button)sender).Tag;
+            var filteringForGame = StreamsManager.Filters[myFiltersEnum];
 
-            if (StreamsManager.Filters[myFiltersEnum] == null)
+            if (filteringForGame == null)
             {
-                StreamsManager.Filters[myFiltersEnum] = true;
+                filteringForGame = true;
             }
-            else if (StreamsManager.Filters[myFiltersEnum] == true)
+            else if (filteringForGame == true)
             {
-                StreamsManager.Filters[myFiltersEnum] = false;
+                filteringForGame = false;
             }
-            else if (StreamsManager.Filters[myFiltersEnum] == false)
+            else if (filteringForGame == false)
             {
-                StreamsManager.Filters[myFiltersEnum] = null;
+                filteringForGame = null;
             }
+            StreamsManager.Filters[myFiltersEnum] = filteringForGame;
 
             UpdateGameIconBackgrounds();
             ConfigManager.Instance.WriteConfigXml();
@@ -326,44 +258,46 @@ namespace LeStreamsFace
             }
         }
 
+        private void window_OnPreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (!streamsTabItem.IsSelected || Flyouts.GetChildObjects().Cast<Flyout>().Any(flyout => flyout.IsOpen))
+            {
+                return;
+            }
+            if (e.Key == Key.Up || e.Key == Key.Down) // for keyboard streams list navigation
+            {
+                return;
+            }
+
+            if (e.Key == Key.Escape || e.Key == Key.Back && string.IsNullOrWhiteSpace(searchTextBox.Text))
+            {
+                streamsDataGrid.Focus();
+                searchTextBox.Text = string.Empty;
+                searchPanel.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                searchPanel.Visibility = Visibility.Visible;
+                searchTextBox.Focus();
+            }
+        }
+
         private void window_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
         {
             if (!streamsTabItem.IsSelected)
             {
                 return;
             }
-
-            if (e.Key == Key.Escape)
-            {
-                streamsDataGrid.Focus();
-                searchTextBox.Text = string.Empty;
-                searchPanel.Visibility = Visibility.Collapsed;
-            }
         }
 
         private void window_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            if (!streamsTabItem.IsSelected || Flyouts.GetChildObjects().Cast<Flyout>().Any(flyout => flyout.IsOpen))
-            {
-                return;
-            }
-
-            if (!string.IsNullOrWhiteSpace(e.Text))
-            {
-                var char1 = e.Text[0];
-                if (char1 == 27)
-                {
-                    return;
-                }
-                searchPanel.Visibility = Visibility.Visible;
-                searchTextBox.Focus();
-            }
         }
 
         private void searchTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            var text = ((TextBox)sender).Text;
-            if (!string.IsNullOrWhiteSpace(searchTextBox.Text))
+            var text = searchTextBox.Text;
+            if (!string.IsNullOrWhiteSpace(text))
             {
                 searchPanel.Visibility = Visibility.Visible;
             }
@@ -504,72 +438,6 @@ namespace LeStreamsFace
             }
         }
 
-        public void ConfigTabMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            //            e.Handled = true;
-            //            try
-            //            {
-            //                DragMove();
-            //            }
-            //            catch (InvalidOperationException)
-            //            {
-            //            }
-        }
-
-        private async void GamesPanel_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            //            selectedGameFlyout.Header = name;
-            //            selectedGamesPanel.ItemsSource = streams;
-        }
-
-        private async void SelectedGamesPanel_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            var stream = ((ListBox)sender).SelectedItem as Stream;
-            if (stream == null)
-            {
-                return;
-            }
-
-            var newStreamingTab = new TabItem();
-            newStreamingTab.Header = stream.LoginNameTwtv;
-            newStreamingTab.Visibility = Visibility.Collapsed;
-            newStreamingTab.Content = stream.LoginNameTwtv;
-            tabControl.Items.Add(newStreamingTab);
-            newStreamingTab.IsSelected = true;
-
-            //
-            //            cefWebView.WebBrowser.Address = url;
-
-            //            var wings = @"<object type=""application/x-shockwave-flash"" height=""" + "100%" + @""" width=""" + "100%" + @""" id=""live_embed_player_flash"" data=""http://www.twitch.tv/widgets/live_embed_player.swf?channel=wingsofdeath"" bgcolor=""#000000""><param name=""allowFullScreen"" value=""true"" /><param name=""allowScriptAccess"" value=""always"" /><param name=""allowNetworking"" value=""all"" /><param name=""movie"" value=""http://www.twitch.tv/widgets/live_embed_player.swf"" /><param name=""flashvars"" value=""hostname=www.twitch.tv&channel=wingsofdeath&auto_play=true&start_volume=25"" /></object><a href=""http://www.twitch.tv/wingsofdeath"" style=""padding:2px 0px 4px; display:block; width:345px; font-weight:normal; font-size:10px;text-decoration:underline; text-align:center;"">Watch live video from Wingsofdeath on www.twitch.tv</a>";
-            //            cefWebView.WebBrowser.LoadHtml(wings, "arst");// = wings;
-
-            var url = @"<object type=""application/x-shockwave-flash"" height=""100%"" width=""100%"" style=""overflow:hidden; width:100%; height:100%; margin:0; padding:0; border:0;"" id=""live_embed_player_flash"" data=""http://www.twitch.tv/widgets/live_embed_player.swf?channel=" + stream.LoginNameTwtv + @""" bgcolor=""#000000""><param name=""allowFullScreen"" value=""false"" /><param name=""allowScriptAccess"" value=""always"" /><param name=""allowNetworking"" value=""all"" /><param name=""movie"" value=""http://www.twitch.tv/widgets/live_embed_player.swf"" /><param name=""flashvars"" value=""hostname=www.twitch.tv&channel=" + stream.LoginNameTwtv + @"&auto_play=true&start_volume=25"" /></object>";
-            url = @"<div style=""overflow:hidden;"">" + url + @"</div>";
-            gamesFlyout.IsOpen = false;
-            selectedGameFlyout.IsOpen = false;
-
-            //            cefWebView.webView.LoadHtml(url, stream.LoginNameTwtv);
-            //            cefFlyout.IsOpen = true;
-
-            //            cefWebView.webView.LoadHtml(wings, "about:blank");// = wings;
-            // = wings;
-            //            cefWebView.webView.WebBrowser.LoadHtml(url, "about:blank");// = wings;
-            //            cefWebView.webView.WebBrowser.Address = "www.google.com";
-
-            //            var dialog = (BaseMetroDialog)this.Resources["LoadingDialog"];
-            //            if (cefWebView.webView == null || cefWebView.WebBrowser == null)
-            //            {
-            //                await this.ShowMetroDialogAsync(dialog);
-            //                while (cefWebView.webView == null || cefWebView.WebBrowser == null)
-            //                {
-            //                    await TaskEx.Delay(200);
-            //                }
-            //                await this.HideMetroDialogAsync(dialog);
-            //            }
-        }
-
-        private bool ignoreNextMouseMove;
-
         private void DragMoveWindow(object sender, MouseButtonEventArgs e)
         {
             if (e.MiddleButton == MouseButtonState.Pressed) return;
@@ -581,7 +449,6 @@ namespace LeStreamsFace
             if (e.ClickCount == 2)
             {
                 WindowState = WindowState == WindowState.Maximized ? WindowState.Normal : WindowState.Maximized;
-                ignoreNextMouseMove = true;
                 return;
             }
 
@@ -591,9 +458,7 @@ namespace LeStreamsFace
         private void ShellViewMouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             e.Handled = true;
-            //            if (DocumentIsOpen && !Header.IsMouseOver) return;
             ToggleMaximized();
-            ignoreNextMouseMove = true;
         }
 
         private void ToggleMaximized()
@@ -601,47 +466,23 @@ namespace LeStreamsFace
             WindowState = WindowState == WindowState.Maximized ? WindowState.Normal : WindowState.Maximized;
         }
 
-        // when maximized snap it out by dragging the title bar
-        private void MouseMoveWindow(object sender, MouseEventArgs e)
+        private void GamesPanel_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var mouseY = Mouse.GetPosition(this).Y;
-            Console.WriteLine("mouse getPos is at:" + mouseY + " WHILE event is " + e.GetPosition(this).Y);
+            gamesPanel.SelectedIndex = -1;
+        }
 
-            //            if (WindowState == WindowState.Maximized && e.GetPosition(this).Y <= 30 && !ShowTitleBar) ShowTitleBar = true;
-            //            if (WindowState == WindowState.Maximized && e.GetPosition(this).Y > 30 && ShowTitleBar) ShowTitleBar = false;
+        private void SelectedGamesPanel_ItemsSourceUpdated(object sender, DataTransferEventArgs e)
+        {
+            var notifyCollectionChanged = (selectedGamesPanel.ItemsSource) as INotifyCollectionChanged;
+            notifyCollectionChanged.CollectionChanged += new NotifyCollectionChangedEventHandler(SelectedGamesPanel_CollectionChanged);
+        }
 
-            if (ignoreNextMouseMove)
-            {
-                ignoreNextMouseMove = false;
-                return;
-            }
+        private void SelectedGamesPanel_CollectionChanged(Object sender, NotifyCollectionChangedEventArgs e)
+        {
+            var itemsSource = selectedGamesPanel.ItemsSource as IEnumerable<Stream>;
+            if (itemsSource == null || !itemsSource.Any()) return;
 
-            if (WindowState != WindowState.Maximized) return;
-
-            if (e.MiddleButton == MouseButtonState.Pressed) return;
-            if (e.RightButton == MouseButtonState.Pressed) return;
-            if (e.LeftButton != MouseButtonState.Pressed) return;
-
-            //            var mouseY = Mouse.GetPosition(this).Y;
-            Console.WriteLine("mouse getPos is at:" + mouseY + " WHILE event is " + e.GetPosition(this).Y);
-            if (mouseY > TitlebarHeight) return; // don't snap out if we're over the height of the title bar
-
-            // Calculate correct left coordinate for multi-screen system
-            var mouseX = PointToScreen(Mouse.GetPosition(this)).X;
-            var width = RestoreBounds.Width;
-            var left = mouseX - width / 2;
-            if (left < 0) left = 0;
-
-            // Align left edge to fit the screen
-            var virtualScreenWidth = SystemParameters.VirtualScreenWidth;
-            if (left + width > virtualScreenWidth) left = virtualScreenWidth - width;
-
-            Top = 0;
-            Left = left;
-
-            WindowState = WindowState.Normal;
-
-            DragMove();
+            selectedGamesPanel.ScrollIntoView(itemsSource.First());
         }
     }
 }

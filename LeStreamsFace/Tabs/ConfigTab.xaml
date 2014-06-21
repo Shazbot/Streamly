@@ -255,7 +255,6 @@
                             </StackPanel>
                         </WrapPanel>
                     </ScrollViewer>
-
                 </DataTemplate>
             </Setter.Value>
         </Setter>

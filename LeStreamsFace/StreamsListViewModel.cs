@@ -8,9 +8,11 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -20,18 +22,18 @@ namespace LeStreamsFace
     [ImplementPropertyChanged]
     internal class StreamsListViewModel : INotifyPropertyChanged
     {
-        private StreamsListWindow view;
+        public readonly StreamsListWindow View;
 
         private GamesViewModel _gamesPanelSelectedGame;
         private Stream _streamsPanelSelectedStream;
 
         public StreamsListViewModel(StreamsListWindow view)
         {
-            this.view = view;
+            this.View = view;
 
             _runningStreams.CollectionChanged += RunningStreamsOnCollectionChanged;
 
-            GamesPanelButtonPressedCommand = new DelegateCommand(ToggleGamesPanel);
+            GamesPanelToggleCommand = new DelegateCommand(ToggleGamesPanel);
             StreamingTabClickedCommand = new DelegateCommand(() => OpenExistingStreamingTab());
             GetTwitchFavoritesCommand = new DelegateCommand<string>(usernameOnTwitch => ImportTwitchFavorites(usernameOnTwitch));
             RefreshViewCommand = new DelegateCommand(() => view.RefreshView());
@@ -46,12 +48,11 @@ namespace LeStreamsFace
             // TODO
 
             var str = new Stream("wingsofdeathx", "wings", 123, "123", "ra", "asr", StreamingSite.TwitchTv);
+            //TODO if we want to start with a stream
             str.LoginNameTwtv = "wingsofdeath";
             //            RunningStreams.Add(str);
-
-            //TODO if we want to start with a stream
-            //                        IsAnyStreamTabOpen = true;
-            //                        SelectedStreamTab = str;
+            //            IsAnyStreamTabOpen = true;
+            //            SelectedStreamTab = str;
             // TODO maybe move this to switching tab logic
             // TODO can we use the property itself or it's ok like this?
         }
@@ -66,16 +67,16 @@ namespace LeStreamsFace
             IsGamesPanelOpen = false;
             IsStreamsPanelOpen = false;
 
-            if (tab == view.streamsTabItem)
+            if (tab == View.streamsTabItem)
             {
                 if (tab.IsSelected)
                 {
                     //                    doFilterGames = !doFilterGames;
 
-                    view.RefreshView();
+                    View.RefreshView();
                 }
             }
-            else if (tab == view.configTabItem)
+            else if (tab == View.configTabItem)
             {
                 TimeWhenNotNotifyingTextInput = ConfigManager.Instance.FromSpan.ToString("hhmm") + '-' + ConfigManager.Instance.ToSpan.ToString("hhmm");
                 BannedGamesTextInput = ConfigManager.Instance.BannedGames.Aggregate((s, s1) => s + ", " + s1);
@@ -87,7 +88,7 @@ namespace LeStreamsFace
         {
             stream.IsFavorite = !stream.IsFavorite;
 
-            view.RefreshView();
+            View.RefreshView();
 
             if (!stream.IsFavorite)
             {
@@ -150,7 +151,7 @@ namespace LeStreamsFace
             {
                 MessageBox.Show("Successfully imported favorites.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
                 ConfigManager.Instance.WriteConfigXml();
-                view.RefreshView();
+                View.RefreshView();
             }
             else
             {
@@ -169,17 +170,26 @@ namespace LeStreamsFace
                 {
                     ourFavorite.IsFavorite = false;
                 }
-                view.RefreshView();
+                View.RefreshView();
                 ConfigManager.Instance.WriteConfigXml();
             }
         }
 
-        private async void FetchGames()
+        private async Task FetchGames()
         {
-            var twitchResponse = await new RestClient("https://api.twitch.tv/kraken/games/top?limit=100").ExecuteTaskAsync(new RestRequest());
+            // TODO make this rerun after a timeout
+            //                        var twitchResponse = await new RestClient("https://api.twitch.tv/kraken/games/top?limit=100").ExecuteTaskAsync(new RestRequest(),);
+            var twitchResponse = new RestClient("https://api.twitch.tv/kraken/games/top?limit=100").Execute(new RestRequest());
             var topGamesJObject = JsonConvert.DeserializeObject<JObject>(twitchResponse.Content)["top"];
             var games = topGamesJObject.Children().Select(token => new GamesViewModel(token["game"]["name"].ToString(), token["game"]["box"]["medium"].ToString()));
+            // sometimes we get no Games (Games.Count == 0)
+            var gc = games.Count();
             Games.AddRange(games);
+
+            if (Games.Count == 0) // examine response
+            {
+                Debugger.Break();
+            }
         }
 
         private void ToggleGamesPanel()
@@ -230,15 +240,23 @@ namespace LeStreamsFace
 
         #endregion Streams
 
+        private GamesViewModel _previousGameSelection;
+
         public GamesViewModel GamesPanelSelectedGame
         {
             get { return _gamesPanelSelectedGame; }
             set
             {
                 //                if (value == _gamesPanelSelectedGame) return;
-                _gamesPanelSelectedGame = value;
-                FetchStreams(_gamesPanelSelectedGame.GameName);
-                IsStreamsPanelOpen = true;
+                if (value == null && _gamesPanelSelectedGame != null)
+                {
+                    IsStreamsPanelOpen = true;
+                }
+                else if (value != null)
+                {
+                    _gamesPanelSelectedGame = value;
+                    FetchStreams(value.GameName);
+                }
             }
         }
 
@@ -280,7 +298,7 @@ namespace LeStreamsFace
 
         public bool IsStreamsPanelOpen { get; set; }
 
-        public ICommand GamesPanelButtonPressedCommand { get; private set; }
+        public ICommand GamesPanelToggleCommand { get; private set; }
 
         public ICommand StreamingTabClickedCommand { get; private set; }
 
@@ -311,7 +329,7 @@ namespace LeStreamsFace
                     ConfigManager.Instance.BannedGames.Clear();
                 }
                 ConfigManager.Instance.WriteConfigXml();
-                view.RefreshView();
+                View.RefreshView();
             }
             catch (Exception)
             {
@@ -361,6 +379,79 @@ namespace LeStreamsFace
             catch (Exception)
             {
             }
+        }
+
+        public string GameFilteringTextInput { get; set; }
+
+        public bool GameFilteringByIconsEnabled = true;
+
+        public bool Filter(object o)
+        {
+            Stream stream = (Stream)o;
+
+            if (stream.IsFavorite && MainWindow.WasTimeBlocking)
+            {
+                return false;
+            }
+
+            var searchText = GameFilteringTextInput;
+            if (!string.IsNullOrWhiteSpace(searchText))
+            {
+                if (stream.Name.ToLower().Contains(searchText.ToLower())
+                        || stream.Title.ToLower().Contains(searchText.ToLower())
+                        || stream.GameName.ToLower().Contains(searchText.ToLower()))
+                {
+                    return true;
+                }
+                return false;
+            }
+
+            if (ConfigManager.Instance.BannedGames.Any(stream.GameName.ContainsIgnoreCase))
+            {
+                return false;
+            }
+
+            if (stream.Viewers < ConfigManager.Instance.TriageStreams && !stream.IsFavorite)
+            {
+                return false;
+            }
+
+            if (GameFilteringByIconsEnabled)
+            {
+                if (StreamsManager.Filters.Any(pair => pair.Value ?? false))
+                {
+                    foreach (
+                        KeyValuePair<FiltersEnum, bool?> keyValuePair in
+                            StreamsManager.Filters.Where(pair => pair.Value == true))
+                    {
+                        var description =
+                            ((DescriptionAttribute)
+                             typeof(FiltersEnum).GetMember(keyValuePair.Key.ToString())[0].GetCustomAttributes(
+                                 typeof(DescriptionAttribute), false)[0]).Description;
+                        if (stream.GameName == description)
+                        {
+                            return true;
+                        }
+                    }
+                    return false;
+                }
+
+                foreach (
+                    KeyValuePair<FiltersEnum, bool?> keyValuePair in
+                        StreamsManager.Filters.Where(pair => pair.Value == false))
+                {
+                    var description =
+                        ((DescriptionAttribute)
+                         typeof(FiltersEnum).GetMember(keyValuePair.Key.ToString())[0].GetCustomAttributes(
+                             typeof(DescriptionAttribute), false)[0]).Description;
+                    if (stream.GameName == description)
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            return true;
         }
 
         public Stream SelectedStreamTab

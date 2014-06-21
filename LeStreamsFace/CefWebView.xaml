@@ -9,26 +9,27 @@
              d:DesignHeight="300"
              d:DesignWidth="300"
              mc:Ignorable="d">
-    <Grid>
+    <Grid MouseMove="UIElement_OnMouseMove">
         <Grid x:Name="Overlay"
-              Margin="0,8,0,20"
-              Panel.ZIndex="1000">
+              Margin="0,4,0,26"
+              Panel.ZIndex="1000"
+              IsEnabled="False"
+              IsHitTestVisible="True">
             <Grid.Background>
-                <SolidColorBrush Opacity="0" Color="Beige" />
+                <SolidColorBrush Opacity="0" Color="Red" />
             </Grid.Background>
         </Grid>
 
         <!--  <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinHeight="300" MinWidth="300">  -->
-        <leStreamsFace:MyChromiumWebBrowser x:Name="browser" UseLayoutRounding="True" RenderOptions.EdgeMode="Aliased" RenderOptions.CachingHint="Cache"
-                                            RenderOptions.BitmapScalingMode="Fant"
-                                            MinWidth="500"
-                                            MinHeight="500"
-                                            Margin="0,0,0,0"
+        <leStreamsFace:MyChromiumWebBrowser x:Name="browser"
+                                            Margin="0"
                                             HorizontalAlignment="Stretch"
                                             VerticalAlignment="Stretch"
-                                            VerticalContentAlignment="Top"
+                                            MouseLeftButtonDown="Browser_OnMouseLeftButtonDown"
+                                            PreviewMouseDown="Browser_OnPreviewMouseDown"
                                             ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                                             ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                                            UseLayoutRounding="True"
                                             WebBrowser="{Binding WebBrowser,
                                                                  Mode=OneWayToSource}" />
         <!--  <wpf:ChromiumWebBrowser x:Name="browser" />  -->

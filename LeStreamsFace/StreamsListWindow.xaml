@@ -26,26 +26,26 @@
                                           Source={x:Static LeStreamsFace:ConfigManager.Instance}}"
                            MouseDoubleClick="ShellViewMouseDoubleClick"
                            MouseLeftButtonDown="DragMoveWindow"
-                           MouseMove="MouseMoveWindow"
                            NonActiveWindowTitleBrush="{DynamicResource WindowTitleColorBrush}"
                            Opacity="{Binding WinOpacity,
                                              Mode=TwoWay,
                                              Source={x:Static LeStreamsFace:ConfigManager.Instance}}"
+                           PreviewKeyDown="window_OnPreviewKeyDown"
                            PreviewTextInput="window_PreviewTextInput"
                            ResizeMode="CanResizeWithGrip"
                            ShowIconOnTitleBar="False"
+                           ShowTitleBar="True"
                            SizeChanged="WindowSizeChanged"
-                           
                            SizeToContent="Manual"
-                           WindowTransitionsEnabled="False"
-                           UseLayoutRounding="False"
                            SnapsToDevicePixels="True"
                            SourceInitialized="window_SourceInitialized"
                            Top="{Binding WinTop,
                                          Mode=TwoWay,
                                          Source={x:Static LeStreamsFace:ConfigManager.Instance}}"
+                           UseLayoutRounding="False"
                            WindowStartupLocation="CenterScreen"
                            WindowStyle="None"
+                           WindowTransitionsEnabled="False"
                            d:DataContext="{d:DesignInstance LeStreamsFace:StreamsListViewModel}"
                            d:DesignHeight="300"
                            d:DesignWidth="300"
@@ -120,16 +120,18 @@
                     <Setter Property="Width" Value="{Binding WinWidth, Mode=TwoWay, Source={x:Static LeStreamsFace:ConfigManager.Instance}}" />
                     <Setter Property="Height" Value="{Binding WinHeight, Mode=TwoWay, Source={x:Static LeStreamsFace:ConfigManager.Instance}}" />
                 </DataTrigger>
-<!--                <Trigger Property="WindowState" Value="Maximized">-->
-<!--                    <Setter Property="ShowTitleBar" Value="False" />-->
-<!--                </Trigger>-->
+                <!--  <Trigger Property="WindowState" Value="Maximized">  -->
+                <!--  <Setter Property="ShowTitleBar" Value="False" />  -->
+                <!--  </Trigger>  -->
             </Style.Triggers>
         </Style>
     </Window.Style>
 
     <MetroControls:MetroWindow.WindowCommands>
         <MetroControls:WindowCommands x:Name="windowCommands">
-            <StackPanel Name="gameIconsPanel" Orientation="Horizontal">
+            <StackPanel Name="gameIconsPanel"
+                        Margin="0"
+                        Orientation="Horizontal">
                 <Button Name="leagueIconButton"
                         Click="GameIconButton_Click"
                         Tag="{x:Static LeStreamsFace:FiltersEnum.League}">
@@ -160,12 +162,14 @@
                            Source="/LeStreamsFace;component/Resources/DiabloIcon.png" />
                 </Button>
             </StackPanel>
-            <StackPanel Name="changeTabButtons" Orientation="Horizontal">
+            <StackPanel Name="changeTabButtons"
+                        Margin="0"
+                        Orientation="Horizontal">
                 <Button Command="{Binding ChangeShellTabCommand}"
                         CommandParameter="{Binding ElementName=streamsTabItem}"
                         Content="streams" />
                 <ToggleButton Name="toggleGamesPanelButton"
-                              Command="{Binding GamesPanelButtonPressedCommand}"
+                              Command="{Binding GamesPanelToggleCommand}"
                               Content="games"
                               IsChecked="{Binding IsGamesPanelOpen,
                                                   Mode=OneWay}" />
@@ -278,9 +282,11 @@
                              Margin="20,0,20,0"
                              HorizontalAlignment="Center"
                              Background="Transparent"
-                             ItemsSource="{Binding Games}"
+                             ItemsSource="{Binding Games,
+                                                   Mode=OneWay}"
                              ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                             SelectedItem="{Binding GamesPanelSelectedGame}"
+                             SelectedItem="{Binding GamesPanelSelectedGame,
+                                                    Mode=OneWayToSource}"
                              SelectionChanged="GamesPanel_OnSelectionChanged">
                         <ListBox.Resources>
                             <SolidColorBrush x:Key="AccentColorBrush3" Color="Transparent" />
@@ -330,9 +336,12 @@
                              Margin="20,0,20,0"
                              HorizontalAlignment="Center"
                              Background="Transparent"
-                             ItemsSource="{Binding Streams}"
+                             ItemsSource="{Binding Streams,
+                                                   Mode=OneWay,
+                                                   NotifyOnTargetUpdated=True}"
                              ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                             SelectedItem="{Binding StreamsPanelSelectedStream}">
+                             SelectedItem="{Binding StreamsPanelSelectedStream}"
+                             TargetUpdated="SelectedGamesPanel_ItemsSourceUpdated">
 
                         <ListBox.Resources>
                             <SolidColorBrush x:Key="AccentColorBrush3" Color="Transparent" />
@@ -381,7 +390,6 @@
                                             </MultiBinding>
                                         </TextBlock.Text>
                                     </TextBlock>
-
                                 </StackPanel>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
@@ -401,14 +409,23 @@
                     </Style.Setters>
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding IsAnyStreamTabOpen}" Value="True">
-                            <Setter Property="Margin" Value="-11,-17,-28,-3" />
+                            <!--  <Setter Property="Margin" Value="-5,-10,-5, -3" />  -->
+                            <!--  <Setter Property="Margin" Value="-5,0,-5, -3" />  -->
+                            <Setter Property="Background" Value="#333333" />
+                            <!--  <Setter Property="Margin" Value="-11,-17,-28, 0" />  -->
                         </DataTrigger>
                     </Style.Triggers>
                 </Style>
             </Grid.Style>
 
-            <TabControl ItemsSource="{Binding RunningStreams}"
+            <TabControl Margin="0"
+                        Background="Black"
+                        BorderBrush="Black"
+                        BorderThickness="0"
+                        ItemsSource="{Binding RunningStreams}"
+                        Padding="0"
                         SelectedItem="{Binding SelectedStreamTab}"
+                        Style="{x:Null}"
                         Visibility="{Binding IsAnyStreamTabOpen,
                                              Converter={StaticResource BooleanToVisibilityConverter}}">
                 <TabControl.Resources />
@@ -421,16 +438,13 @@
                     <DataTemplate>
                         <Grid>
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
                                 <RowDefinition Height="*" />
-                                <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
-                            <LeStreamsFace:CefWebView Grid.Row="1"
-                                                      MinWidth="500"
-                                                      MinHeight="500"
+                            <LeStreamsFace:CefWebView Grid.Row="0"
                                                       Margin="0"
                                                       HorizontalAlignment="Stretch"
                                                       VerticalAlignment="Stretch"
+                                                      Background="#333333"
                                                       Html="{Binding DataContext.EmbedHtmlCode,
                                                                      Mode=OneWay,
                                                                      RelativeSource={RelativeSource AncestorType=Grid},
@@ -742,6 +756,9 @@
                                      FontSize="14"
                                      MetroControls:TextboxHelper.Watermark="search"
                                      PreviewTextInput="searchTextBox_PreviewTextInput"
+                                     Text="{Binding GameFilteringTextInput,
+                                                    Mode=OneWayToSource,
+                                                    UpdateSourceTrigger=PropertyChanged}"
                                      TextAlignment="Left"
                                      TextChanged="searchTextBox_TextChanged"
                                      TextInput="searchTextBox_TextInput"

@@ -26,14 +26,14 @@ namespace LeStreamsFace.Tabs
 
         private void ConfigTabMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-//            e.Handled = true;
-//            try
-//            {
-//                DragMove();
-//            }
-//            catch (InvalidOperationException)
-//            {
-//            }
+            var shellView = ((WrapPanel)sender).DataContext as StreamsListViewModel;
+            try
+            {
+                shellView.View.window.DragMove();
+            }
+            catch (InvalidOperationException)
+            {
+            }
         }
     }
 }

@@ -2,6 +2,7 @@
 using System;
 using System.ComponentModel;
 using System.Diagnostics.Contracts;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -112,9 +113,9 @@ namespace LeStreamsFace
 
         public bool GottenViaAutoGetFavs = false;
 
-//        public Stream()
-//        {
-//        } // we don't want the deserializer to call this
+        //        public Stream()
+        //        {
+        //        } // we don't want the deserializer to call this
 
         public Stream(string name, string title, int? viewers, string id, string channelId, string gameName, StreamingSite streamingSite = StreamingSite.TwitchTv)//:this()
         {
@@ -165,8 +166,13 @@ namespace LeStreamsFace
             get
             {
                 if (Site != StreamingSite.TwitchTv) throw new ArgumentException("no supporterino");
-                var url = @"<object type=""application/x-shockwave-flash"" height=""100%"" width=""100%"" style=""overflow:hidden; width:100%; height:100%; margin:0; padding:0; border:0;"" id=""live_embed_player_flash"" data=""http://www.twitch.tv/widgets/live_embed_player.swf?channel=" + LoginNameTwtv + @""" bgcolor=""#000000""><param name=""allowFullScreen"" value=""false"" /><param name=""allowScriptAccess"" value=""always"" /><param name=""allowNetworking"" value=""all"" /><param name=""movie"" value=""http://www.twitch.tv/widgets/live_embed_player.swf"" /><param name=""flashvars"" value=""hostname=www.twitch.tv&channel=" + LoginNameTwtv + @"&auto_play=true&start_volume=25"" /></object>";
-                url = @"<div style=""overflow:hidden;"">" + url + @"</div>";
+
+                var url = @"<object type=""application/x-shockwave-flash"" scrolling=""no"" height=""100%"" width=""100%"" style=""overflow:hidden; width:100%; height:100%;"" id=""live_embed_player_flash"" data=""http://www.twitch.tv/widgets/live_embed_player.swf?channel=" + LoginNameTwtv + @""" bgcolor=""#000000""><param name=""allowFullScreen"" value=""false"" /><param name=""allowScriptAccess"" value=""always"" /><param name=""allowNetworking"" value=""all"" /><param name=""movie"" value=""http://www.twitch.tv/widgets/live_embed_player.swf"" /><param name=""flashvars"" value=""hostname=www.twitch.tv&channel=" + LoginNameTwtv + @"&auto_play=true&start_volume=25"" /></object>";
+                //                url = @"<div style=""overflow:hidden;"">" + url + @"</div>";
+                url = @"<body style=""overflow:hidden;"">" + url + @"</body>";
+
+                //                url = @"<iframe id=""player"" type=""text/html"" width=""620"" height=""378"" src=""http://www.twitch.tv/" + LoginNameTwtv + @"/hls"" frameborder=""0""></iframe>";
+                url = File.ReadAllText("stream.txt").Replace("channelname", LoginNameTwtv);
                 return url;
             }
         }

@@ -8,6 +8,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace LeStreamsFace
 {
@@ -71,7 +72,11 @@ namespace LeStreamsFace
             var host = (CefWebView)d;
             if (host.browser == null) return;
 
-            host.browser.LoadHtml(((string)e.NewValue), "url");
+            //            var html = ((string)(e.NewValue)).Replace("width=\"100%\"", "width=\"" + host.ActualWidth + "\"").Replace("height=\"100%\"", "height=\"" + host.ActualHeight + "\"");
+            var html = ((string)(e.NewValue)).Replace("height=\"100%\"", "height=\"100%\"");
+            host.browser.LoadHtml(html, "url");
+
+            //            host.browser.LoadHtml(((string)e.NewValue), "url");
         }
 
         private void webView_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
@@ -86,7 +91,7 @@ namespace LeStreamsFace
         private void InitializeData()
         {
             //            var html = @"<object type=""application/x-shockwave-flash"" height=""100%"" width=""100%"" style=""overflow:hidden; width:100%; height:100%; margin:0; padding:0; border:0;"" id=""live_embed_player_flash"" data=""http://www.twitch.tv/widgets/live_embed_player.swf?channel=hotshotgg"" bgcolor=""#000000""><param name=""allowFullScreen"" value=""true"" /><param name=""allowScriptAccess"" value=""always"" /><param name=""allowNetworking"" value=""all"" /><param name=""movie"" value=""http://www.twitch.tv/widgets/live_embed_player.swf"" /><param name=""flashvars"" value=""hostname=www.twitch.tv&channel=hotshotgg&auto_play=true&start_volume=25"" /></object>";
-            browser.LoadHtml(Html, "url");
+            //                        browser.LoadHtml(Html, "url");
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -96,6 +101,24 @@ namespace LeStreamsFace
         {
             var handler = PropertyChanged;
             if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private void UIElement_OnMouseMove(object sender, MouseEventArgs e)
+        {
+            //            Console.WriteLine("x is " + e.GetPosition(browser).X);
+            //            Console.WriteLine("y is " + e.GetPosition(browser).Y);
+            //            Console.WriteLine("b width is " + browser.Width + "       " + browser.ActualWidth);
+            //            Console.WriteLine("b height is " + browser.Height + "       " + browser.ActualHeight);
+        }
+
+        private void Browser_OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            //            e.Handled = true;
+        }
+
+        private void Browser_OnPreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            //            e.Handled = true;
         }
     }
 }
