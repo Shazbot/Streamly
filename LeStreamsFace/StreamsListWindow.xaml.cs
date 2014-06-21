@@ -471,18 +471,22 @@ namespace LeStreamsFace
             gamesPanel.SelectedIndex = -1;
         }
 
-        private void SelectedGamesPanel_ItemsSourceUpdated(object sender, DataTransferEventArgs e)
+        private void StreamsPanel_ItemsSourceUpdated(object sender, DataTransferEventArgs e)
         {
-            var notifyCollectionChanged = (selectedGamesPanel.ItemsSource) as INotifyCollectionChanged;
-            notifyCollectionChanged.CollectionChanged += new NotifyCollectionChangedEventHandler(SelectedGamesPanel_CollectionChanged);
+            var notifyCollectionChanged = (streamsPanel.ItemsSource) as INotifyCollectionChanged;
+            notifyCollectionChanged.CollectionChanged += new NotifyCollectionChangedEventHandler(StreamsPanel_CollectionChanged);
         }
 
-        private void SelectedGamesPanel_CollectionChanged(Object sender, NotifyCollectionChangedEventArgs e)
+        private void StreamsPanel_CollectionChanged(Object sender, NotifyCollectionChangedEventArgs e)
         {
-            var itemsSource = selectedGamesPanel.ItemsSource as IEnumerable<Stream>;
+            var itemsSource = streamsPanel.ItemsSource as IEnumerable<Stream>;
             if (itemsSource == null || !itemsSource.Any()) return;
 
-            selectedGamesPanel.ScrollIntoView(itemsSource.First());
+            streamsPanel.ScrollIntoView(itemsSource.First());
+        }
+
+        private void FrameworkElement_OnUnloaded(object sender, RoutedEventArgs e)
+        {
         }
     }
 }

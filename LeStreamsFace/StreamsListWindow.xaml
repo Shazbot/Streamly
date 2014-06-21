@@ -83,7 +83,7 @@
                     <Setter Property="Opacity" Value="0.85" />
                 </Style.Setters>
                 <Style.Triggers>
-                    <DataTrigger Binding="{Binding IsMouseOver, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type StackPanel}}}" Value="True">
+                    <DataTrigger Binding="{Binding IsMouseOver, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBoxItem}}}" Value="True">
                         <Setter Property="Opacity" Value="1" />
                         <!--  <Setter Property="Foreground" Value="Black" />  -->
                     </DataTrigger>
@@ -198,7 +198,10 @@
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Button Command="{Binding DataContext.StreamingTabClickedCommand, ElementName=window}" ToolTipService.InitialShowDelay="100">
+                        <Button Command="{Binding DataContext.StreamingTabClickedCommand,
+                                                  ElementName=window}"
+                                CommandParameter="{Binding}"
+                                ToolTipService.InitialShowDelay="100">
                             <Button.ToolTip>
                                 <ToolTip Background="Black"
                                          Content="{Binding Name}"
@@ -314,7 +317,7 @@
                 </Grid>
             </MetroControls:Flyout>
 
-            <MetroControls:Flyout x:Name="selectedGameFlyout"
+            <MetroControls:Flyout x:Name="streamsFlyout"
                                   Width="{Binding RelativeSource={RelativeSource FindAncestor,
                                                                                  AncestorType=MetroControls:MetroWindow},
                                                   Path=ActualWidth}"
@@ -331,17 +334,18 @@
                     </Grid.RowDefinitions>
                     <StackPanel Grid.Row="0" />
 
-                    <ListBox x:Name="selectedGamesPanel"
+                    <ListBox x:Name="streamsPanel"
                              Grid.Row="1"
                              Margin="20,0,20,0"
                              HorizontalAlignment="Center"
                              Background="Transparent"
+                             IsEnabled="{Binding IsStreamsPanelOpen}"
                              ItemsSource="{Binding Streams,
                                                    Mode=OneWay,
                                                    NotifyOnTargetUpdated=True}"
                              ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                              SelectedItem="{Binding StreamsPanelSelectedStream}"
-                             TargetUpdated="SelectedGamesPanel_ItemsSourceUpdated">
+                             TargetUpdated="StreamsPanel_ItemsSourceUpdated">
 
                         <ListBox.Resources>
                             <SolidColorBrush x:Key="AccentColorBrush3" Color="Transparent" />
@@ -418,16 +422,18 @@
                 </Style>
             </Grid.Style>
 
-            <TabControl Margin="0"
-                        Background="Black"
-                        BorderBrush="Black"
-                        BorderThickness="0"
-                        ItemsSource="{Binding RunningStreams}"
-                        Padding="0"
-                        SelectedItem="{Binding SelectedStreamTab}"
-                        Style="{x:Null}"
-                        Visibility="{Binding IsAnyStreamTabOpen,
-                                             Converter={StaticResource BooleanToVisibilityConverter}}">
+            <LeStreamsFace:NonReloadingTabControl Margin="0"
+                                                  Background="Black"
+                                                  BorderBrush="Black"
+                                                  BorderThickness="0"
+                                                  ItemsSource="{Binding RunningStreams}"
+                                                  Padding="0"
+                                                  SelectedItem="{Binding SelectedRunningStreamTab,
+                                                                         Mode=OneWay,
+                                                                         UpdateSourceTrigger=PropertyChanged}"
+                                                  Style="{x:Null}"
+                                                  Unloaded="FrameworkElement_OnUnloaded"
+                                                  Visibility="Visible">
                 <TabControl.Resources />
                 <TabControl.ItemTemplate>
                     <DataTemplate>
@@ -435,25 +441,28 @@
                     </DataTemplate>
                 </TabControl.ItemTemplate>
                 <TabControl.ContentTemplate>
-                    <DataTemplate>
+                    <DataTemplate DataType="{x:Type LeStreamsFace:Stream}">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="*" />
                             </Grid.RowDefinitions>
+                            <TextBlock Text="{Binding DataContext.Name, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Grid}}, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
                             <LeStreamsFace:CefWebView Grid.Row="0"
                                                       Margin="0"
                                                       HorizontalAlignment="Stretch"
                                                       VerticalAlignment="Stretch"
                                                       Background="#333333"
+                                                      DataContext="{Binding}"
                                                       Html="{Binding DataContext.EmbedHtmlCode,
+                                                                     RelativeSource={RelativeSource FindAncestor,
+                                                                                                    AncestorType={x:Type Grid}},
                                                                      Mode=OneWay,
-                                                                     RelativeSource={RelativeSource AncestorType=Grid},
                                                                      UpdateSourceTrigger=PropertyChanged}"
                                                       Padding="0" />
                         </Grid>
                     </DataTemplate>
                 </TabControl.ContentTemplate>
-            </TabControl>
+            </LeStreamsFace:NonReloadingTabControl>
 
             <TabControl Name="tabControl"
                         SelectedItem="{Binding SelectedShellTab,

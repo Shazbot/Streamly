@@ -10,15 +10,15 @@
              d:DesignWidth="300"
              mc:Ignorable="d">
     <Grid MouseMove="UIElement_OnMouseMove">
-        <Grid x:Name="Overlay"
-              Margin="0,4,0,26"
-              Panel.ZIndex="1000"
-              IsEnabled="False"
-              IsHitTestVisible="True">
-            <Grid.Background>
-                <SolidColorBrush Opacity="0" Color="Red" />
-            </Grid.Background>
-        </Grid>
+        <!--        <Grid x:Name="Overlay"-->
+        <!--              Margin="0,4,0,26"-->
+        <!--              Panel.ZIndex="1000"-->
+        <!--              IsEnabled="False"-->
+        <!--              IsHitTestVisible="True">-->
+        <!--            <Grid.Background>-->
+        <!--                <SolidColorBrush Opacity="0" Color="Red" />-->
+        <!--            </Grid.Background>-->
+        <!--        </Grid>-->
 
         <!--  <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinHeight="300" MinWidth="300">  -->
         <leStreamsFace:MyChromiumWebBrowser x:Name="browser"

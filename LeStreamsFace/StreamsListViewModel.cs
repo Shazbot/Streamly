@@ -34,7 +34,7 @@ namespace LeStreamsFace
             _runningStreams.CollectionChanged += RunningStreamsOnCollectionChanged;
 
             GamesPanelToggleCommand = new DelegateCommand(ToggleGamesPanel);
-            StreamingTabClickedCommand = new DelegateCommand(() => OpenExistingStreamingTab());
+            StreamingTabClickedCommand = new DelegateCommand<Stream>(stream => OpenExistingStreamingTab(stream));
             GetTwitchFavoritesCommand = new DelegateCommand<string>(usernameOnTwitch => ImportTwitchFavorites(usernameOnTwitch));
             RefreshViewCommand = new DelegateCommand(() => view.RefreshView());
             UnfavoriteStreamCommand = new DelegateCommand<FavoriteStream>(param => UnfavoriteStream(param));
@@ -47,18 +47,25 @@ namespace LeStreamsFace
 
             // TODO
 
-            var str = new Stream("wingsofdeathx", "wings", 123, "123", "ra", "asr", StreamingSite.TwitchTv);
+            var str = new Stream("wingsofdeathx", "wings", 123, "1", "ID1", "asr", StreamingSite.TwitchTv);
+            var str2 = new Stream("ongamenet", "wings", 123, "2", "ID2", "asr", StreamingSite.TwitchTv);
             //TODO if we want to start with a stream
             str.LoginNameTwtv = "wingsofdeath";
-            //            RunningStreams.Add(str);
-            //            IsAnyStreamTabOpen = true;
-            //            SelectedStreamTab = str;
+
+            str.LoginNameTwtv = "riotgames";
+            str2.LoginNameTwtv = "ongamenet";
+
+            RunningStreams.Add(str);
+            RunningStreams.Add(str2);
+            IsAnyStreamTabOpen = true;
+            SelectedRunningStreamTab = str;
             // TODO maybe move this to switching tab logic
             // TODO can we use the property itself or it's ok like this?
         }
 
-        private void OpenExistingStreamingTab()
+        private void OpenExistingStreamingTab(Stream stream)
         {
+            SelectedRunningStreamTab = stream;
             IsAnyStreamTabOpen = true;
         }
 
@@ -71,8 +78,7 @@ namespace LeStreamsFace
             {
                 if (tab.IsSelected)
                 {
-                    //                    doFilterGames = !doFilterGames;
-
+                    GameFilteringByIconsEnabled = !GameFilteringByIconsEnabled;
                     View.RefreshView();
                 }
             }
@@ -194,7 +200,14 @@ namespace LeStreamsFace
 
         private void ToggleGamesPanel()
         {
-            IsGamesPanelOpen = !IsGamesPanelOpen;
+            if (IsGamesPanelOpen && IsStreamsPanelOpen)
+            {
+                IsStreamsPanelOpen = false;
+            }
+            else
+            {
+                IsGamesPanelOpen = !IsGamesPanelOpen;
+            }
         }
 
         private void RunningStreamsOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs notifyCollectionChangedEventArgs)
@@ -226,11 +239,9 @@ namespace LeStreamsFace
         #region Streams
 
         private readonly OptimizedObservableCollection<Stream> _streams = new OptimizedObservableCollection<Stream>();
-        private Stream _selectedStreamTab;
+        private Stream _selectedRunningStreamTab;
         private string _bannedGamesTextInput;
         private string _timeWhenNotNotifyingTextInput;
-        private TabItem _selectedShellTab;
-        private bool _isConfigTabSelected;
         private Thickness _shellContainerMargin;
 
         public OptimizedObservableCollection<Stream> Streams
@@ -240,19 +251,17 @@ namespace LeStreamsFace
 
         #endregion Streams
 
-        private GamesViewModel _previousGameSelection;
-
         public GamesViewModel GamesPanelSelectedGame
         {
             get { return _gamesPanelSelectedGame; }
             set
             {
-                //                if (value == _gamesPanelSelectedGame) return;
-                if (value == null && _gamesPanelSelectedGame != null)
+                if (value == null && _gamesPanelSelectedGame != null) // value is null if we select the same game in the games panel
                 {
                     IsStreamsPanelOpen = true;
+                    FetchStreams(_gamesPanelSelectedGame.GameName); // refresh the stream list
                 }
-                else if (value != null)
+                else if (value != null) // selected a new game to show streams for
                 {
                     _gamesPanelSelectedGame = value;
                     FetchStreams(value.GameName);
@@ -273,6 +282,7 @@ namespace LeStreamsFace
             get { return _streamsPanelSelectedStream; }
             set
             {
+                if (value == null) return;
                 _streamsPanelSelectedStream = value;
                 OpenNewStreamingTab(value);
             }
@@ -280,13 +290,14 @@ namespace LeStreamsFace
 
         private void OpenNewStreamingTab(Stream streamToStream)
         {
+            //            View.streamsPanel.IsEnabled = false; // if we close the panel and the LMB is down we will select and start multiple streams
             RunningStreams.Add(streamToStream);
             IsStreamsPanelOpen = false;
             IsGamesPanelOpen = false;
             IsAnyStreamTabOpen = true;
             OnPropertyChanged(Extensions.GetVariableName(() => CloseStreamsButtonVisibility));
 
-            SelectedStreamTab = streamToStream;
+            SelectedRunningStreamTab = streamToStream;
         }
 
         public bool CloseStreamsButtonVisibility
@@ -296,7 +307,18 @@ namespace LeStreamsFace
 
         public bool IsGamesPanelOpen { get; set; }
 
-        public bool IsStreamsPanelOpen { get; set; }
+        public bool IsStreamsPanelOpen
+        {
+            get { return _isStreamsPanelOpen; }
+            set
+            {
+                _isStreamsPanelOpen = value;
+                if (!value)
+                {
+                    Streams.RemoveAll();
+                }
+            }
+        }
 
         public ICommand GamesPanelToggleCommand { get; private set; }
 
@@ -384,6 +406,7 @@ namespace LeStreamsFace
         public string GameFilteringTextInput { get; set; }
 
         public bool GameFilteringByIconsEnabled = true;
+        private bool _isStreamsPanelOpen;
 
         public bool Filter(object o)
         {
@@ -454,33 +477,19 @@ namespace LeStreamsFace
             return true;
         }
 
-        public Stream SelectedStreamTab
+        public Stream SelectedRunningStreamTab
         {
-            get { return _selectedStreamTab; }
+            get { return _selectedRunningStreamTab; }
             set
             {
-                if (value == _selectedStreamTab) return;
-                _selectedStreamTab = value;
+                if (value == _selectedRunningStreamTab) return;
+                _selectedRunningStreamTab = value;
             }
         }
 
-        public TabItem SelectedShellTab
-        {
-            get { return _selectedShellTab; }
-            set
-            {
-                _selectedShellTab = value;
-            }
-        }
+        public TabItem SelectedShellTab { get; set; }
 
-        public bool IsConfigTabSelected
-        {
-            get { return _isConfigTabSelected; }
-            set
-            {
-                _isConfigTabSelected = value;
-            }
-        }
+        public bool IsConfigTabSelected { get; set; }
 
         public ICommand FavoriteAStreamCommand { get; private set; }
 

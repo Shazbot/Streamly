@@ -217,6 +217,7 @@
     <Compile Include="CefWebView.xaml.cs">
       <DependentUpon>CefWebView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="NonReloadingTabControl.cs" />
     <Compile Include="Commands\AwaitableDelegateCommand.cs" />
     <Compile Include="ConfigManager.cs" />
     <Compile Include="Converters\GameNameToIconUriConverter.cs" />
@@ -240,6 +241,7 @@
       <DependentUpon>StreamsListWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\CutOffConverter.cs" />
+    <Compile Include="TabControlEx.cs" />
     <Compile Include="Tabs\ConfigTab.xaml.cs">
       <DependentUpon>ConfigTab.xaml</DependentUpon>
     </Compile>
