@@ -79,16 +79,16 @@ namespace LeStreamsFace
         private static void HtmlChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var host = (CefWebView)d;
-            if (!views.Contains(host)) views.Add(host);
+            if (!views.Contains(host)) views.Add(host); // check if we are reusing views in tabcontrol
             if (host.browser == null) return;
 
             //            var html = ((string)(e.NewValue)).Replace("width=\"100%\"", "width=\"" + host.ActualWidth + "\"").Replace("height=\"100%\"", "height=\"" + host.ActualHeight + "\"");
             var html = ((string)(e.NewValue));//.Replace("height=\"100%\"", "height=\"100%\"");
-            if (html == host.oldHtml) return;
+            //            if (html == host.oldHtml) return;
             //            if (host.loadedHtml) return;
-            host.oldHtml = html;
+            //            host.oldHtml = html;
             host.browser.LoadHtml(html, "url");
-            host.loadedHtml = true;
+            //            host.loadedHtml = true;
 
             //            host.browser.LoadHtml(((string)e.NewValue), "url");
         }
@@ -105,7 +105,7 @@ namespace LeStreamsFace
         private void InitializeData()
         {
             //            var html = @"<object type=""application/x-shockwave-flash"" height=""100%"" width=""100%"" style=""overflow:hidden; width:100%; height:100%; margin:0; padding:0; border:0;"" id=""live_embed_player_flash"" data=""http://www.twitch.tv/widgets/live_embed_player.swf?channel=hotshotgg"" bgcolor=""#000000""><param name=""allowFullScreen"" value=""true"" /><param name=""allowScriptAccess"" value=""always"" /><param name=""allowNetworking"" value=""all"" /><param name=""movie"" value=""http://www.twitch.tv/widgets/live_embed_player.swf"" /><param name=""flashvars"" value=""hostname=www.twitch.tv&channel=hotshotgg&auto_play=true&start_volume=25"" /></object>";
-            browser.LoadHtml(Html, "url");
+            //            browser.LoadHtml(Html, "url");
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

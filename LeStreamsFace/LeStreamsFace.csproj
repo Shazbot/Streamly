@@ -241,6 +241,7 @@
       <DependentUpon>StreamsListWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\CutOffConverter.cs" />
+    <Compile Include="TabContent.cs" />
     <Compile Include="TabControlEx.cs" />
     <Compile Include="Tabs\ConfigTab.xaml.cs">
       <DependentUpon>ConfigTab.xaml</DependentUpon>
