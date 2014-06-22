@@ -27,9 +27,6 @@
                            MouseDoubleClick="ShellViewMouseDoubleClick"
                            MouseLeftButtonDown="DragMoveWindow"
                            NonActiveWindowTitleBrush="{DynamicResource WindowTitleColorBrush}"
-                           Opacity="{Binding WinOpacity,
-                                             Mode=TwoWay,
-                                             Source={x:Static LeStreamsFace:ConfigManager.Instance}}"
                            PreviewKeyDown="window_OnPreviewKeyDown"
                            PreviewTextInput="window_PreviewTextInput"
                            ResizeMode="CanResizeWithGrip"
@@ -39,6 +36,7 @@
                            SizeToContent="Manual"
                            SnapsToDevicePixels="True"
                            SourceInitialized="window_SourceInitialized"
+                           StateChanged="StreamsListWindow_OnStateChanged"
                            Top="{Binding WinTop,
                                          Mode=TwoWay,
                                          Source={x:Static LeStreamsFace:ConfigManager.Instance}}"
@@ -108,6 +106,7 @@
                 <converters:InvertBooleanConverter />
                 <BooleanToVisibilityConverter />
             </LeStreamsFace:ValueConverterGroup>
+            <converters:SameStreamMultiConverter x:Key="sameStreamMultiConverter" />
         </ResourceDictionary>
     </Window.Resources>
 
@@ -198,10 +197,34 @@
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Button Command="{Binding DataContext.StreamingTabClickedCommand,
+                        <Button Background="Transparent"
+                                BorderThickness="0"
+                                Command="{Binding DataContext.StreamingTabClickedCommand,
                                                   ElementName=window}"
                                 CommandParameter="{Binding}"
                                 ToolTipService.InitialShowDelay="100">
+                            <Button.Resources>
+                                <ResourceDictionary>
+                                    <SolidColorBrush x:Key="FlatButtonPressedBackgroundBrush" Color="Transparent" />
+                                </ResourceDictionary>
+                            </Button.Resources>
+                            <Button.Style>
+                                <Style BasedOn="{StaticResource MetroFlatButton}" TargetType="{x:Type Button}">
+                                    <Setter Property="Foreground" Value="White" />
+                                    <Setter Property="Opacity" Value="0.5" />
+                                    <Style.Triggers>
+                                        <DataTrigger Value="True">
+                                            <DataTrigger.Binding>
+                                                <MultiBinding Converter="{StaticResource sameStreamMultiConverter}">
+                                                    <Binding Path="" />
+                                                    <Binding ElementName="window" Path="DataContext.SelectedRunningStreamTab" />
+                                                </MultiBinding>
+                                            </DataTrigger.Binding>
+                                            <Setter Property="Opacity" Value="1" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
                             <Button.ToolTip>
                                 <ToolTip Background="Black"
                                          Content="{Binding Name}"
@@ -221,7 +244,10 @@
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
 
-            <Button Margin="0, 0, 0, 0" Visibility="{Binding CloseStreamsButtonVisibility, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <Button Margin="0, 0, 0, 0"
+                    Command="{Binding CloseStreamingTabCommand}"
+                    Visibility="{Binding CloseStreamsButtonVisibility,
+                                         Converter={StaticResource BooleanToVisibilityConverter}}">
                 <Button.Resources>
                     <ResourceDictionary>
                         <ResourceDictionary.MergedDictionaries>
@@ -433,8 +459,9 @@
                         SelectedItem="{Binding SelectedRunningStreamTab,
                                                Mode=OneWay}"
                         Style="{x:Null}"
-                        Unloaded="FrameworkElement_OnUnloaded"
-                        Visibility="Visible">
+                        Visibility="{Binding IsAnyStreamTabOpen,
+                                             Mode=OneWay,
+                                             Converter={StaticResource BooleanToVisibilityConverter}}">
                 <TabControl.Resources />
                 <LeStreamsFace:TabContent.Template>
                     <DataTemplate>
@@ -452,7 +479,8 @@
                                                                                                     AncestorType={x:Type Grid}},
                                                                      Mode=OneWay,
                                                                      UpdateSourceTrigger=PropertyChanged}"
-                                                      Padding="0" />
+                                                      Padding="0"
+                                                      Unloaded="CefWebView_OnUnloaded" />
                         </Grid>
                     </DataTemplate>
                 </LeStreamsFace:TabContent.Template>

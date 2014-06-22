@@ -217,6 +217,8 @@
     <Compile Include="CefWebView.xaml.cs">
       <DependentUpon>CefWebView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="EnumMatchToBooleanConverter.cs" />
+    <Compile Include="Converters\SameStreamMultiConverter.cs" />
     <Compile Include="NonReloadingTabControl.cs" />
     <Compile Include="Commands\AwaitableDelegateCommand.cs" />
     <Compile Include="ConfigManager.cs" />
@@ -227,6 +229,7 @@
     <Compile Include="GamesViewModel.cs" />
     <Compile Include="MyChromiumWebBrowser.cs" />
     <Compile Include="Properties\Annotations.cs" />
+    <Compile Include="StreamOpeningProcedure.cs" />
     <Compile Include="StreamParsers\IStreamParser.cs" />
     <Compile Include="RestSharpJsonNetSerializer.cs" />
     <Compile Include="StreamParsers\TwitchJSONStreamParser.cs" />
@@ -242,7 +245,6 @@
     </Compile>
     <Compile Include="Converters\CutOffConverter.cs" />
     <Compile Include="TabContent.cs" />
-    <Compile Include="TabControlEx.cs" />
     <Compile Include="Tabs\ConfigTab.xaml.cs">
       <DependentUpon>ConfigTab.xaml</DependentUpon>
     </Compile>
@@ -289,7 +291,9 @@
     <Resource Include="Resources\DiabloIcon.png" />
     <Resource Include="Resources\appbar.question.png" />
     <Resource Include="Resources\bindingOfIsaacIcon.png" />
-    <Resource Include="Resources\config.xml" />
+    <Resource Include="Resources\config.xml">
+      <SubType>Designer</SubType>
+    </Resource>
     <Resource Include="Resources\leagueIcon.png" />
     <Resource Include="Resources\StarcraftIcon.png" />
   </ItemGroup>

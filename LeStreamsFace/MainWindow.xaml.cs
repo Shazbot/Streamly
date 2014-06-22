@@ -225,10 +225,12 @@ namespace LeStreamsFace
                 IEnumerable<Stream> twitchFetchedStreams = Enumerable.Empty<Stream>();
 
                 // TODO By tomorrow
-                //                var twitchResponse = await new RestClient("https://api.twitch.tv/kraken/streams?limit=100").ExecuteTaskAsync(new RestRequest());
-                //                twitchFetchedStreams = _streamParserJSON.GetStreamsFromContent(twitchResponse.Content);
+                var twitchResponse = await new RestClient("https://api.twitch.tv/kraken/streams?limit=100").ExecuteTaskAsync(new RestRequest());
+                twitchFetchedStreams = _streamParserJSON.GetStreamsFromContent(twitchResponse.Content);
 
-                twitchFetchedStreams = _streamParserJSON.GetStreamsFromContent(File.ReadAllText("Resources/debug/json request for debug.json"));
+                // DEBUG FILE TO USE
+                //                twitchFetchedStreams = _streamParserJSON.GetStreamsFromContent(File.ReadAllText("Resources/debug/json request for debug.json"));
+
                 //                try
                 //                {
                 //                    twitchFetchedStreams = await twitchTask;

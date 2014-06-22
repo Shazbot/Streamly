@@ -8,7 +8,8 @@ namespace LeStreamsFace
     {
         private ImageBrush Brush { get; set; }
 
-        public GameIconAdorner(UIElement adornedElement, ImageBrush brush) : base(adornedElement)
+        public GameIconAdorner(UIElement adornedElement, ImageBrush brush)
+            : base(adornedElement)
         {
             this.Brush = brush;
             IsHitTestVisible = false;

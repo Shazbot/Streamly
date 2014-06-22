@@ -30,6 +30,8 @@ namespace LeStreamsFace
     /// </summary>
     internal partial class StreamsListWindow : MetroWindow
     {
+        public static bool IsMaximized;
+
         private Func<bool> timeBlockCheck;
         private StreamsListViewModel vm;
 
@@ -150,7 +152,7 @@ namespace LeStreamsFace
                 return;
             }
 
-            System.Diagnostics.Process.Start(sendersStream.GetUrl());
+            vm.StartStream(sendersStream);
         }
 
         private void GameIconButton_Click(object sender, RoutedEventArgs e)
@@ -339,12 +341,6 @@ namespace LeStreamsFace
 
         private void window_SourceInitialized(object sender, EventArgs e)
         {
-            if (ConfigManager.Instance.PinToDesktop)
-            {
-                var handle = new WindowInteropHelper(this).Handle;
-                IntPtr hwndParent = NativeMethods.FindWindow("ProgMan", null);
-                NativeMethods.SetParent(handle, hwndParent);
-            }
         }
 
         //        public new void DragMove()
@@ -414,7 +410,7 @@ namespace LeStreamsFace
                 if (streamsDataGrid.SelectedItem != null)
                 {
                     var selectedStream = (Stream)streamsDataGrid.SelectedItem;
-                    System.Diagnostics.Process.Start(selectedStream.GetUrl());
+                    vm.StartStream(selectedStream);
                 }
             }
         }
@@ -485,8 +481,15 @@ namespace LeStreamsFace
             streamsPanel.ScrollIntoView(itemsSource.First());
         }
 
-        private void FrameworkElement_OnUnloaded(object sender, RoutedEventArgs e)
+        private void StreamsListWindow_OnStateChanged(object sender, EventArgs e)
         {
+            IsMaximized = WindowState == WindowState.Maximized;
+        }
+
+        private void CefWebView_OnUnloaded(object sender, RoutedEventArgs e)
+        {
+            var cefWebView = sender as CefWebView;
+            cefWebView.browser.Dispose();
         }
     }
 }

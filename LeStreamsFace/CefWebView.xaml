@@ -10,41 +10,29 @@
              d:DesignWidth="300"
              mc:Ignorable="d">
     <Grid MouseMove="UIElement_OnMouseMove">
-        <!--        <Grid x:Name="Overlay"-->
-        <!--              Margin="0,4,0,26"-->
-        <!--              Panel.ZIndex="1000"-->
-        <!--              IsEnabled="False"-->
-        <!--              IsHitTestVisible="True">-->
-        <!--            <Grid.Background>-->
-        <!--                <SolidColorBrush Opacity="0" Color="Red" />-->
-        <!--            </Grid.Background>-->
-        <!--        </Grid>-->
+        <!--  put this over the browser to catch mouse input so we don't get redirected to twitch  -->
+        <Grid x:Name="Overlay"
+              Margin="0,0,0,26"
+              Panel.ZIndex="1000"
+              IsEnabled="False"
+              IsHitTestVisible="True">
+            <Grid.Background>
+                <SolidColorBrush Opacity="0" Color="Red" />
+            </Grid.Background>
+        </Grid>
 
-        <!--  <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinHeight="300" MinWidth="300">  -->
         <leStreamsFace:MyChromiumWebBrowser x:Name="browser"
                                             Margin="0"
                                             HorizontalAlignment="Stretch"
                                             VerticalAlignment="Stretch"
                                             MouseLeftButtonDown="Browser_OnMouseLeftButtonDown"
+                                            MouseMove="Browser_OnMouseMove"
                                             PreviewMouseDown="Browser_OnPreviewMouseDown"
                                             ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                                             ScrollViewer.VerticalScrollBarVisibility="Disabled"
                                             UseLayoutRounding="True"
                                             WebBrowser="{Binding WebBrowser,
                                                                  Mode=OneWayToSource}" />
-        <!--  <wpf:ChromiumWebBrowser x:Name="browser" />  -->
-        <!--  <wpf:WebView x:Name="webView"  -->
-        <!--  MinWidth="500" Margin="0" Padding="0"  -->
-        <!--  MinHeight="500"  -->
-        <!--  HorizontalAlignment="Stretch"  -->
-        <!--  VerticalAlignment="Stretch"  -->
-        <!--  Loaded="WebView_OnLoaded"  -->
-        <!--  PreviewMouseMove="WebView_OnPreviewMouseMove"  -->
-        <!--  ToolTip=""  -->
-        <!--  ToolTipOpening="WebView_OnToolTipOpening"  -->
-        <!--  WebBrowser="{Binding WebBrowser,  -->
-        <!--  Mode=OneWayToSource}" />  -->
-        <!--  </StackPanel>  -->
 
         <!--  Width="{Binding RelativeSource={RelativeSource FindAncestor,  -->
         <!--  AncestorType=controls:MetroWindow},  -->

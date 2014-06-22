@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Runtime.CompilerServices;
@@ -40,6 +41,7 @@ namespace LeStreamsFace
             UnfavoriteStreamCommand = new DelegateCommand<FavoriteStream>(param => UnfavoriteStream(param));
             FavoriteAStreamCommand = new DelegateCommand<Stream>(stream => FavoriteAStream(stream));
             ChangeShellTabCommand = new DelegateCommand<TabItem>(tab => ChangeShellTab(tab));
+            CloseStreamingTabCommand = new DelegateCommand(() => CloseStreamingTab());
 
             ShellContainerMargin = new Thickness(0);
 
@@ -63,16 +65,32 @@ namespace LeStreamsFace
             // TODO can we use the property itself or it's ok like this?
         }
 
+        private void CloseStreamingTab()
+        {
+            var streamToRemove = SelectedRunningStreamTab;
+            SelectedRunningStreamTab = RunningStreams.FirstOrDefault(stream => stream != SelectedRunningStreamTab);
+
+            RunningStreams.Remove(streamToRemove);
+
+            if (SelectedRunningStreamTab == null)
+            {
+                IsAnyStreamTabOpen = false;
+            }
+            OnPropertyChanged(Extensions.GetVariableName(() => CloseStreamsButtonVisibility));
+        }
+
         private void OpenExistingStreamingTab(Stream stream)
         {
+            CloseFlyouts();
+
             SelectedRunningStreamTab = stream;
             IsAnyStreamTabOpen = true;
         }
 
         private void ChangeShellTab(TabItem tab)
         {
-            IsGamesPanelOpen = false;
-            IsStreamsPanelOpen = false;
+            CloseFlyouts();
+            IsAnyStreamTabOpen = false;
 
             if (tab == View.streamsTabItem)
             {
@@ -185,16 +203,22 @@ namespace LeStreamsFace
         {
             // TODO make this rerun after a timeout
             //                        var twitchResponse = await new RestClient("https://api.twitch.tv/kraken/games/top?limit=100").ExecuteTaskAsync(new RestRequest(),);
-            var twitchResponse = new RestClient("https://api.twitch.tv/kraken/games/top?limit=100").Execute(new RestRequest());
-            var topGamesJObject = JsonConvert.DeserializeObject<JObject>(twitchResponse.Content)["top"];
-            var games = topGamesJObject.Children().Select(token => new GamesViewModel(token["game"]["name"].ToString(), token["game"]["box"]["medium"].ToString()));
-            // sometimes we get no Games (Games.Count == 0)
-            var gc = games.Count();
-            Games.AddRange(games);
-
-            if (Games.Count == 0) // examine response
+            try
             {
-                Debugger.Break();
+                var twitchResponse = new RestClient("https://api.twitch.tv/kraken/games/top?limit=100").Execute(new RestRequest());
+                var topGamesJObject = JsonConvert.DeserializeObject<JObject>(twitchResponse.Content)["top"];
+                var games = topGamesJObject.Children().Select(token => new GamesViewModel(token["game"]["name"].ToString(), token["game"]["box"]["medium"].ToString()));
+                // sometimes we get no Games (Games.Count == 0)
+                var gc = games.Count();
+                Games.AddRange(games);
+
+                if (Games.Count == 0) // examine response
+                {
+                    Debugger.Break();
+                }
+            }
+            catch (Exception e)
+            {
             }
         }
 
@@ -292,12 +316,17 @@ namespace LeStreamsFace
         {
             //            View.streamsPanel.IsEnabled = false; // if we close the panel and the LMB is down we will select and start multiple streams
             RunningStreams.Add(streamToStream);
-            IsStreamsPanelOpen = false;
-            IsGamesPanelOpen = false;
+            CloseFlyouts();
             IsAnyStreamTabOpen = true;
             OnPropertyChanged(Extensions.GetVariableName(() => CloseStreamsButtonVisibility));
 
             SelectedRunningStreamTab = streamToStream;
+        }
+
+        private void CloseFlyouts()
+        {
+            IsStreamsPanelOpen = false;
+            IsGamesPanelOpen = false;
         }
 
         public bool CloseStreamsButtonVisibility
@@ -504,6 +533,8 @@ namespace LeStreamsFace
             }
         }
 
+        public ICommand CloseStreamingTabCommand { get; private set; }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         [NotifyPropertyChangedInvocator]
@@ -511,6 +542,52 @@ namespace LeStreamsFace
         {
             var handler = PropertyChanged;
             if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        public void StartStream(Stream streamToStart)
+        {
+            switch (ConfigManager.Instance.StreamOpeningProcedure)
+            {
+                case StreamOpeningProcedure.Browser:
+                    Process.Start(streamToStart.GetUrl());
+                    break;
+
+                case StreamOpeningProcedure.Tab:
+                    OpenNewStreamingTab(streamToStart);
+                    break;
+
+                case StreamOpeningProcedure.Livestreamer:
+                    CreateLivestreamerConsole(streamToStart);
+                    break;
+            }
+        }
+
+        private void CreateLivestreamerConsole(Stream streamToStart)
+        {
+            //            var args = streamToStart.GetUrl() + " " + ConfigManager.Instance.LivestreamerArguments;
+            var args = "twitch.tv/" + streamToStart.LoginNameTwtv + " " + ConfigManager.Instance.LivestreamerArguments;
+            var processStartInfo = new ProcessStartInfo(@"livestreamer\livestreamer.exe", args);
+
+            processStartInfo.UseShellExecute = false;
+            processStartInfo.ErrorDialog = false;
+
+            processStartInfo.RedirectStandardError = true;
+            processStartInfo.RedirectStandardInput = true;
+            processStartInfo.RedirectStandardOutput = true;
+            processStartInfo.CreateNoWindow = true;
+
+            Task.Factory.StartNew(() =>
+            {
+                Process process = new Process();
+                process.StartInfo = processStartInfo;
+                bool processStarted = process.Start();
+
+                StreamWriter inputWriter = process.StandardInput;
+                StreamReader outputReader = process.StandardOutput;
+                StreamReader errorReader = process.StandardError;
+                var consoleOutput = outputReader.ReadToEnd();
+                process.WaitForExit();
+            });
         }
     }
 }

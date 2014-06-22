@@ -10,6 +10,9 @@
     <Style x:Key="configTabStyle"
            BasedOn="{StaticResource {x:Type TabItem}}"
            TargetType="{x:Type TabItem}">
+        <Style.Resources>
+            <LeStreamsFace:EnumMatchToBooleanConverter x:Key="enumConverter" />
+        </Style.Resources>
         <Setter Property="ContentTemplate">
             <Setter.Value>
                 <DataTemplate>
@@ -37,7 +40,10 @@
                                                      Width="250"
                                                      Margin="0,0,5,0"
                                                      FontSize="14" />
-                                            <Button Command="{Binding GetTwitchFavoritesCommand}" CommandParameter="{Binding Text, ElementName=twitchFavorites}" Content="OK" />
+                                            <Button Command="{Binding GetTwitchFavoritesCommand}"
+                                                    CommandParameter="{Binding Text,
+                                                                               ElementName=twitchFavorites}"
+                                                    Content="OK" />
                                         </StackPanel>
                                         <CheckBox x:Name="AutoCheckFavoritesCheckBox"
                                                   Margin="0,12,0,0"
@@ -150,18 +156,6 @@
                                          TextWrapping="Wrap"
                                          controls:TextboxHelper.ClearTextButton="True"
                                          controls:TextboxHelper.Watermark="0000-0000" />
-                                <Slider Name="opacitySlider"
-                                        Width="160"
-                                        Height="20"
-                                        Margin="0,10,0,0"
-                                        HorizontalAlignment="Left"
-                                        Maximum="1"
-                                        Minimum="0.2"
-                                        ToolTipService.ToolTip="Opacity"
-                                        Value="{Binding Opacity,
-                                                        Mode=TwoWay,
-                                                        ElementName=window}" />
-
                                 <CheckBox Margin="0,12,0,0"
                                           VerticalContentAlignment="Center"
                                           Content="Remember window size and position"
@@ -170,26 +164,33 @@
                                                               Source={x:Static LeStreamsFace:ConfigManager.Instance},
                                                               Mode=TwoWay}"
                                           Padding="4,-3,0,0" />
-                                <CheckBox x:Name="HideTitleBarCheckBox"
-                                          Margin="0,12,0,0"
-                                          VerticalContentAlignment="Center"
-                                          Content="Hide title bar"
-                                          FontSize="13.333"
-                                          IsChecked="{Binding HideTitleBar,
-                                                              Source={x:Static LeStreamsFace:ConfigManager.Instance},
-                                                              Mode=TwoWay}"
-                                          Padding="4,-3,0,0" />
-                                <CheckBox x:Name="PinToDesktopCheckBox"
-                                          Margin="0,12,0,0"
-                                          VerticalContentAlignment="Center"
-                                          Content="Pin to desktop"
-                                          FontSize="13.333"
-                                          IsChecked="{Binding PinToDesktop,
-                                                              Source={x:Static LeStreamsFace:ConfigManager.Instance},
-                                                              Mode=TwoWay}"
-                                          Padding="4,-3,0,0"
-                                          ToolTip="Requires reopening the window"
-                                          ToolTipService.InitialShowDelay="0" />
+                                <TextBlock Margin="0,10,0,0"
+                                           FontSize="14"
+                                           Text="How to open a stream:" />
+                                <RadioButton Margin="5,10,0,0"
+                                             Content="In a browser"
+                                             GroupName="StreamOpeningProcedure"
+                                             IsChecked="{Binding StreamOpeningProcedure,
+                                                                 Mode=TwoWay,
+                                                                 Converter={StaticResource enumConverter},
+                                                                 Source={x:Static LeStreamsFace:ConfigManager.Instance},
+                                                                 ConverterParameter=Browser}" />
+                                <RadioButton Margin="5,10,0,0"
+                                             Content="In a new tab"
+                                             GroupName="StreamOpeningProcedure"
+                                             IsChecked="{Binding StreamOpeningProcedure,
+                                                                 Mode=TwoWay,
+                                                                 Converter={StaticResource enumConverter},
+                                                                 Source={x:Static LeStreamsFace:ConfigManager.Instance},
+                                                                 ConverterParameter=Tab}" />
+                                <RadioButton Margin="5,10,0,0"
+                                             Content="Using Livestreamer"
+                                             GroupName="StreamOpeningProcedure"
+                                             IsChecked="{Binding StreamOpeningProcedure,
+                                                                 Mode=TwoWay,
+                                                                 Converter={StaticResource enumConverter},
+                                                                 Source={x:Static LeStreamsFace:ConfigManager.Instance},
+                                                                 ConverterParameter=Livestreamer}" />
                             </StackPanel>
                             <StackPanel Margin="0" VerticalAlignment="Top">
                                 <Expander Margin="20,15,10,15"
@@ -252,6 +253,22 @@
                                         </ListBox.ItemContainerStyle>
                                     </ListBox>
                                 </Expander>
+
+                                <TextBlock Margin="20,10,0,0"
+                                           FontSize="14"
+                                           Text="Livestreamer arguments:"
+                                           TextWrapping="Wrap" />
+                                <TextBox Width="300"
+                                         Margin="20,5,0,0"
+                                         HorizontalAlignment="Left"
+                                         HorizontalContentAlignment="Left"
+                                         VerticalContentAlignment="Center"
+                                         Text="{Binding LivestreamerArguments,
+                                                        Mode=TwoWay,
+                                                        Source={x:Static LeStreamsFace:ConfigManager.Instance},
+                                                        UpdateSourceTrigger=PropertyChanged}"
+                                         TextWrapping="NoWrap"
+                                         controls:TextboxHelper.Watermark="0000-0000" />
                             </StackPanel>
                         </WrapPanel>
                     </ScrollViewer>

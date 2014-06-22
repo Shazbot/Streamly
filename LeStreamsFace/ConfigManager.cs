@@ -1,5 +1,6 @@
 ﻿using OxyPlot;
 using OxyPlot.Series;
+using PropertyChanged;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,7 +11,6 @@ using System.Windows;
 using System.Windows.Resources;
 using System.Xml;
 using System.Xml.Linq;
-using PropertyChanged;
 using MessageBox = System.Windows.MessageBox;
 
 namespace LeStreamsFace
@@ -113,6 +113,8 @@ namespace LeStreamsFace
             FavoriteStreams = new OptimizedObservableCollection<FavoriteStream>();
             AutoCheckFavorites = true;
             Offline = false;
+            StreamOpeningProcedure = StreamOpeningProcedure.Browser;
+            LivestreamerArguments = "best";
         }
 
         public static ConfigManager Instance
@@ -166,28 +168,6 @@ namespace LeStreamsFace
             }
         }
 
-        public bool HideTitleBar
-        {
-            get { return _hideTitleBar; }
-            set
-            {
-                if (_hideTitleBar == value) return;
-                _hideTitleBar = value;
-                WriteConfigXml();
-            }
-        }
-
-        public bool PinToDesktop
-        {
-            get { return _pinToDesktop; }
-            set
-            {
-                if (_pinToDesktop == value) return;
-                _pinToDesktop = value;
-                WriteConfigXml();
-            }
-        }
-
         public bool SaveWindowPosition
         {
             get { return _saveWindowPosition; }
@@ -221,17 +201,6 @@ namespace LeStreamsFace
             }
         }
 
-        public double WinOpacity
-        {
-            get { return _winOpacity; }
-            set
-            {
-                if (_winOpacity == value) return;
-                _winOpacity = value;
-                WriteConfigXml();
-            }
-        }
-
         public double WinWidth
         {
             get { return _winWidth; }
@@ -258,17 +227,15 @@ namespace LeStreamsFace
 
         private double _winWidth = 1000;
         private double _winHeight = 580;
-        private double _winOpacity = 1.0;
         private double _winLeft = 0;
         private double _winTop = 0;
         private bool _saveWindowPosition;
-        private bool _hideTitleBar;
-        private bool _pinToDesktop;
         private int _notificationTimeout = 20;
         private int _triageStreams = 20;
 
         private bool initialConfigReadCompleted = false;
         private bool _autoCheckFavorites;
+        private StreamOpeningProcedure _streamOpeningProcedure;
 
         public bool AutoCheckFavorites
         {
@@ -277,6 +244,30 @@ namespace LeStreamsFace
             {
                 if (value == _autoCheckFavorites) return;
                 _autoCheckFavorites = value;
+                WriteConfigXml();
+            }
+        }
+
+        public StreamOpeningProcedure StreamOpeningProcedure
+        {
+            get { return _streamOpeningProcedure; }
+            set
+            {
+                if (value == _streamOpeningProcedure) return;
+                _streamOpeningProcedure = value;
+                WriteConfigXml();
+            }
+        }
+
+        private string _livestreamerArguments;
+
+        public string LivestreamerArguments
+        {
+            get { return _livestreamerArguments; }
+            set
+            {
+                if (value == _livestreamerArguments) return;
+                _livestreamerArguments = value;
                 WriteConfigXml();
             }
         }
@@ -304,14 +295,13 @@ namespace LeStreamsFace
                 NotificationTimeout = int.Parse(XAppSettings.Element(GetVariableName(() => NotificationTimeout)).Value);
                 TriageStreams = int.Parse(XAppSettings.Element(GetVariableName(() => TriageStreams)).Value);
                 AutoCheckFavorites = bool.Parse(XAppSettings.Element(GetVariableName(() => AutoCheckFavorites)).Value);
-                HideTitleBar = bool.Parse(XAppSettings.Element(GetVariableName(() => HideTitleBar)).Value);
-                PinToDesktop = bool.Parse(XAppSettings.Element(GetVariableName(() => PinToDesktop)).Value);
                 SaveWindowPosition = bool.Parse(XAppSettings.Element(GetVariableName(() => SaveWindowPosition)).Value);
                 WinTop = double.Parse(XAppSettings.Element(GetVariableName(() => WinTop)).Value);
                 WinLeft = double.Parse(XAppSettings.Element(GetVariableName(() => WinLeft)).Value);
-                WinOpacity = double.Parse(XAppSettings.Element(GetVariableName(() => WinOpacity)).Value);
                 WinWidth = double.Parse(XAppSettings.Element(GetVariableName(() => WinWidth)).Value);
                 WinHeight = double.Parse(XAppSettings.Element(GetVariableName(() => WinHeight)).Value);
+                LivestreamerArguments = (string)XAppSettings.Element(GetVariableName(() => LivestreamerArguments)) ?? "best";
+                StreamOpeningProcedure = (StreamOpeningProcedure)Enum.Parse(typeof(StreamOpeningProcedure), (string)XAppSettings.Element(GetVariableName(() => StreamOpeningProcedure)) ?? "Browser");
 
                 BannedGames = xDoc.Element("Config").Element(GetVariableName(() => BannedGames)).Value.Split(',').Select(s => s.Trim()).ToList();
 
@@ -366,14 +356,13 @@ namespace LeStreamsFace
             appSettings.Add(new XElement(GetVariableName(() => NotificationTimeout), NotificationTimeout));
             appSettings.Add(new XElement(GetVariableName(() => TriageStreams), TriageStreams));
             appSettings.Add(new XElement(GetVariableName(() => AutoCheckFavorites), AutoCheckFavorites));
-            appSettings.Add(new XElement(GetVariableName(() => HideTitleBar), HideTitleBar));
-            appSettings.Add(new XElement(GetVariableName(() => PinToDesktop), PinToDesktop));
             appSettings.Add(new XElement(GetVariableName(() => SaveWindowPosition), SaveWindowPosition));
             appSettings.Add(new XElement(GetVariableName(() => WinTop), WinTop));
             appSettings.Add(new XElement(GetVariableName(() => WinLeft), WinLeft));
-            appSettings.Add(new XElement(GetVariableName(() => WinOpacity), WinOpacity));
             appSettings.Add(new XElement(GetVariableName(() => WinWidth), WinWidth));
             appSettings.Add(new XElement(GetVariableName(() => WinHeight), WinHeight));
+            appSettings.Add(new XElement(GetVariableName(() => LivestreamerArguments), LivestreamerArguments));
+            appSettings.Add(new XElement(GetVariableName(() => StreamOpeningProcedure), StreamOpeningProcedure));
 
             xDoc.Element("Config").Element(GetVariableName(() => BannedGames)).Value = BannedGames.Any() ? BannedGames.Aggregate((s, s1) => s + ',' + s1) : string.Empty;
 
