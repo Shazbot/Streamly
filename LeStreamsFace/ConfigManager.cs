@@ -113,7 +113,7 @@ namespace LeStreamsFace
             FavoriteStreams = new OptimizedObservableCollection<FavoriteStream>();
             AutoCheckFavorites = true;
             Offline = false;
-            StreamOpeningProcedure = StreamOpeningProcedure.Browser;
+            StreamOpeningProcedure = StreamOpeningProcedure.Tab;
             LivestreamerArguments = "best";
         }
 
@@ -315,9 +315,9 @@ namespace LeStreamsFace
                 favorites.Element("TwitchTv").Descendants("Stream").Select(
                     element => new FavoriteStream(element.Attribute("Name").Value, element.Value, StreamingSite.TwitchTv)).
                         ToList().ForEach(stream => FavoriteStreams.Add(stream));
-                favorites.Element("OwnedTv").Descendants("Stream").Select(
-                    element => new FavoriteStream(element.Attribute("Name").Value, element.Value, StreamingSite.OwnedTv))
-                        .ToList().ForEach(stream => FavoriteStreams.Add(stream));
+                //                favorites.Element("OwnedTv").Descendants("Stream").Select(
+                //                    element => new FavoriteStream(element.Attribute("Name").Value, element.Value, StreamingSite.OwnedTv))
+                //                        .ToList().ForEach(stream => FavoriteStreams.Add(stream));
 
                 var timeBlock = xDoc.Element("Config").Element("TimeBlock");
                 FromSpan = TimeSpan.Parse(timeBlock.Element(GetVariableName(() => FromSpan)).Value);
@@ -380,13 +380,13 @@ namespace LeStreamsFace
                 twitchFavs.Add(streamItem);
             }
 
-            var ownedFavs = xDoc.Element("Config").Element("Favorites").Element("OwnedTv");
-            foreach (Stream stream in FavoriteStreams.Where(stream => stream.Site == StreamingSite.OwnedTv))
-            {
-                XElement streamItem = new XElement("Stream", stream.ChannelId);
-                streamItem.SetAttributeValue("Name", stream.LoginNameTwtv);
-                ownedFavs.Add(streamItem);
-            }
+            //            var ownedFavs = xDoc.Element("Config").Element("Favorites").Element("OwnedTv");
+            //            foreach (Stream stream in FavoriteStreams.Where(stream => stream.Site == StreamingSite.OwnedTv))
+            //            {
+            //                XElement streamItem = new XElement("Stream", stream.ChannelId);
+            //                streamItem.SetAttributeValue("Name", stream.LoginNameTwtv);
+            //                ownedFavs.Add(streamItem);
+            //            }
 
             var blockSettings = xDoc.Element("Config").Element("TimeBlock");
             blockSettings.Add(new XElement(GetVariableName(() => FromSpan), FromSpan.ToString()));

@@ -3,6 +3,7 @@
                            xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                            xmlns:LeStreamsFace="clr-namespace:LeStreamsFace"
                            xmlns:MetroControls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+                           xmlns:commands="clr-namespace:LeStreamsFace.Commands"
                            xmlns:con="clr-namespace:Kent.Boogaart.Converters.Markup;assembly=Kent.Boogaart.Converters"
                            xmlns:converters="clr-namespace:LeStreamsFace.Converters"
                            xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -126,6 +127,10 @@
         </Style>
     </Window.Style>
 
+    <Window.InputBindings>
+        <KeyBinding Key="Escape" Command="{Binding PressedEscCommand}" />
+    </Window.InputBindings>
+
     <MetroControls:MetroWindow.WindowCommands>
         <MetroControls:WindowCommands x:Name="windowCommands">
             <StackPanel Name="gameIconsPanel"
@@ -159,6 +164,11 @@
                     <Image Width="15"
                            Height="15"
                            Source="/LeStreamsFace;component/Resources/DiabloIcon.png" />
+                </Button>
+                <Button Click="GameIconButton_Click" Tag="{x:Static LeStreamsFace:FiltersEnum.Hearthstone}">
+                    <Image Width="15"
+                           Height="15"
+                           Source="/LeStreamsFace;component/Resources/hearthstone.png" />
                 </Button>
             </StackPanel>
             <StackPanel Name="changeTabButtons"
@@ -202,6 +212,9 @@
                                 Command="{Binding DataContext.StreamingTabClickedCommand,
                                                   ElementName=window}"
                                 CommandParameter="{Binding}"
+                                MouseDown="RunningStreamTabMouseDown"
+                                Tag="{Binding DataContext.CloseRunningStreamTabCommand,
+                                              ElementName=window}"
                                 ToolTipService.InitialShowDelay="100">
                             <Button.Resources>
                                 <ResourceDictionary>
@@ -480,6 +493,11 @@
                                                                      Mode=OneWay,
                                                                      UpdateSourceTrigger=PropertyChanged}"
                                                       Padding="0"
+                                                      Tag="{Binding DataContext,
+                                                                    RelativeSource={RelativeSource FindAncestor,
+                                                                                                   AncestorType={x:Type Grid}},
+                                                                    Mode=OneWay,
+                                                                    UpdateSourceTrigger=PropertyChanged}"
                                                       Unloaded="CefWebView_OnUnloaded" />
                         </Grid>
                     </DataTemplate>
@@ -553,6 +571,7 @@
                                   BorderThickness="0"
                                   CanUserAddRows="False"
                                   ColumnWidth="SizeToCells"
+                                  Unloaded="StreamsDataGrid_OnUnloaded"
                                   FocusVisualStyle="{x:Null}"
                                   GridLinesVisibility="None"
                                   HeadersVisibility="None"
@@ -815,62 +834,74 @@
                          Header="Stats"
                          Visibility="Collapsed">
                     <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition />
-                            <ColumnDefinition />
-                        </Grid.ColumnDefinitions>
-                        <oxy:PlotView Name="gameViewersPlot"
-                                      Grid.Column="0"
-                                      Background="Transparent"
-                                      Model="{Binding ViewersPerGamePlotModel,
-                                                      Source={x:Static LeStreamsFace:ConfigManager.Instance}}" />
-                        <ListBox Name="gameViewersList"
-                                 Grid.Column="1"
-                                 HorizontalContentAlignment="Stretch"
-                                 ItemsSource="{Binding ViewersPerGame,
-                                                       Source={x:Static LeStreamsFace:ConfigManager.Instance}}">
-                            <ListBox.ItemTemplate>
-                                <DataTemplate>
-                                    <Grid Width="Auto" HorizontalAlignment="Stretch">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="70*" />
-                                            <ColumnDefinition Width="30*" />
-                                        </Grid.ColumnDefinitions>
-                                        <TextBlock Grid.Column="0" Text="{Binding Item1}" />
-                                        <TextBlock Grid.Column="1"
-                                                   HorizontalAlignment="Right"
-                                                   Text="{Binding Item2}" />
-                                    </Grid>
-                                </DataTemplate>
-                            </ListBox.ItemTemplate>
-                        </ListBox>
-                        <oxy:PlotView Name="gameStreamsPlot"
-                                      Grid.Column="0"
-                                      Background="Transparent"
-                                      Model="{Binding StreamsPerGamePlotModel,
-                                                      Source={x:Static LeStreamsFace:ConfigManager.Instance}}"
-                                      Visibility="Collapsed" />
-                        <ListBox Name="gameStreamsList"
-                                 Grid.Column="1"
-                                 HorizontalContentAlignment="Stretch"
-                                 ItemsSource="{Binding StreamsPerGame,
-                                                       Source={x:Static LeStreamsFace:ConfigManager.Instance}}"
-                                 Visibility="Collapsed">
-                            <ListBox.ItemTemplate>
-                                <DataTemplate>
-                                    <Grid Width="Auto" HorizontalAlignment="Stretch">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="70*" />
-                                            <ColumnDefinition Width="30*" />
-                                        </Grid.ColumnDefinitions>
-                                        <TextBlock Grid.Column="0" Text="{Binding Item1}" />
-                                        <TextBlock Grid.Column="1"
-                                                   HorizontalAlignment="Right"
-                                                   Text="{Binding Item2}" />
-                                    </Grid>
-                                </DataTemplate>
-                            </ListBox.ItemTemplate>
-                        </ListBox>
+                        <MetroControls:MetroAnimatedSingleRowTabControl>
+                            <MetroControls:MetroTabItem Header="number of viewers">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition />
+                                        <ColumnDefinition />
+                                    </Grid.ColumnDefinitions>
+                                    <oxy:PlotView Name="gameViewersPlot"
+                                                  Grid.Column="0"
+                                                  Background="Transparent"
+                                                  Model="{Binding ViewersPerGamePlotModel,
+                                                                  Source={x:Static LeStreamsFace:ConfigManager.Instance}}" />
+                                    <ListBox Name="gameViewersList"
+                                             Grid.Column="1"
+                                             HorizontalContentAlignment="Stretch"
+                                             ItemsSource="{Binding ViewersPerGame,
+                                                                   Source={x:Static LeStreamsFace:ConfigManager.Instance}}">
+                                        <ListBox.ItemTemplate>
+                                            <DataTemplate>
+                                                <Grid Width="Auto" HorizontalAlignment="Stretch">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="70*" />
+                                                        <ColumnDefinition Width="30*" />
+                                                    </Grid.ColumnDefinitions>
+                                                    <TextBlock Grid.Column="0" Text="{Binding Item1}" />
+                                                    <TextBlock Grid.Column="1"
+                                                               HorizontalAlignment="Right"
+                                                               Text="{Binding Item2}" />
+                                                </Grid>
+                                            </DataTemplate>
+                                        </ListBox.ItemTemplate>
+                                    </ListBox>
+                                </Grid>
+                            </MetroControls:MetroTabItem>
+                            <MetroControls:MetroTabItem Header="number of streams">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition />
+                                        <ColumnDefinition />
+                                    </Grid.ColumnDefinitions>
+                                    <oxy:PlotView Name="gameStreamsPlot"
+                                                  Grid.Column="0"
+                                                  Background="Transparent"
+                                                  Model="{Binding StreamsPerGamePlotModel,
+                                                                  Source={x:Static LeStreamsFace:ConfigManager.Instance}}" />
+                                    <ListBox Name="gameStreamsList"
+                                             Grid.Column="1"
+                                             HorizontalContentAlignment="Stretch"
+                                             ItemsSource="{Binding StreamsPerGame,
+                                                                   Source={x:Static LeStreamsFace:ConfigManager.Instance}}">
+                                        <ListBox.ItemTemplate>
+                                            <DataTemplate>
+                                                <Grid Width="Auto" HorizontalAlignment="Stretch">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="70*" />
+                                                        <ColumnDefinition Width="30*" />
+                                                    </Grid.ColumnDefinitions>
+                                                    <TextBlock Grid.Column="0" Text="{Binding Item1}" />
+                                                    <TextBlock Grid.Column="1"
+                                                               HorizontalAlignment="Right"
+                                                               Text="{Binding Item2}" />
+                                                </Grid>
+                                            </DataTemplate>
+                                        </ListBox.ItemTemplate>
+                                    </ListBox>
+                                </Grid>
+                            </MetroControls:MetroTabItem>
+                        </MetroControls:MetroAnimatedSingleRowTabControl>
                     </Grid>
                 </TabItem>
                 <TabItem Name="aboutTabItem"

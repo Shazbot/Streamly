@@ -1,5 +1,4 @@
 ﻿using CefSharp;
-using CefSharp.Example;
 using CefSharp.Wpf;
 using LeStreamsFace.Annotations;
 using OxyPlot.Reporting;
@@ -19,14 +18,25 @@ namespace LeStreamsFace
     [ImplementPropertyChanged]
     public partial class CefWebView : UserControl, INotifyPropertyChanged
     {
+        // we need to manually dispose of webViews
+        public static readonly Dictionary<Stream, CefWebView> WebViewForStream = new Dictionary<Stream, CefWebView>();
+
         public CefWebView()
         {
             InitializeComponent();
-            browser.RequestHandler = new RequestHandler();
 
-            PropertyChanged += webView_PropertyChanged;
-            browser.IsBrowserInitializedChanged += BrowserOnIsBrowserInitializedChanged;
             DataContext = this;
+        }
+
+        public static void Init()
+        {
+            CefSharp.Settings settings = new CefSharp.Settings();
+            if (CEF.Initialize(settings))
+            {
+                //                CEF.RegisterScheme("theme", new ThemeSchemeHandlerFactory());
+                //CEF.RegisterScheme("test", new SchemeHandlerFactory());
+                //CEF.RegisterJsObject("bound", new BoundObject());
+            }
         }
 
         private void BrowserOnIsBrowserInitializedChanged(object sender, DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs)
@@ -34,25 +44,12 @@ namespace LeStreamsFace
             if ((bool)dependencyPropertyChangedEventArgs.NewValue)
             {
                 Dispatcher.BeginInvoke((Action)InitializeData);
-                browser.FrameLoadStart += BrowserOnFrameLoadStart;
             }
-        }
-
-        private void BrowserOnFrameLoadStart(object sender, FrameLoadStartEventArgs args)
-        {
         }
 
         public string Address { get; set; }
 
         public string Title { get; set; }
-
-        private IWpfWebBrowser webBrowser;
-
-        public IWpfWebBrowser WebBrowser
-        {
-            get { return webBrowser; }
-            set { PropertyChanged.ChangeAndNotify(ref webBrowser, value, () => WebBrowser); }
-        }
 
         #region public string Html
 
@@ -79,21 +76,31 @@ namespace LeStreamsFace
             if (host.browser == null) return;
 
             var html = ((string)(e.NewValue));
-            host.browser.LoadHtml(html, "url");
+            //            host.browser.LoadHtml(html, "url");
         }
 
-        private void webView_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        public override void OnApplyTemplate()
         {
-            if (browser == null) return;
+            base.OnApplyTemplate();
 
+            browser.PropertyChanged += host_PropertyChanged;
+        }
+
+        private void host_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
             switch (e.PropertyName)
             {
+                case "IsBrowserInitialized":
+                    if (browser.IsBrowserInitialized)
+                        Dispatcher.BeginInvoke((Action)InitializeData);
+                    break;
             }
         }
 
         private void InitializeData()
         {
-            //            browser.LoadHtml(Html, "url");
+            WebViewForStream[((Stream)Tag)] = this;
+            browser.LoadHtml(Html, "url");
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -120,16 +127,16 @@ namespace LeStreamsFace
                 return;
             }
 
-            var x = e.GetPosition(this).X;
-            if (x >= 4 && x <= 25) // pause by sending space
-            {
-                SendKeys.SendWait(" ");
-            }
-            else if (x >= 30 && x <= 55) // mute by sending a click at the low end of the volume slider
-            {
-                var muteClickPoint = PointToScreen(new Point(60, browser.ActualHeight - 10));
-                NativeMethods.LeftClick((int)muteClickPoint.X, (int)muteClickPoint.Y);
-            }
+            //            var x = e.GetPosition(this).X;
+            //            if (x >= 4 && x <= 25) // pause by sending space
+            //            {
+            //                SendKeys.SendWait(" ");
+            //            }
+            //            else if (x >= 30 && x <= 55) // mute by sending a click at the low end of the volume slider
+            //            {
+            //                var muteClickPoint = PointToScreen(new Point(60, browser.ActualHeight - 10));
+            //                NativeMethods.LeftClick((int)muteClickPoint.X, (int)muteClickPoint.Y);
+            //            }
 
             //            e.Handled = true;
             //            Console.WriteLine("x is " + e.GetPosition(browser).X);
@@ -140,20 +147,24 @@ namespace LeStreamsFace
 
         private void Browser_OnPreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
-            var x = e.GetPosition(this).X;
-            if (x >= browser.ActualWidth - 27) // ignore maximize
-            {
-                e.Handled = true;
-            }
+            //            var x = e.GetPosition(this).X;
+            //            if (x >= browser.ActualWidth - 27) // ignore maximize
+            //            {
+            //                e.Handled = true;
+            //            }
         }
 
         private void Browser_OnMouseMove(object sender, MouseEventArgs e)
         {
-            Console.WriteLine("x is " + e.GetPosition(browser).X);
-            Console.WriteLine("y is " + e.GetPosition(browser).Y);
-            Console.WriteLine("b width is " + browser.Width + "       " + browser.ActualWidth);
-            Console.WriteLine("b height is " + browser.Height + "       " + browser.ActualHeight);
-            Console.WriteLine("".PadRight(20, '-'));
+            //            Console.WriteLine("x is " + e.GetPosition(browser).X);
+            //            Console.WriteLine("y is " + e.GetPosition(browser).Y);
+            //            Console.WriteLine("b width is " + browser.Width + "       " + browser.ActualWidth);
+            //            Console.WriteLine("b height is " + browser.Height + "       " + browser.ActualHeight);
+            //            Console.WriteLine("".PadRight(20, '-'));
+        }
+
+        private void Browser_OnUnloaded(object sender, RoutedEventArgs e)
+        {
         }
     }
 }

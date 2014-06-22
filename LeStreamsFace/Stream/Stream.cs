@@ -9,12 +9,12 @@ using System.Text;
 
 namespace LeStreamsFace
 {
-    internal enum StreamingSite
+    public enum StreamingSite
     {
         TwitchTv = 0, OwnedTv
     }
 
-    internal class Stream : INotifyPropertyChanged
+    public class Stream : INotifyPropertyChanged
     {
         private string _name = string.Empty;
         private string _title = string.Empty;

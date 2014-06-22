@@ -1,10 +1,9 @@
-﻿using System;
+﻿using LeStreamsFace.StreamParsers;
+using System;
 using System.Linq;
 using System.Reflection;
 using System.Threading;
 using System.Windows;
-using CefSharp.Example;
-using LeStreamsFace.StreamParsers;
 
 namespace LeStreamsFace
 {
@@ -32,9 +31,9 @@ namespace LeStreamsFace
             base.OnStartup(e);
 
             // now using Costura to load assemblies
-//            AppDomain.CurrentDomain.AssemblyResolve += new ResolveEventHandler(Target);
+            //            AppDomain.CurrentDomain.AssemblyResolve += new ResolveEventHandler(Target);
 
-            CefExample.Init();
+            CefWebView.Init();
 
             new MainWindow(new TwitchXMLStreamParser(), new TwitchJSONStreamParser());
         }

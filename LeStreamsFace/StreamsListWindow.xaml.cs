@@ -39,6 +39,7 @@ namespace LeStreamsFace
         {
             InitializeComponent();
             DataContext = vm = new StreamsListViewModel(this);
+            vm.OnStreamTabOpening += VmOnOnStreamTabOpening;
 
             this.timeBlockCheck = timeBlockCheck;
 
@@ -58,14 +59,13 @@ namespace LeStreamsFace
                 Height = 580;
             }
 
-            var url = @"<object type=""application/x-shockwave-flash"" height=""100%"" width=""100%"" style=""overflow:hidden; width:100%; height:100%; margin:0; padding:0; border:0;"" id=""live_embed_player_flash"" data=""http://www.twitch.tv/widgets/live_embed_player.swf?channel=" + "wingsofdeath" + @""" bgcolor=""#000000""><param name=""allowFullScreen"" value=""false"" /><param name=""allowScriptAccess"" value=""always"" /><param name=""allowNetworking"" value=""all"" /><param name=""movie"" value=""http://www.twitch.tv/widgets/live_embed_player.swf"" /><param name=""flashvars"" value=""hostname=www.twitch.tv&channel=" + "wingsofdeath" + @"&auto_play=true&start_volume=25"" /></object>";
-            //            url = @"<div style=""overflow:hidden;"">" + url + @"</div>";
-            //            gamesFlyout.IsOpen = false;
-            //            cefFlyout.IsOpen = true;
-            //	    cefWebView.browser.LoadHtml(url, "www.google.com");
-
             configTabItem.IsSelected = true;
             streamsTabItem.IsSelected = true;
+        }
+
+        private void VmOnOnStreamTabOpening(object source, StreamsListViewModel.StreamTabOpeningEventArgs streamTabOpeningEventArgs)
+        {
+            UnsetGameIconBackground();
         }
 
         private void window_Closed(object sender, EventArgs e)
@@ -207,7 +207,7 @@ namespace LeStreamsFace
             SetGameIconBackground();
         }
 
-        private void SetGameIconBackground()
+        public void SetGameIconBackground()
         {
             AdornerLayer adLayer = AdornerLayer.GetAdornerLayer(streamsDataGrid);
             if (adLayer == null) return;
@@ -233,13 +233,25 @@ namespace LeStreamsFace
             }
             else
             {
-                adLayer.FindChildren<GameIconAdorner>().ToList().ForEach(adLayer.Remove);
+                UnsetGameIconBackground();
             }
         }
 
         private void streamsDataGrid_Loaded(object sender, RoutedEventArgs e)
         {
             SetGameIconBackground();
+        }
+
+        private void StreamsDataGrid_OnUnloaded(object sender, RoutedEventArgs e)
+        {
+            UnsetGameIconBackground();
+        }
+
+        public void UnsetGameIconBackground()
+        {
+            AdornerLayer adLayer = AdornerLayer.GetAdornerLayer(streamsDataGrid);
+            if (adLayer == null) return;
+            adLayer.FindChildren<GameIconAdorner>().ToList().ForEach(adLayer.Remove);
         }
 
         private void WindowSizeChanged(object sender, SizeChangedEventArgs e)
@@ -436,6 +448,8 @@ namespace LeStreamsFace
 
         private void DragMoveWindow(object sender, MouseButtonEventArgs e)
         {
+            if (vm.IsAnyStreamTabOpen && e.GetPosition(this).Y >= this.ActualHeight - 30) return;
+
             if (e.MiddleButton == MouseButtonState.Pressed) return;
             if (e.RightButton == MouseButtonState.Pressed) return;
             if (e.LeftButton != MouseButtonState.Pressed) return;
@@ -453,6 +467,8 @@ namespace LeStreamsFace
 
         private void ShellViewMouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
+            if (vm.IsAnyStreamTabOpen && e.GetPosition(this).Y >= this.ActualHeight - 30) return;
+
             e.Handled = true;
             ToggleMaximized();
         }
@@ -488,8 +504,20 @@ namespace LeStreamsFace
 
         private void CefWebView_OnUnloaded(object sender, RoutedEventArgs e)
         {
-            var cefWebView = sender as CefWebView;
-            cefWebView.browser.Dispose();
+            var stream = ((CefWebView)sender).Tag as Stream;
+
+            if (!vm.RunningStreams.Contains(stream))
+            {
+                ((CefWebView)sender).browser.Dispose();
+            }
+        }
+
+        private void RunningStreamTabMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Middle && e.ButtonState == MouseButtonState.Pressed)
+            {
+                vm.CloseRunningStreamTabCommand.Execute(((FrameworkElement)sender).DataContext);
+            }
         }
     }
 }

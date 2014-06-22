@@ -10,14 +10,17 @@ namespace LeStreamsFace
         [Description("League of Legends")]
         League,
 
-        [Description("StarCraft II")]
+        [Description("StarCraft II: Heart of the Swarm")]
         Starcraft,
 
-        [Description("Diablo III")]
+        [Description("Diablo III: Reaper of Souls")]
         Diablo,
 
         [Description("Dota 2")]
-        Dota
+        Dota,
+
+        [Description("Hearthstone: Heroes of Warcraft")]
+        Hearthstone
     }
 
     internal static class StreamsManager

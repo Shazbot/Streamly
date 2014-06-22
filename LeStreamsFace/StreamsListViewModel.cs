@@ -28,6 +28,32 @@ namespace LeStreamsFace
         private GamesViewModel _gamesPanelSelectedGame;
         private Stream _streamsPanelSelectedStream;
 
+        public class StreamTabOpeningEventArgs : EventArgs
+        {
+            private string EventInfo;
+
+            public StreamTabOpeningEventArgs()
+            {
+            }
+        }
+
+        public class StreamTabClosingEventArgs : EventArgs
+        {
+            private string EventInfo;
+
+            public StreamTabClosingEventArgs()
+            {
+            }
+        }
+
+        public delegate void StreamTabOpening(object source, StreamTabOpeningEventArgs e);
+
+        public delegate void StreamTabClosing(object source, StreamTabClosingEventArgs e);
+
+        public event StreamTabOpening OnStreamTabOpening;
+
+        public event StreamTabClosing OnStreamTabClosing;
+
         public StreamsListViewModel(StreamsListWindow view)
         {
             this.View = view;
@@ -42,31 +68,34 @@ namespace LeStreamsFace
             FavoriteAStreamCommand = new DelegateCommand<Stream>(stream => FavoriteAStream(stream));
             ChangeShellTabCommand = new DelegateCommand<TabItem>(tab => ChangeShellTab(tab));
             CloseStreamingTabCommand = new DelegateCommand(() => CloseStreamingTab());
-
-            ShellContainerMargin = new Thickness(0);
+            PressedEscCommand = new DelegateCommand(() => PressedEsc());
+            CloseRunningStreamTabCommand = new DelegateCommand<Stream>(stream => CloseRunningStreamTab(stream));
 
             FetchGames();
 
-            // TODO
+            // TODO debug stuff if we want to start with some streams
+            //            var str = new Stream("wingsofdeathx", "wings", 123, "1", "ID1", "asr", StreamingSite.TwitchTv);
+            //            var str2 = new Stream("ongamenet", "wings", 123, "2", "ID2", "asr", StreamingSite.TwitchTv);
+            //            str.LoginNameTwtv = "wingsofdeath";
+            //            str.LoginNameTwtv = "riotgames";
+            //            str2.LoginNameTwtv = "ongamenet";
+            //            RunningStreams.Add(str);
+            //            RunningStreams.Add(str2);
+            //            IsAnyStreamTabOpen = true;
+            //            SelectedRunningStreamTab = str;
+        }
 
-            var str = new Stream("wingsofdeathx", "wings", 123, "1", "ID1", "asr", StreamingSite.TwitchTv);
-            var str2 = new Stream("ongamenet", "wings", 123, "2", "ID2", "asr", StreamingSite.TwitchTv);
-            //TODO if we want to start with a stream
-            str.LoginNameTwtv = "wingsofdeath";
-
-            str.LoginNameTwtv = "riotgames";
-            str2.LoginNameTwtv = "ongamenet";
-
-            RunningStreams.Add(str);
-            RunningStreams.Add(str2);
-            IsAnyStreamTabOpen = true;
-            SelectedRunningStreamTab = str;
-            // TODO maybe move this to switching tab logic
-            // TODO can we use the property itself or it's ok like this?
+        private void PressedEsc()
+        {
+            if (IsAnyStreamTabOpen && View.window.WindowState == WindowState.Maximized)
+            {
+                View.window.WindowState = WindowState.Normal;
+            }
         }
 
         private void CloseStreamingTab()
         {
+            OnStreamTabClosing(this, new StreamTabClosingEventArgs());
             var streamToRemove = SelectedRunningStreamTab;
             SelectedRunningStreamTab = RunningStreams.FirstOrDefault(stream => stream != SelectedRunningStreamTab);
 
@@ -79,8 +108,23 @@ namespace LeStreamsFace
             OnPropertyChanged(Extensions.GetVariableName(() => CloseStreamsButtonVisibility));
         }
 
+        private void CloseRunningStreamTab(Stream streamInTabToRemove)
+        {
+            if (streamInTabToRemove == SelectedRunningStreamTab)
+            {
+                CloseStreamingTab();
+                return;
+            }
+
+            OnStreamTabClosing(this, new StreamTabClosingEventArgs());
+            RunningStreams.Remove(streamInTabToRemove);
+            CefWebView.WebViewForStream[streamInTabToRemove].browser.Dispose();
+            CefWebView.WebViewForStream.Remove(streamInTabToRemove);
+        }
+
         private void OpenExistingStreamingTab(Stream stream)
         {
+            OnStreamTabOpening(this, new StreamTabOpeningEventArgs());
             CloseFlyouts();
 
             SelectedRunningStreamTab = stream;
@@ -94,6 +138,7 @@ namespace LeStreamsFace
 
             if (tab == View.streamsTabItem)
             {
+                View.SetGameIconBackground();
                 if (tab.IsSelected)
                 {
                     GameFilteringByIconsEnabled = !GameFilteringByIconsEnabled;
@@ -186,7 +231,9 @@ namespace LeStreamsFace
         private void UnfavoriteStream(FavoriteStream streamToUnfavorite)
         {
             ConfigManager.Instance.FavoriteStreams.Remove(streamToUnfavorite);
+            ConfigManager.Instance.WriteConfigXml();
 
+            // uncheck in running streams
             var ourFavorites = StreamsManager.Streams.Where(stream => stream.ChannelId == streamToUnfavorite.ChannelId);
             if (ourFavorites.Any())
             {
@@ -195,21 +242,18 @@ namespace LeStreamsFace
                     ourFavorite.IsFavorite = false;
                 }
                 View.RefreshView();
-                ConfigManager.Instance.WriteConfigXml();
             }
         }
 
-        private async Task FetchGames()
+        private void FetchGames()
         {
-            // TODO make this rerun after a timeout
-            //                        var twitchResponse = await new RestClient("https://api.twitch.tv/kraken/games/top?limit=100").ExecuteTaskAsync(new RestRequest(),);
             try
             {
+                // TODO getting some weird timeout issues with await, the whole method hangs indefinitely, can look into task timeout and cancellations
+                //                        var twitchResponse = await new RestClient("https://api.twitch.tv/kraken/games/top?limit=100").ExecuteTaskAsync(new RestRequest(),);
                 var twitchResponse = new RestClient("https://api.twitch.tv/kraken/games/top?limit=100").Execute(new RestRequest());
                 var topGamesJObject = JsonConvert.DeserializeObject<JObject>(twitchResponse.Content)["top"];
                 var games = topGamesJObject.Children().Select(token => new GamesViewModel(token["game"]["name"].ToString(), token["game"]["box"]["medium"].ToString()));
-                // sometimes we get no Games (Games.Count == 0)
-                var gc = games.Count();
                 Games.AddRange(games);
 
                 if (Games.Count == 0) // examine response
@@ -266,7 +310,6 @@ namespace LeStreamsFace
         private Stream _selectedRunningStreamTab;
         private string _bannedGamesTextInput;
         private string _timeWhenNotNotifyingTextInput;
-        private Thickness _shellContainerMargin;
 
         public OptimizedObservableCollection<Stream> Streams
         {
@@ -295,10 +338,17 @@ namespace LeStreamsFace
 
         private async void FetchStreams(string gameName)
         {
-            var twitchResponse = await new RestClient("https://api.twitch.tv/kraken/search/streams?limit=20&q=" + gameName).ExecuteTaskAsync(new RestRequest());
-            var streams = (new TwitchJSONStreamParser()).GetStreamsFromContent(twitchResponse.Content);
-            Streams.RemoveAll();
-            Streams.AddRange(streams);
+            try
+            {
+                // limit is at 50, we can go up to 100 and more with an offset
+                var twitchResponse = await new RestClient("https://api.twitch.tv/kraken/search/streams?limit=50&q=" + gameName).ExecuteTaskAsync(new RestRequest());
+                var streams = (new TwitchJSONStreamParser()).GetStreamsFromContent(twitchResponse.Content);
+                Streams.RemoveAll();
+                Streams.AddRange(streams);
+            }
+            catch (Exception e)
+            {
+            }
         }
 
         public Stream StreamsPanelSelectedStream
@@ -315,7 +365,11 @@ namespace LeStreamsFace
         private void OpenNewStreamingTab(Stream streamToStream)
         {
             //            View.streamsPanel.IsEnabled = false; // if we close the panel and the LMB is down we will select and start multiple streams
-            RunningStreams.Add(streamToStream);
+            OnStreamTabOpening(this, new StreamTabOpeningEventArgs());
+            if (!RunningStreams.Contains(streamToStream))
+            {
+                RunningStreams.Add(streamToStream);
+            }
             CloseFlyouts();
             IsAnyStreamTabOpen = true;
             OnPropertyChanged(Extensions.GetVariableName(() => CloseStreamsButtonVisibility));
@@ -524,16 +578,11 @@ namespace LeStreamsFace
 
         public ICommand ChangeShellTabCommand { get; private set; }
 
-        public Thickness ShellContainerMargin
-        {
-            get { return _shellContainerMargin; }
-            set
-            {
-                _shellContainerMargin = value;
-            }
-        }
-
         public ICommand CloseStreamingTabCommand { get; private set; }
+
+        public ICommand PressedEscCommand { get; private set; }
+
+        public ICommand CloseRunningStreamTabCommand { get; private set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
 

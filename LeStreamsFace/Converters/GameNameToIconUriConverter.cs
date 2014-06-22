@@ -9,6 +9,7 @@ namespace LeStreamsFace
     public class GameNameToIconUriConverter : MarkupExtension, IValueConverter
     {
         private static GameNameToIconUriConverter _converter = null;
+
         public GameNameToIconUriConverter()
         {
         }
@@ -44,7 +45,7 @@ namespace LeStreamsFace
                     iconUri = "StarcraftIcon.png";
                     break;
 
-                case "Diablo III":
+                case "Diablo III: Reaper of Souls":
                     iconUri = "diabloIcon.png";
                     break;
 
@@ -62,6 +63,10 @@ namespace LeStreamsFace
 
                 case "The Binding of Isaac":
                     iconUri = "bindingOfIsaacIcon.png";
+                    break;
+
+                case "Hearthstone: Heroes of Warcraft":
+                    iconUri = "hearthstone.png";
                     break;
 
                 default:
