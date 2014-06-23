@@ -105,40 +105,6 @@ namespace LeStreamsFace
             //            ((DataGrid)sender).SelectedCells.Clear();
         }
 
-        private void ChangeTab_Click(object sender, RoutedEventArgs e)
-        {
-            return;
-            // TODO MOVE THIS TO VM
-            var tabItem = (sender as FrameworkElement).Tag as TabItem;
-            if (tabItem == streamsTabItem)
-            {
-                if (streamsTabItem.IsSelected)
-                {
-                    vm.GameFilteringByIconsEnabled = !vm.GameFilteringByIconsEnabled;
-
-                    RefreshView();
-                }
-            }
-            else if (tabItem == configTabItem)
-            {
-                //                                DisabledTimeTextBox.Text = ConfigManager.Instance.FromSpan.ToString("hhmm") + '-' + ConfigManager.Instance.ToSpan.ToString("hhmm");
-                //                                BannedGamesTextBox.Text = ConfigManager.Instance.BannedGames.Aggregate((s, s1) => s + ", " + s1);
-            }
-            else if (tabItem == statsTabItem)
-            {
-                if (statsTabItem.IsSelected)
-                {
-                    // switch between stats for viewers and number of streams / game
-                    foreach (var control in new Control[] { gameStreamsList, gameStreamsPlot, gameViewersList, gameViewersPlot })
-                    {
-                        control.Visibility = control.Visibility == Visibility.Visible
-                                                     ? Visibility.Collapsed
-                                                     : Visibility.Visible;
-                    }
-                }
-            }
-        }
-
         private void NameTitleTextBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             var sendersStream = (Stream)((TextBlock)sender).DataContext;

@@ -4,6 +4,7 @@ using CefSharp.Wpf;
 using LeStreamsFace.Annotations;
 using OxyPlot.Reporting;
 using PropertyChanged;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -121,12 +122,28 @@ namespace LeStreamsFace
             //                        Console.WriteLine("b height is " + browser.Height + "       " + browser.ActualHeight);
         }
 
+        private bool waitForQualityOptionsClick;
+
         private void Browser_OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+            if (waitForQualityOptionsClick)
+            {
+                waitForQualityOptionsClick = false;
+                Overlay.Visibility = Visibility.Visible;
+                e.Handled = true;
+                return;
+            }
+
             var x = e.GetPosition(this).X;
             if (x >= browser.ActualWidth - 27) // fake maximize
             {
                 EventAggregatorExtensions.PublishOnUIThread(MainWindow.EventAggregator, new MinimizeMaximizeMessage());
+                e.Handled = true;
+            }
+            else if (x >= browser.ActualWidth - 110 && x <= browser.ActualWidth - 58)
+            {
+                waitForQualityOptionsClick = true;
+                Overlay.Visibility = Visibility.Collapsed;
                 e.Handled = true;
             }
 
@@ -146,10 +163,10 @@ namespace LeStreamsFace
             //            }
 
             //            e.Handled = true;
-            //            Console.WriteLine("x is " + e.GetPosition(browser).X);
-            //            Console.WriteLine("y is " + e.GetPosition(browser).Y);
-            //            Console.WriteLine("b width is " + browser.Width + "       " + browser.ActualWidth);
-            //            Console.WriteLine("b height is " + browser.Height + "       " + browser.ActualHeight);
+            Console.WriteLine("x is " + e.GetPosition(browser).X);
+            Console.WriteLine("y is " + e.GetPosition(browser).Y);
+            Console.WriteLine("b width is " + browser.Width + "       " + browser.ActualWidth);
+            Console.WriteLine("b height is " + browser.Height + "       " + browser.ActualHeight);
         }
 
         private void Browser_OnPreviewMouseDown(object sender, MouseButtonEventArgs e)

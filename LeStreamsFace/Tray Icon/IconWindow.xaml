@@ -8,17 +8,17 @@
         Height="0"
         ResizeMode="NoResize"
         ShowInTaskbar="False"
+        SourceInitialized="Window_SourceInitialized"
         Visibility="Hidden"
         WindowStyle="None"
-        x:ClassModifier="internal" SourceInitialized="Window_SourceInitialized">
+        x:ClassModifier="internal">
     <Grid>
         <l:NotificationAreaIcon x:Name="notificationItem"
                                 Icon="pack://application:,,,/Resources/App.ico"
-                                Text="LeStreamsFace">
+                                Text="Streamly">
             <l:NotificationAreaIcon.MenuItems>
                 <forms:MenuItem Click="OnMenuItemExitClick" Text="Exit" />
             </l:NotificationAreaIcon.MenuItems>
         </l:NotificationAreaIcon>
-
     </Grid>
 </Window>

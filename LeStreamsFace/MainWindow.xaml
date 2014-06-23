@@ -9,7 +9,7 @@
         Height="0"
         AllowsTransparency="True"
         Focusable="False"
-        Icon="/LeStreamsFace;component/Resources/App.ico"
+        Icon="pack://application:,,,/Resources/App.ico"
         IsHitTestVisible="False"
         Left="0"
         SizeToContent="WidthAndHeight"

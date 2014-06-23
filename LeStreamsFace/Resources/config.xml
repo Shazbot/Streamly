@@ -10,6 +10,8 @@
     <WinLeft>0</WinLeft>
     <WinWidth>1000</WinWidth>
     <WinHeight>580</WinHeight>
+    <LivestreamerArguments>best</LivestreamerArguments>
+    <StreamOpeningProcedure>Tab</StreamOpeningProcedure>
   </AppSettings>
   <Filters>
   </Filters>

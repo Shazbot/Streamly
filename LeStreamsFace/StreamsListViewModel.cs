@@ -10,11 +10,9 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.IO;
 using System.Linq;
 using System.Net;
 using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -39,18 +37,7 @@ namespace LeStreamsFace
             }
         }
 
-        public class StreamTabClosingEventArgs : EventArgs
-        {
-            private string EventInfo;
-
-            public StreamTabClosingEventArgs()
-            {
-            }
-        }
-
         public delegate void StreamTabOpening(object source, StreamTabOpeningEventArgs e);
-
-        public delegate void StreamTabClosing(object source, StreamTabClosingEventArgs e);
 
         public event StreamTabOpening OnStreamTabOpening;
 
@@ -124,7 +111,10 @@ namespace LeStreamsFace
 
         private void OpenExistingStreamingTab(Stream stream)
         {
-            OnStreamTabOpening(this, new StreamTabOpeningEventArgs());
+            if (OnStreamTabOpening != null)
+            {
+                OnStreamTabOpening(this, new StreamTabOpeningEventArgs());
+            }
             CloseFlyouts();
 
             SelectedRunningStreamTab = stream;
@@ -365,7 +355,10 @@ namespace LeStreamsFace
         private void OpenNewStreamingTab(Stream streamToStream)
         {
             //            View.streamsPanel.IsEnabled = false; // if we close the panel and the LMB is down we will select and start multiple streams
-            OnStreamTabOpening(this, new StreamTabOpeningEventArgs());
+            if (OnStreamTabOpening != null)
+            {
+                OnStreamTabOpening(this, new StreamTabOpeningEventArgs());
+            }
             if (!RunningStreams.Contains(streamToStream))
             {
                 RunningStreams.Add(streamToStream);

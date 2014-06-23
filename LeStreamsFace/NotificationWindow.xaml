@@ -148,7 +148,7 @@
             </Grid>
         </Grid>
         <Border.Background>
-            <ImageBrush ImageSource="/LeStreamsFace;component/Resources/box1.png" />
+            <ImageBrush ImageSource="pack://application:,,,/Resources/box1.png" />
         </Border.Background>
     </Border>
 </Window>

@@ -19,7 +19,7 @@
                            MinHeight="100"
                            Background="WhiteSmoke"
                            Closed="window_Closed"
-                           Icon="/LeStreamsFace;component/Resources/App.ico"
+                           Icon="pack://application:,,,/Resources/App.ico"
                            IgnoreTaskbarOnMaximize="True"
                            KeyDown="window_KeyDown"
                            Left="{Binding WinLeft,
@@ -27,12 +27,12 @@
                                           Source={x:Static LeStreamsFace:ConfigManager.Instance}}"
                            MouseDoubleClick="ShellViewMouseDoubleClick"
                            MouseLeftButtonDown="DragMoveWindow"
+                           MouseMove="StreamsListWindow_OnMouseMove"
                            NonActiveWindowTitleBrush="{DynamicResource WindowTitleColorBrush}"
                            PreviewKeyDown="window_OnPreviewKeyDown"
                            PreviewTextInput="window_PreviewTextInput"
                            ResizeMode="CanResizeWithGrip"
                            ShowIconOnTitleBar="False"
-                           MouseMove="StreamsListWindow_OnMouseMove"
                            ShowTitleBar="True"
                            SizeChanged="WindowSizeChanged"
                            SizeToContent="Manual"
@@ -102,7 +102,7 @@
                                                 Minimum="0" />
             </dialogs:SimpleDialog>
 
-            <BitmapImage x:Key="questionMarkImage" UriSource="/LeStreamsFace;component/Resources/appbar.question.png" />
+            <BitmapImage x:Key="questionMarkImage" UriSource="pack://application:,,,/Resources/appbar.question.png" />
             <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
             <LeStreamsFace:ValueConverterGroup x:Key="InvertedBooleanToVisibilityConverter">
                 <converters:InvertBooleanConverter />
@@ -143,33 +143,33 @@
                     <Image Width="15"
                            Height="15"
                            Margin="0,5"
-                           Source="/LeStreamsFace;component/Resources/LeagueIcon.png" />
+                           Source="pack://application:,,,/Resources/LeagueIcon.png" />
                 </Button>
                 <Button Name="sc2IconButton"
                         Click="GameIconButton_Click"
                         Tag="{x:Static LeStreamsFace:FiltersEnum.Starcraft}">
                     <Image Width="15"
                            Height="15"
-                           Source="/LeStreamsFace;component/Resources/StarcraftIcon.png" />
+                           Source="pack://application:,,,/Resources/StarcraftIcon.png" />
                 </Button>
                 <Button Name="dota2IconButton"
                         Click="GameIconButton_Click"
                         Tag="{x:Static LeStreamsFace:FiltersEnum.Dota}">
                     <Image Width="15"
                            Height="15"
-                           Source="/LeStreamsFace;component/Resources/DotaIcon.png" />
+                           Source="pack://application:,,,/Resources/DotaIcon.png" />
                 </Button>
                 <Button Name="diabloIconButton"
                         Click="GameIconButton_Click"
                         Tag="{x:Static LeStreamsFace:FiltersEnum.Diablo}">
                     <Image Width="15"
                            Height="15"
-                           Source="/LeStreamsFace;component/Resources/DiabloIcon.png" />
+                           Source="pack://application:,,,/Resources/DiabloIcon.png" />
                 </Button>
                 <Button Click="GameIconButton_Click" Tag="{x:Static LeStreamsFace:FiltersEnum.Hearthstone}">
                     <Image Width="15"
                            Height="15"
-                           Source="/LeStreamsFace;component/Resources/hearthstone.png" />
+                           Source="pack://application:,,,/Resources/hearthstone.png" />
                 </Button>
             </StackPanel>
             <StackPanel Name="changeTabButtons"
@@ -576,7 +576,6 @@
                                   BorderThickness="0"
                                   CanUserAddRows="False"
                                   ColumnWidth="SizeToCells"
-                                  Unloaded="StreamsDataGrid_OnUnloaded"
                                   FocusVisualStyle="{x:Null}"
                                   GridLinesVisibility="None"
                                   HeadersVisibility="None"
@@ -587,7 +586,8 @@
                                   PreviewKeyDown="streamsDataGrid_PreviewKeyDown"
                                   SelectionChanged="blockedItemsListBox_SelectionChanged"
                                   SelectionMode="Single"
-                                  SelectionUnit="FullRow">
+                                  SelectionUnit="FullRow"
+                                  Unloaded="StreamsDataGrid_OnUnloaded">
                             <DataGrid.Style>
                                 <Style BasedOn="{StaticResource {x:Type DataGrid}}" TargetType="{x:Type DataGrid}">
                                     <Style.Triggers>
