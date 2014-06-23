@@ -11,6 +11,9 @@
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
                 <ResourceDictionary Source="Resources/Icons.xaml" />
+                <ResourceDictionary>
+                    <myns:AppBootstraper x:Key="bootstrapper" />
+                </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
             <myns:CutoffConverter x:Key="WidthConverter" Cutoff="150" />
             <!--  wpf bug: http://bengribaudo.com/blog/2010/08/19/106/bug-single-application-resources-entry-ignored  -->

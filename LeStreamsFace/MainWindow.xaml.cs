@@ -1,4 +1,5 @@
-﻿using LeStreamsFace.StreamParsers;
+﻿using Caliburn.Micro;
+using LeStreamsFace.StreamParsers;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using RestSharp;
@@ -8,6 +9,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Security.RightsManagement;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -19,10 +21,11 @@ using System.Xml.Linq;
 using ContextMenu = System.Windows.Forms.ContextMenu;
 using MenuItem = System.Windows.Forms.MenuItem;
 using MessageBox = System.Windows.MessageBox;
+using Screen = System.Windows.Forms.Screen;
 
 namespace LeStreamsFace
 {
-    internal partial class MainWindow : Window
+    internal partial class MainWindow : Window, IHandle<TabCreationEvent>
     {
         private readonly DispatcherTimer mainTimer;
         private readonly DispatcherTimer fullscreenWaitTimer;
@@ -45,6 +48,8 @@ namespace LeStreamsFace
         private readonly IStreamParser<XElement> _streamParserXML;
         private readonly IStreamParser<JToken> _streamParserJSON;
 
+        public static IEventAggregator EventAggregator;
+
         public MainWindow(IStreamParser<XElement> streamParserXML, IStreamParser<JToken> streamParserJSON)
         {
             _streamParserXML = streamParserXML;
@@ -56,6 +61,8 @@ namespace LeStreamsFace
 #endif
 
             InitializeComponent();
+            EventAggregator = new EventAggregator();
+            EventAggregator.Subscribe(this);
             this.Visibility = Visibility.Hidden;
             this.Show();
 
@@ -134,7 +141,7 @@ namespace LeStreamsFace
                                                     .Favorites()
                                                     .Where(stream => StreamsManager.Streams.Any(stream1 => stream1 == stream)))
             {
-                new NotificationWindow(unreportedStream);
+                new NotificationWindow(unreportedStream, EventAggregator);
             }
             unreportedFavs.Clear();
         }
@@ -164,17 +171,7 @@ namespace LeStreamsFace
         {
             if (streamsWindow == null)
             {
-                lock (_syncLock)
-                {
-                    if (streamsWindow == null)
-                    {
-                        streamsWindow = new StreamsListWindow(DuringTimeBlock);
-                        streamsWindow.Closed += (o, args) => streamsWindow = null;
-                        streamsWindow.Owner = this;
-
-                        streamsWindow.Show();
-                    }
-                }
+                CreateStreamsListWindow();
             }
 
             streamsWindow.Activate();
@@ -183,6 +180,30 @@ namespace LeStreamsFace
             streamsWindow.Topmost = true;
             streamsWindow.Topmost = false;
             streamsWindow.Focus();
+        }
+
+        private void CreateStreamsListWindow()
+        {
+            lock (_syncLock)
+            {
+                if (streamsWindow == null)
+                {
+                    streamsWindow = new StreamsListWindow(DuringTimeBlock, EventAggregator);
+                    //                    _startNewStreamCommand = new DelegateCommand<Stream>(stream => streamsWindow.StartNewStream(stream));
+                    streamsWindow.Closed += (o, args) =>
+                                            {
+                                                streamsWindow = null;
+                                                //                                                _startNewStreamCommand = new DelegateCommand<Stream>(stream =>
+                                                //                                                                                                     {
+                                                //                                                                                                         CreateStreamsListWindow();
+                                                //                                                                                                         streamsWindow.StartNewStream(stream);
+                                                //                                                                                                     });
+                                            };
+                    streamsWindow.Owner = this;
+
+                    streamsWindow.Show();
+                }
+            }
         }
 
         private void OnTrayExitClick(object sender, EventArgs e)
@@ -307,7 +328,7 @@ namespace LeStreamsFace
                     {
                         foreach (Stream newStream in newStreamsList.Favorites())
                         {
-                            new NotificationWindow(newStream);
+                            new NotificationWindow(newStream, EventAggregator);
                         }
                     }
                     else
@@ -332,7 +353,7 @@ namespace LeStreamsFace
                                 // foreach (Stream newStream in newStreamsList)
                                 foreach (Stream newStream in newStreamsList.Favorites())
                                 {
-                                    new NotificationWindow(newStream);
+                                    new NotificationWindow(newStream, EventAggregator);
                                 }
                             }
                         }
@@ -401,7 +422,7 @@ namespace LeStreamsFace
                 {
                     foreach (Stream newStream in streamsFromOldPasses)
                     {
-                        new NotificationWindow(newStream);
+                        new NotificationWindow(newStream, EventAggregator);
                     }
                 }
             }
@@ -482,6 +503,54 @@ namespace LeStreamsFace
                 StreamListOnClick();
             }
             return IntPtr.Zero;
+        }
+
+        public void Handle(TabCreationEvent message)
+        {
+            if (ConfigManager.Instance.StreamOpeningProcedure == StreamOpeningProcedure.Livestreamer)
+            {
+                CreateLivestreamerConsole(message.Stream);
+            }
+            if (ConfigManager.Instance.StreamOpeningProcedure == StreamOpeningProcedure.Tab)
+            {
+                if (streamsWindow == null)
+                {
+                    CreateStreamsListWindow();
+                    EventAggregator.PublishOnCurrentThread(message);
+                }
+            }
+            if (ConfigManager.Instance.StreamOpeningProcedure == StreamOpeningProcedure.Browser)
+            {
+                Process.Start(message.Stream.GetUrl());
+            }
+        }
+
+        private void CreateLivestreamerConsole(Stream streamToStart)
+        {
+            //            var args = streamToStart.GetUrl() + " " + ConfigManager.Instance.LivestreamerArguments;
+            var args = "twitch.tv/" + streamToStart.LoginNameTwtv + " " + ConfigManager.Instance.LivestreamerArguments;
+            var processStartInfo = new ProcessStartInfo(@"livestreamer\livestreamer.exe", args);
+
+            processStartInfo.UseShellExecute = false;
+            processStartInfo.ErrorDialog = false;
+
+            processStartInfo.RedirectStandardError = true;
+            processStartInfo.RedirectStandardInput = true;
+            processStartInfo.RedirectStandardOutput = true;
+            processStartInfo.CreateNoWindow = true;
+
+            Task.Factory.StartNew(() =>
+                                  {
+                                      Process process = new Process();
+                                      process.StartInfo = processStartInfo;
+                                      bool processStarted = process.Start();
+
+                                      StreamWriter inputWriter = process.StandardInput;
+                                      StreamReader outputReader = process.StandardOutput;
+                                      StreamReader errorReader = process.StandardError;
+                                      var consoleOutput = outputReader.ReadToEnd();
+                                      process.WaitForExit();
+                                  });
         }
     }
 }

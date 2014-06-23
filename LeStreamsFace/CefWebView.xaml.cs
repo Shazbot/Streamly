@@ -1,15 +1,16 @@
-﻿using CefSharp;
+﻿using Caliburn.Micro;
+using CefSharp;
 using CefSharp.Wpf;
 using LeStreamsFace.Annotations;
 using OxyPlot.Reporting;
 using PropertyChanged;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Input;
+using Action = System.Action;
 using MouseEventArgs = System.Windows.Input.MouseEventArgs;
 using UserControl = System.Windows.Controls.UserControl;
 
@@ -122,11 +123,17 @@ namespace LeStreamsFace
 
         private void Browser_OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            if (StreamsListWindow.IsMaximized)
+            var x = e.GetPosition(this).X;
+            if (x >= browser.ActualWidth - 27) // fake maximize
             {
-                return;
+                EventAggregatorExtensions.PublishOnUIThread(MainWindow.EventAggregator, new MinimizeMaximizeMessage());
+                e.Handled = true;
             }
 
+            //            if (StreamsListWindow.IsMaximized)
+            //            {
+            //                return;
+            //            }
             //            var x = e.GetPosition(this).X;
             //            if (x >= 4 && x <= 25) // pause by sending space
             //            {
@@ -147,11 +154,11 @@ namespace LeStreamsFace
 
         private void Browser_OnPreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
-            //            var x = e.GetPosition(this).X;
-            //            if (x >= browser.ActualWidth - 27) // ignore maximize
-            //            {
-            //                e.Handled = true;
-            //            }
+            //                        var x = e.GetPosition(this).X;
+            //                        if (x >= browser.ActualWidth - 27) // ignore maximize
+            //                        {
+            //                            e.Handled = true;
+            //                        }
         }
 
         private void Browser_OnMouseMove(object sender, MouseEventArgs e)

@@ -1,4 +1,5 @@
-﻿using LeStreamsFace.Annotations;
+﻿using Caliburn.Micro;
+using LeStreamsFace.Annotations;
 using LeStreamsFace.StreamParsers;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -21,9 +22,10 @@ using System.Windows.Input;
 namespace LeStreamsFace
 {
     [ImplementPropertyChanged]
-    internal class StreamsListViewModel : INotifyPropertyChanged
+    internal class StreamsListViewModel : INotifyPropertyChanged, IHandle<TabCreationEvent>
     {
         public readonly StreamsListWindow View;
+        private readonly IEventAggregator _eventAggregator;
 
         private GamesViewModel _gamesPanelSelectedGame;
         private Stream _streamsPanelSelectedStream;
@@ -52,11 +54,11 @@ namespace LeStreamsFace
 
         public event StreamTabOpening OnStreamTabOpening;
 
-        public event StreamTabClosing OnStreamTabClosing;
-
-        public StreamsListViewModel(StreamsListWindow view)
+        public StreamsListViewModel(StreamsListWindow view, IEventAggregator eventAggregator)
         {
             this.View = view;
+            _eventAggregator = eventAggregator;
+            _eventAggregator.Subscribe(this);
 
             _runningStreams.CollectionChanged += RunningStreamsOnCollectionChanged;
 
@@ -95,7 +97,6 @@ namespace LeStreamsFace
 
         private void CloseStreamingTab()
         {
-            OnStreamTabClosing(this, new StreamTabClosingEventArgs());
             var streamToRemove = SelectedRunningStreamTab;
             SelectedRunningStreamTab = RunningStreams.FirstOrDefault(stream => stream != SelectedRunningStreamTab);
 
@@ -116,7 +117,6 @@ namespace LeStreamsFace
                 return;
             }
 
-            OnStreamTabClosing(this, new StreamTabClosingEventArgs());
             RunningStreams.Remove(streamInTabToRemove);
             CefWebView.WebViewForStream[streamInTabToRemove].browser.Dispose();
             CefWebView.WebViewForStream.Remove(streamInTabToRemove);
@@ -358,7 +358,7 @@ namespace LeStreamsFace
             {
                 if (value == null) return;
                 _streamsPanelSelectedStream = value;
-                OpenNewStreamingTab(value);
+                _eventAggregator.PublishOnCurrentThread(new TabCreationEvent(value));
             }
         }
 
@@ -593,50 +593,12 @@ namespace LeStreamsFace
             if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public void StartStream(Stream streamToStart)
+        public void Handle(TabCreationEvent message)
         {
-            switch (ConfigManager.Instance.StreamOpeningProcedure)
+            if (ConfigManager.Instance.StreamOpeningProcedure == StreamOpeningProcedure.Tab)
             {
-                case StreamOpeningProcedure.Browser:
-                    Process.Start(streamToStart.GetUrl());
-                    break;
-
-                case StreamOpeningProcedure.Tab:
-                    OpenNewStreamingTab(streamToStart);
-                    break;
-
-                case StreamOpeningProcedure.Livestreamer:
-                    CreateLivestreamerConsole(streamToStart);
-                    break;
+                OpenNewStreamingTab(message.Stream);
             }
-        }
-
-        private void CreateLivestreamerConsole(Stream streamToStart)
-        {
-            //            var args = streamToStart.GetUrl() + " " + ConfigManager.Instance.LivestreamerArguments;
-            var args = "twitch.tv/" + streamToStart.LoginNameTwtv + " " + ConfigManager.Instance.LivestreamerArguments;
-            var processStartInfo = new ProcessStartInfo(@"livestreamer\livestreamer.exe", args);
-
-            processStartInfo.UseShellExecute = false;
-            processStartInfo.ErrorDialog = false;
-
-            processStartInfo.RedirectStandardError = true;
-            processStartInfo.RedirectStandardInput = true;
-            processStartInfo.RedirectStandardOutput = true;
-            processStartInfo.CreateNoWindow = true;
-
-            Task.Factory.StartNew(() =>
-            {
-                Process process = new Process();
-                process.StartInfo = processStartInfo;
-                bool processStarted = process.Start();
-
-                StreamWriter inputWriter = process.StandardInput;
-                StreamReader outputReader = process.StandardOutput;
-                StreamReader errorReader = process.StandardError;
-                var consoleOutput = outputReader.ReadToEnd();
-                process.WaitForExit();
-            });
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using MahApps.Metro.Controls;
+﻿using Caliburn.Micro;
+using MahApps.Metro.Controls;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -28,20 +29,23 @@ namespace LeStreamsFace
     /// <summary>
     /// Interaction logic for BlockedItemsWindow.xaml
     /// </summary>
-    internal partial class StreamsListWindow : MetroWindow
+    internal partial class StreamsListWindow : MetroWindow, IHandle<MinimizeMaximizeMessage>
     {
         public static bool IsMaximized;
 
         private Func<bool> timeBlockCheck;
+        private readonly IEventAggregator _eventAggregator;
         private StreamsListViewModel vm;
 
-        public StreamsListWindow(Func<bool> timeBlockCheck)
+        public StreamsListWindow(Func<bool> timeBlockCheck, IEventAggregator eventAggregator)
         {
             InitializeComponent();
-            DataContext = vm = new StreamsListViewModel(this);
+            DataContext = vm = new StreamsListViewModel(this, eventAggregator);
             vm.OnStreamTabOpening += VmOnOnStreamTabOpening;
+            MainWindow.EventAggregator.Subscribe(this);
 
             this.timeBlockCheck = timeBlockCheck;
+            _eventAggregator = eventAggregator;
 
             NameScope.SetNameScope(windowCommands, NameScope.GetNameScope(this));
 
@@ -152,7 +156,7 @@ namespace LeStreamsFace
                 return;
             }
 
-            vm.StartStream(sendersStream);
+            _eventAggregator.PublishOnCurrentThread(new TabCreationEvent(sendersStream));
         }
 
         private void GameIconButton_Click(object sender, RoutedEventArgs e)
@@ -274,7 +278,7 @@ namespace LeStreamsFace
 
         private void window_OnPreviewKeyDown(object sender, KeyEventArgs e)
         {
-            if (!streamsTabItem.IsSelected || Flyouts.GetChildObjects().Cast<Flyout>().Any(flyout => flyout.IsOpen))
+            if (!streamsTabItem.IsSelected || vm.IsAnyStreamTabOpen || Flyouts.GetChildObjects().Cast<Flyout>().Any(flyout => flyout.IsOpen))
             {
                 return;
             }
@@ -422,7 +426,7 @@ namespace LeStreamsFace
                 if (streamsDataGrid.SelectedItem != null)
                 {
                     var selectedStream = (Stream)streamsDataGrid.SelectedItem;
-                    vm.StartStream(selectedStream);
+                    _eventAggregator.PublishOnCurrentThread(new TabCreationEvent(selectedStream));
                 }
             }
         }
@@ -500,6 +504,15 @@ namespace LeStreamsFace
         private void StreamsListWindow_OnStateChanged(object sender, EventArgs e)
         {
             IsMaximized = WindowState == WindowState.Maximized;
+
+            if (WindowState == WindowState.Maximized)
+            {
+                ShowTitleBar = false;
+            }
+            if (WindowState == WindowState.Normal)
+            {
+                ShowTitleBar = true;
+            }
         }
 
         private void CefWebView_OnUnloaded(object sender, RoutedEventArgs e)
@@ -517,6 +530,34 @@ namespace LeStreamsFace
             if (e.ChangedButton == MouseButton.Middle && e.ButtonState == MouseButtonState.Pressed)
             {
                 vm.CloseRunningStreamTabCommand.Execute(((FrameworkElement)sender).DataContext);
+            }
+        }
+
+        private void StreamsListWindow_OnMouseMove(object sender, MouseEventArgs e)
+        {
+            if (WindowState == WindowState.Maximized)
+            {
+                var titleBarOffset = TitlebarHeight * 2;
+                if (e.GetPosition(this).Y < TitlebarHeight / 2 && !ShowTitleBar)
+                {
+                    ShowTitleBar = true;
+                }
+                else if (e.GetPosition(this).Y >= titleBarOffset && ShowTitleBar)
+                {
+                    ShowTitleBar = false;
+                }
+            }
+        }
+
+        public void Handle(MinimizeMaximizeMessage message)
+        {
+            if (WindowState == WindowState.Maximized)
+            {
+                WindowState = WindowState.Normal;
+            }
+            else if (WindowState == WindowState.Normal)
+            {
+                WindowState = WindowState.Maximized;
             }
         }
     }

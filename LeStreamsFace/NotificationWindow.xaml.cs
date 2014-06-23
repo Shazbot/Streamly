@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Caliburn.Micro;
+using System;
 using System.Linq;
 using System.Windows;
 using System.Windows.Forms;
@@ -9,19 +10,22 @@ using System.Windows.Media.Animation;
 using System.Windows.Threading;
 using Clipboard = System.Windows.Clipboard;
 using MouseEventArgs = System.Windows.Input.MouseEventArgs;
+using Screen = System.Windows.Forms.Screen;
 
 namespace LeStreamsFace
 {
     internal partial class NotificationWindow : Window
     {
+        private readonly IEventAggregator _eventAggregator;
         private bool removeLater = false;
         private bool animationRunning = true;
 
         private DispatcherTimer dispatcherTimer;
         private double calculatedTop;
 
-        public NotificationWindow(Stream stream)
+        public NotificationWindow(Stream stream, IEventAggregator eventAggregator)
         {
+            _eventAggregator = eventAggregator;
             this.InitializeComponent();
             this.DataContext = stream;
 
@@ -208,7 +212,8 @@ namespace LeStreamsFace
                 return;
             }
 
-            System.Diagnostics.Process.Start(((Stream)DataContext).GetUrl());
+            _eventAggregator.PublishOnCurrentThread(new TabCreationEvent((Stream)DataContext));
+            //            System.Diagnostics.Process.Start(((Stream)DataContext).GetUrl());
         }
 
         private void Window_MouseEnter(object sender, MouseEventArgs e)

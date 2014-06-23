@@ -32,6 +32,7 @@
                            PreviewTextInput="window_PreviewTextInput"
                            ResizeMode="CanResizeWithGrip"
                            ShowIconOnTitleBar="False"
+                           MouseMove="StreamsListWindow_OnMouseMove"
                            ShowTitleBar="True"
                            SizeChanged="WindowSizeChanged"
                            SizeToContent="Manual"
@@ -226,6 +227,10 @@
                                     <Setter Property="Foreground" Value="White" />
                                     <Setter Property="Opacity" Value="0.5" />
                                     <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Opacity" Value="1" />
+                                        </Trigger>
+
                                         <DataTrigger Value="True">
                                             <DataTrigger.Binding>
                                                 <MultiBinding Converter="{StaticResource sameStreamMultiConverter}">
