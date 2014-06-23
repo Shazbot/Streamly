@@ -19,6 +19,7 @@
                            MinHeight="100"
                            Background="WhiteSmoke"
                            Closed="window_Closed"
+                           Closing="window_OnClosing"
                            Icon="pack://application:,,,/Resources/App.ico"
                            IgnoreTaskbarOnMaximize="True"
                            KeyDown="window_KeyDown"

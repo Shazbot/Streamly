@@ -20,7 +20,7 @@ using Screen = System.Windows.Forms.Screen;
 
 namespace LeStreamsFace
 {
-    internal partial class MainWindow : Window, IHandle<TabCreationEvent>
+    internal partial class MainWindow : Window, IHandle<TabCreationEvent>, IHandle<CheckTimeBlockEvent>
     {
         private readonly DispatcherTimer mainTimer;
         private readonly DispatcherTimer fullscreenWaitTimer;
@@ -183,7 +183,7 @@ namespace LeStreamsFace
             {
                 if (streamsWindow == null)
                 {
-                    streamsWindow = new StreamsListWindow(DuringTimeBlock, EventAggregator);
+                    streamsWindow = new StreamsListWindow(EventAggregator);
                     //                    _startNewStreamCommand = new DelegateCommand<Stream>(stream => streamsWindow.StartNewStream(stream));
                     streamsWindow.Closed += (o, args) =>
                                             {
@@ -546,6 +546,11 @@ namespace LeStreamsFace
                                       var consoleOutput = outputReader.ReadToEnd();
                                       process.WaitForExit();
                                   });
+        }
+
+        public void Handle(CheckTimeBlockEvent message)
+        {
+            DuringTimeBlock();
         }
     }
 }

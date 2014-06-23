@@ -1,7 +1,6 @@
 ﻿using Caliburn.Micro;
 using MahApps.Metro.Controls;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
@@ -12,17 +11,13 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Forms;
 using System.Windows.Input;
-using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 using Button = System.Windows.Controls.Button;
 using Clipboard = System.Windows.Clipboard;
-using Control = System.Windows.Controls.Control;
 using KeyEventArgs = System.Windows.Input.KeyEventArgs;
-using ListBox = System.Windows.Controls.ListBox;
 using MouseEventArgs = System.Windows.Input.MouseEventArgs;
-using TextBox = System.Windows.Controls.TextBox;
 
 namespace LeStreamsFace
 {
@@ -33,18 +28,16 @@ namespace LeStreamsFace
     {
         public static bool IsMaximized;
 
-        private Func<bool> timeBlockCheck;
-        private readonly IEventAggregator _eventAggregator;
+        private IEventAggregator _eventAggregator;
         private StreamsListViewModel vm;
 
-        public StreamsListWindow(Func<bool> timeBlockCheck, IEventAggregator eventAggregator)
+        public StreamsListWindow(IEventAggregator eventAggregator)
         {
             InitializeComponent();
             DataContext = vm = new StreamsListViewModel(this, eventAggregator);
             vm.OnStreamTabOpening += VmOnOnStreamTabOpening;
             MainWindow.EventAggregator.Subscribe(this);
 
-            this.timeBlockCheck = timeBlockCheck;
             _eventAggregator = eventAggregator;
 
             NameScope.SetNameScope(windowCommands, NameScope.GetNameScope(this));
@@ -70,15 +63,6 @@ namespace LeStreamsFace
         private void VmOnOnStreamTabOpening(object source, StreamsListViewModel.StreamTabOpeningEventArgs streamTabOpeningEventArgs)
         {
             UnsetGameIconBackground();
-        }
-
-        private void window_Closed(object sender, EventArgs e)
-        {
-            TypeDescriptor.GetProperties(this.streamsDataGrid)["ItemsSource"].RemoveValueChanged(this.streamsDataGrid, new EventHandler(blockedItemsListBox_ItemsSourceChanged));
-            timeBlockCheck = null;
-
-            gameStreamsPlot.Model = null;
-            gameViewersPlot.Model = null;
         }
 
         private void blockedItemsListBox_ItemsSourceChanged(object sender, EventArgs e)
@@ -456,6 +440,8 @@ namespace LeStreamsFace
         private void StreamsPanel_ItemsSourceUpdated(object sender, DataTransferEventArgs e)
         {
             var notifyCollectionChanged = (streamsPanel.ItemsSource) as INotifyCollectionChanged;
+            if (notifyCollectionChanged == null) return;
+
             notifyCollectionChanged.CollectionChanged += new NotifyCollectionChangedEventHandler(StreamsPanel_CollectionChanged);
         }
 
@@ -525,6 +511,22 @@ namespace LeStreamsFace
             {
                 WindowState = WindowState.Maximized;
             }
+        }
+
+        private void window_OnClosing(object sender, CancelEventArgs e)
+        {
+            TypeDescriptor.GetProperties(this.streamsDataGrid)["ItemsSource"].RemoveValueChanged(this.streamsDataGrid, new EventHandler(blockedItemsListBox_ItemsSourceChanged));
+            vm.CloseAllRunningStreams();
+            vm.OnStreamTabOpening -= VmOnOnStreamTabOpening;
+        }
+
+        private void window_Closed(object sender, EventArgs e)
+        {
+            _eventAggregator = null;
+            streamsDataGrid.ItemsSource = null;
+            DataContext = vm = null;
+            gameStreamsPlot.Model = null;
+            gameViewersPlot.Model = null;
         }
     }
 }

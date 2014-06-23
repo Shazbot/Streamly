@@ -218,6 +218,7 @@
     <Compile Include="CefWebView.xaml.cs">
       <DependentUpon>CefWebView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Messages\CheckTimeBlockEvent.cs" />
     <Compile Include="Commands\InteractiveCommand .cs" />
     <Compile Include="Converters\EnumMatchToBooleanConverter.cs" />
     <Compile Include="Converters\SameStreamMultiConverter.cs" />

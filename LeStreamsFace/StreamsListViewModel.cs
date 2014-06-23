@@ -15,6 +15,7 @@ using System.Net;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Documents;
 using System.Windows.Input;
 
 namespace LeStreamsFace
@@ -107,6 +108,14 @@ namespace LeStreamsFace
             RunningStreams.Remove(streamInTabToRemove);
             CefWebView.WebViewForStream[streamInTabToRemove].browser.Dispose();
             CefWebView.WebViewForStream.Remove(streamInTabToRemove);
+        }
+
+        public void CloseAllRunningStreams()
+        {
+            foreach (var runningStream in RunningStreams.ToList())
+            {
+                CloseRunningStreamTab(runningStream);
+            }
         }
 
         private void OpenExistingStreamingTab(Stream stream)
@@ -471,8 +480,7 @@ namespace LeStreamsFace
                 ConfigManager.Instance.FromSpan = fromSpan;
                 ConfigManager.Instance.ToSpan = toSpan;
                 ConfigManager.Instance.WriteConfigXml();
-                // TODO think about if we need this check here
-                //                timeBlockCheck();
+                _eventAggregator.PublishOnUIThread(new CheckTimeBlockEvent());
             }
             catch (Exception)
             {
