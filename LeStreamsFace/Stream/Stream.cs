@@ -6,6 +6,9 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Windows;
+using System.Windows.Resources;
+using System.Xml.Linq;
 
 namespace LeStreamsFace
 {
@@ -167,12 +170,8 @@ namespace LeStreamsFace
             {
                 if (Site != StreamingSite.TwitchTv) throw new ArgumentException("no supporterino");
 
-                var url = @"<object type=""application/x-shockwave-flash"" scrolling=""no"" height=""100%"" width=""100%"" style=""overflow:hidden; width:100%; height:100%;"" id=""live_embed_player_flash"" data=""http://www.twitch.tv/widgets/live_embed_player.swf?channel=" + LoginNameTwtv + @""" bgcolor=""#000000""><param name=""allowFullScreen"" value=""false"" /><param name=""allowScriptAccess"" value=""always"" /><param name=""allowNetworking"" value=""all"" /><param name=""movie"" value=""http://www.twitch.tv/widgets/live_embed_player.swf"" /><param name=""flashvars"" value=""hostname=www.twitch.tv&channel=" + LoginNameTwtv + @"&auto_play=true&start_volume=25"" /></object>";
-                //                url = @"<div style=""overflow:hidden;"">" + url + @"</div>";
-                url = @"<body style=""overflow:hidden;"">" + url + @"</body>";
-
-                //                url = @"<iframe id=""player"" type=""text/html"" width=""620"" height=""378"" src=""http://www.twitch.tv/" + LoginNameTwtv + @"/hls"" frameborder=""0""></iframe>";
-                url = File.ReadAllText("stream.txt").Replace("channelname", LoginNameTwtv);
+                //                url = File.ReadAllText("stream.txt").Replace("channelname", LoginNameTwtv);
+                var url = ConfigManager.Instance.StreamHtml.Replace("channelname", LoginNameTwtv);
                 return url;
             }
         }

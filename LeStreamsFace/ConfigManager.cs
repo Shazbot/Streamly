@@ -115,7 +115,13 @@ namespace LeStreamsFace
             Offline = false;
             StreamOpeningProcedure = StreamOpeningProcedure.Tab;
             LivestreamerArguments = "best";
+
+            Uri uri = new Uri("pack://application:,,,/Resources/streamHtml.txt");
+            StreamResourceInfo streamResourceInfo = Application.GetResourceStream(uri);
+            StreamHtml = new StreamReader(streamResourceInfo.Stream).ReadToEnd();
         }
+
+        public string StreamHtml { get; private set; }
 
         public static ConfigManager Instance
         {
