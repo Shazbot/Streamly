@@ -152,10 +152,10 @@ namespace LeStreamsFace
             //                return;
             //            }
             //            var x = e.GetPosition(this).X;
-            //            if (x >= 4 && x <= 25) // pause by sending space
-            //            {
-            //                SendKeys.SendWait(" ");
-            //            }
+            if (StreamsListWindow.IsMaximized && x >= 4 && x <= 25) // pause by sending space
+            {
+                SendKeys.SendWait(" ");
+            }
             //            else if (x >= 30 && x <= 55) // mute by sending a click at the low end of the volume slider
             //            {
             //                var muteClickPoint = PointToScreen(new Point(60, browser.ActualHeight - 10));
@@ -163,10 +163,11 @@ namespace LeStreamsFace
             //            }
 
             //            e.Handled = true;
-            Console.WriteLine("x is " + e.GetPosition(browser).X);
-            Console.WriteLine("y is " + e.GetPosition(browser).Y);
-            Console.WriteLine("b width is " + browser.Width + "       " + browser.ActualWidth);
-            Console.WriteLine("b height is " + browser.Height + "       " + browser.ActualHeight);
+
+            //            Console.WriteLine("x is " + e.GetPosition(browser).X);
+            //            Console.WriteLine("y is " + e.GetPosition(browser).Y);
+            //            Console.WriteLine("b width is " + browser.Width + "       " + browser.ActualWidth);
+            //            Console.WriteLine("b height is " + browser.Height + "       " + browser.ActualHeight);
         }
 
         private void Browser_OnPreviewMouseDown(object sender, MouseButtonEventArgs e)
