@@ -232,7 +232,7 @@ namespace LeStreamsFace
                 {
                     try
                     {
-                        await Task.Factory.StartNew(() => CheckFavoriteTwitchStreamsManually(newStreamsList, streamsList));
+                        await CheckFavoriteTwitchStreamsManually(newStreamsList, streamsList);
                     }
                     catch (Exception) { }
                     closedStreams.AddRange(StreamsManager.Streams.Where(stream => stream.GottenViaAutoGetFavs && !streamsList.Contains(stream)).ToList());
@@ -440,7 +440,7 @@ namespace LeStreamsFace
                    || DateTime.Now.TimeOfDay <= ConfigManager.Instance.ToSpan;
         }
 
-        private void CheckFavoriteTwitchStreamsManually(List<Stream> newStreamsList, List<Stream> streamsList)
+        private async Task CheckFavoriteTwitchStreamsManually(List<Stream> newStreamsList, List<Stream> streamsList)
         {
             if (!ConfigManager.Instance.FavoriteStreams.Any()) return;
 
@@ -450,7 +450,7 @@ namespace LeStreamsFace
                 .Select(stream => stream.LoginNameTwtv)
                 .Aggregate((s, s1) => s + "," + s1);
 
-            var twitchFavsResponse = new RestClient("http://api.justin.tv/api/stream/list.xml?channel=" + channels).SinglePageResponse();
+            var twitchFavsResponse = await new RestClient("http://api.justin.tv/api/stream/list.xml?channel=" + channels).ExecuteTaskAsync(new RestRequest());
             XDocument xDocument = XDocument.Parse(twitchFavsResponse.Content);
 
             var gottenFavs = new List<Stream>();
