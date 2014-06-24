@@ -16,7 +16,6 @@ using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Documents;
 using System.Windows.Input;
 
 namespace LeStreamsFace
@@ -32,8 +31,6 @@ namespace LeStreamsFace
 
         public class StreamTabOpeningEventArgs : EventArgs
         {
-            private string EventInfo;
-
             public StreamTabOpeningEventArgs()
             {
             }
@@ -500,7 +497,7 @@ namespace LeStreamsFace
         {
             Stream stream = (Stream)o;
 
-            if (stream.IsFavorite && MainWindow.WasTimeBlocking)
+            if (stream.IsFavorite && AppLogic.WasTimeBlocking)
             {
                 return false;
             }

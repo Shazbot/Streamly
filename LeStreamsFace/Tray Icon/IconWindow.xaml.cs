@@ -9,9 +9,9 @@ namespace LeStreamsFace
     /// </summary>
     internal partial class IconWindow : Window
     {
-        private MainWindow.ExitDelegate exitDelegate;
+        private AppLogic.ExitDelegate exitDelegate;
 
-        internal IconWindow(MainWindow.ExitDelegate exitDelegate)
+        internal IconWindow(AppLogic.ExitDelegate exitDelegate)
         {
             InitializeComponent();
             this.exitDelegate = exitDelegate;

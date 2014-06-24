@@ -38,7 +38,7 @@ namespace LeStreamsFace
             InitializeComponent();
             DataContext = vm = new StreamsListViewModel(this, eventAggregator);
             vm.OnStreamTabOpening += VmOnOnStreamTabOpening;
-            MainWindow.EventAggregator.Subscribe(this);
+            AppLogic.EventAggregator.Subscribe(this);
 
             _eventAggregator = eventAggregator;
 

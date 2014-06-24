@@ -1,10 +1,7 @@
 ﻿using Caliburn.Micro;
 using CefSharp;
-using CefSharp.Wpf;
 using LeStreamsFace.Annotations;
-using OxyPlot.Reporting;
 using PropertyChanged;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -137,7 +134,7 @@ namespace LeStreamsFace
             var x = e.GetPosition(this).X;
             if (x >= browser.ActualWidth - 27) // fake maximize
             {
-                EventAggregatorExtensions.PublishOnUIThread(MainWindow.EventAggregator, new MinimizeMaximizeMessage());
+                EventAggregatorExtensions.PublishOnUIThread(AppLogic.EventAggregator, new MinimizeMaximizeMessage());
                 e.Handled = true;
             }
             else if (x >= browser.ActualWidth - 110 && x <= browser.ActualWidth - 58)

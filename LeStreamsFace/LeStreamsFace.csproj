@@ -197,10 +197,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="MainWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="NotificationWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -211,6 +207,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="AppBootstraper.cs" />
+    <Compile Include="AppLogic.cs" />
     <Compile Include="CefWebView.xaml.cs">
       <DependentUpon>CefWebView.xaml</DependentUpon>
     </Compile>
@@ -253,9 +250,6 @@
     </Compile>
     <Compile Include="Tray Icon\IconWindow.xaml.cs">
       <DependentUpon>IconWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\ValueConverterGroup.cs" />
     <Compile Include="Windows Interop\MouseUtilities.cs" />

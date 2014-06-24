@@ -33,7 +33,7 @@ namespace LeStreamsFace
             // now using Costura to load assemblies
             //            AppDomain.CurrentDomain.AssemblyResolve += new ResolveEventHandler(Target);
 
-            new MainWindow(new TwitchXMLStreamParser(), new TwitchJSONStreamParser());
+            new AppLogic(new TwitchXMLStreamParser(), new TwitchJSONStreamParser());
 
             CefWebView.Init();
         }

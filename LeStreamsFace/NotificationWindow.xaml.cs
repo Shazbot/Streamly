@@ -35,13 +35,13 @@ namespace LeStreamsFace
             this.Top = point.Y;
             calculatedTop = Top;
 
-            var numNotifications = MainWindow.NotificationWindows.Count;
+            var numNotifications = AppLogic.NotificationWindows.Count;
             if (numNotifications > 0)
             {
-                this.Top = MainWindow.NotificationWindows[numNotifications - 1].calculatedTop - this.Height;
+                this.Top = AppLogic.NotificationWindows[numNotifications - 1].calculatedTop - this.Height;
                 calculatedTop = Top;
             }
-            MainWindow.NotificationWindows.Add(this);
+            AppLogic.NotificationWindows.Add(this);
             this.Opacity = 0.9;
             //            this.Topmost = false;
             this.Show();
@@ -70,7 +70,7 @@ namespace LeStreamsFace
             MouseUtilities.Win32Point win32Point = new MouseUtilities.Win32Point();
             NativeMethods.GetCursorPos(ref win32Point);
 
-            foreach (NotificationWindow notificationWindow in MainWindow.NotificationWindows)
+            foreach (NotificationWindow notificationWindow in AppLogic.NotificationWindows)
             {
                 if (VisualTreeHelper.GetDescendantBounds(notificationWindow).Contains(
                     notificationWindow.PointFromScreen(new System.Windows.Point(win32Point.X, win32Point.Y))))
@@ -89,13 +89,13 @@ namespace LeStreamsFace
 
             var screenHeight = primaryScreen.Bounds.Height;
             var screenWidth = primaryScreen.Bounds.Width;
-            if (MainWindow.Taskbar.Position == TaskbarPosition.Bottom && !MainWindow.Taskbar.AutoHide)
+            if (AppLogic.Taskbar.Position == TaskbarPosition.Bottom && !AppLogic.Taskbar.AutoHide)
             {
-                screenHeight = MainWindow.Taskbar.Location.Y;
+                screenHeight = AppLogic.Taskbar.Location.Y;
             }
-            else if (MainWindow.Taskbar.Position == TaskbarPosition.Right && !MainWindow.Taskbar.AutoHide)
+            else if (AppLogic.Taskbar.Position == TaskbarPosition.Right && !AppLogic.Taskbar.AutoHide)
             {
-                screenWidth = MainWindow.Taskbar.Location.X;
+                screenWidth = AppLogic.Taskbar.Location.X;
             }
 
             return new Point(screenWidth - this.Width, screenHeight - this.Height);
@@ -116,7 +116,7 @@ namespace LeStreamsFace
             NativeMethods.GetCursorPos(ref win32Point);
 
             bool mouseOverAny = false;
-            foreach (NotificationWindow notificationWindow in MainWindow.NotificationWindows.Where(window => window != this))
+            foreach (NotificationWindow notificationWindow in AppLogic.NotificationWindows.Where(window => window != this))
             {
                 if (notificationWindow.animationRunning || notificationWindow.endAnimationStarted)
                 {
@@ -141,7 +141,7 @@ namespace LeStreamsFace
 
         private void RemoveNotifications()
         {
-            var index = MainWindow.NotificationWindows.IndexOf(this);
+            var index = AppLogic.NotificationWindows.IndexOf(this);
             if (index < 0)
             {
                 return;
@@ -149,26 +149,26 @@ namespace LeStreamsFace
 
             this.Close();
 
-            bool allAnimationsDone = MainWindow.NotificationWindows.Where(window => window.endAnimationStarted).All(window => window.endAnimationEnded);
+            bool allAnimationsDone = AppLogic.NotificationWindows.Where(window => window.endAnimationStarted).All(window => window.endAnimationEnded);
 
-            index = MainWindow.NotificationWindows.IndexOf(this);
+            index = AppLogic.NotificationWindows.IndexOf(this);
             if (index >= 0 && endAnimationEnded)
             {
-                MainWindow.NotificationWindows.RemoveAt(index);
+                AppLogic.NotificationWindows.RemoveAt(index);
             }
 
             MouseUtilities.Win32Point win32Point = new MouseUtilities.Win32Point();
             NativeMethods.GetCursorPos(ref win32Point);
 
             // if mouse over any notification don't restack them
-            if (MainWindow.NotificationWindows.Where(window => !window.endAnimationStarted && !window.animationRunning).Any(notificationWindow => VisualTreeHelper.GetDescendantBounds(notificationWindow).Contains(
+            if (AppLogic.NotificationWindows.Where(window => !window.endAnimationStarted && !window.animationRunning).Any(notificationWindow => VisualTreeHelper.GetDescendantBounds(notificationWindow).Contains(
                 notificationWindow.PointFromScreen(new System.Windows.Point(win32Point.X, win32Point.Y)))))
             {
                 return;
             }
 
             // remove notifications scheduled for removal
-            foreach (NotificationWindow notificationWindow in MainWindow.NotificationWindows.Where(window => window.removeLater))
+            foreach (NotificationWindow notificationWindow in AppLogic.NotificationWindows.Where(window => window.removeLater))
             {
                 if (notificationWindow == this)
                 {
@@ -184,10 +184,10 @@ namespace LeStreamsFace
             }
 
             // restack all notifications
-            foreach (NotificationWindow notificationWindow in MainWindow.NotificationWindows)
+            foreach (NotificationWindow notificationWindow in AppLogic.NotificationWindows)
             {
                 var point = notificationWindow.CalculateTopAndLeft();
-                var newTop = point.Y - MainWindow.NotificationWindows.IndexOf(notificationWindow) * notificationWindow.Height;
+                var newTop = point.Y - AppLogic.NotificationWindows.IndexOf(notificationWindow) * notificationWindow.Height;
                 notificationWindow.calculatedTop = newTop;
 
                 notificationWindow.BeginAnimation(TopProperty, null);
@@ -315,7 +315,7 @@ namespace LeStreamsFace
                     MouseUtilities.Win32Point win32Point = new MouseUtilities.Win32Point();
                     NativeMethods.GetCursorPos(ref win32Point);
                     bool mouseOverAny = false;
-                    foreach (NotificationWindow notificationWindow in MainWindow.NotificationWindows.Where(window => !window.endAnimationStarted && !window.animationRunning))
+                    foreach (NotificationWindow notificationWindow in AppLogic.NotificationWindows.Where(window => !window.endAnimationStarted && !window.animationRunning))
                     {
                         if (VisualTreeHelper.GetDescendantBounds(notificationWindow).Contains(
                             notificationWindow.PointFromScreen(new System.Windows.Point(win32Point.X, win32Point.Y))))
