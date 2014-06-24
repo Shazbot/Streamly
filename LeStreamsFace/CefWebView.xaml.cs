@@ -155,12 +155,19 @@ namespace LeStreamsFace
             if (StreamsListWindow.IsMaximized && x >= 4 && x <= 25) // pause by sending space
             {
                 SendKeys.SendWait(" ");
+                e.Handled = true;
+                return;
             }
-            //            else if (x >= 30 && x <= 55) // mute by sending a click at the low end of the volume slider
-            //            {
-            //                var muteClickPoint = PointToScreen(new Point(60, browser.ActualHeight - 10));
-            //                NativeMethods.LeftClick((int)muteClickPoint.X, (int)muteClickPoint.Y);
-            //            }
+
+            if (StreamsListWindow.IsMaximized && x >= 30 && x <= 55) // mute by sending a click at the low end of the volume slider
+            {
+                var currentMousePos = PointToScreen(e.GetPosition(this));
+                var muteClickPoint = PointToScreen(new Point(60, browser.ActualHeight - 10));
+                NativeMethods.LeftClick((int)muteClickPoint.X, (int)muteClickPoint.Y);
+                NativeMethods.SetCursorPos((int)currentMousePos.X, (int)currentMousePos.Y);
+                e.Handled = true;
+                return;
+            }
 
             //            e.Handled = true;
 

@@ -408,5 +408,8 @@ namespace LeStreamsFace
             mouse_event((int)(MouseEventFlags.LEFTDOWN), 0, 0, 0, 0);
             mouse_event((int)(MouseEventFlags.LEFTUP), 0, 0, 0, 0);
         }
+
+        [DllImport("user32.dll")]
+        public static extern bool SetCursorPos(int X, int Y);
     }
 }

@@ -471,7 +471,14 @@ namespace LeStreamsFace
         {
             var stream = ((CefWebView)sender).Tag as Stream;
 
-            if (!vm.RunningStreams.Contains(stream))
+            if (vm != null)
+            {
+                if (!vm.RunningStreams.Contains(stream))
+                {
+                    ((CefWebView)sender).browser.Dispose();
+                }
+            }
+            else
             {
                 ((CefWebView)sender).browser.Dispose();
             }
