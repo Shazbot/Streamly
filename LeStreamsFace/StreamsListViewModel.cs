@@ -13,6 +13,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
@@ -60,6 +61,9 @@ namespace LeStreamsFace
             CloseStreamingTabCommand = new DelegateCommand(() => CloseStreamingTab());
             PressedEscCommand = new DelegateCommand(() => PressedEsc());
             CloseRunningStreamTabCommand = new DelegateCommand<Stream>(stream => CloseRunningStreamTab(stream));
+
+            _timeWhenNotNotifyingTextInput = ConfigManager.Instance.FromSpan.ToString("hhmm") + '-' + ConfigManager.Instance.ToSpan.ToString("hhmm");
+            _bannedGamesTextInput = ConfigManager.Instance.BannedGames.Aggregate((s, s1) => s + ", " + s1);
 
             FetchGames();
 
@@ -244,13 +248,13 @@ namespace LeStreamsFace
             }
         }
 
-        private void FetchGames()
+        private async Task FetchGames()
         {
             try
             {
                 // TODO getting some weird timeout issues with await, the whole method hangs indefinitely, can look into task timeout and cancellations
-                //                        var twitchResponse = await new RestClient("https://api.twitch.tv/kraken/games/top?limit=100").ExecuteTaskAsync(new RestRequest(),);
-                var twitchResponse = new RestClient("https://api.twitch.tv/kraken/games/top?limit=100").Execute(new RestRequest());
+                var twitchResponse = await new RestClient("https://api.twitch.tv/kraken/games/top?limit=100").ExecuteTaskAsync(new RestRequest());
+                //                var twitchResponse = new RestClient("https://api.twitch.tv/kraken/games/top?limit=100").Execute(new RestRequest());
                 var topGamesJObject = JsonConvert.DeserializeObject<JObject>(twitchResponse.Content)["top"];
                 var games = topGamesJObject.Children().Select(token => new GamesViewModel(token["game"]["name"].ToString(), token["game"]["box"]["medium"].ToString()));
                 Games.AddRange(games);

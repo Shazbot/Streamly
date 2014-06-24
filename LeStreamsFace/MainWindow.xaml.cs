@@ -197,6 +197,7 @@ namespace LeStreamsFace
                     streamsWindow.Owner = this;
 
                     streamsWindow.Show();
+                    StreamsListWindow.DoneWithFirstOpening = true;
                 }
             }
         }

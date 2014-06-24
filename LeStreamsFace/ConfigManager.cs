@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Timers;
 using System.Windows;
 using System.Windows.Resources;
 using System.Xml;
@@ -107,6 +108,10 @@ namespace LeStreamsFace
 
         private static volatile ConfigManager _instance;
         private static object syncRoot = new Object();
+        private static object syncConfigWriting = new Object();
+
+        private readonly Timer _winPosTimer = new Timer(500);
+        private readonly Timer _winSizeTimer = new Timer(500);
 
         private ConfigManager()
         {
@@ -119,6 +124,17 @@ namespace LeStreamsFace
             Uri uri = new Uri("pack://application:,,,/Resources/streamHtml.txt");
             StreamResourceInfo streamResourceInfo = Application.GetResourceStream(uri);
             StreamHtml = new StreamReader(streamResourceInfo.Stream).ReadToEnd();
+
+            _winPosTimer.Elapsed += (sender, args) =>
+                                    {
+                                        _winPosTimer.Stop();
+                                        WriteConfigXml();
+                                    };
+            _winSizeTimer.Elapsed += (sender, args) =>
+                                     {
+                                         _winSizeTimer.Stop();
+                                         WriteConfigXml();
+                                     };
         }
 
         public string StreamHtml { get; private set; }
@@ -192,7 +208,11 @@ namespace LeStreamsFace
             {
                 if (_winLeft == value) return;
                 _winLeft = value;
-                WriteConfigXml();
+                if (StreamsListWindow.DoneWithFirstOpening)
+                {
+                    _winPosTimer.Stop();
+                    _winPosTimer.Start(); ;
+                }
             }
         }
 
@@ -203,7 +223,11 @@ namespace LeStreamsFace
             {
                 if (_winTop == value) return;
                 _winTop = value;
-                WriteConfigXml();
+                if (StreamsListWindow.DoneWithFirstOpening)
+                {
+                    _winPosTimer.Stop();
+                    _winPosTimer.Start();
+                }
             }
         }
 
@@ -214,7 +238,11 @@ namespace LeStreamsFace
             {
                 if (_winWidth == value) return;
                 _winWidth = value;
-                WriteConfigXml();
+                if (StreamsListWindow.DoneWithFirstOpening)
+                {
+                    _winSizeTimer.Stop();
+                    _winSizeTimer.Start();
+                }
             }
         }
 
@@ -225,7 +253,11 @@ namespace LeStreamsFace
             {
                 if (_winHeight == value) return;
                 _winHeight = value;
-                WriteConfigXml();
+                if (StreamsListWindow.DoneWithFirstOpening)
+                {
+                    _winSizeTimer.Stop();
+                    _winSizeTimer.Start();
+                }
             }
         }
 
@@ -347,56 +379,59 @@ namespace LeStreamsFace
                 return;
             }
 
-            XDocument xDoc = new XDocument(
-                new XDeclaration(XmlVersion, "utf-8", "yes"),
-                new XElement("Config",
-                    new XElement("AppSettings"),
-                    new XElement("Filters"),
-                    new XElement(GetVariableName(() => BannedGames)),
-                    new XElement("TimeBlock"),
-                    new XElement("Favorites", new XElement("TwitchTv")))
-            );
-
-            var appSettings = xDoc.Element("Config").Element("AppSettings");
-            appSettings.Add(new XElement(GetVariableName(() => SamplingInterval), SamplingInterval));
-            appSettings.Add(new XElement(GetVariableName(() => NotificationTimeout), NotificationTimeout));
-            appSettings.Add(new XElement(GetVariableName(() => TriageStreams), TriageStreams));
-            appSettings.Add(new XElement(GetVariableName(() => AutoCheckFavorites), AutoCheckFavorites));
-            appSettings.Add(new XElement(GetVariableName(() => SaveWindowPosition), SaveWindowPosition));
-            appSettings.Add(new XElement(GetVariableName(() => WinTop), WinTop));
-            appSettings.Add(new XElement(GetVariableName(() => WinLeft), WinLeft));
-            appSettings.Add(new XElement(GetVariableName(() => WinWidth), WinWidth));
-            appSettings.Add(new XElement(GetVariableName(() => WinHeight), WinHeight));
-            appSettings.Add(new XElement(GetVariableName(() => LivestreamerArguments), LivestreamerArguments));
-            appSettings.Add(new XElement(GetVariableName(() => StreamOpeningProcedure), StreamOpeningProcedure));
-
-            xDoc.Element("Config").Element(GetVariableName(() => BannedGames)).Value = BannedGames.Any() ? BannedGames.Aggregate((s, s1) => s + ',' + s1) : string.Empty;
-
-            var filters = xDoc.Element("Config").Element("Filters");
-            foreach (KeyValuePair<FiltersEnum, bool?> keyValuePair in StreamsManager.Filters.Where(pair => pair.Value != null))
+            lock (syncConfigWriting)
             {
-                filters.Add(new XElement(keyValuePair.Key.ToString(), keyValuePair.Value));
-            }
+                XDocument xDoc = new XDocument(
+                    new XDeclaration(XmlVersion, "utf-8", "yes"),
+                    new XElement("Config",
+                        new XElement("AppSettings"),
+                        new XElement("Filters"),
+                        new XElement(GetVariableName(() => BannedGames)),
+                        new XElement("TimeBlock"),
+                        new XElement("Favorites", new XElement("TwitchTv")))
+                    );
 
-            var twitchFavs = xDoc.Element("Config").Element("Favorites").Element("TwitchTv");
-            foreach (Stream stream in FavoriteStreams.Where(stream => stream.Site == StreamingSite.TwitchTv))
-            {
-                XElement streamItem = new XElement("Stream", stream.ChannelId);
-                streamItem.SetAttributeValue("Name", stream.LoginNameTwtv);
-                twitchFavs.Add(streamItem);
-            }
+                var appSettings = xDoc.Element("Config").Element("AppSettings");
+                appSettings.Add(new XElement(GetVariableName(() => SamplingInterval), SamplingInterval));
+                appSettings.Add(new XElement(GetVariableName(() => NotificationTimeout), NotificationTimeout));
+                appSettings.Add(new XElement(GetVariableName(() => TriageStreams), TriageStreams));
+                appSettings.Add(new XElement(GetVariableName(() => AutoCheckFavorites), AutoCheckFavorites));
+                appSettings.Add(new XElement(GetVariableName(() => SaveWindowPosition), SaveWindowPosition));
+                appSettings.Add(new XElement(GetVariableName(() => WinTop), WinTop));
+                appSettings.Add(new XElement(GetVariableName(() => WinLeft), WinLeft));
+                appSettings.Add(new XElement(GetVariableName(() => WinWidth), WinWidth));
+                appSettings.Add(new XElement(GetVariableName(() => WinHeight), WinHeight));
+                appSettings.Add(new XElement(GetVariableName(() => LivestreamerArguments), LivestreamerArguments));
+                appSettings.Add(new XElement(GetVariableName(() => StreamOpeningProcedure), StreamOpeningProcedure));
 
-            var blockSettings = xDoc.Element("Config").Element("TimeBlock");
-            blockSettings.Add(new XElement(GetVariableName(() => FromSpan), FromSpan.ToString()));
-            blockSettings.Add(new XElement(GetVariableName(() => ToSpan), ToSpan.ToString()));
+                xDoc.Element("Config").Element(GetVariableName(() => BannedGames)).Value = BannedGames.Any() ? BannedGames.Aggregate((s, s1) => s + ',' + s1) : string.Empty;
 
-            XmlWriterSettings settings = new XmlWriterSettings();
-            settings.IndentChars = "\t";
-            settings.Indent = true;
+                var filters = xDoc.Element("Config").Element("Filters");
+                foreach (KeyValuePair<FiltersEnum, bool?> keyValuePair in StreamsManager.Filters.Where(pair => pair.Value != null))
+                {
+                    filters.Add(new XElement(keyValuePair.Key.ToString(), keyValuePair.Value));
+                }
 
-            using (XmlWriter xw = XmlWriter.Create(ConfigFileName, settings))
-            {
-                xDoc.Save(xw);
+                var twitchFavs = xDoc.Element("Config").Element("Favorites").Element("TwitchTv");
+                foreach (Stream stream in FavoriteStreams.Where(stream => stream.Site == StreamingSite.TwitchTv))
+                {
+                    XElement streamItem = new XElement("Stream", stream.ChannelId);
+                    streamItem.SetAttributeValue("Name", stream.LoginNameTwtv);
+                    twitchFavs.Add(streamItem);
+                }
+
+                var blockSettings = xDoc.Element("Config").Element("TimeBlock");
+                blockSettings.Add(new XElement(GetVariableName(() => FromSpan), FromSpan.ToString()));
+                blockSettings.Add(new XElement(GetVariableName(() => ToSpan), ToSpan.ToString()));
+
+                XmlWriterSettings settings = new XmlWriterSettings();
+                settings.IndentChars = "\t";
+                settings.Indent = true;
+
+                using (XmlWriter xw = XmlWriter.Create(ConfigFileName, settings))
+                {
+                    xDoc.Save(xw);
+                }
             }
         }
 

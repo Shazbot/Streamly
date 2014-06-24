@@ -31,6 +31,8 @@ namespace LeStreamsFace
         private IEventAggregator _eventAggregator;
         private StreamsListViewModel vm;
 
+        public static bool DoneWithFirstOpening = false;
+
         public StreamsListWindow(IEventAggregator eventAggregator)
         {
             InitializeComponent();
@@ -56,7 +58,6 @@ namespace LeStreamsFace
                 Height = 580;
             }
 
-            configTabItem.IsSelected = true;
             streamsTabItem.IsSelected = true;
         }
 
