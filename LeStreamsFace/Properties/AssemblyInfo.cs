@@ -4,17 +4,17 @@ using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Markup;
 
-[assembly: InternalsVisibleTo("LeStreamsFace.Tests")]
+[assembly: InternalsVisibleTo("Streamly.Tests")]
 //[assembly: ThemeInfo(ResourceDictionaryLocation.SourceAssembly, ResourceDictionaryLocation.SourceAssembly)]
-//[assembly: XmlnsDefinition("http://schemas.leschemasface.com/2012/xaml/presentation", "LeHostsFileFace")]
+//[assembly: XmlnsDefinition("http://schemas.leschemasface.com/2012/xaml/presentation", "Streamly")]
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("LeStreamsFace")]
+[assembly: AssemblyTitle("Streamly")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("LeStreamsFace")]
+[assembly: AssemblyProduct("Streamly")]
 [assembly: AssemblyCopyright("")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

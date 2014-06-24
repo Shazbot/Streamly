@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LeStreamsFace", "LeStreamsFace\LeStreamsFace.csproj", "{88922744-5F2F-4AE4-BFEA-C77BD1BBE685}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Streamly", "LeStreamsFace\Streamly.csproj", "{88922744-5F2F-4AE4-BFEA-C77BD1BBE685}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{A70D9070-A0B6-4D02-9362-2E3880183766}"
 	ProjectSection(SolutionItems) = preProject
@@ -12,7 +12,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{A70D90
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LeStreamsFace.Tests", "LeStreamsFace.Tests\LeStreamsFace.Tests.csproj", "{E97D41D4-1C15-4A08-8B1B-54B93B569A5A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Streamly.Tests", "LeStreamsFace.Tests\Streamly.Tests.csproj", "{E97D41D4-1C15-4A08-8B1B-54B93B569A5A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
