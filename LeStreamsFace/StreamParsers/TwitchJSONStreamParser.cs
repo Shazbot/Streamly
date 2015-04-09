@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace LeStreamsFace.StreamParsers
 {
-    internal class TwitchJSONStreamParser : IStreamParser<JToken>
+    public class TwitchJSONStreamParser : IStreamParser<JToken>
     {
         public IEnumerable<Stream> GetStreamsFromContent(string content)
         {

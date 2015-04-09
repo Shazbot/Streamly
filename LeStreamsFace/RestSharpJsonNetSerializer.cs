@@ -10,7 +10,7 @@ using JsonSerializer = Newtonsoft.Json.JsonSerializer;
 
 namespace LeStreamsFace
 {
-    internal class RestSharpJsonNetSerializer : ISerializer, IDeserializer
+    public class RestSharpJsonNetSerializer : ISerializer, IDeserializer
     {
         private readonly Newtonsoft.Json.JsonSerializer _serializer;
 

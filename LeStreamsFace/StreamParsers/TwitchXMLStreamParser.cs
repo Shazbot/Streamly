@@ -4,7 +4,7 @@ using System.Xml.Linq;
 
 namespace LeStreamsFace.StreamParsers
 {
-    internal class TwitchXMLStreamParser : IStreamParser<XElement>
+    public class TwitchXMLStreamParser : IStreamParser<XElement>
     {
         public IEnumerable<Stream> GetStreamsFromContent(string content)
         {

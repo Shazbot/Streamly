@@ -6,7 +6,7 @@ using RestSharp;
 
 namespace LeStreamsFace
 {
-    internal static class ProjectExtensions
+    public static class ProjectExtensions
     {
         public static IEnumerable<Stream> Favorites(this IEnumerable<Stream> streamEnumeration)
         {
@@ -21,7 +21,7 @@ namespace LeStreamsFace
         public static bool NoStreamWithChannelId(this IEnumerable<Stream> streams, string channelIdToLookFor)
         {
             return streams.All(stream => stream.ChannelId != channelIdToLookFor);
-        } 
+        }
 
         public static void ThrowExceptions(this IRestResponse restResponse)
         {

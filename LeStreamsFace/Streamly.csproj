@@ -14,7 +14,7 @@
     <ExpressionBlendVersion>4.0.30816.0</ExpressionBlendVersion>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
-    <NuGetPackageImportStamp>4d4de016</NuGetPackageImportStamp>
+    <NuGetPackageImportStamp>8480f214</NuGetPackageImportStamp>
     <CodeContractsAssemblyMode>0</CodeContractsAssemblyMode>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
@@ -82,11 +82,13 @@
   </PropertyGroup>
   <ItemGroup>
     <None Include="Resources\Entypo.ttf" />
-    <Reference Include="Caliburn.Micro">
-      <HintPath>..\packages\Caliburn.Micro.Core.2.0.0\lib\net40\Caliburn.Micro.dll</HintPath>
+    <Reference Include="Caliburn.Micro, Version=2.0.1.0, Culture=neutral, PublicKeyToken=8e5891231f2ed21f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Caliburn.Micro.Core.2.0.1\lib\net40\Caliburn.Micro.dll</HintPath>
     </Reference>
-    <Reference Include="Caliburn.Micro.Platform">
-      <HintPath>..\packages\Caliburn.Micro.2.0.0\lib\net40\Caliburn.Micro.Platform.dll</HintPath>
+    <Reference Include="Caliburn.Micro.Platform, Version=2.0.1.0, Culture=neutral, PublicKeyToken=8e5891231f2ed21f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Caliburn.Micro.2.0.1\lib\net40\Caliburn.Micro.Platform.dll</HintPath>
     </Reference>
     <Reference Include="CefSharp, Version=31.0.0.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
@@ -119,7 +121,7 @@
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Newtonsoft.Json.6.0.3\lib\net40\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="OxyPlot, Version=2014.1.318.1, Culture=neutral, PublicKeyToken=638079a8f0bd61e9, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -136,7 +138,7 @@
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="PropertyChanged">
-      <HintPath>..\packages\PropertyChanged.Fody.1.48.2.0\Lib\NET35\PropertyChanged.dll</HintPath>
+      <HintPath>..\packages\PropertyChanged.Fody.1.49.0\Lib\portable-net4+sl4+wp8+win8+wpa81+MonoAndroid16+MonoTouch40\PropertyChanged.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="RestSharp">
@@ -161,7 +163,7 @@
     </Reference>
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Caliburn.Micro.2.0.0\lib\net40\System.Windows.Interactivity.dll</HintPath>
+      <HintPath>..\packages\Caliburn.Micro.2.0.1\lib\net40\System.Windows.Interactivity.dll</HintPath>
     </Reference>
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml" />
@@ -292,7 +294,9 @@
     <Resource Include="Resources\StarcraftIcon.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="FodyWeavers.xml" />
+    <Content Include="FodyWeavers.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Resources\Entypo-license.txt" />
     <Resource Include="Resources\hearthstone.png" />
     <Resource Include="Resources\streamHtml.txt" />
@@ -308,21 +312,18 @@
     </PreBuildEvent>
   </PropertyGroup>
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
-  <Import Project="..\packages\Fody.1.24.0\build\Fody.targets" Condition="Exists('..\packages\Fody.1.24.0\build\Fody.targets')" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\packages\Fody.1.24.0\build\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Fody.1.24.0\build\Fody.targets'))" />
-  </Target>
-  <Import Project="..\packages\Microsoft.Bcl.Build.1.0.17-beta\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.17-beta\tools\Microsoft.Bcl.Build.targets')" />
-  <Target Name="EnsureBclBuildImported" BeforeTargets="BeforeBuild" Condition="'$(BclBuildImported)' == ''">
-    <Error Condition="!Exists('..\packages\Microsoft.Bcl.Build.1.0.17-beta\tools\Microsoft.Bcl.Build.targets')" Text="This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=317567." HelpKeyword="BCLBUILD2001" />
-    <Error Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.17-beta\tools\Microsoft.Bcl.Build.targets')" Text="The build restored NuGet packages. Build the project again to include these packages in the build. For more information, see http://go.microsoft.com/fwlink/?LinkID=317568." HelpKeyword="BCLBUILD2002" />
-  </Target>
   <PropertyGroup>
     <PostBuildEvent>copy "$(SolutionDir)\lib\*" "$(TargetDir)"
 mkdir "$(TargetDir)locales\"
 copy "$(SolutionDir)\lib\locales\*" "$(TargetDir)locales\"</PostBuildEvent>
   </PropertyGroup>
+  <Import Project="..\packages\Fody.1.26.4\build\Fody.targets" Condition="Exists('..\packages\Fody.1.26.4\build\Fody.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Fody.1.26.4\build\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Fody.1.26.4\build\Fody.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets'))" />
+  </Target>
+  <Import Project="..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
 </Project>
