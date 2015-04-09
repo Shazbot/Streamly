@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Net.Mime;
-using System.Text;
-using System.Threading.Tasks;
-using ApprovalTests;
+﻿using ApprovalTests;
 using ApprovalTests.Reporters;
 using FluentAssertions;
 using LeStreamsFace.StreamParsers;
@@ -13,6 +6,13 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json.Linq;
 using RestSharp;
 using RestSharp.Extensions;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Net.Mime;
+using System.Text;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace LeStreamsFace.Tests
@@ -58,8 +58,8 @@ namespace LeStreamsFace.Tests
             streamsFromJSON.Take(50).Should().BeSubsetOf(streamsFromXML);
         }
 
-        [Fact(Skip = "Can't handle 9000 streams")]
-        //        [Fact]
+        //        [Fact(Skip = "Can't handle 9000 streams")]
+        [Fact]
         public async Task CanWeGetAllStreams()
         {
             var JSONparser = new TwitchJSONStreamParser();

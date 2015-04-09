@@ -1,9 +1,12 @@
 ﻿using LeStreamsFace.StreamParsers;
+using Mindscape.Raygun4Net;
 using System;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Threading;
 using System.Windows;
+using System.Windows.Threading;
 
 namespace LeStreamsFace
 {
@@ -15,6 +18,19 @@ namespace LeStreamsFace
         private static Mutex mutex;
 
         public static readonly int WM_SHOWFIRSTINSTANCE = NativeMethods.RegisterWindowMessage("WM_SHOWFIRSTINSTANCE|" + Assembly.GetEntryAssembly().GetName().Name + "|" + ProgramInfo.AssemblyGuid);
+
+        private RaygunClient _raygunClient = new RaygunClient("Fyi8SY7+vLuMQWj+FqLx5g==");
+
+        public App()
+        {
+            DispatcherUnhandledException += OnDispatcherUnhandledException;
+        }
+
+        private void OnDispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
+        {
+            File.WriteAllText("crash " + DateTime.Now.ToString().Replace(':', '-') + ".txt", e.Exception.ToString());
+            _raygunClient.Send(e.Exception);
+        }
 
         protected override void OnStartup(StartupEventArgs e)
         {

@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using LeStreamsFace.StreamParsers;
+﻿using LeStreamsFace.StreamParsers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using RestSharp.Deserializers;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using Xunit;
 
 namespace LeStreamsFace.Tests
@@ -14,11 +14,11 @@ namespace LeStreamsFace.Tests
     public class DontCreateStreamWithNullValues
     {
         [Fact]
-        public void JSONInputHasNullValues()
+        private void JSONInputHasNullValues()
         {
             var input = File.ReadAllText(@"data/streams online.json");
-            var streamKeys = new[] {"_id", "viewers", "game"};
-            var channelKeys = new[] {"_id", "name", "video_banner", "display_name", "status"};
+            var streamKeys = new[] { "_id", "viewers", "game" };
+            var channelKeys = new[] { "_id", "name", "video_banner", "display_name", "status" };
 
             var random = new Random();
 
@@ -32,6 +32,7 @@ namespace LeStreamsFace.Tests
                     case 0:
                         stream[streamKeys[random.Next(2)]] = null;
                         break;
+
                     case 1:
                         stream["channel"][channelKeys[random.Next(5)]] = null;
                         break;
