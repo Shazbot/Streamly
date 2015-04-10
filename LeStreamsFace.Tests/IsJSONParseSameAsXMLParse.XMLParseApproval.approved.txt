@@ -8,6 +8,29 @@ GameName: Dota 2
 ChannelId: 29578325
 LoginNameTwtv: beyondthesummit
 ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_beyondthesummit-630x473.jpg
+EmbedHtmlCode: <html>
+<head>
+<style>
+html
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+body
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+</style>
+</head>
+<body>
+<object type="application/x-shockwave-flash" height="100%" width="100%" id="live_embed_player_flash" data="http://www.twitch.tv/widgets/live_embed_player.swf?channel=beyondthesummit" bgcolor="#000000"><param name="allowFullScreen" value="false" /><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="movie" value="http://www.twitch.tv/widgets/live_embed_player.swf" /><param name="flashvars" value="hostname=www.twitch.tv&channel=beyondthesummit&auto_play=true&start_volume=25" /></object>
+</body>
+<html>
 
 [1] = Name: cryaotic
 Title: Late Night with Cry and Russ
@@ -19,6 +42,29 @@ GameName: Contagion
 ChannelId: 7951350
 LoginNameTwtv: cryaotic
 ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_cryaotic-630x473.jpg
+EmbedHtmlCode: <html>
+<head>
+<style>
+html
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+body
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+</style>
+</head>
+<body>
+<object type="application/x-shockwave-flash" height="100%" width="100%" id="live_embed_player_flash" data="http://www.twitch.tv/widgets/live_embed_player.swf?channel=cryaotic" bgcolor="#000000"><param name="allowFullScreen" value="false" /><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="movie" value="http://www.twitch.tv/widgets/live_embed_player.swf" /><param name="flashvars" value="hostname=www.twitch.tv&channel=cryaotic&auto_play=true&start_volume=25" /></object>
+</body>
+<html>
 
 [2] = Name: trick2g
 Title: Trick2g | On Euw Atm | GG Rito
@@ -30,6 +76,29 @@ GameName: League of Legends
 ChannelId: 28036688
 LoginNameTwtv: trick2g
 ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_trick2g-630x473.jpg
+EmbedHtmlCode: <html>
+<head>
+<style>
+html
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+body
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+</style>
+</head>
+<body>
+<object type="application/x-shockwave-flash" height="100%" width="100%" id="live_embed_player_flash" data="http://www.twitch.tv/widgets/live_embed_player.swf?channel=trick2g" bgcolor="#000000"><param name="allowFullScreen" value="false" /><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="movie" value="http://www.twitch.tv/widgets/live_embed_player.swf" /><param name="flashvars" value="hostname=www.twitch.tv&channel=trick2g&auto_play=true&start_volume=25" /></object>
+</body>
+<html>
 
 [3] = Name: scarra
 Title: Scarra's stream | RANKED IS UP
@@ -41,6 +110,29 @@ GameName: League of Legends
 ChannelId: 22253819
 LoginNameTwtv: scarra
 ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_scarra-630x473.jpg
+EmbedHtmlCode: <html>
+<head>
+<style>
+html
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+body
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+</style>
+</head>
+<body>
+<object type="application/x-shockwave-flash" height="100%" width="100%" id="live_embed_player_flash" data="http://www.twitch.tv/widgets/live_embed_player.swf?channel=scarra" bgcolor="#000000"><param name="allowFullScreen" value="false" /><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="movie" value="http://www.twitch.tv/widgets/live_embed_player.swf" /><param name="flashvars" value="hostname=www.twitch.tv&channel=scarra&auto_play=true&start_volume=25" /></object>
+</body>
+<html>
 
 [4] = Name: ludendi
 Title: Team Ludendi presents speedrunning at DreamHack Summer 2014!
@@ -52,6 +144,29 @@ GameName: Street Fighter 2010: The Final Fight
 ChannelId: 28673774
 LoginNameTwtv: ludendi
 ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_ludendi-630x473.jpg
+EmbedHtmlCode: <html>
+<head>
+<style>
+html
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+body
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+</style>
+</head>
+<body>
+<object type="application/x-shockwave-flash" height="100%" width="100%" id="live_embed_player_flash" data="http://www.twitch.tv/widgets/live_embed_player.swf?channel=ludendi" bgcolor="#000000"><param name="allowFullScreen" value="false" /><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="movie" value="http://www.twitch.tv/widgets/live_embed_player.swf" /><param name="flashvars" value="hostname=www.twitch.tv&channel=ludendi&auto_play=true&start_volume=25" /></object>
+</body>
+<html>
 
 [5] = Name: trumpsc
 Title: Trump's Bindings
@@ -63,6 +178,29 @@ GameName: The Binding of Isaac
 ChannelId: 14836307
 LoginNameTwtv: trumpsc
 ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_trumpsc-630x473.jpg
+EmbedHtmlCode: <html>
+<head>
+<style>
+html
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+body
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+</style>
+</head>
+<body>
+<object type="application/x-shockwave-flash" height="100%" width="100%" id="live_embed_player_flash" data="http://www.twitch.tv/widgets/live_embed_player.swf?channel=trumpsc" bgcolor="#000000"><param name="allowFullScreen" value="false" /><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="movie" value="http://www.twitch.tv/widgets/live_embed_player.swf" /><param name="flashvars" value="hostname=www.twitch.tv&channel=trumpsc&auto_play=true&start_volume=25" /></object>
+</body>
+<html>
 
 [6] = Name: kdl_en
 Title: [KDL Live]
@@ -74,6 +212,29 @@ GameName: Dota 2
 ChannelId: 56749116
 LoginNameTwtv: kdl_en
 ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_kdl_en-630x473.jpg
+EmbedHtmlCode: <html>
+<head>
+<style>
+html
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+body
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+</style>
+</head>
+<body>
+<object type="application/x-shockwave-flash" height="100%" width="100%" id="live_embed_player_flash" data="http://www.twitch.tv/widgets/live_embed_player.swf?channel=kdl_en" bgcolor="#000000"><param name="allowFullScreen" value="false" /><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="movie" value="http://www.twitch.tv/widgets/live_embed_player.swf" /><param name="flashvars" value="hostname=www.twitch.tv&channel=kdl_en&auto_play=true&start_volume=25" /></object>
+</body>
+<html>
 
 [7] = Name: mushisgosu
 Title: hi im Gosu - ADC - Diamond 1 93 LP
@@ -85,6 +246,29 @@ GameName: League of Legends
 ChannelId: 41939266
 LoginNameTwtv: mushisgosu
 ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_mushisgosu-630x473.jpg
+EmbedHtmlCode: <html>
+<head>
+<style>
+html
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+body
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+</style>
+</head>
+<body>
+<object type="application/x-shockwave-flash" height="100%" width="100%" id="live_embed_player_flash" data="http://www.twitch.tv/widgets/live_embed_player.swf?channel=mushisgosu" bgcolor="#000000"><param name="allowFullScreen" value="false" /><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="movie" value="http://www.twitch.tv/widgets/live_embed_player.swf" /><param name="flashvars" value="hostname=www.twitch.tv&channel=mushisgosu&auto_play=true&start_volume=25" /></object>
+</body>
+<html>
 
 [8] = Name: dreamleague_v1lat
 Title: DreamLeague LAN Finals | Day 1 Rebroadcast | by v1lat & CaspeRRR
@@ -96,6 +280,29 @@ GameName: Dota 2
 ChannelId: 50904520
 LoginNameTwtv: dreamleague_v1lat
 ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_dreamleague_v1lat-630x473.jpg
+EmbedHtmlCode: <html>
+<head>
+<style>
+html
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+body
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+</style>
+</head>
+<body>
+<object type="application/x-shockwave-flash" height="100%" width="100%" id="live_embed_player_flash" data="http://www.twitch.tv/widgets/live_embed_player.swf?channel=dreamleague_v1lat" bgcolor="#000000"><param name="allowFullScreen" value="false" /><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="movie" value="http://www.twitch.tv/widgets/live_embed_player.swf" /><param name="flashvars" value="hostname=www.twitch.tv&channel=dreamleague_v1lat&auto_play=true&start_volume=25" /></object>
+</body>
+<html>
 
 [9] = Name: mym_alkapone
 Title: EuroTruck Cumbiero HD
@@ -107,6 +314,29 @@ GameName: Euro Truck Simulator 2
 ChannelId: 31478096
 LoginNameTwtv: mym_alkapone
 ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_mym_alkapone-630x473.jpg
+EmbedHtmlCode: <html>
+<head>
+<style>
+html
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+body
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+</style>
+</head>
+<body>
+<object type="application/x-shockwave-flash" height="100%" width="100%" id="live_embed_player_flash" data="http://www.twitch.tv/widgets/live_embed_player.swf?channel=mym_alkapone" bgcolor="#000000"><param name="allowFullScreen" value="false" /><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="movie" value="http://www.twitch.tv/widgets/live_embed_player.swf" /><param name="flashvars" value="hostname=www.twitch.tv&channel=mym_alkapone&auto_play=true&start_volume=25" /></object>
+</body>
+<html>
 
 [10] = Name: lethalfrag
 Title: ASCENSION HYPE!! Pack Opening / Rift Runs - http://store.steampowered.com/app/257730/
@@ -118,6 +348,29 @@ GameName: Infinity Wars
 ChannelId: 23460970
 LoginNameTwtv: lethalfrag
 ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_lethalfrag-630x473.jpg
+EmbedHtmlCode: <html>
+<head>
+<style>
+html
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+body
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+</style>
+</head>
+<body>
+<object type="application/x-shockwave-flash" height="100%" width="100%" id="live_embed_player_flash" data="http://www.twitch.tv/widgets/live_embed_player.swf?channel=lethalfrag" bgcolor="#000000"><param name="allowFullScreen" value="false" /><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="movie" value="http://www.twitch.tv/widgets/live_embed_player.swf" /><param name="flashvars" value="hostname=www.twitch.tv&channel=lethalfrag&auto_play=true&start_volume=25" /></object>
+</body>
+<html>
 
 [11] = Name: versuta
 Title: Supa mida? NOOOOO!!! SUPA FIDA-.-azaz!
@@ -129,6 +382,29 @@ GameName: Dota 2
 ChannelId: 21802540
 LoginNameTwtv: versuta
 ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_versuta-630x473.jpg
+EmbedHtmlCode: <html>
+<head>
+<style>
+html
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+body
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+</style>
+</head>
+<body>
+<object type="application/x-shockwave-flash" height="100%" width="100%" id="live_embed_player_flash" data="http://www.twitch.tv/widgets/live_embed_player.swf?channel=versuta" bgcolor="#000000"><param name="allowFullScreen" value="false" /><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="movie" value="http://www.twitch.tv/widgets/live_embed_player.swf" /><param name="flashvars" value="hostname=www.twitch.tv&channel=versuta&auto_play=true&start_volume=25" /></object>
+</body>
+<html>
 
 [12] = Name: flosd
 Title: BoxBox - (Subscribers try out !dailybonus and !soulmate)
@@ -140,6 +416,29 @@ GameName: League of Legends
 ChannelId: 38881685
 LoginNameTwtv: flosd
 ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_flosd-630x473.jpg
+EmbedHtmlCode: <html>
+<head>
+<style>
+html
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+body
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+</style>
+</head>
+<body>
+<object type="application/x-shockwave-flash" height="100%" width="100%" id="live_embed_player_flash" data="http://www.twitch.tv/widgets/live_embed_player.swf?channel=flosd" bgcolor="#000000"><param name="allowFullScreen" value="false" /><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="movie" value="http://www.twitch.tv/widgets/live_embed_player.swf" /><param name="flashvars" value="hostname=www.twitch.tv&channel=flosd&auto_play=true&start_volume=25" /></object>
+</body>
+<html>
 
 [13] = Name: showvideogames
 Title: 395+ Hour Mario Kart Marathon - Giveaways Prizes - Mario Kart 8 - Online Races - 8 Subs +1 Hour - Wii U Giveaway - Final Days
@@ -151,6 +450,29 @@ GameName: Mario Kart 8
 ChannelId: 45837105
 LoginNameTwtv: showvideogames
 ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_showvideogames-630x473.jpg
+EmbedHtmlCode: <html>
+<head>
+<style>
+html
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+body
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+</style>
+</head>
+<body>
+<object type="application/x-shockwave-flash" height="100%" width="100%" id="live_embed_player_flash" data="http://www.twitch.tv/widgets/live_embed_player.swf?channel=showvideogames" bgcolor="#000000"><param name="allowFullScreen" value="false" /><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="movie" value="http://www.twitch.tv/widgets/live_embed_player.swf" /><param name="flashvars" value="hostname=www.twitch.tv&channel=showvideogames&auto_play=true&start_volume=25" /></object>
+</body>
+<html>
 
 [14] = Name: aclprosc2
 Title: #WCSANZ (OCE/SEA) Season 3 Stage 2: KingKong (Z) vs Iaguz (T)
@@ -162,6 +484,29 @@ GameName: StarCraft II: Heart of the Swarm
 ChannelId: 29714457
 LoginNameTwtv: aclprosc2
 ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_aclprosc2-630x473.jpg
+EmbedHtmlCode: <html>
+<head>
+<style>
+html
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+body
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+</style>
+</head>
+<body>
+<object type="application/x-shockwave-flash" height="100%" width="100%" id="live_embed_player_flash" data="http://www.twitch.tv/widgets/live_embed_player.swf?channel=aclprosc2" bgcolor="#000000"><param name="allowFullScreen" value="false" /><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="movie" value="http://www.twitch.tv/widgets/live_embed_player.swf" /><param name="flashvars" value="hostname=www.twitch.tv&channel=aclprosc2&auto_play=true&start_volume=25" /></object>
+</body>
+<html>
 
 [15] = Name: maximilian_dood
 Title: Mario Kart 8 with Subscribers!
@@ -173,6 +518,29 @@ GameName: Mario Kart 8
 ChannelId: 30104304
 LoginNameTwtv: maximilian_dood
 ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_maximilian_dood-630x473.jpg
+EmbedHtmlCode: <html>
+<head>
+<style>
+html
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+body
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+</style>
+</head>
+<body>
+<object type="application/x-shockwave-flash" height="100%" width="100%" id="live_embed_player_flash" data="http://www.twitch.tv/widgets/live_embed_player.swf?channel=maximilian_dood" bgcolor="#000000"><param name="allowFullScreen" value="false" /><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="movie" value="http://www.twitch.tv/widgets/live_embed_player.swf" /><param name="flashvars" value="hostname=www.twitch.tv&channel=maximilian_dood&auto_play=true&start_volume=25" /></object>
+</body>
+<html>
 
 [16] = Name: skumbagkrepo
 Title: EG Krepo [No advertisements, just chillin' relaxin all cool.]
@@ -184,6 +552,29 @@ GameName: League of Legends
 ChannelId: 38865198
 LoginNameTwtv: skumbagkrepo
 ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_skumbagkrepo-630x473.jpg
+EmbedHtmlCode: <html>
+<head>
+<style>
+html
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+body
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+</style>
+</head>
+<body>
+<object type="application/x-shockwave-flash" height="100%" width="100%" id="live_embed_player_flash" data="http://www.twitch.tv/widgets/live_embed_player.swf?channel=skumbagkrepo" bgcolor="#000000"><param name="allowFullScreen" value="false" /><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="movie" value="http://www.twitch.tv/widgets/live_embed_player.swf" /><param name="flashvars" value="hostname=www.twitch.tv&channel=skumbagkrepo&auto_play=true&start_volume=25" /></object>
+</body>
+<html>
 
 [17] = Name: deernadia
 Title: (っ◕‿◕)っ Gib Golden Drood (っ◕‿◕)っ
@@ -195,6 +586,29 @@ GameName: Hearthstone: Heroes of Warcraft
 ChannelId: 55859980
 LoginNameTwtv: deernadia
 ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_deernadia-630x473.jpg
+EmbedHtmlCode: <html>
+<head>
+<style>
+html
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+body
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+</style>
+</head>
+<body>
+<object type="application/x-shockwave-flash" height="100%" width="100%" id="live_embed_player_flash" data="http://www.twitch.tv/widgets/live_embed_player.swf?channel=deernadia" bgcolor="#000000"><param name="allowFullScreen" value="false" /><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="movie" value="http://www.twitch.tv/widgets/live_embed_player.swf" /><param name="flashvars" value="hostname=www.twitch.tv&channel=deernadia&auto_play=true&start_volume=25" /></object>
+</body>
+<html>
 
 [18] = Name: thyak
 Title: *ESPA�OL* FORO DE DISCUSION CON OZRAK Y SKYSHOCK
@@ -206,6 +620,29 @@ GameName: League of Legends
 ChannelId: 30928536
 LoginNameTwtv: thyak
 ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_thyak-630x473.jpg
+EmbedHtmlCode: <html>
+<head>
+<style>
+html
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+body
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+</style>
+</head>
+<body>
+<object type="application/x-shockwave-flash" height="100%" width="100%" id="live_embed_player_flash" data="http://www.twitch.tv/widgets/live_embed_player.swf?channel=thyak" bgcolor="#000000"><param name="allowFullScreen" value="false" /><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="movie" value="http://www.twitch.tv/widgets/live_embed_player.swf" /><param name="flashvars" value="hostname=www.twitch.tv&channel=thyak&auto_play=true&start_volume=25" /></object>
+</body>
+<html>
 
 [19] = Name: scglive
 Title: SCG Open Series Columbus featuring The Invitational - June 13-15, 2014
@@ -217,6 +654,29 @@ GameName: Magic: The Gathering
 ChannelId: 22480377
 LoginNameTwtv: scglive
 ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_scglive-630x473.jpg
+EmbedHtmlCode: <html>
+<head>
+<style>
+html
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+body
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+</style>
+</head>
+<body>
+<object type="application/x-shockwave-flash" height="100%" width="100%" id="live_embed_player_flash" data="http://www.twitch.tv/widgets/live_embed_player.swf?channel=scglive" bgcolor="#000000"><param name="allowFullScreen" value="false" /><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="movie" value="http://www.twitch.tv/widgets/live_embed_player.swf" /><param name="flashvars" value="hostname=www.twitch.tv&channel=scglive&auto_play=true&start_volume=25" /></object>
+</body>
+<html>
 
 [20] = Name: goodideagaming
 Title: ☑GIG☑ - RIP - Crusader Gearing Challenge! 5th Passive Slot INC (HF Amulets)! 2.1 PTR Tuesday (Leaked Date)! - Rip The Gigger is Dead.
@@ -228,6 +688,29 @@ GameName: Diablo III: Reaper of Souls
 ChannelId: 29227153
 LoginNameTwtv: goodideagaming
 ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_goodideagaming-630x473.jpg
+EmbedHtmlCode: <html>
+<head>
+<style>
+html
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+body
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+</style>
+</head>
+<body>
+<object type="application/x-shockwave-flash" height="100%" width="100%" id="live_embed_player_flash" data="http://www.twitch.tv/widgets/live_embed_player.swf?channel=goodideagaming" bgcolor="#000000"><param name="allowFullScreen" value="false" /><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="movie" value="http://www.twitch.tv/widgets/live_embed_player.swf" /><param name="flashvars" value="hostname=www.twitch.tv&channel=goodideagaming&auto_play=true&start_volume=25" /></object>
+</body>
+<html>
 
 [21] = Name: dansgaming
 Title: Dansgaming: The Legend of Zelda: A Link Between Worlds (3DS)
@@ -239,6 +722,29 @@ GameName: The Legend of Zelda: A Link Between Worlds
 ChannelId: 7236692
 LoginNameTwtv: dansgaming
 ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_dansgaming-630x473.jpg
+EmbedHtmlCode: <html>
+<head>
+<style>
+html
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+body
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+</style>
+</head>
+<body>
+<object type="application/x-shockwave-flash" height="100%" width="100%" id="live_embed_player_flash" data="http://www.twitch.tv/widgets/live_embed_player.swf?channel=dansgaming" bgcolor="#000000"><param name="allowFullScreen" value="false" /><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="movie" value="http://www.twitch.tv/widgets/live_embed_player.swf" /><param name="flashvars" value="hostname=www.twitch.tv&channel=dansgaming&auto_play=true&start_volume=25" /></object>
+</body>
+<html>
 
 [22] = Name: bostv
 Title: Tournament Tryouts! Balls of Steel round 2! Over 1k in prizes!
@@ -250,6 +756,29 @@ GameName: The Binding of Isaac
 ChannelId: 63327203
 LoginNameTwtv: bostv
 ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_bostv-630x473.jpg
+EmbedHtmlCode: <html>
+<head>
+<style>
+html
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+body
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+</style>
+</head>
+<body>
+<object type="application/x-shockwave-flash" height="100%" width="100%" id="live_embed_player_flash" data="http://www.twitch.tv/widgets/live_embed_player.swf?channel=bostv" bgcolor="#000000"><param name="allowFullScreen" value="false" /><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="movie" value="http://www.twitch.tv/widgets/live_embed_player.swf" /><param name="flashvars" value="hostname=www.twitch.tv&channel=bostv&auto_play=true&start_volume=25" /></object>
+</body>
+<html>
 
 [23] = Name: sirhcez
 Title: NASUS | SINGED | NEW BUILD | #1 SLEEP STREAM | SirhcEz
@@ -261,6 +790,29 @@ GameName: League of Legends
 ChannelId: 27934574
 LoginNameTwtv: sirhcez
 ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_sirhcez-630x473.jpg
+EmbedHtmlCode: <html>
+<head>
+<style>
+html
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+body
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+</style>
+</head>
+<body>
+<object type="application/x-shockwave-flash" height="100%" width="100%" id="live_embed_player_flash" data="http://www.twitch.tv/widgets/live_embed_player.swf?channel=sirhcez" bgcolor="#000000"><param name="allowFullScreen" value="false" /><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="movie" value="http://www.twitch.tv/widgets/live_embed_player.swf" /><param name="flashvars" value="hostname=www.twitch.tv&channel=sirhcez&auto_play=true&start_volume=25" /></object>
+</body>
+<html>
 
 [24] = Name: peroniogh
 Title: (PT-BR) PeronioLIVE - AMONG THE SLEEP - Sorteio as 3:30h
@@ -272,6 +824,29 @@ GameName: Among The Sleep
 ChannelId: 35750532
 LoginNameTwtv: peroniogh
 ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_peroniogh-630x473.jpg
+EmbedHtmlCode: <html>
+<head>
+<style>
+html
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+body
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+</style>
+</head>
+<body>
+<object type="application/x-shockwave-flash" height="100%" width="100%" id="live_embed_player_flash" data="http://www.twitch.tv/widgets/live_embed_player.swf?channel=peroniogh" bgcolor="#000000"><param name="allowFullScreen" value="false" /><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="movie" value="http://www.twitch.tv/widgets/live_embed_player.swf" /><param name="flashvars" value="hostname=www.twitch.tv&channel=peroniogh&auto_play=true&start_volume=25" /></object>
+</body>
+<html>
 
 [25] = Name: zilea
 Title: Zilea - 2x NA legend as control pally. Ordered Wii U Deluxe Edition w/ Mario Kart 8!
@@ -283,6 +858,29 @@ GameName: Hearthstone: Heroes of Warcraft
 ChannelId: 4535698
 LoginNameTwtv: zilea
 ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_zilea-630x473.jpg
+EmbedHtmlCode: <html>
+<head>
+<style>
+html
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+body
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+</style>
+</head>
+<body>
+<object type="application/x-shockwave-flash" height="100%" width="100%" id="live_embed_player_flash" data="http://www.twitch.tv/widgets/live_embed_player.swf?channel=zilea" bgcolor="#000000"><param name="allowFullScreen" value="false" /><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="movie" value="http://www.twitch.tv/widgets/live_embed_player.swf" /><param name="flashvars" value="hostname=www.twitch.tv&channel=zilea&auto_play=true&start_volume=25" /></object>
+</body>
+<html>
 
 [26] = Name: pauseunpause
 Title: Scary Games Saturday + Beer
@@ -294,6 +892,29 @@ GameName: DreadOut
 ChannelId: 22856032
 LoginNameTwtv: pauseunpause
 ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_pauseunpause-630x473.jpg
+EmbedHtmlCode: <html>
+<head>
+<style>
+html
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+body
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+</style>
+</head>
+<body>
+<object type="application/x-shockwave-flash" height="100%" width="100%" id="live_embed_player_flash" data="http://www.twitch.tv/widgets/live_embed_player.swf?channel=pauseunpause" bgcolor="#000000"><param name="allowFullScreen" value="false" /><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="movie" value="http://www.twitch.tv/widgets/live_embed_player.swf" /><param name="flashvars" value="hostname=www.twitch.tv&channel=pauseunpause&auto_play=true&start_volume=25" /></object>
+</body>
+<html>
 
 [27] = Name: twitchplayspokemon
 Title: Twitch Plays Pokemon (Enter button inputs via chat!!!)
@@ -305,6 +926,29 @@ GameName: Pok�mon Black/White
 ChannelId: 56648155
 LoginNameTwtv: twitchplayspokemon
 ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_twitchplayspokemon-630x473.jpg
+EmbedHtmlCode: <html>
+<head>
+<style>
+html
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+body
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+</style>
+</head>
+<body>
+<object type="application/x-shockwave-flash" height="100%" width="100%" id="live_embed_player_flash" data="http://www.twitch.tv/widgets/live_embed_player.swf?channel=twitchplayspokemon" bgcolor="#000000"><param name="allowFullScreen" value="false" /><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="movie" value="http://www.twitch.tv/widgets/live_embed_player.swf" /><param name="flashvars" value="hostname=www.twitch.tv&channel=twitchplayspokemon&auto_play=true&start_volume=25" /></object>
+</body>
+<html>
 
 [28] = Name: crimsix
 Title: $8s | World Champion EG Crimsix
@@ -316,6 +960,29 @@ GameName: Call of Duty: Ghosts
 ChannelId: 11454896
 LoginNameTwtv: crimsix
 ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_crimsix-630x473.jpg
+EmbedHtmlCode: <html>
+<head>
+<style>
+html
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+body
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+</style>
+</head>
+<body>
+<object type="application/x-shockwave-flash" height="100%" width="100%" id="live_embed_player_flash" data="http://www.twitch.tv/widgets/live_embed_player.swf?channel=crimsix" bgcolor="#000000"><param name="allowFullScreen" value="false" /><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="movie" value="http://www.twitch.tv/widgets/live_embed_player.swf" /><param name="flashvars" value="hostname=www.twitch.tv&channel=crimsix&auto_play=true&start_volume=25" /></object>
+</body>
+<html>
 
 [29] = Name: dexter_bl
 Title: 25% off Wildstar | Sloppy Saturday | 500+ HR Stream +1hr per 4 sub! Giveaways!
@@ -327,6 +994,29 @@ GameName: WildStar
 ChannelId: 10180554
 LoginNameTwtv: dexter_bl
 ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_dexter_bl-630x473.jpg
+EmbedHtmlCode: <html>
+<head>
+<style>
+html
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+body
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+</style>
+</head>
+<body>
+<object type="application/x-shockwave-flash" height="100%" width="100%" id="live_embed_player_flash" data="http://www.twitch.tv/widgets/live_embed_player.swf?channel=dexter_bl" bgcolor="#000000"><param name="allowFullScreen" value="false" /><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="movie" value="http://www.twitch.tv/widgets/live_embed_player.swf" /><param name="flashvars" value="hostname=www.twitch.tv&channel=dexter_bl&auto_play=true&start_volume=25" /></object>
+</body>
+<html>
 
 [30] = Name: darthkin0002
 Title: [tw]有種都來住中路By卡特神 中國服上分ing 目前鑽五
@@ -338,6 +1028,29 @@ GameName: League of Legends
 ChannelId: 36122931
 LoginNameTwtv: darthkin0002
 ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_darthkin0002-630x473.jpg
+EmbedHtmlCode: <html>
+<head>
+<style>
+html
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+body
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+</style>
+</head>
+<body>
+<object type="application/x-shockwave-flash" height="100%" width="100%" id="live_embed_player_flash" data="http://www.twitch.tv/widgets/live_embed_player.swf?channel=darthkin0002" bgcolor="#000000"><param name="allowFullScreen" value="false" /><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="movie" value="http://www.twitch.tv/widgets/live_embed_player.swf" /><param name="flashvars" value="hostname=www.twitch.tv&channel=darthkin0002&auto_play=true&start_volume=25" /></object>
+</body>
+<html>
 
 [31] = Name: lolgeranimo
 Title: #Geranimo! | ADC Academy! | I'm back! | NA Challenger? | Learn to AD | Q&A between Qs |
@@ -349,6 +1062,29 @@ GameName: League of Legends
 ChannelId: 44334603
 LoginNameTwtv: lolgeranimo
 ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_lolgeranimo-630x473.jpg
+EmbedHtmlCode: <html>
+<head>
+<style>
+html
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+body
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+</style>
+</head>
+<body>
+<object type="application/x-shockwave-flash" height="100%" width="100%" id="live_embed_player_flash" data="http://www.twitch.tv/widgets/live_embed_player.swf?channel=lolgeranimo" bgcolor="#000000"><param name="allowFullScreen" value="false" /><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="movie" value="http://www.twitch.tv/widgets/live_embed_player.swf" /><param name="flashvars" value="hostname=www.twitch.tv&channel=lolgeranimo&auto_play=true&start_volume=25" /></object>
+</body>
+<html>
 
 [32] = Name: jahmillionaire
 Title: mage3k
@@ -360,6 +1096,29 @@ GameName: World of Warcraft: Mists of Pandaria
 ChannelId: 26229743
 LoginNameTwtv: jahmillionaire
 ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_jahmillionaire-630x473.jpg
+EmbedHtmlCode: <html>
+<head>
+<style>
+html
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+body
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+</style>
+</head>
+<body>
+<object type="application/x-shockwave-flash" height="100%" width="100%" id="live_embed_player_flash" data="http://www.twitch.tv/widgets/live_embed_player.swf?channel=jahmillionaire" bgcolor="#000000"><param name="allowFullScreen" value="false" /><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="movie" value="http://www.twitch.tv/widgets/live_embed_player.swf" /><param name="flashvars" value="hostname=www.twitch.tv&channel=jahmillionaire&auto_play=true&start_volume=25" /></object>
+</body>
+<html>
 
 [33] = Name: fathersongaming
 Title: Papa went to bed - Survivin
@@ -371,6 +1130,29 @@ GameName: DayZ
 ChannelId: 21924993
 LoginNameTwtv: fathersongaming
 ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_fathersongaming-630x473.jpg
+EmbedHtmlCode: <html>
+<head>
+<style>
+html
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+body
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+</style>
+</head>
+<body>
+<object type="application/x-shockwave-flash" height="100%" width="100%" id="live_embed_player_flash" data="http://www.twitch.tv/widgets/live_embed_player.swf?channel=fathersongaming" bgcolor="#000000"><param name="allowFullScreen" value="false" /><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="movie" value="http://www.twitch.tv/widgets/live_embed_player.swf" /><param name="flashvars" value="hostname=www.twitch.tv&channel=fathersongaming&auto_play=true&start_volume=25" /></object>
+</body>
+<html>
 
 [34] = Name: showdownsmash
 Title: NorCal Monthlies #5 - GRAND FINALS - ZHUUUU, Shroomed, PPU, HMW, Scar, Alan, Toph, Ky, Tang, Hyuga, Laudandus - http://challonge.com/NCM5
@@ -382,6 +1164,29 @@ GameName: Super Smash Bros. Melee
 ChannelId: 59420086
 LoginNameTwtv: showdownsmash
 ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_showdownsmash-630x473.jpg
+EmbedHtmlCode: <html>
+<head>
+<style>
+html
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+body
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+</style>
+</head>
+<body>
+<object type="application/x-shockwave-flash" height="100%" width="100%" id="live_embed_player_flash" data="http://www.twitch.tv/widgets/live_embed_player.swf?channel=showdownsmash" bgcolor="#000000"><param name="allowFullScreen" value="false" /><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="movie" value="http://www.twitch.tv/widgets/live_embed_player.swf" /><param name="flashvars" value="hostname=www.twitch.tv&channel=showdownsmash&auto_play=true&start_volume=25" /></object>
+</body>
+<html>
 
 [35] = Name: wootystyle
 Title: Road to AFRO! :: Drunk Stream! Shots for Subs!
@@ -393,6 +1198,29 @@ GameName: Counter-Strike: Global Offensive
 ChannelId: 35980760
 LoginNameTwtv: wootystyle
 ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_wootystyle-630x473.jpg
+EmbedHtmlCode: <html>
+<head>
+<style>
+html
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+body
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+</style>
+</head>
+<body>
+<object type="application/x-shockwave-flash" height="100%" width="100%" id="live_embed_player_flash" data="http://www.twitch.tv/widgets/live_embed_player.swf?channel=wootystyle" bgcolor="#000000"><param name="allowFullScreen" value="false" /><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="movie" value="http://www.twitch.tv/widgets/live_embed_player.swf" /><param name="flashvars" value="hostname=www.twitch.tv&channel=wootystyle&auto_play=true&start_volume=25" /></object>
+</body>
+<html>
 
 [36] = Name: carcinogensda
 Title: [24 hour Resident Evil Marathon - How many can I beat in a day?] (FAQ/Schedule: http://pastebin.com/dF16jxu7)
@@ -404,6 +1232,29 @@ GameName: Resident Evil
 ChannelId: 14891712
 LoginNameTwtv: carcinogensda
 ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_carcinogensda-630x473.jpg
+EmbedHtmlCode: <html>
+<head>
+<style>
+html
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+body
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+</style>
+</head>
+<body>
+<object type="application/x-shockwave-flash" height="100%" width="100%" id="live_embed_player_flash" data="http://www.twitch.tv/widgets/live_embed_player.swf?channel=carcinogensda" bgcolor="#000000"><param name="allowFullScreen" value="false" /><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="movie" value="http://www.twitch.tv/widgets/live_embed_player.swf" /><param name="flashvars" value="hostname=www.twitch.tv&channel=carcinogensda&auto_play=true&start_volume=25" /></object>
+</body>
+<html>
 
 [37] = Name: brandon505
 Title: Destiny with Brandon (PS4)
@@ -415,6 +1266,29 @@ GameName: Destiny
 ChannelId: 6659152
 LoginNameTwtv: brandon505
 ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_brandon505-630x473.jpg
+EmbedHtmlCode: <html>
+<head>
+<style>
+html
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+body
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+</style>
+</head>
+<body>
+<object type="application/x-shockwave-flash" height="100%" width="100%" id="live_embed_player_flash" data="http://www.twitch.tv/widgets/live_embed_player.swf?channel=brandon505" bgcolor="#000000"><param name="allowFullScreen" value="false" /><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="movie" value="http://www.twitch.tv/widgets/live_embed_player.swf" /><param name="flashvars" value="hostname=www.twitch.tv&channel=brandon505&auto_play=true&start_volume=25" /></object>
+</body>
+<html>
 
 [38] = Name: steel_tv
 Title: @iBUYPOWER steel - 720p 60fps - "toxic" CS:GO player - 10mans!
@@ -426,6 +1300,29 @@ GameName: Counter-Strike: Global Offensive
 ChannelId: 26202775
 LoginNameTwtv: steel_tv
 ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_steel_tv-630x473.jpg
+EmbedHtmlCode: <html>
+<head>
+<style>
+html
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+body
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+</style>
+</head>
+<body>
+<object type="application/x-shockwave-flash" height="100%" width="100%" id="live_embed_player_flash" data="http://www.twitch.tv/widgets/live_embed_player.swf?channel=steel_tv" bgcolor="#000000"><param name="allowFullScreen" value="false" /><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="movie" value="http://www.twitch.tv/widgets/live_embed_player.swf" /><param name="flashvars" value="hostname=www.twitch.tv&channel=steel_tv&auto_play=true&start_volume=25" /></object>
+</body>
+<html>
 
 [39] = Name: narokuu
 Title: |English| |Narokuu|  Giveaway after every game. Let's feed!
@@ -437,6 +1334,29 @@ GameName: Dota 2
 ChannelId: 27951325
 LoginNameTwtv: narokuu
 ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_narokuu-630x473.jpg
+EmbedHtmlCode: <html>
+<head>
+<style>
+html
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+body
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+</style>
+</head>
+<body>
+<object type="application/x-shockwave-flash" height="100%" width="100%" id="live_embed_player_flash" data="http://www.twitch.tv/widgets/live_embed_player.swf?channel=narokuu" bgcolor="#000000"><param name="allowFullScreen" value="false" /><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="movie" value="http://www.twitch.tv/widgets/live_embed_player.swf" /><param name="flashvars" value="hostname=www.twitch.tv&channel=narokuu&auto_play=true&start_volume=25" /></object>
+</body>
+<html>
 
 [40] = Name: 5hizzle
 Title: Arma 3 - King of the Hill Shenanigans
@@ -448,6 +1368,29 @@ GameName: ArmA III
 ChannelId: 22694682
 LoginNameTwtv: 5hizzle
 ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_5hizzle-630x473.jpg
+EmbedHtmlCode: <html>
+<head>
+<style>
+html
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+body
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+</style>
+</head>
+<body>
+<object type="application/x-shockwave-flash" height="100%" width="100%" id="live_embed_player_flash" data="http://www.twitch.tv/widgets/live_embed_player.swf?channel=5hizzle" bgcolor="#000000"><param name="allowFullScreen" value="false" /><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="movie" value="http://www.twitch.tv/widgets/live_embed_player.swf" /><param name="flashvars" value="hostname=www.twitch.tv&channel=5hizzle&auto_play=true&start_volume=25" /></object>
+</body>
+<html>
 
 [41] = Name: welovegames
 Title: WelovegamesTV
@@ -459,6 +1402,29 @@ GameName:
 ChannelId: 30814134
 LoginNameTwtv: welovegames
 ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_welovegames-630x473.jpg
+EmbedHtmlCode: <html>
+<head>
+<style>
+html
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+body
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+</style>
+</head>
+<body>
+<object type="application/x-shockwave-flash" height="100%" width="100%" id="live_embed_player_flash" data="http://www.twitch.tv/widgets/live_embed_player.swf?channel=welovegames" bgcolor="#000000"><param name="allowFullScreen" value="false" /><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="movie" value="http://www.twitch.tv/widgets/live_embed_player.swf" /><param name="flashvars" value="hostname=www.twitch.tv&channel=welovegames&auto_play=true&start_volume=25" /></object>
+</body>
+<html>
 
 [42] = Name: wyld
 Title: BuildGuild Modded S04 - Ultra Hard Survival - Day Seven
@@ -470,6 +1436,29 @@ GameName: Minecraft
 ChannelId: 36972151
 LoginNameTwtv: wyld
 ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_wyld-630x473.jpg
+EmbedHtmlCode: <html>
+<head>
+<style>
+html
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+body
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+</style>
+</head>
+<body>
+<object type="application/x-shockwave-flash" height="100%" width="100%" id="live_embed_player_flash" data="http://www.twitch.tv/widgets/live_embed_player.swf?channel=wyld" bgcolor="#000000"><param name="allowFullScreen" value="false" /><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="movie" value="http://www.twitch.tv/widgets/live_embed_player.swf" /><param name="flashvars" value="hostname=www.twitch.tv&channel=wyld&auto_play=true&start_volume=25" /></object>
+</body>
+<html>
 
 [43] = Name: machinegunnerusmc
 Title: 5 rp giveaway's  Duo Q on Smurf with Amber ||Celebrating 4 years out of the Marine Corps and 1 month w/Sub Button
@@ -481,6 +1470,29 @@ GameName: League of Legends
 ChannelId: 29693067
 LoginNameTwtv: machinegunnerusmc
 ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_machinegunnerusmc-630x473.jpg
+EmbedHtmlCode: <html>
+<head>
+<style>
+html
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+body
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+</style>
+</head>
+<body>
+<object type="application/x-shockwave-flash" height="100%" width="100%" id="live_embed_player_flash" data="http://www.twitch.tv/widgets/live_embed_player.swf?channel=machinegunnerusmc" bgcolor="#000000"><param name="allowFullScreen" value="false" /><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="movie" value="http://www.twitch.tv/widgets/live_embed_player.swf" /><param name="flashvars" value="hostname=www.twitch.tv&channel=machinegunnerusmc&auto_play=true&start_volume=25" /></object>
+</body>
+<html>
 
 [44] = Name: sovitia
 Title: Sovitia :3 | Diamond ADC Ranked | Q&A Between Games
@@ -492,6 +1504,29 @@ GameName: League of Legends
 ChannelId: 31778135
 LoginNameTwtv: sovitia
 ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_sovitia-630x473.jpg
+EmbedHtmlCode: <html>
+<head>
+<style>
+html
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+body
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+</style>
+</head>
+<body>
+<object type="application/x-shockwave-flash" height="100%" width="100%" id="live_embed_player_flash" data="http://www.twitch.tv/widgets/live_embed_player.swf?channel=sovitia" bgcolor="#000000"><param name="allowFullScreen" value="false" /><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="movie" value="http://www.twitch.tv/widgets/live_embed_player.swf" /><param name="flashvars" value="hostname=www.twitch.tv&channel=sovitia&auto_play=true&start_volume=25" /></object>
+</body>
+<html>
 
 [45] = Name: puncayshun
 Title: 70 star runs for 48
@@ -503,6 +1538,29 @@ GameName: Super Mario 64
 ChannelId: 30105209
 LoginNameTwtv: puncayshun
 ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_puncayshun-630x473.jpg
+EmbedHtmlCode: <html>
+<head>
+<style>
+html
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+body
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+</style>
+</head>
+<body>
+<object type="application/x-shockwave-flash" height="100%" width="100%" id="live_embed_player_flash" data="http://www.twitch.tv/widgets/live_embed_player.swf?channel=puncayshun" bgcolor="#000000"><param name="allowFullScreen" value="false" /><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="movie" value="http://www.twitch.tv/widgets/live_embed_player.swf" /><param name="flashvars" value="hostname=www.twitch.tv&channel=puncayshun&auto_play=true&start_volume=25" /></object>
+</body>
+<html>
 
 [46] = Name: meclipse
 Title: GOAL - 300 SUBS! (280) w/ Shroud! | 720p/60 FPS | Follow @mEclipseTV
@@ -514,6 +1572,29 @@ GameName: Counter-Strike: Global Offensive
 ChannelId: 37402112
 LoginNameTwtv: meclipse
 ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_meclipse-630x473.jpg
+EmbedHtmlCode: <html>
+<head>
+<style>
+html
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+body
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+</style>
+</head>
+<body>
+<object type="application/x-shockwave-flash" height="100%" width="100%" id="live_embed_player_flash" data="http://www.twitch.tv/widgets/live_embed_player.swf?channel=meclipse" bgcolor="#000000"><param name="allowFullScreen" value="false" /><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="movie" value="http://www.twitch.tv/widgets/live_embed_player.swf" /><param name="flashvars" value="hostname=www.twitch.tv&channel=meclipse&auto_play=true&start_volume=25" /></object>
+</body>
+<html>
 
 [47] = Name: elicherlol
 Title: [BR] Elicher - Top laner Diamante 1 | nano playlist | ADC night =3
@@ -525,6 +1606,29 @@ GameName: League of Legends
 ChannelId: 36474786
 LoginNameTwtv: elicherlol
 ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_elicherlol-630x473.jpg
+EmbedHtmlCode: <html>
+<head>
+<style>
+html
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+body
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+</style>
+</head>
+<body>
+<object type="application/x-shockwave-flash" height="100%" width="100%" id="live_embed_player_flash" data="http://www.twitch.tv/widgets/live_embed_player.swf?channel=elicherlol" bgcolor="#000000"><param name="allowFullScreen" value="false" /><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="movie" value="http://www.twitch.tv/widgets/live_embed_player.swf" /><param name="flashvars" value="hostname=www.twitch.tv&channel=elicherlol&auto_play=true&start_volume=25" /></object>
+</body>
+<html>
 
 [48] = Name: crumps2
 Title: ALL ENDINGS Chrono Trigger - run 3/5
@@ -536,6 +1640,29 @@ GameName: Chrono Trigger
 ChannelId: 19107317
 LoginNameTwtv: crumps2
 ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_crumps2-630x473.jpg
+EmbedHtmlCode: <html>
+<head>
+<style>
+html
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+body
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+</style>
+</head>
+<body>
+<object type="application/x-shockwave-flash" height="100%" width="100%" id="live_embed_player_flash" data="http://www.twitch.tv/widgets/live_embed_player.swf?channel=crumps2" bgcolor="#000000"><param name="allowFullScreen" value="false" /><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="movie" value="http://www.twitch.tv/widgets/live_embed_player.swf" /><param name="flashvars" value="hostname=www.twitch.tv&channel=crumps2&auto_play=true&start_volume=25" /></object>
+</body>
+<html>
 
 [49] = Name: swifty
 Title: Swifty 24 Hour Stream / At DreamHack!
@@ -547,6 +1674,29 @@ GameName: World of Warcraft: Mists of Pandaria
 ChannelId: 23524577
 LoginNameTwtv: swifty
 ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_swifty-630x473.jpg
+EmbedHtmlCode: <html>
+<head>
+<style>
+html
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+body
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+</style>
+</head>
+<body>
+<object type="application/x-shockwave-flash" height="100%" width="100%" id="live_embed_player_flash" data="http://www.twitch.tv/widgets/live_embed_player.swf?channel=swifty" bgcolor="#000000"><param name="allowFullScreen" value="false" /><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="movie" value="http://www.twitch.tv/widgets/live_embed_player.swf" /><param name="flashvars" value="hostname=www.twitch.tv&channel=swifty&auto_play=true&start_volume=25" /></object>
+</body>
+<html>
 
 [50] = Name: kiki7611190
 Title: ヾ(⌒(_�･ㅅ･`)_韓服鑽1台服菁英蠻王陳貓台 Tryndamere--TW Challenger, Korean Diamond1 發問前看下方Q&A \( ˘�ω�˘ )/
@@ -558,6 +1708,29 @@ GameName: League of Legends
 ChannelId: 38646527
 LoginNameTwtv: kiki7611190
 ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_kiki7611190-630x473.jpg
+EmbedHtmlCode: <html>
+<head>
+<style>
+html
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+body
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+</style>
+</head>
+<body>
+<object type="application/x-shockwave-flash" height="100%" width="100%" id="live_embed_player_flash" data="http://www.twitch.tv/widgets/live_embed_player.swf?channel=kiki7611190" bgcolor="#000000"><param name="allowFullScreen" value="false" /><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="movie" value="http://www.twitch.tv/widgets/live_embed_player.swf" /><param name="flashvars" value="hostname=www.twitch.tv&channel=kiki7611190&auto_play=true&start_volume=25" /></object>
+</body>
+<html>
 
 [51] = Name: koopatroopa787
 Title: SoberKoopa - THE LONE CANNON - Masters DE Farming - UPDATE SOON!
@@ -569,6 +1742,29 @@ GameName: Clash of Clans
 ChannelId: 54567086
 LoginNameTwtv: koopatroopa787
 ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_koopatroopa787-630x473.jpg
+EmbedHtmlCode: <html>
+<head>
+<style>
+html
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+body
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+</style>
+</head>
+<body>
+<object type="application/x-shockwave-flash" height="100%" width="100%" id="live_embed_player_flash" data="http://www.twitch.tv/widgets/live_embed_player.swf?channel=koopatroopa787" bgcolor="#000000"><param name="allowFullScreen" value="false" /><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="movie" value="http://www.twitch.tv/widgets/live_embed_player.swf" /><param name="flashvars" value="hostname=www.twitch.tv&channel=koopatroopa787&auto_play=true&start_volume=25" /></object>
+</body>
+<html>
 
 [52] = Name: alisha12287
 Title: Live in Florida with Emily zomoor chair pid Paul wigman
@@ -580,6 +1776,29 @@ GameName: RuneScape
 ChannelId: 43871381
 LoginNameTwtv: alisha12287
 ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_alisha12287-630x473.jpg
+EmbedHtmlCode: <html>
+<head>
+<style>
+html
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+body
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+</style>
+</head>
+<body>
+<object type="application/x-shockwave-flash" height="100%" width="100%" id="live_embed_player_flash" data="http://www.twitch.tv/widgets/live_embed_player.swf?channel=alisha12287" bgcolor="#000000"><param name="allowFullScreen" value="false" /><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="movie" value="http://www.twitch.tv/widgets/live_embed_player.swf" /><param name="flashvars" value="hostname=www.twitch.tv&channel=alisha12287&auto_play=true&start_volume=25" /></object>
+</body>
+<html>
 
 [53] = Name: inozemec
 Title: Leo Stream (RU) Марафон 24 часа
@@ -591,6 +1810,29 @@ GameName: Dota 2
 ChannelId: 36957524
 LoginNameTwtv: inozemec
 ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_inozemec-630x473.jpg
+EmbedHtmlCode: <html>
+<head>
+<style>
+html
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+body
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+</style>
+</head>
+<body>
+<object type="application/x-shockwave-flash" height="100%" width="100%" id="live_embed_player_flash" data="http://www.twitch.tv/widgets/live_embed_player.swf?channel=inozemec" bgcolor="#000000"><param name="allowFullScreen" value="false" /><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="movie" value="http://www.twitch.tv/widgets/live_embed_player.swf" /><param name="flashvars" value="hostname=www.twitch.tv&channel=inozemec&auto_play=true&start_volume=25" /></object>
+</body>
+<html>
 
 [54] = Name: iamkeeferz
 Title: POWER HOUR ROUND 2 + LEVEL 3 CLUES
@@ -602,6 +1844,29 @@ GameName: RuneScape
 ChannelId: 38011347
 LoginNameTwtv: iamkeeferz
 ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_iamkeeferz-630x473.jpg
+EmbedHtmlCode: <html>
+<head>
+<style>
+html
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+body
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+</style>
+</head>
+<body>
+<object type="application/x-shockwave-flash" height="100%" width="100%" id="live_embed_player_flash" data="http://www.twitch.tv/widgets/live_embed_player.swf?channel=iamkeeferz" bgcolor="#000000"><param name="allowFullScreen" value="false" /><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="movie" value="http://www.twitch.tv/widgets/live_embed_player.swf" /><param name="flashvars" value="hostname=www.twitch.tv&channel=iamkeeferz&auto_play=true&start_volume=25" /></object>
+</body>
+<html>
 
 [55] = Name: magic
 Title: Grand Prix Moscow, June 14-15, Standard
@@ -613,6 +1878,29 @@ GameName: Magic: The Gathering
 ChannelId: 26991613
 LoginNameTwtv: magic
 ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_magic-630x473.jpg
+EmbedHtmlCode: <html>
+<head>
+<style>
+html
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+body
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+</style>
+</head>
+<body>
+<object type="application/x-shockwave-flash" height="100%" width="100%" id="live_embed_player_flash" data="http://www.twitch.tv/widgets/live_embed_player.swf?channel=magic" bgcolor="#000000"><param name="allowFullScreen" value="false" /><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="movie" value="http://www.twitch.tv/widgets/live_embed_player.swf" /><param name="flashvars" value="hostname=www.twitch.tv&channel=magic&auto_play=true&start_volume=25" /></object>
+</body>
+<html>
 
 [56] = Name: vinesauce
 Title: Informative Broadcast Title with DireBoar
@@ -624,6 +1912,29 @@ GameName: Trials Fusion
 ChannelId: 25725272
 LoginNameTwtv: vinesauce
 ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_vinesauce-630x473.jpg
+EmbedHtmlCode: <html>
+<head>
+<style>
+html
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+body
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+</style>
+</head>
+<body>
+<object type="application/x-shockwave-flash" height="100%" width="100%" id="live_embed_player_flash" data="http://www.twitch.tv/widgets/live_embed_player.swf?channel=vinesauce" bgcolor="#000000"><param name="allowFullScreen" value="false" /><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="movie" value="http://www.twitch.tv/widgets/live_embed_player.swf" /><param name="flashvars" value="hostname=www.twitch.tv&channel=vinesauce&auto_play=true&start_volume=25" /></object>
+</body>
+<html>
 
 [57] = Name: cinnamontoastken
 Title: RESIDENT EVIL 4
@@ -635,6 +1946,29 @@ GameName: Resident Evil 4
 ChannelId: 30482057
 LoginNameTwtv: cinnamontoastken
 ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_cinnamontoastken-630x473.jpg
+EmbedHtmlCode: <html>
+<head>
+<style>
+html
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+body
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+</style>
+</head>
+<body>
+<object type="application/x-shockwave-flash" height="100%" width="100%" id="live_embed_player_flash" data="http://www.twitch.tv/widgets/live_embed_player.swf?channel=cinnamontoastken" bgcolor="#000000"><param name="allowFullScreen" value="false" /><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="movie" value="http://www.twitch.tv/widgets/live_embed_player.swf" /><param name="flashvars" value="hostname=www.twitch.tv&channel=cinnamontoastken&auto_play=true&start_volume=25" /></object>
+</body>
+<html>
 
 [58] = Name: krazyness
 Title: Krazyness NA Ranked / Primetime Draven sorteo [English/Spanish]
@@ -646,6 +1980,29 @@ GameName: League of Legends
 ChannelId: 2128782
 LoginNameTwtv: krazyness
 ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_krazyness-630x473.jpg
+EmbedHtmlCode: <html>
+<head>
+<style>
+html
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+body
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+</style>
+</head>
+<body>
+<object type="application/x-shockwave-flash" height="100%" width="100%" id="live_embed_player_flash" data="http://www.twitch.tv/widgets/live_embed_player.swf?channel=krazyness" bgcolor="#000000"><param name="allowFullScreen" value="false" /><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="movie" value="http://www.twitch.tv/widgets/live_embed_player.swf" /><param name="flashvars" value="hostname=www.twitch.tv&channel=krazyness&auto_play=true&start_volume=25" /></object>
+</body>
+<html>
 
 [59] = Name: bodil40
 Title: Minecraft HEXXIT COOP Subscriber Server HYPE HYPE
@@ -657,6 +2014,29 @@ GameName: minecraft
 ChannelId: 36236399
 LoginNameTwtv: bodil40
 ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_bodil40-630x473.jpg
+EmbedHtmlCode: <html>
+<head>
+<style>
+html
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+body
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+</style>
+</head>
+<body>
+<object type="application/x-shockwave-flash" height="100%" width="100%" id="live_embed_player_flash" data="http://www.twitch.tv/widgets/live_embed_player.swf?channel=bodil40" bgcolor="#000000"><param name="allowFullScreen" value="false" /><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="movie" value="http://www.twitch.tv/widgets/live_embed_player.swf" /><param name="flashvars" value="hostname=www.twitch.tv&channel=bodil40&auto_play=true&start_volume=25" /></object>
+</body>
+<html>
 
 [60] = Name: riotgamesoceania
 Title: NA LCS W4D1 - Rebroadcast
@@ -668,6 +2048,29 @@ GameName: League of Legends
 ChannelId: 46273272
 LoginNameTwtv: riotgamesoceania
 ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_riotgamesoceania-630x473.jpg
+EmbedHtmlCode: <html>
+<head>
+<style>
+html
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+body
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+</style>
+</head>
+<body>
+<object type="application/x-shockwave-flash" height="100%" width="100%" id="live_embed_player_flash" data="http://www.twitch.tv/widgets/live_embed_player.swf?channel=riotgamesoceania" bgcolor="#000000"><param name="allowFullScreen" value="false" /><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="movie" value="http://www.twitch.tv/widgets/live_embed_player.swf" /><param name="flashvars" value="hostname=www.twitch.tv&channel=riotgamesoceania&auto_play=true&start_volume=25" /></object>
+</body>
+<html>
 
 [61] = Name: competitive_online
 Title: Smite with Wolfy I Rawr
@@ -679,6 +2082,29 @@ GameName: Smite
 ChannelId: 16433726
 LoginNameTwtv: competitive_online
 ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_competitive_online-630x473.jpg
+EmbedHtmlCode: <html>
+<head>
+<style>
+html
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+body
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+</style>
+</head>
+<body>
+<object type="application/x-shockwave-flash" height="100%" width="100%" id="live_embed_player_flash" data="http://www.twitch.tv/widgets/live_embed_player.swf?channel=competitive_online" bgcolor="#000000"><param name="allowFullScreen" value="false" /><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="movie" value="http://www.twitch.tv/widgets/live_embed_player.swf" /><param name="flashvars" value="hostname=www.twitch.tv&channel=competitive_online&auto_play=true&start_volume=25" /></object>
+</body>
+<html>
 
 [62] = Name: cmayy
 Title: Snipein till I pass out. Taking Song requests!!
@@ -690,6 +2116,29 @@ GameName: Smite
 ChannelId: 36610672
 LoginNameTwtv: cmayy
 ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_cmayy-630x473.jpg
+EmbedHtmlCode: <html>
+<head>
+<style>
+html
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+body
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+</style>
+</head>
+<body>
+<object type="application/x-shockwave-flash" height="100%" width="100%" id="live_embed_player_flash" data="http://www.twitch.tv/widgets/live_embed_player.swf?channel=cmayy" bgcolor="#000000"><param name="allowFullScreen" value="false" /><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="movie" value="http://www.twitch.tv/widgets/live_embed_player.swf" /><param name="flashvars" value="hostname=www.twitch.tv&channel=cmayy&auto_play=true&start_volume=25" /></object>
+</body>
+<html>
 
 [63] = Name: ogssupernova
 Title: Code S Terran SuperNova KR Ladder!!
@@ -701,6 +2150,29 @@ GameName: StarCraft II: Heart of the Swarm
 ChannelId: 27913876
 LoginNameTwtv: ogssupernova
 ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_ogssupernova-630x473.jpg
+EmbedHtmlCode: <html>
+<head>
+<style>
+html
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+body
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+</style>
+</head>
+<body>
+<object type="application/x-shockwave-flash" height="100%" width="100%" id="live_embed_player_flash" data="http://www.twitch.tv/widgets/live_embed_player.swf?channel=ogssupernova" bgcolor="#000000"><param name="allowFullScreen" value="false" /><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="movie" value="http://www.twitch.tv/widgets/live_embed_player.swf" /><param name="flashvars" value="hostname=www.twitch.tv&channel=ogssupernova&auto_play=true&start_volume=25" /></object>
+</body>
+<html>
 
 [64] = Name: bigfoltz
 Title: Solo KEMS r NAH? w/ @Bigfoltz
@@ -712,6 +2184,29 @@ GameName: Call of Duty: Ghosts
 ChannelId: 32607302
 LoginNameTwtv: bigfoltz
 ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_bigfoltz-630x473.jpg
+EmbedHtmlCode: <html>
+<head>
+<style>
+html
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+body
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+</style>
+</head>
+<body>
+<object type="application/x-shockwave-flash" height="100%" width="100%" id="live_embed_player_flash" data="http://www.twitch.tv/widgets/live_embed_player.swf?channel=bigfoltz" bgcolor="#000000"><param name="allowFullScreen" value="false" /><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="movie" value="http://www.twitch.tv/widgets/live_embed_player.swf" /><param name="flashvars" value="hostname=www.twitch.tv&channel=bigfoltz&auto_play=true&start_volume=25" /></object>
+</body>
+<html>
 
 [65] = Name: flamesword
 Title: OpTic House 2014 Live #OpTicBeard
@@ -723,6 +2218,29 @@ GameName: Halo 3
 ChannelId: 22090129
 LoginNameTwtv: flamesword
 ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_flamesword-630x473.jpg
+EmbedHtmlCode: <html>
+<head>
+<style>
+html
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+body
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+</style>
+</head>
+<body>
+<object type="application/x-shockwave-flash" height="100%" width="100%" id="live_embed_player_flash" data="http://www.twitch.tv/widgets/live_embed_player.swf?channel=flamesword" bgcolor="#000000"><param name="allowFullScreen" value="false" /><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="movie" value="http://www.twitch.tv/widgets/live_embed_player.swf" /><param name="flashvars" value="hostname=www.twitch.tv&channel=flamesword&auto_play=true&start_volume=25" /></object>
+</body>
+<html>
 
 [66] = Name: ryuzilla
 Title: 24 Hour stream HYPE!  3PM EST Start time.  Saturday-Sunday.
@@ -734,6 +2252,29 @@ GameName: Counter-Strike: Global Offensive
 ChannelId: 44473716
 LoginNameTwtv: ryuzilla
 ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_ryuzilla-630x473.jpg
+EmbedHtmlCode: <html>
+<head>
+<style>
+html
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+body
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+</style>
+</head>
+<body>
+<object type="application/x-shockwave-flash" height="100%" width="100%" id="live_embed_player_flash" data="http://www.twitch.tv/widgets/live_embed_player.swf?channel=ryuzilla" bgcolor="#000000"><param name="allowFullScreen" value="false" /><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="movie" value="http://www.twitch.tv/widgets/live_embed_player.swf" /><param name="flashvars" value="hostname=www.twitch.tv&channel=ryuzilla&auto_play=true&start_volume=25" /></object>
+</body>
+<html>
 
 [67] = Name: teaselol
 Title: Tease - 3s RMD w/ Poolz & Humanbeing | Rdruid Pov
@@ -745,6 +2286,29 @@ GameName: World of Warcraft: Mists of Pandaria
 ChannelId: 29902952
 LoginNameTwtv: teaselol
 ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_teaselol-630x473.jpg
+EmbedHtmlCode: <html>
+<head>
+<style>
+html
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+body
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+</style>
+</head>
+<body>
+<object type="application/x-shockwave-flash" height="100%" width="100%" id="live_embed_player_flash" data="http://www.twitch.tv/widgets/live_embed_player.swf?channel=teaselol" bgcolor="#000000"><param name="allowFullScreen" value="false" /><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="movie" value="http://www.twitch.tv/widgets/live_embed_player.swf" /><param name="flashvars" value="hostname=www.twitch.tv&channel=teaselol&auto_play=true&start_volume=25" /></object>
+</body>
+<html>
 
 [68] = Name: alkaizerx
 Title: ヽ(◉◡◔)ﾉ
@@ -756,6 +2320,29 @@ GameName: Diablo III: Reaper of Souls
 ChannelId: 35916854
 LoginNameTwtv: alkaizerx
 ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_alkaizerx-630x473.jpg
+EmbedHtmlCode: <html>
+<head>
+<style>
+html
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+body
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+</style>
+</head>
+<body>
+<object type="application/x-shockwave-flash" height="100%" width="100%" id="live_embed_player_flash" data="http://www.twitch.tv/widgets/live_embed_player.swf?channel=alkaizerx" bgcolor="#000000"><param name="allowFullScreen" value="false" /><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="movie" value="http://www.twitch.tv/widgets/live_embed_player.swf" /><param name="flashvars" value="hostname=www.twitch.tv&channel=alkaizerx&auto_play=true&start_volume=25" /></object>
+</body>
+<html>
 
 [69] = Name: standy12
 Title: SweetCamper 鑽1 幹 日本被逆轉 有夠幹! 碎念台 累了(雷了)就關
@@ -767,6 +2354,29 @@ GameName: League of Legends
 ChannelId: 46960174
 LoginNameTwtv: standy12
 ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_standy12-630x473.jpg
+EmbedHtmlCode: <html>
+<head>
+<style>
+html
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+body
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+</style>
+</head>
+<body>
+<object type="application/x-shockwave-flash" height="100%" width="100%" id="live_embed_player_flash" data="http://www.twitch.tv/widgets/live_embed_player.swf?channel=standy12" bgcolor="#000000"><param name="allowFullScreen" value="false" /><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="movie" value="http://www.twitch.tv/widgets/live_embed_player.swf" /><param name="flashvars" value="hostname=www.twitch.tv&channel=standy12&auto_play=true&start_volume=25" /></object>
+</body>
+<html>
 
 [70] = Name: jukebox360
 Title: DRUNKEN RANT
@@ -778,6 +2388,29 @@ GameName: Call of Duty: Ghosts
 ChannelId: 2765645
 LoginNameTwtv: jukebox360
 ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_jukebox360-630x473.jpg
+EmbedHtmlCode: <html>
+<head>
+<style>
+html
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+body
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+</style>
+</head>
+<body>
+<object type="application/x-shockwave-flash" height="100%" width="100%" id="live_embed_player_flash" data="http://www.twitch.tv/widgets/live_embed_player.swf?channel=jukebox360" bgcolor="#000000"><param name="allowFullScreen" value="false" /><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="movie" value="http://www.twitch.tv/widgets/live_embed_player.swf" /><param name="flashvars" value="hostname=www.twitch.tv&channel=jukebox360&auto_play=true&start_volume=25" /></object>
+</body>
+<html>
 
 [71] = Name: skyasi
 Title: Skyasi  -Why do creepers keep blowing up my SkyBlock!  ლ(ಠ益ಠლ
@@ -789,6 +2422,29 @@ GameName: Minecraft
 ChannelId: 51849906
 LoginNameTwtv: skyasi
 ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_skyasi-630x473.jpg
+EmbedHtmlCode: <html>
+<head>
+<style>
+html
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+body
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+</style>
+</head>
+<body>
+<object type="application/x-shockwave-flash" height="100%" width="100%" id="live_embed_player_flash" data="http://www.twitch.tv/widgets/live_embed_player.swf?channel=skyasi" bgcolor="#000000"><param name="allowFullScreen" value="false" /><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="movie" value="http://www.twitch.tv/widgets/live_embed_player.swf" /><param name="flashvars" value="hostname=www.twitch.tv&channel=skyasi&auto_play=true&start_volume=25" /></object>
+</body>
+<html>
 
 [72] = Name: sorujin
 Title: Sorujin | Minecraft: Agrarian Skies | #MenuLive
@@ -800,6 +2456,29 @@ GameName: Minecraft
 ChannelId: 35057209
 LoginNameTwtv: sorujin
 ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_sorujin-630x473.jpg
+EmbedHtmlCode: <html>
+<head>
+<style>
+html
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+body
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+</style>
+</head>
+<body>
+<object type="application/x-shockwave-flash" height="100%" width="100%" id="live_embed_player_flash" data="http://www.twitch.tv/widgets/live_embed_player.swf?channel=sorujin" bgcolor="#000000"><param name="allowFullScreen" value="false" /><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="movie" value="http://www.twitch.tv/widgets/live_embed_player.swf" /><param name="flashvars" value="hostname=www.twitch.tv&channel=sorujin&auto_play=true&start_volume=25" /></object>
+</body>
+<html>
 
 [73] = Name: netenho1
 Title: Netenho 00:00 to de volta!!
@@ -811,6 +2490,29 @@ GameName: Point Blank
 ChannelId: 42604220
 LoginNameTwtv: netenho1
 ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_netenho1-630x473.jpg
+EmbedHtmlCode: <html>
+<head>
+<style>
+html
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+body
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+</style>
+</head>
+<body>
+<object type="application/x-shockwave-flash" height="100%" width="100%" id="live_embed_player_flash" data="http://www.twitch.tv/widgets/live_embed_player.swf?channel=netenho1" bgcolor="#000000"><param name="allowFullScreen" value="false" /><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="movie" value="http://www.twitch.tv/widgets/live_embed_player.swf" /><param name="flashvars" value="hostname=www.twitch.tv&channel=netenho1&auto_play=true&start_volume=25" /></object>
+</body>
+<html>
 
 [74] = Name: jerpdoesgames
 Title: Dark Souls 2 - Scientific Cheese (PC)
@@ -822,6 +2524,29 @@ GameName: Dark Souls II
 ChannelId: 26627520
 LoginNameTwtv: jerpdoesgames
 ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_jerpdoesgames-630x473.jpg
+EmbedHtmlCode: <html>
+<head>
+<style>
+html
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+body
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+</style>
+</head>
+<body>
+<object type="application/x-shockwave-flash" height="100%" width="100%" id="live_embed_player_flash" data="http://www.twitch.tv/widgets/live_embed_player.swf?channel=jerpdoesgames" bgcolor="#000000"><param name="allowFullScreen" value="false" /><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="movie" value="http://www.twitch.tv/widgets/live_embed_player.swf" /><param name="flashvars" value="hostname=www.twitch.tv&channel=jerpdoesgames&auto_play=true&start_volume=25" /></object>
+</body>
+<html>
 
 [75] = Name: silentsentry
 Title: Battle Royale - 1080p
@@ -833,6 +2558,29 @@ GameName: ArmA III
 ChannelId: 56625428
 LoginNameTwtv: silentsentry
 ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_silentsentry-630x473.jpg
+EmbedHtmlCode: <html>
+<head>
+<style>
+html
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+body
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+</style>
+</head>
+<body>
+<object type="application/x-shockwave-flash" height="100%" width="100%" id="live_embed_player_flash" data="http://www.twitch.tv/widgets/live_embed_player.swf?channel=silentsentry" bgcolor="#000000"><param name="allowFullScreen" value="false" /><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="movie" value="http://www.twitch.tv/widgets/live_embed_player.swf" /><param name="flashvars" value="hostname=www.twitch.tv&channel=silentsentry&auto_play=true&start_volume=25" /></object>
+</body>
+<html>
 
 [76] = Name: liquidken
 Title: KING OF SMASH streaming Super Smash Bros Melee With Hotbid LiquidKDJ manacloud and LIL FUMI (coming later) Q and A E3/Smash WII U today
@@ -844,6 +2592,29 @@ GameName: Super Smash Bros. Melee
 ChannelId: 15954674
 LoginNameTwtv: liquidken
 ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_liquidken-630x473.jpg
+EmbedHtmlCode: <html>
+<head>
+<style>
+html
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+body
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+</style>
+</head>
+<body>
+<object type="application/x-shockwave-flash" height="100%" width="100%" id="live_embed_player_flash" data="http://www.twitch.tv/widgets/live_embed_player.swf?channel=liquidken" bgcolor="#000000"><param name="allowFullScreen" value="false" /><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="movie" value="http://www.twitch.tv/widgets/live_embed_player.swf" /><param name="flashvars" value="hostname=www.twitch.tv&channel=liquidken&auto_play=true&start_volume=25" /></object>
+</body>
+<html>
 
 [77] = Name: rageweawer
 Title: Boosting Anyone To Master League For Free - Get Free Stuff For Donation Day 62 (ง �̀_�́)ง
@@ -855,6 +2626,29 @@ GameName: StarCraft II: Heart of the Swarm
 ChannelId: 28034886
 LoginNameTwtv: rageweawer
 ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_rageweawer-630x473.jpg
+EmbedHtmlCode: <html>
+<head>
+<style>
+html
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+body
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+</style>
+</head>
+<body>
+<object type="application/x-shockwave-flash" height="100%" width="100%" id="live_embed_player_flash" data="http://www.twitch.tv/widgets/live_embed_player.swf?channel=rageweawer" bgcolor="#000000"><param name="allowFullScreen" value="false" /><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="movie" value="http://www.twitch.tv/widgets/live_embed_player.swf" /><param name="flashvars" value="hostname=www.twitch.tv&channel=rageweawer&auto_play=true&start_volume=25" /></object>
+</body>
+<html>
 
 [78] = Name: fefosampaio
 Title: lol lol lol brazil meu irmao
@@ -866,6 +2660,29 @@ GameName: League of Legends
 ChannelId: 39166170
 LoginNameTwtv: fefosampaio
 ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_fefosampaio-630x473.jpg
+EmbedHtmlCode: <html>
+<head>
+<style>
+html
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+body
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+</style>
+</head>
+<body>
+<object type="application/x-shockwave-flash" height="100%" width="100%" id="live_embed_player_flash" data="http://www.twitch.tv/widgets/live_embed_player.swf?channel=fefosampaio" bgcolor="#000000"><param name="allowFullScreen" value="false" /><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="movie" value="http://www.twitch.tv/widgets/live_embed_player.swf" /><param name="flashvars" value="hostname=www.twitch.tv&channel=fefosampaio&auto_play=true&start_volume=25" /></object>
+</body>
+<html>
 
 [79] = Name: romarionz
 Title: Стримчик PWI
@@ -877,6 +2694,29 @@ GameName: Perfect World International
 ChannelId: 39804139
 LoginNameTwtv: romarionz
 ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_romarionz-630x473.jpg
+EmbedHtmlCode: <html>
+<head>
+<style>
+html
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+body
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+</style>
+</head>
+<body>
+<object type="application/x-shockwave-flash" height="100%" width="100%" id="live_embed_player_flash" data="http://www.twitch.tv/widgets/live_embed_player.swf?channel=romarionz" bgcolor="#000000"><param name="allowFullScreen" value="false" /><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="movie" value="http://www.twitch.tv/widgets/live_embed_player.swf" /><param name="flashvars" value="hostname=www.twitch.tv&channel=romarionz&auto_play=true&start_volume=25" /></object>
+</body>
+<html>
 
 [80] = Name: sllverlady1
 Title: [ENG/FR]    ᔕLᒪⅤᗴᖇᒪᗩᕍᎩ1 白金
@@ -888,6 +2728,29 @@ GameName: League of Legends
 ChannelId: 47515032
 LoginNameTwtv: sllverlady1
 ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_sllverlady1-630x473.jpg
+EmbedHtmlCode: <html>
+<head>
+<style>
+html
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+body
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+</style>
+</head>
+<body>
+<object type="application/x-shockwave-flash" height="100%" width="100%" id="live_embed_player_flash" data="http://www.twitch.tv/widgets/live_embed_player.swf?channel=sllverlady1" bgcolor="#000000"><param name="allowFullScreen" value="false" /><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="movie" value="http://www.twitch.tv/widgets/live_embed_player.swf" /><param name="flashvars" value="hostname=www.twitch.tv&channel=sllverlady1&auto_play=true&start_volume=25" /></object>
+</body>
+<html>
 
 [81] = Name: teamkhaos
 Title: Saturday Slugfest from Lynnwood WA.  INJ, UMvC3, USF4 and more!  Brackets at http://gameclucks.challonge.com/
@@ -899,6 +2762,29 @@ GameName: BlazBlue: Chrono Phantasma
 ChannelId: 18437614
 LoginNameTwtv: teamkhaos
 ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_teamkhaos-630x473.jpg
+EmbedHtmlCode: <html>
+<head>
+<style>
+html
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+body
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+</style>
+</head>
+<body>
+<object type="application/x-shockwave-flash" height="100%" width="100%" id="live_embed_player_flash" data="http://www.twitch.tv/widgets/live_embed_player.swf?channel=teamkhaos" bgcolor="#000000"><param name="allowFullScreen" value="false" /><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="movie" value="http://www.twitch.tv/widgets/live_embed_player.swf" /><param name="flashvars" value="hostname=www.twitch.tv&channel=teamkhaos&auto_play=true&start_volume=25" /></object>
+</body>
+<html>
 
 [82] = Name: skunkodor
 Title: "Happy Stream" ft. Frazmk4 and Poptarttally appearances made by Ginger J and dem Wifeys | Day 104
@@ -910,6 +2796,29 @@ GameName: League of Legends
 ChannelId: 36831324
 LoginNameTwtv: skunkodor
 ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_skunkodor-630x473.jpg
+EmbedHtmlCode: <html>
+<head>
+<style>
+html
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+body
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+</style>
+</head>
+<body>
+<object type="application/x-shockwave-flash" height="100%" width="100%" id="live_embed_player_flash" data="http://www.twitch.tv/widgets/live_embed_player.swf?channel=skunkodor" bgcolor="#000000"><param name="allowFullScreen" value="false" /><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="movie" value="http://www.twitch.tv/widgets/live_embed_player.swf" /><param name="flashvars" value="hostname=www.twitch.tv&channel=skunkodor&auto_play=true&start_volume=25" /></object>
+</body>
+<html>
 
 [83] = Name: kyl3collins
 Title: [BR] Competitivo
@@ -921,6 +2830,29 @@ GameName: Dota 2
 ChannelId: 62697676
 LoginNameTwtv: kyl3collins
 ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_kyl3collins-630x473.jpg
+EmbedHtmlCode: <html>
+<head>
+<style>
+html
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+body
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+</style>
+</head>
+<body>
+<object type="application/x-shockwave-flash" height="100%" width="100%" id="live_embed_player_flash" data="http://www.twitch.tv/widgets/live_embed_player.swf?channel=kyl3collins" bgcolor="#000000"><param name="allowFullScreen" value="false" /><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="movie" value="http://www.twitch.tv/widgets/live_embed_player.swf" /><param name="flashvars" value="hostname=www.twitch.tv&channel=kyl3collins&auto_play=true&start_volume=25" /></object>
+</body>
+<html>
 
 [84] = Name: saltybet
 Title: Salty's Dream Cast Casino! Place your bets at saltybet.com
@@ -932,6 +2864,29 @@ GameName: M.U.G.E.N
 ChannelId: 43201452
 LoginNameTwtv: saltybet
 ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_saltybet-630x473.jpg
+EmbedHtmlCode: <html>
+<head>
+<style>
+html
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+body
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+</style>
+</head>
+<body>
+<object type="application/x-shockwave-flash" height="100%" width="100%" id="live_embed_player_flash" data="http://www.twitch.tv/widgets/live_embed_player.swf?channel=saltybet" bgcolor="#000000"><param name="allowFullScreen" value="false" /><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="movie" value="http://www.twitch.tv/widgets/live_embed_player.swf" /><param name="flashvars" value="hostname=www.twitch.tv&channel=saltybet&auto_play=true&start_volume=25" /></object>
+</body>
+<html>
 
 [85] = Name: anatomyz
 Title: Paper Mario Any% Speedruns
@@ -943,6 +2898,29 @@ GameName: Paper Mario
 ChannelId: 25247091
 LoginNameTwtv: anatomyz
 ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_anatomyz-630x473.jpg
+EmbedHtmlCode: <html>
+<head>
+<style>
+html
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+body
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+</style>
+</head>
+<body>
+<object type="application/x-shockwave-flash" height="100%" width="100%" id="live_embed_player_flash" data="http://www.twitch.tv/widgets/live_embed_player.swf?channel=anatomyz" bgcolor="#000000"><param name="allowFullScreen" value="false" /><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="movie" value="http://www.twitch.tv/widgets/live_embed_player.swf" /><param name="flashvars" value="hostname=www.twitch.tv&channel=anatomyz&auto_play=true&start_volume=25" /></object>
+</body>
+<html>
 
 [86] = Name: modogrinder1
 Title: 1962 RATING Vintage Masters Draft
@@ -954,6 +2932,29 @@ GameName: Magic: The Gathering
 ChannelId: 32054439
 LoginNameTwtv: modogrinder1
 ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_modogrinder1-630x473.jpg
+EmbedHtmlCode: <html>
+<head>
+<style>
+html
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+body
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+</style>
+</head>
+<body>
+<object type="application/x-shockwave-flash" height="100%" width="100%" id="live_embed_player_flash" data="http://www.twitch.tv/widgets/live_embed_player.swf?channel=modogrinder1" bgcolor="#000000"><param name="allowFullScreen" value="false" /><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="movie" value="http://www.twitch.tv/widgets/live_embed_player.swf" /><param name="flashvars" value="hostname=www.twitch.tv&channel=modogrinder1&auto_play=true&start_volume=25" /></object>
+</body>
+<html>
 
 [87] = Name: kiwikid
 Title: solo challenger queue
@@ -965,6 +2966,29 @@ GameName: League of Legends
 ChannelId: 31650369
 LoginNameTwtv: kiwikid
 ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_kiwikid-630x473.jpg
+EmbedHtmlCode: <html>
+<head>
+<style>
+html
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+body
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+</style>
+</head>
+<body>
+<object type="application/x-shockwave-flash" height="100%" width="100%" id="live_embed_player_flash" data="http://www.twitch.tv/widgets/live_embed_player.swf?channel=kiwikid" bgcolor="#000000"><param name="allowFullScreen" value="false" /><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="movie" value="http://www.twitch.tv/widgets/live_embed_player.swf" /><param name="flashvars" value="hostname=www.twitch.tv&channel=kiwikid&auto_play=true&start_volume=25" /></object>
+</body>
+<html>
 
 [88] = Name: shahzam
 Title: ShahZaM - Pro CS:GO ScrimZ
@@ -976,6 +3000,29 @@ GameName: Counter-Strike: Global Offensive
 ChannelId: 38433240
 LoginNameTwtv: shahzam
 ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_shahzam-630x473.jpg
+EmbedHtmlCode: <html>
+<head>
+<style>
+html
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+body
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+</style>
+</head>
+<body>
+<object type="application/x-shockwave-flash" height="100%" width="100%" id="live_embed_player_flash" data="http://www.twitch.tv/widgets/live_embed_player.swf?channel=shahzam" bgcolor="#000000"><param name="allowFullScreen" value="false" /><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="movie" value="http://www.twitch.tv/widgets/live_embed_player.swf" /><param name="flashvars" value="hostname=www.twitch.tv&channel=shahzam&auto_play=true&start_volume=25" /></object>
+</body>
+<html>
 
 [89] = Name: shadowqwe
 Title: Dignitas Shadowq - Diamond Support with commentary
@@ -987,6 +3034,29 @@ GameName: Smite
 ChannelId: 28090370
 LoginNameTwtv: shadowqwe
 ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_shadowqwe-630x473.jpg
+EmbedHtmlCode: <html>
+<head>
+<style>
+html
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+body
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+</style>
+</head>
+<body>
+<object type="application/x-shockwave-flash" height="100%" width="100%" id="live_embed_player_flash" data="http://www.twitch.tv/widgets/live_embed_player.swf?channel=shadowqwe" bgcolor="#000000"><param name="allowFullScreen" value="false" /><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="movie" value="http://www.twitch.tv/widgets/live_embed_player.swf" /><param name="flashvars" value="hostname=www.twitch.tv&channel=shadowqwe&auto_play=true&start_volume=25" /></object>
+</body>
+<html>
 
 [90] = Name: crumbzz
 Title: dignitas Crumbz Challenger jungler . Wardlord.  #Supertramp
@@ -998,6 +3068,29 @@ GameName: League of Legends
 ChannelId: 28914510
 LoginNameTwtv: crumbzz
 ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_crumbzz-630x473.jpg
+EmbedHtmlCode: <html>
+<head>
+<style>
+html
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+body
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+</style>
+</head>
+<body>
+<object type="application/x-shockwave-flash" height="100%" width="100%" id="live_embed_player_flash" data="http://www.twitch.tv/widgets/live_embed_player.swf?channel=crumbzz" bgcolor="#000000"><param name="allowFullScreen" value="false" /><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="movie" value="http://www.twitch.tv/widgets/live_embed_player.swf" /><param name="flashvars" value="hostname=www.twitch.tv&channel=crumbzz&auto_play=true&start_volume=25" /></object>
+</body>
+<html>
 
 [91] = Name: d3lor1
 Title: [Click Here]
@@ -1009,6 +3102,29 @@ GameName: League of Legends
 ChannelId: 39346171
 LoginNameTwtv: d3lor1
 ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_d3lor1-630x473.jpg
+EmbedHtmlCode: <html>
+<head>
+<style>
+html
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+body
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+</style>
+</head>
+<body>
+<object type="application/x-shockwave-flash" height="100%" width="100%" id="live_embed_player_flash" data="http://www.twitch.tv/widgets/live_embed_player.swf?channel=d3lor1" bgcolor="#000000"><param name="allowFullScreen" value="false" /><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="movie" value="http://www.twitch.tv/widgets/live_embed_player.swf" /><param name="flashvars" value="hostname=www.twitch.tv&channel=d3lor1&auto_play=true&start_volume=25" /></object>
+</body>
+<html>
 
 [92] = Name: simcopter1
 Title: Interactive and Methodical Arenas With SimCopter1; 65.03% Win Rate! [Warlock]
@@ -1020,6 +3136,29 @@ GameName: Hearthstone: Heroes of Warcraft
 ChannelId: 60216187
 LoginNameTwtv: simcopter1
 ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_simcopter1-630x473.jpg
+EmbedHtmlCode: <html>
+<head>
+<style>
+html
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+body
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+</style>
+</head>
+<body>
+<object type="application/x-shockwave-flash" height="100%" width="100%" id="live_embed_player_flash" data="http://www.twitch.tv/widgets/live_embed_player.swf?channel=simcopter1" bgcolor="#000000"><param name="allowFullScreen" value="false" /><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="movie" value="http://www.twitch.tv/widgets/live_embed_player.swf" /><param name="flashvars" value="hostname=www.twitch.tv&channel=simcopter1&auto_play=true&start_volume=25" /></object>
+</body>
+<html>
 
 [93] = Name: slayish
 Title: � Chilled stream. The forest! | Join the Slay army!! �
@@ -1031,6 +3170,29 @@ GameName: The Forest
 ChannelId: 25911266
 LoginNameTwtv: slayish
 ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_slayish-630x473.jpg
+EmbedHtmlCode: <html>
+<head>
+<style>
+html
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+body
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+</style>
+</head>
+<body>
+<object type="application/x-shockwave-flash" height="100%" width="100%" id="live_embed_player_flash" data="http://www.twitch.tv/widgets/live_embed_player.swf?channel=slayish" bgcolor="#000000"><param name="allowFullScreen" value="false" /><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="movie" value="http://www.twitch.tv/widgets/live_embed_player.swf" /><param name="flashvars" value="hostname=www.twitch.tv&channel=slayish&auto_play=true&start_volume=25" /></object>
+</body>
+<html>
 
 [94] = Name: rwhitegoose
 Title: GoldenEye 007 Speedruns : Night 9 of Silo Agent 1:01 WR attempts [ ** FAQ & Tutorial ** http://bombch.us/lka ]
@@ -1042,6 +3204,29 @@ GameName: GoldenEye 007
 ChannelId: 29159207
 LoginNameTwtv: rwhitegoose
 ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_rwhitegoose-630x473.jpg
+EmbedHtmlCode: <html>
+<head>
+<style>
+html
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+body
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+</style>
+</head>
+<body>
+<object type="application/x-shockwave-flash" height="100%" width="100%" id="live_embed_player_flash" data="http://www.twitch.tv/widgets/live_embed_player.swf?channel=rwhitegoose" bgcolor="#000000"><param name="allowFullScreen" value="false" /><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="movie" value="http://www.twitch.tv/widgets/live_embed_player.swf" /><param name="flashvars" value="hostname=www.twitch.tv&channel=rwhitegoose&auto_play=true&start_volume=25" /></object>
+</body>
+<html>
 
 [95] = Name: zealot711
 Title: Lvl 50 Medic - Healing Veteran Dungeon Silvers/Golds & World Bosses Tomorrow! - CREDD Giveaways Daily!
@@ -1053,6 +3238,29 @@ GameName: WildStar
 ChannelId: 25412137
 LoginNameTwtv: zealot711
 ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_zealot711-630x473.jpg
+EmbedHtmlCode: <html>
+<head>
+<style>
+html
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+body
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+</style>
+</head>
+<body>
+<object type="application/x-shockwave-flash" height="100%" width="100%" id="live_embed_player_flash" data="http://www.twitch.tv/widgets/live_embed_player.swf?channel=zealot711" bgcolor="#000000"><param name="allowFullScreen" value="false" /><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="movie" value="http://www.twitch.tv/widgets/live_embed_player.swf" /><param name="flashvars" value="hostname=www.twitch.tv&channel=zealot711&auto_play=true&start_volume=25" /></object>
+</body>
+<html>
 
 [96] = Name: apdrop
 Title: R1 to Legend?  - (>‿<✿) Druid(& everything else :o) 6x Lgnd
@@ -1064,6 +3272,29 @@ GameName: Hearthstone: Heroes of Warcraft
 ChannelId: 32560951
 LoginNameTwtv: apdrop
 ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_apdrop-630x473.jpg
+EmbedHtmlCode: <html>
+<head>
+<style>
+html
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+body
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+</style>
+</head>
+<body>
+<object type="application/x-shockwave-flash" height="100%" width="100%" id="live_embed_player_flash" data="http://www.twitch.tv/widgets/live_embed_player.swf?channel=apdrop" bgcolor="#000000"><param name="allowFullScreen" value="false" /><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="movie" value="http://www.twitch.tv/widgets/live_embed_player.swf" /><param name="flashvars" value="hostname=www.twitch.tv&channel=apdrop&auto_play=true&start_volume=25" /></object>
+</body>
+<html>
 
 [97] = Name: captainrogue
 Title: stuff n things
@@ -1075,6 +3306,29 @@ GameName: League of Legends
 ChannelId: 25770017
 LoginNameTwtv: captainrogue
 ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_captainrogue-630x473.jpg
+EmbedHtmlCode: <html>
+<head>
+<style>
+html
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+body
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+</style>
+</head>
+<body>
+<object type="application/x-shockwave-flash" height="100%" width="100%" id="live_embed_player_flash" data="http://www.twitch.tv/widgets/live_embed_player.swf?channel=captainrogue" bgcolor="#000000"><param name="allowFullScreen" value="false" /><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="movie" value="http://www.twitch.tv/widgets/live_embed_player.swf" /><param name="flashvars" value="hostname=www.twitch.tv&channel=captainrogue&auto_play=true&start_volume=25" /></object>
+</body>
+<html>
 
 [98] = Name: liquescent
 Title: Path to partnership | Sh*t Faced Saturday! Inebriated liquorscent is inebriated
@@ -1086,6 +3340,29 @@ GameName: Battlefield Hardline
 ChannelId: 37287831
 LoginNameTwtv: liquescent
 ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_liquescent-630x473.jpg
+EmbedHtmlCode: <html>
+<head>
+<style>
+html
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+body
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+</style>
+</head>
+<body>
+<object type="application/x-shockwave-flash" height="100%" width="100%" id="live_embed_player_flash" data="http://www.twitch.tv/widgets/live_embed_player.swf?channel=liquescent" bgcolor="#000000"><param name="allowFullScreen" value="false" /><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="movie" value="http://www.twitch.tv/widgets/live_embed_player.swf" /><param name="flashvars" value="hostname=www.twitch.tv&channel=liquescent&auto_play=true&start_volume=25" /></object>
+</body>
+<html>
 
 [99] = Name: uzra
 Title: 【Uzra】ヾ＠～＠ノ NA Rank 拼#1
@@ -1097,4 +3374,27 @@ GameName: Hearthstone: Heroes of Warcraft
 ChannelId: 11692694
 LoginNameTwtv: uzra
 ThumbnailURI: http://static-cdn.jtvnw.net/previews/live_user_uzra-630x473.jpg
+EmbedHtmlCode: <html>
+<head>
+<style>
+html
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+body
+{
+    border: 0px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+</style>
+</head>
+<body>
+<object type="application/x-shockwave-flash" height="100%" width="100%" id="live_embed_player_flash" data="http://www.twitch.tv/widgets/live_embed_player.swf?channel=uzra" bgcolor="#000000"><param name="allowFullScreen" value="false" /><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="movie" value="http://www.twitch.tv/widgets/live_embed_player.swf" /><param name="flashvars" value="hostname=www.twitch.tv&channel=uzra&auto_play=true&start_volume=25" /></object>
+</body>
+<html>
 
