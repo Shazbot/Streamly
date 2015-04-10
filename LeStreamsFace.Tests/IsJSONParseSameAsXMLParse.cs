@@ -80,7 +80,7 @@ namespace LeStreamsFace.Tests
                                                  return newResponse.Content;
                                              });
                 tasks.Add(newTask);
-            } while (numStreamsProcessed < numStreams);//1000); // not using numStreams
+            } while (numStreamsProcessed < numStreams);//1000); // if not using numStreams
 
             Task.WaitAll(tasks.ToArray());
 

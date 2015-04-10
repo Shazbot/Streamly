@@ -176,7 +176,7 @@
                                                                  Source={x:Static LeStreamsFace:ConfigManager.Instance},
                                                                  ConverterParameter=Browser}" />
                                 <RadioButton Margin="5,10,0,0"
-                                             Content="In a new tab"
+                                             Content="In a new app tab"
                                              GroupName="StreamOpeningProcedure"
                                              IsChecked="{Binding StreamOpeningProcedure,
                                                                  Mode=TwoWay,
@@ -184,7 +184,7 @@
                                                                  Source={x:Static LeStreamsFace:ConfigManager.Instance},
                                                                  ConverterParameter=Tab}" />
                                 <RadioButton Margin="5,10,0,0"
-                                             Content="Using Livestreamer"
+                                             Content="Using Livestreamer (requires VLC)"
                                              GroupName="StreamOpeningProcedure"
                                              IsChecked="{Binding StreamOpeningProcedure,
                                                                  Mode=TwoWay,

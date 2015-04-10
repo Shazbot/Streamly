@@ -231,11 +231,22 @@ namespace LeStreamsFace
                     closedStreams.AddRange(StreamsManager.Streams.Where(stream => stream.GottenViaAutoGetFavs && !streamsList.Contains(stream)).ToList());
                 }
 
-                IEnumerable<Stream> twitchFetchedStreams = Enumerable.Empty<Stream>();
+                List<Stream> twitchFetchedStreams = new List<Stream>();
                 try
                 {
                     var twitchResponse = await new RestClient("https://api.twitch.tv/kraken/streams?limit=100").ExecuteTaskAsync(new RestRequest());
-                    twitchFetchedStreams = _streamParserJSON.GetStreamsFromContent(twitchResponse.Content);
+                    twitchFetchedStreams = _streamParserJSON.GetStreamsFromContent(twitchResponse.Content).ToList();
+                    var offset = 0;
+                    var numGottenStreams = 0;
+                    do
+                    {
+                        offset += 100;
+                        var newClient = new RestClient("https://api.twitch.tv/kraken/streams?limit=100&offset=" + offset);
+                        var newResponse = await newClient.ExecuteTaskAsync(new RestRequest());
+                        var newStreams = _streamParserJSON.GetStreamsFromContent(newResponse.Content).ToList();
+                        twitchFetchedStreams.AddRange(newStreams);
+                        numGottenStreams = newStreams.Count();
+                    } while (numGottenStreams == 100 && twitchFetchedStreams.Last().Viewers >= ConfigManager.Instance.TriageStreams);
                 }
                 catch (Exception exception)
                 {
@@ -443,20 +454,9 @@ namespace LeStreamsFace
                 .Select(stream => stream.LoginNameTwtv)
                 .Aggregate((s, s1) => s + "," + s1);
 
-            var twitchFavsResponse = await new RestClient("http://api.justin.tv/api/stream/list.xml?channel=" + channels).ExecuteTaskAsync(new RestRequest());
-            XDocument xDocument = XDocument.Parse(twitchFavsResponse.Content);
-
-            var gottenFavs = new List<Stream>();
-            foreach (XElement xElement in xDocument.Element("streams").Elements("stream"))
-            {
-                try
-                {
-                    gottenFavs.Add(_streamParserXML.GetStreamFromElement(xElement));
-                }
-                catch (NullReferenceException)
-                {
-                }
-            }
+            //            var twitchFavsResponse = await new RestClient("http://api.justin.tv/api/stream/list.xml?channel=" + channels).ExecuteTaskAsync(new RestRequest());
+            var twitchFavsResponse = await new RestClient("https://api.twitch.tv/kraken/streams?channel=" + channels).ExecuteTaskAsync(new RestRequest());
+            var gottenFavs = _streamParserJSON.GetStreamsFromContent(twitchFavsResponse.Content).ToList();
 
             foreach (Stream stream in gottenFavs)
             {
