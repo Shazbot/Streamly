@@ -1,6 +1,4 @@
-http://shazbot.github.com/LeStreamsFace/
-
-This is a native Windows application for stream aggregation and notifications, in the vein of the browser extensions that do the same job.
+This is a native Windows application for twitch.tv stream aggregation and notifications, in the vein of the browser extensions that do the same job.
 
 I initially made it to track some streams of other games, that were unlisted on the clg site, and because of some small issues I had with the firefox extension.
 
