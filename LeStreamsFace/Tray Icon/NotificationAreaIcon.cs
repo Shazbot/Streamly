@@ -167,12 +167,16 @@ namespace LeStreamsFace
             {
                 case Forms.MouseButtons.Left:
                     return MouseButton.Left;
+
                 case Forms.MouseButtons.Right:
                     return MouseButton.Right;
+
                 case Forms.MouseButtons.Middle:
                     return MouseButton.Middle;
+
                 case Forms.MouseButtons.XButton1:
                     return MouseButton.XButton1;
+
                 case Forms.MouseButtons.XButton2:
                     return MouseButton.XButton2;
             }

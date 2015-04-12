@@ -62,7 +62,9 @@ namespace LeStreamsFace
             _timeWhenNotNotifyingTextInput = ConfigManager.Instance.FromSpan.ToString("hhmm") + '-' + ConfigManager.Instance.ToSpan.ToString("hhmm");
             _bannedGamesTextInput = ConfigManager.Instance.BannedGames.Aggregate((s, s1) => s + ", " + s1);
 
+#pragma warning disable 4014
             FetchGames();
+#pragma warning restore 4014
 
             // TODO debug stuff if we want to start with some streams
             //            var str = new Stream("wingsofdeathx", "wings", 123, "1", "ID1", "asr", StreamingSite.TwitchTv);
@@ -261,7 +263,7 @@ namespace LeStreamsFace
                     Debugger.Break();
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
             }
         }
@@ -346,7 +348,7 @@ namespace LeStreamsFace
                 Streams.RemoveAll();
                 Streams.AddRange(streams);
             }
-            catch (Exception e)
+            catch (Exception)
             {
             }
         }

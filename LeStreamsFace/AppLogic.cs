@@ -21,7 +21,7 @@ using Screen = System.Windows.Forms.Screen;
 
 namespace LeStreamsFace
 {
-    internal class AppLogic : IHandle<TabCreationEvent>, IHandle<CheckTimeBlockEvent>
+    internal class AppLogic : IHandle<TabCreationEvent>, IHandle<CheckTimeBlockEvent>, IHandle<OpenStreamsListWindow>
     {
         private readonly DispatcherTimer mainTimer;
         private readonly DispatcherTimer fullscreenWaitTimer;
@@ -65,7 +65,7 @@ namespace LeStreamsFace
 
                 ExitDelegate exitDelegate = new ExitDelegate(OnTrayExitClick);
 
-                iconWindow = new IconWindow(exitDelegate);
+                iconWindow = new IconWindow(EventAggregator, exitDelegate);
 
                 List<MenuItem> menuItems = new List<MenuItem>(iconWindow.notificationItem.MenuItems);
                 menuItems.Insert(0, new MenuItem("-"));
@@ -471,29 +471,6 @@ namespace LeStreamsFace
             //            Debug.WriteLine("TIMER TO RETRIEVE FAVORITES: " + (DateTime.Now - now).TotalSeconds);
         }
 
-        //        private void Window_SourceInitialized(object sender, EventArgs e)
-        //        {
-        //            var hwnd = new WindowInteropHelper(this).Handle;
-        //
-        //            // make invisible to task manager
-        //            int exStyle = (int)NativeMethods.GetWindowLong(hwnd, (int)NativeMethods.GetWindowLongFields.GWL_EXSTYLE);
-        //            exStyle |= (int)NativeMethods.ExtendedWindowStyles.WS_EX_TOOLWINDOW;
-        //            exStyle |= (int)NativeMethods.ExtendedWindowStyles.WS_EX_NOACTIVATE;
-        //            NativeMethods.SetWindowLong(hwnd, (int)NativeMethods.GetWindowLongFields.GWL_EXSTYLE, (IntPtr)exStyle);
-        //
-        //            HwndSource src = HwndSource.FromHwnd(hwnd);
-        //            src.AddHook(new HwndSourceHook(WndProc));
-        //        }
-
-        private IntPtr WndProc(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
-        {
-            if (msg == App.WM_SHOWFIRSTINSTANCE)
-            {
-                StreamListOnClick();
-            }
-            return IntPtr.Zero;
-        }
-
         public void Handle(TabCreationEvent message)
         {
             if (ConfigManager.Instance.StreamOpeningProcedure == StreamOpeningProcedure.Livestreamer)
@@ -545,6 +522,11 @@ namespace LeStreamsFace
         public void Handle(CheckTimeBlockEvent message)
         {
             DuringTimeBlock();
+        }
+
+        public void Handle(OpenStreamsListWindow message)
+        {
+            StreamListOnClick();
         }
     }
 }

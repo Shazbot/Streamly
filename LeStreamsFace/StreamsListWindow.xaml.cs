@@ -11,6 +11,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Forms;
 using System.Windows.Input;
+using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
@@ -59,6 +60,10 @@ namespace LeStreamsFace
             }
 
             streamsTabItem.IsSelected = true;
+        }
+
+        private void window_SourceInitialized(object sender, EventArgs e)
+        {
         }
 
         private void VmOnOnStreamTabOpening(object source, StreamsListViewModel.StreamTabOpeningEventArgs streamTabOpeningEventArgs)
@@ -306,10 +311,6 @@ namespace LeStreamsFace
             }
         }
 
-        private void window_SourceInitialized(object sender, EventArgs e)
-        {
-        }
-
         //        public new void DragMove()
         //        {
         //            var hs = (HwndSource)PresentationSource.FromVisual(this);
@@ -424,8 +425,9 @@ namespace LeStreamsFace
         {
             if (vm.IsAnyStreamTabOpen && e.GetPosition(this).Y >= this.ActualHeight - 30) return;
 
-            e.Handled = true;
-            ToggleMaximized();
+            // look into a per tab way of handling maximize on double click if needed
+            //            e.Handled = true;
+            //            ToggleMaximized();
         }
 
         private void ToggleMaximized()

@@ -222,6 +222,7 @@
     <Compile Include="Converters\EnumMatchToBooleanConverter.cs" />
     <Compile Include="Converters\SameStreamMultiConverter.cs" />
     <Compile Include="Messages\MinimizeMaximizeMessage.cs" />
+    <Compile Include="Messages\OpenStreamsListWindow.cs" />
     <Compile Include="NonReloadingTabControl.cs" />
     <Compile Include="Commands\AwaitableDelegateCommand.cs" />
     <Compile Include="ConfigManager.cs" />
