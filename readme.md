@@ -1,3 +1,7 @@
+NOTE: not updated for the new Twitch API, use Streamlink Twitch GUI instead.
+
+![screenshot](https://raw.githubusercontent.com/Shazbot/Streamly/gh-pages/assets/screenshot.jpg)
+
 This is a native Windows application for twitch.tv stream aggregation and notifications, in the vein of the browser extensions that do the same job.
 
 I initially made it to track some streams of other games, that were unlisted on the clg site, and because of some small issues I had with the firefox extension.
